@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Scrum.Data.Data
 {
-    public class ReportRepository<T>
+    public class ReportRepository<T> where T: class 
     {
         internal XmlSerializer Xml;
 
