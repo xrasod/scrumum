@@ -81,9 +81,9 @@
                     <Label Content="Belopp för kvitto" Canvas.Left="31" Canvas.Top="601" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label Content="Ladda upp kvitto
                            " Canvas.Left="31" Canvas.Top="522" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="466" Canvas.Top="538" Width="154" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="31"/>
+                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="410" Canvas.Top="538" Width="210" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="31"/>
                     <Button x:Name="btnSendReport" Content="Skicka Rapport
-                            " Canvas.Left="466" Canvas.Top="574" Width="154" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="58" Click="btnSendReport_Click" Padding="40,1,1,1"/>
+                            " Canvas.Left="410" Canvas.Top="623" Width="210" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="51" Click="btnSendReport_Click" Padding="25,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
                     <Label Content="Maxbelopp för land
                            " Canvas.Left="200" Canvas.Top="420" Width="163" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="38" Canvas.Top="452" Width="66" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
