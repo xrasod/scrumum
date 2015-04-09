@@ -11,27 +11,45 @@
             <ColumnDefinition Width="528*"/>
             <ColumnDefinition Width="294*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="4" Margin="-10,0,10,0">
+        <TabControl Grid.ColumnSpan="4" BorderBrush="White" Margin="0,-29,-12,-9">
+            <TabControl.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFD35D5D" Offset="1"/>
+                </LinearGradientBrush>
+            </TabControl.Background>
+            <TabControl.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TabControl.Foreground>
+            <TabControl.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFD1BBBB" Offset="1"/>
+                </LinearGradientBrush>
+            </TabControl.OpacityMask>
             <TabItem Header="Rapportering">
                 <Canvas Margin="0,-3,0,3">
-                    <DatePicker x:Name="dpStartDate" Canvas.Left="165" Canvas.Top="11"></DatePicker>
-                    <DatePicker x:Name="dpEndDate" Canvas.Left="378" Canvas.Top="13"></DatePicker>
+                    <DatePicker x:Name="dpStartDate" Canvas.Left="140" Canvas.Top="10"></DatePicker>
+                    <DatePicker x:Name="dpEndDate" Canvas.Left="347" Canvas.Top="11"></DatePicker>
                     <Label x:Name="lbStartDate" Content="Startdatum
-                           " Canvas.Left="26" Canvas.Top="10" Width="109"/>
-                    <Label x:Name="lbEndDate" Content="Slutdatum" Canvas.Left="294" Canvas.Top="11" Width="65" RenderTransformOrigin="0.366,0.311"/>
-                    <Label x:Name="lbFreeDay" Content="Antal lediga dagar" Canvas.Left="26" Canvas.Top="54" Width="109"/>
+                           " Canvas.Left="31" Canvas.Top="6" Width="109" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16"/>
+                    <Label x:Name="lbEndDate" Content="Slutdatum" Canvas.Left="247" Canvas.Top="8" Width="95" RenderTransformOrigin="0.366,0.311" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                    <Label x:Name="lbFreeDay" Content="Antal lediga dagar" Canvas.Left="26" Canvas.Top="54" Width="161" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <ListView/>
                     <Button x:Name="btnCreateDraft" Content="Skapa Utkast
-                            " Canvas.Left="471" Canvas.Top="505" Width="75" RenderTransformOrigin="0.071,-0.846"/>
-                    <Label x:Name="lbCarTripLength" Content="Bilresor" Canvas.Left="38" Canvas.Top="91" RenderTransformOrigin="0.362,-0.746"/>
-                    <Label x:Name="lbDagar" Content="Dagar" Canvas.Left="38" Canvas.Top="149" RenderTransformOrigin="0.362,-0.746"/>
-                    <Label x:Name="lbLand" Content="Land" Canvas.Left="147" Canvas.Top="149" RenderTransformOrigin="0.362,-0.746"/>
-                    <TextBox x:Name="lbCarTripLengthKm" Height="23" Canvas.Left="99" TextWrapping="Wrap" Text="Km" Canvas.Top="91" Width="102"/>
-                    <Label x:Name="lbWhatHaveIDoneToday" Content="Vad har gjorts under resan:" Canvas.Left="594" Canvas.Top="17" RenderTransformOrigin="0.659,0.185"/>
-                    <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="594" TextWrapping="Wrap" Text="" Canvas.Top="54" Width="121"/>
-                    <TextBox Height="23" Canvas.Left="165" TextWrapping="Wrap" Text="" Canvas.Top="58" Width="102"/>
-                    <ComboBox Canvas.Left="147" Canvas.Top="180" Width="120"/>
-                    <ListView Height="100" Canvas.Left="35" Canvas.Top="180" Width="100">
+                            " Canvas.Left="471" Canvas.Top="505" Width="75" RenderTransformOrigin="0.071,-0.846" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White"/>
+                    <Label x:Name="lbCarTripLength" Content="Bilresor" Canvas.Left="26" Canvas.Top="80" RenderTransformOrigin="0.362,-0.746" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Label x:Name="lbDagar" Content="Dagar" Canvas.Left="38" Canvas.Top="149" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Label x:Name="lbLand" Content="Land" Canvas.Left="207" Canvas.Top="179" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <TextBox x:Name="lbCarTripLengthKm" Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="Km" Canvas.Top="88" Width="102" Background="White"/>
+                    <Label x:Name="lbWhatHaveIDoneToday" Content="Vad har gjorts under resan:" Canvas.Left="594" Canvas.Top="23" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                    <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="594" TextWrapping="Wrap" Text="" Canvas.Top="54" Width="153" Background="White"/>
+                    <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="White"/>
+                    <ComboBox Canvas.Left="207" Canvas.Top="210" Width="120"/>
+                    <ListView Height="126" Canvas.Left="35" Canvas.Top="180" Width="100" Background="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -39,20 +57,20 @@
                         </ListView.View>
                     </ListView>
                     <Button Content="Spara Kvitto
-                            " Canvas.Left="49" Canvas.Top="505" Width="75" RenderTransformOrigin="0.77,2.2"/>
-                    <Button x:Name="btnUploadReceipt" Content="Bläddra" Canvas.Left="192" Canvas.Top="403" Width="75"/>
-                    <TextBox x:Name="tbReceiptFile" Height="23" Canvas.Left="49" TextWrapping="Wrap" Text="" Canvas.Top="400" Width="120" RenderTransformOrigin="0.67,0.409"/>
-                    <TextBox x:Name="tbSum" Height="23" Canvas.Left="45" TextWrapping="Wrap" Text="" Canvas.Top="462" Width="120" RenderTransformOrigin="0.5,0.5">
+                            " Canvas.Left="80" Canvas.Top="468" Width="121" RenderTransformOrigin="0.77,2.2" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Button x:Name="btnUploadReceipt" Content="Bläddra" Canvas.Left="80" Canvas.Top="390" Width="121" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="tbReceiptFile" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="362" Width="166" RenderTransformOrigin="0.67,0.409" Background="White"/>
+                    <TextBox x:Name="tbSum" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="442" Width="163" RenderTransformOrigin="0.5,0.5" Background="White">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
-                                <SkewTransform AngleX="6.809"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="1.373"/>
+                                <SkewTransform AngleX="1.625"/>
+                                <RotateTransform Angle="0.389"/>
+                                <TranslateTransform X="2.42" Y="0.017"/>
                             </TransformGroup>
                         </TextBox.RenderTransform>
                     </TextBox>
-                    <ListView Height="100" Canvas.Left="294" Canvas.Top="400" Width="120">
+                    <ListView Height="100" Canvas.Left="294" Canvas.Top="400" Width="120" Background="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -60,33 +78,40 @@
                         </ListView.View>
                     </ListView>
                     <Button x:Name="btnRemoveSelectedReceipt" Content="Ta bort kvitto
-                            " Canvas.Left="326" Canvas.Top="505" Width="75" RenderTransformOrigin="1.09,0.237"/>
-                    <Label x:Name="lbReceipts" Content="Kvitton för resa" Canvas.Left="310" Canvas.Top="369"/>
-                    <Label Content="Belopp för kvitto" Canvas.Left="49" Canvas.Top="428" Width="116"/>
+                            " Canvas.Left="321" Canvas.Top="505" Width="80" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White"/>
+                    <Label x:Name="lbReceipts" Content="Kvitton för resa" Canvas.Left="310" Canvas.Top="369" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="Belopp för kvitto" Canvas.Left="31" Canvas.Top="413" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label Content="Ladda upp kvitto
-                           " Canvas.Left="49" Canvas.Top="365" RenderTransformOrigin="0.537,0.874"/>
-                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="594" Canvas.Top="505" Width="75" RenderTransformOrigin="0.618,-0.243"/>
+                           " Canvas.Left="31" Canvas.Top="334" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="739" Canvas.Top="490" Width="84" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White"/>
                     <Button x:Name="btnSendReport" Content="Skicka Rapport
-                            " Canvas.Left="716" Canvas.Top="505" Width="84"/>
+                            " Canvas.Left="704" Canvas.Top="524" Width="119" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="30" Click="btnSendReport_Click"/>
                     <Label Content="Maxbelopp för land
-                           " Canvas.Left="147" Canvas.Top="207" Width="116"/>
-                    <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="35" Canvas.Top="292" Width="75"/>
-                    <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="147" Canvas.Top="238" RenderTransformOrigin="1.556,2.432" Width="93"/>
-                    <TextBox x:Name="tbNotes" Height="178" Canvas.Left="594" TextWrapping="Wrap" Text="" Canvas.Top="207" Width="153"/>
-                    <Label x:Name="lblNotes" Content="Anteckningar:" Canvas.Left="594" Canvas.Top="176"/>
-                    <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="594" Canvas.Top="403" Width="121"/>
-                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="594" Canvas.Top="434" Width="121"/>
-                    <Label x:Name="lbTotalDriven" Content="" Canvas.Left="165" Canvas.Top="123" Width="36" RenderTransformOrigin="1.677,0.752"/>
+                           " Canvas.Left="200" Canvas.Top="279" Width="163" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="35" Canvas.Top="311" Width="66" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
+                    <TextBox x:Name="tbNotes" Height="178" Canvas.Left="594" TextWrapping="Wrap" Text="" Canvas.Top="207" Width="153" Background="White"/>
+                    <Label x:Name="lblNotes" Content="Anteckningar:" Canvas.Left="594" Canvas.Top="180" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="594" Canvas.Top="390" Width="121" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}"/>
+                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="594" Canvas.Top="413" Width="121" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Label x:Name="lbTotalDriven" Content="" Canvas.Left="206" Canvas.Top="339" Width="36" RenderTransformOrigin="1.677,0.752"/>
                     <Button x:Name="btnUpdateTotalDriven" Content="Uppdatera
-                            " Canvas.Left="49" Canvas.Top="122" Width="75"/>
-                    <Button x:Name="btnDeleteCountry" Content="Ta Bort" Canvas.Left="129" Canvas.Top="292" Width="54"/>
-                    <ComboBox x:Name="cbCurrencyCountryOne" Canvas.Left="281" Canvas.Top="127" Width="120"/>
-                    <Label x:Name="lbCountryOne" Content="Konvertera från:" Canvas.Left="281" Canvas.Top="96"/>
-                    <Label x:Name="lbValutaKonvertering" Content="Valutakonvertering" Canvas.Left="369" Canvas.Top="73"/>
-                    <ComboBox x:Name="cbCurrencyCountryTwo" Canvas.Left="445" Canvas.Top="127" Width="120"/>
-                    <Label x:Name="lbCountryTwo" Content="Konvertera till:" Canvas.Left="445" Canvas.Top="96"/>
-                    <TextBox x:Name="tbValue" Height="23" Canvas.Left="281" TextWrapping="Wrap" Text="" Canvas.Top="194" Width="120"/>
-                    <Label x:Name="lbValue" Content="Belopp:" Canvas.Left="281" Canvas.Top="168"/>
+                            " Canvas.Left="187" Canvas.Top="116" Width="75" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Button x:Name="btnDeleteCountry" Content="Ta Bort" Canvas.Left="121" Canvas.Top="311" Width="54" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <ComboBox x:Name="cbCurrencyCountryOne" Canvas.Left="426" Canvas.Top="105" Width="120"/>
+                    <Label x:Name="lbCountryOne" Content="Konvertera från:" Canvas.Left="294" Canvas.Top="96" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <Label x:Name="lbValutaKonvertering" Content="Valutakonvertering" Canvas.Left="310" Canvas.Top="58" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16">
+                        <Label.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FFFDFDFD" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Label.BorderBrush>
+                    </Label>
+                    <ComboBox x:Name="cbCurrencyCountryTwo" Canvas.Left="426" Canvas.Top="129" Width="120"/>
+                    <Label x:Name="lbCountryTwo" Content="Konvertera till:" Canvas.Left="294" Canvas.Top="120" RenderTransformOrigin="0.581,1.192" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <TextBox x:Name="tbValue" Height="23" Canvas.Left="207" TextWrapping="Wrap" Text="" Canvas.Top="256" Width="120" Background="White"/>
+                    <Label x:Name="lbValue" Content="Belopp:" Canvas.Left="207" Canvas.Top="228" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label x:Name="lbNewValue" Content="" Canvas.Left="451" Canvas.Top="194" Width="95"/>
 
 

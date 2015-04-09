@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Scrum.Data;
 using Scrum.Data.Data;
 using Scrumproject.Logic.Entities;
+using iTextSharp.text.pdf;
 
 namespace Scrumproject.Logic
 {

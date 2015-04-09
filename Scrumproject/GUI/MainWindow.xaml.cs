@@ -49,6 +49,11 @@ namespace Scrumproject
             tbNotes.Text = reportLoading.Description;
         }
 
+        private void btnSendReport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
 
 
