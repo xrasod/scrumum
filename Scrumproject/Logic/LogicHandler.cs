@@ -13,9 +13,9 @@ namespace Scrumproject.Logic
       ReportRepository<Report> reportRepository = new ReportRepository<Report>();
 
 
-      public void LoadDraft(string sokvag)
+      public Report LoadDraft(string sokvag)
       {
-          reportRepository.Ladda(sokvag);
+          return reportRepository.Ladda(sokvag);
       }
        
        public void SaveDraft(Report report, string sokvag)

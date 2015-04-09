@@ -21,7 +21,8 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Report report = new Report();
+        Report reportSaving = new Report();
+        Report reportLoading = new Report();
         LogicHandler reportHandler = new LogicHandler();
 
         public MainWindow()
@@ -31,14 +32,22 @@ namespace Scrumproject
 
         private void btnCreateDraft_Click(object sender, RoutedEventArgs e)
         {
-            report.Description = "HEJHEJHEJ";
-            report.Id = 1;
-            report.NumberOfKilometersDriven = 111;
-            report.UserId = 12;
-            report.Status = 1;
-            reportHandler.SaveDraft(report, "DraftReport.xml");
-            btnCreateDraft.Visibility = Visibility.Hidden;
+            reportSaving.Description = tbNotes.Text;
+            reportSaving.Id = 1;
+            reportSaving.NumberOfKilometersDriven = 111;
+            reportSaving.UserId = 12;
+            reportSaving.Status = 1;
+            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
+            tbNotes.Text = "";
         }
+
+        private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
+        {
+            reportLoading = reportHandler.LoadDraft("DraftReport.xml");
+            lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
+            tbNotes.Text = reportLoading.Description.ToString();
+        }
+
 
         
 
