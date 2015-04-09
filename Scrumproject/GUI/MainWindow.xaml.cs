@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Scrumproject.Logic;
 
 namespace Scrumproject
 {
@@ -20,9 +21,35 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
+        Report reportSaving = new Report();
+        Report reportLoading = new Report();
+        LogicHandler reportHandler = new LogicHandler();
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void btnCreateDraft_Click(object sender, RoutedEventArgs e)
+        {
+            reportSaving.Description = tbNotes.Text;
+            reportSaving.Id = 1;
+            reportSaving.NumberOfKilometersDriven = 111;
+            reportSaving.UserId = 12;
+            reportSaving.Status = 1;
+            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
+            tbNotes.Text = "";
+        }
+
+        private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
+        {
+            reportLoading = reportHandler.LoadDraft("DraftReport.xml");
+            lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
+            tbNotes.Text = reportLoading.Description.ToString();
+        }
+
+
+        
+
     }
 }
