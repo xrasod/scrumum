@@ -29,7 +29,9 @@
                     <Label x:Name="lbCarTripLength" Content="Bilresor" Canvas.Left="26" Canvas.Top="235" RenderTransformOrigin="0.362,-0.746"/>
                     <TextBox x:Name="lbCarTripLengthKm" Height="23" Canvas.Left="120" TextWrapping="Wrap" Text="Km" Canvas.Top="239" Width="120"/>
                     <Label x:Name="lbPartSection" Content="Delsträckor" Canvas.Left="378" Canvas.Top="55" RenderTransformOrigin="1.68,0.592" Width="102"/>
-                    <TextBox x:Name="tbPartSection" Height="111" Canvas.Left="378" TextWrapping="Wrap" Text="" Canvas.Top="86" Width="120"/>
+                    <TextBox x:Name="tbPartSection" Height="111" Canvas.Left="378" TextWrapping="Wrap" Text="" Canvas.Top="86" Width="121"/>
+                    <Label x:Name="lbWhatHaveIDoneToday" Content="Noteringar" Canvas.Left="544" Canvas.Top="53" RenderTransformOrigin="0.659,0.185"/>
+                    <TextBox x:Name="tbNotes" Height="113" Canvas.Left="563" TextWrapping="Wrap" Text="" Canvas.Top="84" Width="121"/>
 
 
                 </Canvas>
