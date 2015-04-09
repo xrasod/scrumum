@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scrumproject.Data
+namespace Scrumproject.Logic.Entities
 {
-    class BossRepository
+    class User
     {
+        public string Id { get; set; }
     }
 }
