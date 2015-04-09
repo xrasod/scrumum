@@ -42,12 +42,12 @@
                     <Label x:Name="lbCarTripLength" Content="Bilresor" Canvas.Left="26" Canvas.Top="80" RenderTransformOrigin="0.362,-0.746" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label x:Name="lbDagar" Content="Dagar" Canvas.Left="38" Canvas.Top="290" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label x:Name="lbLand" Content="Land" Canvas.Left="207" Canvas.Top="320" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <TextBox x:Name="lbCarTripLengthKm" Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="Km" Canvas.Top="88" Width="102" Background="Black"/>
+                    <TextBox x:Name="lbCarTripLengthKm" Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="Km" Canvas.Top="88" Width="102" Background="Black" Foreground="White"/>
                     <Label x:Name="lbWhatHaveIDoneToday" Content="Vad har gjorts under resan:" Canvas.Left="406" Canvas.Top="93" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
-                    <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="214" Background="Black"/>
-                    <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="Black"/>
+                    <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="214" Background="Black" Foreground="White"/>
+                    <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="Black" Foreground="White"/>
                     <ComboBox Canvas.Left="207" Canvas.Top="351" Width="120"/>
-                    <ListView Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black">
+                    <ListView Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black" Foreground="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -57,8 +57,8 @@
                     <Button Content="Spara Kvitto
                             " Canvas.Left="38" Canvas.Top="656" Width="163" RenderTransformOrigin="0.77,2.2" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="29,1,1,1"/>
                     <Button x:Name="btnUploadReceipt" Content="Bläddra" Canvas.Left="35" Canvas.Top="578" Width="166" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
-                    <TextBox x:Name="tbReceiptFile" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="550" Width="166" RenderTransformOrigin="0.67,0.409" Background="Black"/>
-                    <TextBox x:Name="tbSum" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="630" Width="163" RenderTransformOrigin="0.5,0.5" Background="Black">
+                    <TextBox x:Name="tbReceiptFile" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="550" Width="166" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White"/>
+                    <TextBox x:Name="tbSum" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="630" Width="163" RenderTransformOrigin="0.5,0.5" Background="Black" Foreground="White">
                         <TextBox.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -68,7 +68,7 @@
                             </TransformGroup>
                         </TextBox.RenderTransform>
                     </TextBox>
-                    <ListView Height="100" Canvas.Left="220" Canvas.Top="553" Width="120" Background="Black">
+                    <ListView Height="100" Canvas.Left="220" Canvas.Top="553" Width="120" Background="Black" Foreground="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -88,7 +88,7 @@
                            " Canvas.Left="200" Canvas.Top="420" Width="163" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="35" Canvas.Top="452" Width="66" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
                     <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
-                    <TextBox x:Name="tbNotes" Height="178" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="273" Width="214" Background="Black"/>
+                    <TextBox x:Name="tbNotes" Height="178" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="273" Width="214" Background="Black" Foreground="White"/>
                     <Label x:Name="lblNotes" Content="Anteckningar:" Canvas.Left="406" Canvas.Top="246" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="410" Canvas.Top="456" Width="214" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}"/>
                     <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="410" Canvas.Top="479" Width="214" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
