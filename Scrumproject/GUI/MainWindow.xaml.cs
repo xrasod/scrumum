@@ -24,6 +24,7 @@ namespace Scrumproject
         Report reportSaving = new Report();
         Report reportLoading = new Report();
         LogicHandler reportHandler = new LogicHandler();
+        LogicHandler notesHandler = new LogicHandler();
 
         public MainWindow()
         {
@@ -45,8 +46,10 @@ namespace Scrumproject
         {
             reportLoading = reportHandler.LoadDraft("DraftReport.xml");
             lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
-            tbNotes.Text = reportLoading.Description.ToString();
+            tbNotes.Text = reportLoading.Description;
         }
+
+
 
 
         
