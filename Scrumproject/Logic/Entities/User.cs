@@ -11,3 +11,8 @@ namespace Scrumproject.Logic.Entities
         public string Id { get; set; }
     }
 }
+
+
+
+
+
