@@ -12,7 +12,7 @@
             <ColumnDefinition Width="241*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="3" BorderBrush="White" Margin="-10,-26,0,-134" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
+        <TabControl Grid.ColumnSpan="4" BorderBrush="White" Margin="0,-26,0,0" HorizontalAlignment="Left" Width="662" Height="730" VerticalAlignment="Top">
             <TabControl.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -47,7 +47,7 @@
                     <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="214" Background="Black" Foreground="White"/>
                     <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="Black" Foreground="White"/>
                     <ComboBox Canvas.Left="207" Canvas.Top="351" Width="120"/>
-                    <ListView Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black" Foreground="White">
+                    <ListView x:Name="lvDays" Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black" Foreground="White">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn/>
@@ -110,20 +110,45 @@
                     <Label x:Name="lbCountryTwo" Content="Till" Canvas.Left="30" Canvas.Top="225" RenderTransformOrigin="0.581,1.192" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <TextBox x:Name="tbValue" Height="23" Canvas.Left="207" TextWrapping="Wrap" Text="" Canvas.Top="397" Width="120" Background="White"/>
                     <Label x:Name="lbValue" Content="Belopp:" Canvas.Left="207" Canvas.Top="369" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <Label x:Name="lbNewValue" Content="" Canvas.Left="451" Canvas.Top="194" Width="95"/>
+                    <Label x:Name="lbNewValue" Content="" Canvas.Left="306" Canvas.Top="234" Width="95"/>
+                    <Label x:Name="lbOldValue" Content="" Canvas.Left="317" Canvas.Top="203" Width="84"/>
 
 
                 </Canvas>
             </TabItem>
             <TabItem Header="Förskottsansökan" />
-            <TabItem Header="Administratörs" />
-            <ListView Height="100" Width="100">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <TabItem Header="Chef" />
+            <Canvas Margin="-4,0,4,0">
+                <ListView x:Name="lvUsers" Height="136" Width="313" Canvas.Left="30" Canvas.Top="55">
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label x:Name="lbUsers" Content="Användare:" Canvas.Left="30" Canvas.Top="29" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" />
+                <Label x:Name="lbUsername" Content="" Canvas.Left="363" Canvas.Top="55" Background="#FFFBF8F8" Width="96"/>
+                <Label x:Name="lbUsernameLabel" Content="Användarnamn:" Canvas.Left="363" Canvas.Top="29" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <Label x:Name="lbPasswordLabel" Content="Lösenord:" Canvas.Left="498" Canvas.Top="29" Width="93" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <Label x:Name="lbPassword" Content="" Canvas.Left="498" Canvas.Top="55" Width="93" Background="#FFF5EBEB"/>
+                <Button Content="Lägg till" Canvas.Left="498" Canvas.Top="213" Width="75" RenderTransformOrigin="0.5,0.5"/>
+                <Label Content="Chef:" Canvas.Left="366" Canvas.Top="86" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <Label x:Name="lbBoss" Content="" Canvas.Left="366" Canvas.Top="115" Width="62" Background="#FFFBFBFB"/>
+                <Label x:Name="lbLoggedIn" Content="Inloggad:" Canvas.Left="466" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <Label x:Name="lbLoggedInUser" Content="" Canvas.Left="544" Canvas.Top="2" Width="89" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="12"/>
+                <Label x:Name="lbFirstName" Content="Förnamn:" Canvas.Left="498" Canvas.Top="86" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <TextBox x:Name="tbFirstName" Height="26" Canvas.Left="498" TextWrapping="Wrap" Text="" Canvas.Top="115" Width="100"/>
+                <Label x:Name="lbLastName" Content="Efternamn: " Canvas.Left="498" Canvas.Top="146" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <TextBox x:Name="tbLastNamne" Height="23" Canvas.Left="498" TextWrapping="Wrap" Text="" Canvas.Top="180" Width="100" />
+                <Label x:Name="lbSSN" Content="Personnummer: " Canvas.Left="366" Canvas.Top="146" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                <TextBox Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="180" Width="119"/>
+                <Label x:Name="lbEmail" Content="E-post: " Canvas.Left="363" Canvas.Top="208" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.45,-0.379"/>
+                <TextBox x:Name="tbEmail" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="242" Width="120"/>
+                <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="498" Canvas.Top="242" Width="75"/>
+                <Button x:Name="btnClear" Content="Rensa" Canvas.Left="498" Canvas.Top="267" Width="75"/>
+
+            </Canvas>
         </TabControl>
     </Grid>
 
