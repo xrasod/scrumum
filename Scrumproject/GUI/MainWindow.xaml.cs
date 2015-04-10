@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Scrum.Data;
 using Scrum.Data.Data;
+using Scrumproject.Logic;
+using Scrumproject.Logic.Entities;
 
 namespace Scrumproject
 {
@@ -22,10 +23,13 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Scrumproject.Logic.Report reportSaving = new Scrumproject.Logic.Report();
-        Scrumproject.Logic.Report reportLoading = new Scrumproject.Logic.Report();
-        Scrumproject.Logic.LogicHandler reportHandler = new Scrumproject.Logic.LogicHandler();
-        Scrumproject.Logic.LogicHandler notesHandler = new Scrumproject.Logic.LogicHandler();
+        Report reportSaving = new Report();
+        Report reportLoading = new Report();
+        LogicHandler reportHandler = new LogicHandler();
+        LogicHandler notesHandler = new LogicHandler();
+        Notes notesSaving = new Notes();
+        Notes notesLoading = new Notes();
+
 
         public MainWindow()
         {
@@ -70,6 +74,23 @@ namespace Scrumproject
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
+        {
+            notesSaving.Note = tbNotes.Text;
+            notesHandler.SaveNotes(notesSaving, "Notes.xml");
+            tbNotes.Text = "Dina anteckningar är sparade!";
+            btnSaveNotes.Visibility = Visibility.Hidden;
+        }
+
+        private void btnLoadNotes_Click(object sender, RoutedEventArgs e)
+        {
+            tbNotes.Text = "";
+            notesLoading = notesHandler.LoadNotes("Notes.xml");
+            tbNotes.Text = notesLoading.Note;
+            btnSaveNotes.Visibility = Visibility.Visible;
+            btnLoadNotes.Visibility = Visibility.Hidden;
         }
 
 
