@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Scrumproject.Logic;
+using Scrumproject.Logic.Entities;
 
 namespace Scrumproject
 {
@@ -25,6 +26,8 @@ namespace Scrumproject
         Report reportLoading = new Report();
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
+        Notes notesSaving = new Notes();
+        Notes notesloading = new Notes();
 
         public MainWindow()
         {
@@ -52,6 +55,23 @@ namespace Scrumproject
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
+        {
+            notesSaving.Note = tbNotes.Text;
+            notesHandler.SaveNotes(notesSaving, "Notes.xml");
+            tbNotes.Text = "Dina anteckningar är sparade!";
+            btnSaveNotes.Visibility = Visibility.Hidden;
+        }
+
+        private void btnLoadNotes_Click(object sender, RoutedEventArgs e)
+        {
+            tbNotes.Text = "";
+            notesloading = notesHandler.LoadNotes("Notes.xml");
+            tbNotes.Text = notesloading.Note;
+            btnSaveNotes.Visibility = Visibility.Visible;
+            btnLoadNotes.Visibility = Visibility.Hidden;
         }
 
 
