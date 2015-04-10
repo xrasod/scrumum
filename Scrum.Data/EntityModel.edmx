@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Boss">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PW" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="AprovalBoss" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BossFor">
+          <Key>
+            <PropertyRef Name="BID" />
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="BID" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Subsistence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prepayment">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Reciept">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RID" Type="int" Nullable="false" />
+          <Property Name="TravelReciept" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Kilometers" Type="decimal" Precision="5" Scale="1" />
+          <Property Name="TotalAmount" Type="decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TravelInfo">
+          <Key>
+            <PropertyRef Name="RID" />
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="RID" Type="int" Nullable="false" />
+          <Property Name="CID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="VacationDays" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PW" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="BID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <Association Name="FK__BossFor__BID__3A81B327">
+          <End Role="Boss" Type="Self.Boss" Multiplicity="1" />
+          <End Role="BossFor" Type="Self.BossFor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boss">
+              <PropertyRef Name="BID" />
+            </Principal>
+            <Dependent Role="BossFor">
+              <PropertyRef Name="BID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BossFor__UID__3B75D760">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BossFor" Type="Self.BossFor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="BossFor">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prepayment__UID__48CFD27E">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Prepayment" Type="Self.Prepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Prepayment">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reciept__RID__4316F928">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Reciept" Type="Self.Reciept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="Reciept">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__UID__3E52440B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TravelInfo__CID__45F365D3">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="TravelInfo">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TravelInfo__RID__44FF419A">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="TravelInfo">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__BID__38996AB5">
+          <End Role="Boss" Type="Self.Boss" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boss">
+              <PropertyRef Name="BID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="BID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="scrumModelStoreContainer">
+          <EntitySet Name="Boss" EntityType="Self.Boss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prepayment" EntityType="Self.Prepayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reciept" EntityType="Self.Reciept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BossFor" EntityType="Self.BossFor" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BossFor].[BID] AS [BID], 
+    [BossFor].[UID] AS [UID]
+    FROM [dbo].[BossFor] AS [BossFor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TravelInfo" EntityType="Self.TravelInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TravelInfo].[RID] AS [RID], 
+    [TravelInfo].[CID] AS [CID], 
+    [TravelInfo].[StartDate] AS [StartDate], 
+    [TravelInfo].[EndDate] AS [EndDate], 
+    [TravelInfo].[VacationDays] AS [VacationDays]
+    FROM [dbo].[TravelInfo] AS [TravelInfo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__BossFor__BID__3A81B327" Association="Self.FK__BossFor__BID__3A81B327">
+            <End Role="Boss" EntitySet="Boss" />
+            <End Role="BossFor" EntitySet="BossFor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BossFor__UID__3B75D760" Association="Self.FK__BossFor__UID__3B75D760">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BossFor" EntitySet="BossFor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prepayment__UID__48CFD27E" Association="Self.FK__Prepayment__UID__48CFD27E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Prepayment" EntitySet="Prepayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reciept__RID__4316F928" Association="Self.FK__Reciept__RID__4316F928">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="Reciept" EntitySet="Reciept" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__UID__3E52440B" Association="Self.FK__Report__UID__3E52440B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TravelInfo__CID__45F365D3" Association="Self.FK__TravelInfo__CID__45F365D3">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="TravelInfo" EntitySet="TravelInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TravelInfo__RID__44FF419A" Association="Self.FK__TravelInfo__RID__44FF419A">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="TravelInfo" EntitySet="TravelInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__BID__38996AB5" Association="Self.FK__Users__BID__38996AB5">
+            <End Role="Boss" EntitySet="Boss" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="scrumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Boss">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PW" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="AprovalBoss" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__BID__38996AB5" FromRole="Boss" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.BossFor" FromRole="Boss" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subsistence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TravelInfoes" Relationship="Self.FK__TravelInfo__CID__45F365D3" FromRole="Country" ToRole="TravelInfo" />
+        </EntityType>
+        <EntityType Name="Prepayment">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Prepayment__UID__48CFD27E" FromRole="Prepayment" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reciept">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RID" Type="Int32" Nullable="false" />
+          <Property Name="TravelReciept" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Report" Relationship="Self.FK__Reciept__RID__4316F928" FromRole="Reciept" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kilometers" Type="Decimal" Precision="5" Scale="1" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="6" Scale="2" />
+          <NavigationProperty Name="Reciepts" Relationship="Self.FK__Reciept__RID__4316F928" FromRole="Report" ToRole="Reciept" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Report__UID__3E52440B" FromRole="Report" ToRole="Users" />
+          <NavigationProperty Name="TravelInfoes" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="Report" ToRole="TravelInfo" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PW" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="BID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boss" Relationship="Self.FK__Users__BID__38996AB5" FromRole="Users" ToRole="Boss" />
+          <NavigationProperty Name="Prepayments" Relationship="Self.FK__Prepayment__UID__48CFD27E" FromRole="Users" ToRole="Prepayment" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Report__UID__3E52440B" FromRole="Users" ToRole="Report" />
+          <NavigationProperty Name="Bosses" Relationship="Self.BossFor" FromRole="Users" ToRole="Boss" />
+        </EntityType>
+        <EntityType Name="TravelInfo">
+          <Key>
+            <PropertyRef Name="RID" />
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" />
+          <Property Name="CID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="VacationDays" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__TravelInfo__CID__45F365D3" FromRole="TravelInfo" ToRole="Country" />
+          <NavigationProperty Name="Report" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="TravelInfo" ToRole="Report" />
+        </EntityType>
+        <Association Name="FK__Users__BID__38996AB5">
+          <End Role="Boss" Type="Self.Boss" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boss">
+              <PropertyRef Name="BID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="BID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TravelInfo__CID__45F365D3">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="TravelInfo">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prepayment__UID__48CFD27E">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Prepayment" Type="Self.Prepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Prepayment">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reciept__RID__4316F928">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="Reciept" Type="Self.Reciept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="Reciept">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__UID__3E52440B">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TravelInfo__RID__44FF419A">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="TravelInfo">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BossFor">
+          <End Role="Boss" Type="Self.Boss" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="scrumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bosses" EntityType="Self.Boss" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Prepayments" EntityType="Self.Prepayment" />
+          <EntitySet Name="Reciepts" EntityType="Self.Reciept" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="TravelInfoes" EntityType="Self.TravelInfo" />
+          <AssociationSet Name="FK__Users__BID__38996AB5" Association="Self.FK__Users__BID__38996AB5">
+            <End Role="Boss" EntitySet="Bosses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TravelInfo__CID__45F365D3" Association="Self.FK__TravelInfo__CID__45F365D3">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="TravelInfo" EntitySet="TravelInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prepayment__UID__48CFD27E" Association="Self.FK__Prepayment__UID__48CFD27E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Prepayment" EntitySet="Prepayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reciept__RID__4316F928" Association="Self.FK__Reciept__RID__4316F928">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Reciept" EntitySet="Reciepts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__UID__3E52440B" Association="Self.FK__Report__UID__3E52440B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TravelInfo__RID__44FF419A" Association="Self.FK__TravelInfo__RID__44FF419A">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="TravelInfo" EntitySet="TravelInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="BossFor" Association="Self.BossFor">
+            <End Role="Boss" EntitySet="Bosses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="scrumModelStoreContainer" CdmEntityContainer="scrumEntities">
+          <EntitySetMapping Name="Bosses">
+            <EntityTypeMapping TypeName="scrumModel.Boss">
+              <MappingFragment StoreEntitySet="Boss">
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AprovalBoss" ColumnName="AprovalBoss" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="scrumModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Subsistence" ColumnName="Subsistence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prepayments">
+            <EntityTypeMapping TypeName="scrumModel.Prepayment">
+              <MappingFragment StoreEntitySet="Prepayment">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reciepts">
+            <EntityTypeMapping TypeName="scrumModel.Reciept">
+              <MappingFragment StoreEntitySet="Reciept">
+                <ScalarProperty Name="REID" ColumnName="REID" />
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="TravelReciept" ColumnName="TravelReciept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="scrumModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Kilometers" ColumnName="Kilometers" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="scrumModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelInfoes">
+            <EntityTypeMapping TypeName="scrumModel.TravelInfo">
+              <MappingFragment StoreEntitySet="TravelInfo">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="VacationDays" ColumnName="VacationDays" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BossFor" TypeName="scrumModel.BossFor" StoreEntitySet="BossFor">
+            <EndProperty Name="Boss">
+              <ScalarProperty Name="BID" ColumnName="BID" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UID" ColumnName="UID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

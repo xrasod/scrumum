@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Scrum.Data.Data
 {
-    class CountriesRepository
+    public class CountriesRepository
     {
+        public List<Country> GetAllCountries()
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Countries.OrderBy(x => x.Name).ToList();
+            }
+        }
     }
 }
