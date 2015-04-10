@@ -8,11 +8,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="325*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="195*"/>
+            <ColumnDefinition Width="455*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="3" BorderBrush="White" Margin="-10,-26,0,-134" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
+        <TabControl Grid.ColumnSpan="5" BorderBrush="White" Margin="-10,0,0,-160" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
             <TabControl.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -32,7 +33,7 @@
                 </LinearGradientBrush>
             </TabControl.OpacityMask>
             <TabItem Header="Rapportering">
-                <Canvas Margin="0,-3,236,127">
+                <Canvas Margin="13,28,223,96">
                     <DatePicker x:Name="dpStartDate" Canvas.Left="185" Canvas.Top="29" Width="130" Height="27" Background="Black"></DatePicker>
                     <DatePicker x:Name="dpEndDate" Canvas.Left="336" Canvas.Top="30" Width="118" Background="Black"></DatePicker>
                     <Label x:Name="lbStartDate" Content="Start/slutdatum                            " Canvas.Left="27" Canvas.Top="25" Width="134" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16"/>
@@ -46,7 +47,7 @@
                     <Label x:Name="lbWhatHaveIDoneToday" Content="Vad har gjorts under resan:" Canvas.Left="406" Canvas.Top="93" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
                     <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="214" Background="Black" Foreground="White"/>
                     <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="Black" Foreground="White"/>
-                    <ComboBox Canvas.Left="207" Canvas.Top="351" Width="120"/>
+                    <ComboBox x:Name="CbCountries" Canvas.Left="207" Canvas.Top="351" Width="120"/>
                     <ListView Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black" Foreground="White">
                         <ListView.View>
                             <GridView>
@@ -121,12 +122,12 @@
             <Canvas Margin="-4,0,4,0">
                 <ListView x:Name="lvUsers" Height="136" Width="313" Canvas.Left="30" Canvas.Top="55">
 
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Label x:Name="lbUsers" Content="Användare:" Canvas.Left="30" Canvas.Top="29" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" />
                 <Label x:Name="lbUsername" Content="" Canvas.Left="363" Canvas.Top="55" Background="#FFFBF8F8" Width="96"/>
                 <Label x:Name="lbUsernameLabel" Content="Användarnamn:" Canvas.Left="363" Canvas.Top="29" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -147,6 +148,7 @@
                 <TextBox x:Name="tbEmail" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="242" Width="120"/>
                 <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="498" Canvas.Top="242" Width="75"/>
                 <Button x:Name="btnClear" Content="Rensa" Canvas.Left="498" Canvas.Top="267" Width="75"/>
+                <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="498" Canvas.Top="292" Width="75"/>
 
             </Canvas>
         </TabControl>
