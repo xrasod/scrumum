@@ -4,15 +4,15 @@
         xmlns:scrumproject="clr-namespace:Scrumproject"
         Title="MainWindow" Height="734.687" Width="652.388">
 
-    <Grid Margin="0,0,-250,0" HorizontalAlignment="Left" Width="894">
+    <Grid Margin="0,0,-8,0" HorizontalAlignment="Left" Width="652">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="649*"/>
-            <ColumnDefinition Width="241*"/>
+            <ColumnDefinition Width="325*"/>
+            <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="3" BorderBrush="White" Margin="-10,-26,0,-134" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
+        <TabControl Grid.ColumnSpan="4" BorderBrush="White" Margin="-10,-26,0,-134" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
             <TabControl.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -90,8 +90,8 @@
                     <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
                     <TextBox x:Name="tbNotes" Height="178" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="273" Width="214" Background="Black" Foreground="White"/>
                     <Label x:Name="lblNotes" Content="Anteckningar:" Canvas.Left="406" Canvas.Top="246" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="410" Canvas.Top="456" Width="214" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}"/>
-                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="410" Canvas.Top="479" Width="214" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="410" Canvas.Top="456" Width="214" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}" Click="btnLoadNotes_Click"/>
+                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="410" Canvas.Top="479" Width="214" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click"/>
                     <Label x:Name="lbTotalDriven" Content="" Canvas.Left="146" Canvas.Top="90" Width="36" RenderTransformOrigin="1.677,0.752" Background="White" Height="21"/>
                     <Button x:Name="btnUpdateTotalDriven" Content="Uppdatera
                             " Canvas.Left="187" Canvas.Top="116" Width="102" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="10,1,1,1"/>
