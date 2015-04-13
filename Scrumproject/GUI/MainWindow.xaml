@@ -153,8 +153,8 @@
             </Canvas>
             <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="118" Margin="-8,0,-55,0">
                 <Grid x:Name="MainWindowCurrency" Background="#FFE5E5E5">
-                    <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="180,40,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="386,40,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="180,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbFromCurrency_SelectionChanged"/>
+                    <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="386,40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbToCurrency_SelectionChanged"/>
                     <Button x:Name="BtnConvert" Content="Konvertera&#xD;&#xA;" HorizontalAlignment="Left" Margin="337,157,0,0" VerticalAlignment="Top" Width="75" Click="BtnConvert_Click"/>
                     <TextBox x:Name="TbToCurrency" HorizontalAlignment="Left" Height="78" Margin="38,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" IsEnabled="False"/>
                     <TextBox x:Name="TbFromCurrency" HorizontalAlignment="Left" Height="23" Margin="38,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -162,6 +162,8 @@
                     <Label Content="Valuta från" HorizontalAlignment="Left" Margin="204,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.192"/>
                     <Label Content="Valuta till" HorizontalAlignment="Left" Margin="399,14,0,0" VerticalAlignment="Top" Width="96"/>
                     <Label Content="Resultat" HorizontalAlignment="Left" Margin="48,84,0,0" VerticalAlignment="Top"/>
+                    <Label Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="305,39,0,0" VerticalAlignment="Top" Name="lbFromCurrency" Width="57" Height="23"/>
+                    <Label Content="&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="511,39,0,0" VerticalAlignment="Top" Name="lbToCurrency" Height="23" Width="36"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -15,5 +15,13 @@ namespace Scrum.Data.Data
                 return context.Countries.OrderBy(x => x.Name).ToList();
             }
         }
+
+        public Country GetSpecificCurrencyFromCountry(string country)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Countries.FirstOrDefault(x => x.Name.Equals(country));
+            }
+        }
     }
 }

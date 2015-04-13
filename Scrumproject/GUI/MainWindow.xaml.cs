@@ -37,7 +37,6 @@ namespace Scrumproject
             InitializeComponent();
             PopulateCurrencyData();
 
-
             var rep = new CountriesRepository();
 
             var hej = rep.GetAllCountries();
@@ -103,18 +102,17 @@ namespace Scrumproject
 
             foreach (var x in hej)
             {
-                CbFromCurrency.Items.Add(x.Currency);
-                CbToCurrency.Items.Add(x.Currency);
+                CbFromCurrency.Items.Add(x.Name);
+                CbToCurrency.Items.Add(x.Name);
             }
             CbFromCurrency.SelectedIndex = 0;
             CbToCurrency.SelectedIndex = 0;
-        
         }
 
         private void BtnConvert_Click(object sender, RoutedEventArgs e)
         {
-            string fromCurrency= CbFromCurrency.SelectedItem.ToString();
-            string toCurrency = CbToCurrency.SelectedItem.ToString();
+            string fromCurrency= lbFromCurrency.Content.ToString();
+            string toCurrency = lbToCurrency.Content.ToString();
             string amount = TbFromCurrency.Text.ToString();
             if (Validator.ControlInputConverter(amount))
             {
@@ -128,8 +126,28 @@ namespace Scrumproject
             {
                 TbToCurrency.Text = "failed to convert";
             }
+        }
 
+        private void CbFromCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrencyConverter c = new CurrencyConverter();
 
+            var selectedCountry = CbFromCurrency.SelectedItem.ToString();
+
+            var content = c.GetSelectedCountryCurrency(selectedCountry);
+
+            lbFromCurrency.Content = content.Currency;
+        }
+
+        private void CbToCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrencyConverter c = new CurrencyConverter();
+
+            var selectedCountry = CbToCurrency.SelectedItem.ToString();
+
+            var content = c.GetSelectedCountryCurrency(selectedCountry);
+
+            lbToCurrency.Content = content.Currency;
         }
 
 
