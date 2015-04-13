@@ -28,6 +28,7 @@ namespace Scrumproject
         Report reportLoading = new Report();
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
+        LogicHandler addUserHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
@@ -131,6 +132,31 @@ namespace Scrumproject
 
 
         }
+
+        private void btnInactive_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var logic = new LogicHandler();
+
+            logic.changeStatus(lvUsers.SelectedValue.ToString());
+        
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //var BID = Int32.Parse(lbLoggedInUser.Content.ToString());
+            var email = tbEmail.Text;
+            var firstName = tbFirstName.Text;
+            var lastName = tbLastNamne.Text;
+            var pw = tbPassword.Text;
+            var SSN = tbSsn.Text;
+
+            addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+        }
+
+     
+
+      
 
 
         
