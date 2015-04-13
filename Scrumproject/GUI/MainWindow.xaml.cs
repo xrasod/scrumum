@@ -16,6 +16,7 @@ using Scrum.Data.Data;
 using Scrumproject.Logic;
 using Scrumproject.Logic.Entities;
 
+
 namespace Scrumproject
 {
     /// <summary>
@@ -34,6 +35,7 @@ namespace Scrumproject
         public MainWindow()
         {
             InitializeComponent();
+            PopulateCurrencyData();
 
 
             var rep = new CountriesRepository();
@@ -93,7 +95,31 @@ namespace Scrumproject
             btnLoadNotes.Visibility = Visibility.Hidden;
         }
 
+        private void PopulateCurrencyData()
+        {
+            var logic = new CurrencyConverter();
 
+            var hej = logic.GetCountries();
+
+            foreach (var x in hej)
+            {
+                CbFromCurrency.Items.Add(x.Currency);
+                CbToCurrency.Items.Add(x.Currency);
+                    
+            }
+        
+        }
+
+        private void BtnConvert_Click(object sender, RoutedEventArgs e)
+        {
+            string fromCurrency= CbFromCurrency.SelectedItem.ToString();
+            string toCurrency = CbToCurrency.SelectedItem.ToString();
+            string amount = TbFromCurrency.Text.ToString();
+            double amounten = Convert.ToDouble(amount);
+            CurrencyConverter c = new CurrencyConverter();
+            string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten);
+            TbToCurrency.Text = hej;
+        }
 
 
         
