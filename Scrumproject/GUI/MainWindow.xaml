@@ -118,7 +118,7 @@
                 </Canvas>
             </TabItem>
             <TabItem Header="Förskottsansökan" />
-            <TabItem Header="Chef" />
+            <TabItem Header="Chef" HorizontalAlignment="Left" Width="40" />
             <Canvas Margin="-4,0,4,0">
                 <ListView x:Name="lvUsers" Height="136" Width="313" Canvas.Left="30" Canvas.Top="55">
 
@@ -151,6 +151,19 @@
                 <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="498" Canvas.Top="292" Width="75"/>
 
             </Canvas>
+            <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="118" Margin="-8,0,-55,0">
+                <Grid x:Name="MainWindowCurrency" Background="#FFE5E5E5">
+                    <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="180,40,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="386,40,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="BtnConvert" Content="Konvertera&#xD;&#xA;" HorizontalAlignment="Left" Margin="337,157,0,0" VerticalAlignment="Top" Width="75" Click="BtnConvert_Click"/>
+                    <TextBox x:Name="TbToCurrency" HorizontalAlignment="Left" Height="78" Margin="38,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" IsEnabled="False"/>
+                    <TextBox x:Name="TbFromCurrency" HorizontalAlignment="Left" Height="23" Margin="38,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Summa  Från" HorizontalAlignment="Left" Margin="38,10,0,0" VerticalAlignment="Top" Width="111"/>
+                    <Label Content="Valuta från" HorizontalAlignment="Left" Margin="204,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.192"/>
+                    <Label Content="Valuta till" HorizontalAlignment="Left" Margin="399,14,0,0" VerticalAlignment="Top" Width="96"/>
+                    <Label Content="Resultat" HorizontalAlignment="Left" Margin="48,84,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 
