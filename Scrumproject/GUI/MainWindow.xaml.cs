@@ -105,8 +105,9 @@ namespace Scrumproject
             {
                 CbFromCurrency.Items.Add(x.Currency);
                 CbToCurrency.Items.Add(x.Currency);
-                    
             }
+            CbFromCurrency.SelectedIndex = 0;
+            CbToCurrency.SelectedIndex = 0;
         
         }
 
@@ -115,10 +116,20 @@ namespace Scrumproject
             string fromCurrency= CbFromCurrency.SelectedItem.ToString();
             string toCurrency = CbToCurrency.SelectedItem.ToString();
             string amount = TbFromCurrency.Text.ToString();
+            if (Validator.ControlInputConverter(amount))
+            {
             double amounten = Convert.ToDouble(amount);
             CurrencyConverter c = new CurrencyConverter();
-            string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten);
-            TbToCurrency.Text = hej;
+            
+                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten);
+                TbToCurrency.Text = hej;
+            }
+            else
+            {
+                TbToCurrency.Text = "failed to convert";
+            }
+
+
         }
 
 

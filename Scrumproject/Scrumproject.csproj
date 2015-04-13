@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
+    <Compile Include="Logic\Validator.cs" />
     <Compile Include="Service References\CurrencyConvertor\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
