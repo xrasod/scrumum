@@ -73,8 +73,7 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            var pdffilnamn = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf";
-            reportHandler.CreatePdf(tbNotes.Text, pdffilnamn);
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,6 +183,31 @@ namespace Scrumproject
             var content = c.GetSelectedCountrySpecifics(selectedCountry);
 
             LbTraktamente.Content = content.Subsistence;
+        }
+
+        private void btnUploadReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            // Set filter for file extension and default file extension
+            dlg.DefaultExt = ".png";
+            dlg.Filter =
+                "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+
+            // Display OpenFileDialog by calling ShowDialog method
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                tbReceiptFile.Text = filename;
+            }
         }
 
      
