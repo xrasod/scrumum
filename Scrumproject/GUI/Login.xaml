@@ -3,6 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="300" Width="300">
     <Grid>
-        
+        <Label x:Name="LbLoginName" Content="Användarnamn" HorizontalAlignment="Left" Margin="27,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.396,0.132"/>
+        <Label x:Name="LbPassword" Content="Lösenord" HorizontalAlignment="Left" Margin="27,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbUsername" HorizontalAlignment="Left" Height="23" Margin="27,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbPassword" HorizontalAlignment="Left" Height="23" Margin="27,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnLogin" Content="Logga in" HorizontalAlignment="Left" Margin="27,216,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogin_Click"/>
+        <Button x:Name="BtnAvbryt" Content="Avbryt" HorizontalAlignment="Left" Margin="189,216,0,0" VerticalAlignment="Top" Width="75" Click="BtnAvbryt_Click"/>
+
     </Grid>
 </Window>

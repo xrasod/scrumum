@@ -23,5 +23,37 @@ namespace Scrumproject.GUI
         {
             InitializeComponent();
         }
+
+        private void BtnAvbryt_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            // ~ Dolis gillar killar ~ 
+            // 
+//           ▄█▀█▀█▄
+//        ▄█▀　　█　　▀█▄
+//       ▄█▀　　　　　　　▀█▄
+//       █　　　　　　　　　　　█
+//       █　　　　　　　　　　　█
+//       ▀█▄▄　　█　　　▄█▀
+//         █　　▄▀▄　　█
+//         █　▀　　　▀　█
+//         █　　　　　　　█
+//         █　　　　　　　█
+//         █　　　　 　　 █
+//         █　　　　　　　█
+//         █　　　　　　　█
+//   ▄█▀▀█▄█　　　　　　　█▄█▀█▄
+// ▄█▀▀　　　　▀　　　　　　　　　　　▀▀█
+//█▀　　　　　　　　　Pontus Ågren　　▀█
+//█　　　　　　　　　　　　　　　　　　　　　　█
+//█　　　　　　　　　　　▄█▄　　　　　　　　　█
+//▀█　　　　　　　　　█▀　▀█　　　　　　　　█▀
+// ▀█▄　　　　　　█▀　　　▀█　　　　　▄█▀
+//   ▀█▄▄▄█▀　　　　　　▀█▄▄▄█▀
+        }
     }
 }
