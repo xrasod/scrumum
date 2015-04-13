@@ -1,0 +1,14 @@
+﻿<Window x:Class="Scrumproject.GUI.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LoginWindow" Height="300" Width="300">
+    <Grid>
+        <Button x:Name="BtnLogin" Content="Logga In" HorizontalAlignment="Left" Margin="22,218,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.501,-1.2" Click="BtnLogin_Click"/>
+        <Button x:Name="BtnCloseWindow" Content="Avsluta" HorizontalAlignment="Left" Margin="201,218,0,0" VerticalAlignment="Top" Width="75" Click="BtnCloseWindow_Click"/>
+        <Label x:Name="LbUsername" Content="Användarnamn" HorizontalAlignment="Left" Margin="59,28,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LbPassword" Content="Lösenord" HorizontalAlignment="Left" Margin="59,108,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbUsername" HorizontalAlignment="Left" Height="23" Margin="70,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TbPassword" HorizontalAlignment="Left" Height="23" Margin="70,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
