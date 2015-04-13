@@ -36,11 +36,11 @@ namespace Scrumproject.Logic.Entities
             return CurrencyAmount;
         }
 
-        public Country GetSelectedCountryCurrency(string country)
+        public Country GetSelectedCountrySpecifics(string country)
         {
             CountriesRepository r = new CountriesRepository();
 
-            return r.GetSpecificCurrencyFromCountry(country);
+            return r.GetSpecificsFromCountry(country);
         }
 
     }

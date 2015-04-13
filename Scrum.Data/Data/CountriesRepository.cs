@@ -16,12 +16,14 @@ namespace Scrum.Data.Data
             }
         }
 
-        public Country GetSpecificCurrencyFromCountry(string country)
+        public Country GetSpecificsFromCountry(string country)
         {
             using (var context = new scrumEntities())
             {
                 return context.Countries.FirstOrDefault(x => x.Name.Equals(country));
             }
         }
+
+        
     }
 }

@@ -13,7 +13,7 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.ColumnSpan="5" BorderBrush="White" Margin="-10,0,0,-160" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
+        <TabControl Grid.ColumnSpan="6" BorderBrush="White" Margin="0,-16,-10,-144" HorizontalAlignment="Left" Width="662" Height="864" VerticalAlignment="Top">
             <TabControl.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -47,7 +47,7 @@
                     <Label x:Name="lbWhatHaveIDoneToday" Content="Vad har gjorts under resan:" Canvas.Left="406" Canvas.Top="93" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
                     <TextBox x:Name="tbDoneOnTrip" Height="113" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="214" Background="Black" Foreground="White"/>
                     <TextBox Height="23" Canvas.Left="187" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="102" Background="Black" Foreground="White"/>
-                    <ComboBox x:Name="CbCountries" Canvas.Left="207" Canvas.Top="351" Width="120"/>
+                    <ComboBox x:Name="CbCountries" Canvas.Left="207" Canvas.Top="351" Width="120" SelectionChanged="CbCountries_SelectionChanged"/>
                     <ListView Height="126" Canvas.Left="35" Canvas.Top="321" Width="140" Background="Black" Foreground="White">
                         <ListView.View>
                             <GridView>
@@ -113,6 +113,8 @@
                     <Label x:Name="lbValue" Content="Belopp:" Canvas.Left="207" Canvas.Top="369" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label x:Name="lbNewValue" Content="" Canvas.Left="306" Canvas.Top="234" Width="95"/>
                     <Label x:Name="lbOldValue" Content="" Canvas.Left="317" Canvas.Top="203" Width="84"/>
+                    <TextBox x:Name="tbReceiptFile_Copy" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="550" Width="166" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White"/>
+                    <Label Content="            " Canvas.Left="200" Canvas.Top="456" Width="163" Name="LbTraktamente" Foreground="White" FontWeight="Bold" FontSize="16"/>
 
 
                 </Canvas>

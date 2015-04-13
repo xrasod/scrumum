@@ -46,8 +46,11 @@ namespace Scrumproject
             foreach(var x in hej)
             {
                 CbCountries.Items.Add(x.Name);
+                
             }
             
+
+
         }
 
         private void btnCreateDraft_Click(object sender, RoutedEventArgs e)
@@ -135,7 +138,7 @@ namespace Scrumproject
 
             var selectedCountry = CbFromCurrency.SelectedItem.ToString();
 
-            var content = c.GetSelectedCountryCurrency(selectedCountry);
+            var content = c.GetSelectedCountrySpecifics(selectedCountry);
 
             lbFromCurrency.Content = content.Currency;
         }
@@ -146,7 +149,7 @@ namespace Scrumproject
 
             var selectedCountry = CbToCurrency.SelectedItem.ToString();
 
-            var content = c.GetSelectedCountryCurrency(selectedCountry);
+            var content = c.GetSelectedCountrySpecifics(selectedCountry);
 
             lbToCurrency.Content = content.Currency;
         }
@@ -170,6 +173,16 @@ namespace Scrumproject
             var SSN = tbSsn.Text;
 
             addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+        }
+
+        private void CbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrencyConverter c = new CurrencyConverter();
+            var selectedCountry = CbCountries.SelectedItem.ToString();
+
+            var content = c.GetSelectedCountrySpecifics(selectedCountry);
+
+            LbTraktamente.Content = content.Subsistence;
         }
 
      
