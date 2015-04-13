@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Scrumproject.Logic
 {
-    internal class YoloHandler
+    internal class EmailHandler
     {
 
 
