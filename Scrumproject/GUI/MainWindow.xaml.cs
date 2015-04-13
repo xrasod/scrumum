@@ -73,7 +73,8 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-
+            var pdffilnamn = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf";
+            reportHandler.CreatePdf(tbNotes.Text, pdffilnamn);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

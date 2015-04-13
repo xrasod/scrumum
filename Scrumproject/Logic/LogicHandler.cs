@@ -18,7 +18,12 @@ namespace Scrumproject.Logic
       ReportRepository<Report> reportRepository = new ReportRepository<Report>();
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
-      
+      PDFRepository pdfRepository = new PDFRepository();
+
+       public void CreatePdf(string text, string filnamn)
+       {
+           pdfRepository.createPdf(text, filnamn);
+       }
 
 
       public Report LoadDraft(string sokvag)
