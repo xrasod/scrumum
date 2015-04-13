@@ -113,7 +113,6 @@
                     <Label x:Name="lbValue" Content="Belopp:" Canvas.Left="207" Canvas.Top="369" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label x:Name="lbNewValue" Content="" Canvas.Left="306" Canvas.Top="234" Width="95"/>
                     <Label x:Name="lbOldValue" Content="" Canvas.Left="317" Canvas.Top="203" Width="84"/>
-                    <TextBox x:Name="tbReceiptFile1" Height="23" Canvas.Left="35" TextWrapping="Wrap" Text="" Canvas.Top="546" Width="166" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White"/>
                     <Label Content="            " Canvas.Left="200" Canvas.Top="456" Width="163" Name="LbTraktamente" Foreground="White" FontWeight="Bold" FontSize="16"/>
 
 
