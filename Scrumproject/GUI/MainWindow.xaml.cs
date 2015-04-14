@@ -297,7 +297,7 @@ namespace Scrumproject
             var dateHandler = new DateHandler();
             var daysOff = Convert.ToInt32(TbDaysOff.Text);
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            LvDays.Items.Add(setDate);
+            LvDays.ItemsSource = setDate;
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
