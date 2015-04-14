@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrumproject", "Scrumproject\Scrumproject.csproj", "{F12DB792-D9F8-45A9-A83D-A7E078650904}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrum.Data", "Scrum.Data\Scrum.Data.csproj", "{459B0AD0-18E3-4038-BCD5-0351006FB695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{F8DEC773-6CD3-4005-898C-5A37640C7F5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{459B0AD0-18E3-4038-BCD5-0351006FB695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{459B0AD0-18E3-4038-BCD5-0351006FB695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{459B0AD0-18E3-4038-BCD5-0351006FB695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8DEC773-6CD3-4005-898C-5A37640C7F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8DEC773-6CD3-4005-898C-5A37640C7F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8DEC773-6CD3-4005-898C-5A37640C7F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8DEC773-6CD3-4005-898C-5A37640C7F5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
