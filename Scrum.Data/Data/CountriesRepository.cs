@@ -24,6 +24,6 @@ namespace Scrum.Data.Data
             }
         }
 
-        
+
     }
 }

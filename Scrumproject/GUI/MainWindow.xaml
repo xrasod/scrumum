@@ -133,9 +133,8 @@
                     <Label x:Name="lbUsers" Content="Användare:" Canvas.Left="30" Canvas.Top="29" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" />
                     <Label x:Name="lbUsernameLabel" Content="Användarnamn:" Canvas.Left="363" Canvas.Top="29" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <Label x:Name="lbPasswordLabel" Content="Lösenord:" Canvas.Left="498" Canvas.Top="29" Width="93" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                    <Button x:Name="btnAddUser" Content="Lägg till" Canvas.Left="498" Canvas.Top="213" Width="75" RenderTransformOrigin="0.5,0.5" Click="Button_Click"/>
-                    <Label Content="Chef:" Canvas.Left="366" Canvas.Top="86" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="lbBoss" Content="" Canvas.Left="366" Canvas.Top="115" Width="62" Background="#FFFBFBFB"/>
+                    <Button x:Name="btnAddUser" Content="Lägg till" Canvas.Left="483" Canvas.Top="283" Width="75" RenderTransformOrigin="0.5,0.5" Click="Button_Click"/>
+                    <Label Content="Chef:" Canvas.Left="498" Canvas.Top="208" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <Label x:Name="lbLoggedIn" Content="Inloggad:" Canvas.Left="466" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <Label x:Name="lbLoggedInUser" Content="" Canvas.Left="544" Canvas.Top="2" Width="89" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="12"/>
                     <Label x:Name="lbFirstName" Content="Förnamn:" Canvas.Left="498" Canvas.Top="86" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -146,9 +145,9 @@
                     <TextBox x:Name="tbSsn" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="180" Width="119"/>
                     <Label x:Name="lbEmail" Content="E-post: " Canvas.Left="363" Canvas.Top="208" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.45,-0.379"/>
                     <TextBox x:Name="tbEmail" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="242" Width="120"/>
-                    <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="498" Canvas.Top="242" Width="75"/>
-                    <Button x:Name="btnClear" Content="Rensa" Canvas.Left="498" Canvas.Top="267" Width="75"/>
-                    <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="498" Canvas.Top="292" Width="75" Click="btnInactive_Click"/>
+                    <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="563" Canvas.Top="283" Width="75"/>
+                    <Button x:Name="btnClear" Content="Rensa" Canvas.Left="483" Canvas.Top="308" Width="75"/>
+                    <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="563" Canvas.Top="308" Width="75" Click="btnInactive_Click"/>
                     <TextBox x:Name="tbPassword" Height="26" Canvas.Left="498" TextWrapping="Wrap" Text="" Canvas.Top="63" Width="100"/>
                     <TextBox x:Name="tbUsername" Height="26" Canvas.Left="367" TextWrapping="Wrap" Text="" Canvas.Top="63" Width="100"/>
                     <Label x:Name="lbSentInReports" Content="Rapporter: " Canvas.Left="30" Canvas.Top="274" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -176,6 +175,9 @@
                     <Label x:Name="btnSearchUser" Content="Sök: " Canvas.Left="30" Canvas.Top="196" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="77" TextWrapping="Wrap" Text="" Canvas.Top="202" Width="120"/>
                     <Button x:Name="btnSearchUser1" Content="Sök" Canvas.Left="213" Canvas.Top="205" Width="75"/>
+                    <TextBox x:Name="tbBoss" Height="23" Canvas.Left="498" TextWrapping="Wrap" Text="" Canvas.Top="242" Width="120"/>
+                    <Label x:Name="lbUserID" Content="Anst. nr:" Canvas.Left="368" Canvas.Top="89" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                    <TextBox x:Name="tbUserID" Height="23" Canvas.Left="365" TextWrapping="Wrap" Text="" Canvas.Top="118" Width="102"/>
 
                 </Canvas>
             </TabItem>
