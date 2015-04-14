@@ -58,8 +58,8 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Content="Spara Kvitto
-                            " Canvas.Left="31" Canvas.Top="489" Width="163" RenderTransformOrigin="0.77,2.2" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="50,1,1,1" Click="Button_Click_1"/>
+                    <Button x:Name="BtnSaveReceipt" Content="Spara Kvitto
+                            " Canvas.Left="34" Canvas.Top="489" Width="163" RenderTransformOrigin="0.77,2.2" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="50,1,1,1" Click="Button_Click_1"/>
                     <Button x:Name="btnUploadReceipt" Content="Bläddra" Canvas.Left="31" Canvas.Top="416" Width="166" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnUploadReceipt_Click" RenderTransformOrigin="0.566,-2.278"/>
                     <TextBox x:Name="tbReceiptFile" Height="23" Canvas.Left="31" TextWrapping="Wrap" Text="" Canvas.Top="388" Width="166" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White"/>
                     <TextBox x:Name="tbSum" Height="23" Canvas.Left="30" TextWrapping="Wrap" Text="" Canvas.Top="464" Width="163" RenderTransformOrigin="0.5,0.5" Background="Black" Foreground="White">
@@ -80,7 +80,7 @@
                         </ListView.View>
                     </ListView>
                     <Button x:Name="btnRemoveSelectedReceipt" Content="Ta bort kvitto
-                            " Canvas.Left="207" Canvas.Top="489" Width="120" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White"/>
+                            " Canvas.Left="207" Canvas.Top="489" Width="120" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Click="btnRemoveSelectedReceipt_Click"/>
                     <Label x:Name="lbReceipts" Content="Kvitton för resa" Canvas.Left="200" Canvas.Top="352" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" RenderTransformOrigin="0.465,-1"/>
                     <Label Content="Belopp för kvitto" Canvas.Left="33" Canvas.Top="429" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label Content="Ladda upp kvitto
