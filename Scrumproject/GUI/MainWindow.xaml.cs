@@ -46,7 +46,6 @@ namespace Scrumproject
             tbBoss.IsEnabled = false;
             notesLoading = notesHandler.LoadNotes("Notes.xml");
             tbNotes.Text = notesLoading.Note;
-
             var rep = new CountriesRepository();
 
             var hej = rep.GetAllCountries();
@@ -154,6 +153,7 @@ namespace Scrumproject
             var content = c.GetSelectedCountrySpecifics(selectedCountry);
 
             lbFromCurrency.Content = content.Currency;
+
         }
 
         private void CbToCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -445,7 +445,7 @@ namespace Scrumproject
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+           
         }
 
     }
