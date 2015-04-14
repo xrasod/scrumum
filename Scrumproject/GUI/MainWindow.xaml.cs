@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,7 +74,7 @@ namespace Scrumproject
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
             
-        }
+        }       
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -87,6 +87,7 @@ namespace Scrumproject
             notesHandler.SaveNotes(notesSaving, "Notes.xml");
             tbNotes.Text = "Dina anteckningar är sparade!";
             btnSaveNotes.Visibility = Visibility.Hidden;
+            btnLoadNotes.Visibility = Visibility.Visible;
         }
 
         private void btnLoadNotes_Click(object sender, RoutedEventArgs e)
