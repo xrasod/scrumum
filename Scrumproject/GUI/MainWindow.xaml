@@ -37,7 +37,7 @@
                     <GradientStop Color="#FFD1BBBB" Offset="1"/>
                 </LinearGradientBrush>
             </TabControl.OpacityMask>
-            <TabItem Header="Rapportering" Margin="-2,-2,-89,0" Background="White" Foreground="Black" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold">
+            <TabItem Header="Rapportering" Margin="-2,-2,-89,0" Background="#FFADBEE4" Foreground="Black" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold">
                 <Canvas Margin="13,28,223,96">
                     <DatePicker x:Name="dpStartDate" Canvas.Left="191" Canvas.Top="-9" Width="119" Height="27" Background="Black"></DatePicker>
                     <Label x:Name="lbStartDate" Content="Välj start/slutdatum                            " Canvas.Top="-9" Width="167" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16"/>
@@ -101,8 +101,8 @@
 
                 </Canvas>
             </TabItem>
-            <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="White" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" />
-            <TabItem Header="Chef" HorizontalAlignment="Left" Width="182" Margin="78,-2,-78,2" Background="White" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" >
+            <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="#FF6C83B4" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" />
+            <TabItem Header="Chef" HorizontalAlignment="Left" Width="182" Margin="78,-2,-78,2" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" >
                 <Canvas Height="836" Margin="10,0,81,-9">
                     <Label x:Name="lbUsers" Content="Användare" Canvas.Left="26" Canvas.Top="26" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" />
                     <Label x:Name="lbUsernameLabel" Content="Användarnamn" Canvas.Left="454" Canvas.Top="49" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -154,7 +154,7 @@
 
                 </Canvas>
             </TabItem>
-            <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Right" Height="63" VerticalAlignment="Bottom" Width="182" Margin="0,-2,-68,2" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="White">
+            <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Right" Height="63" VerticalAlignment="Bottom" Width="182" Margin="0,-2,-68,2" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FF96A9D3">
                 <Grid x:Name="MainWindowCurrency">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
