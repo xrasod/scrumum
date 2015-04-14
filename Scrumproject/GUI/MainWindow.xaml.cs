@@ -13,8 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Scrum.Data.Data;
-    using Scrumproject.Data;
-    using Scrumproject.Logic;
+using Scrumproject.Logic;
 using Scrumproject.Logic.Entities;
 
 
@@ -25,27 +24,20 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Report reportSaving = new Report();
-        Report reportLoading = new Report();
+        ReportDraft _reportDraftSaving = new ReportDraft();
+        ReportDraft _reportDraftLoading = new ReportDraft();
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
+        LogicHandler pdfHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
-
-        
 
 
         public MainWindow()
         {
             InitializeComponent();
             PopulateCurrencyData();
-            PopulateListViewUsers();
-
-            tbUserID.IsEnabled = false;
-            tbUsername.IsEnabled = false;
-            tbBoss.IsEnabled = false;
-            
 
             var rep = new CountriesRepository();
 
@@ -54,41 +46,41 @@ namespace Scrumproject
 
             foreach(var x in hej)
             {
-                CbCountries.Items.Add(x.Name);
+                CbCountries.Items.Add(x.Name);       
+            }
+
+            try
+            {
+                _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
+                TbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
+                tbDoneOnTrip.Text = _reportDraftLoading.Description;
+                foreach (var kvitto in _reportDraftLoading.imagePathsList)
+                {
+                    LvReceipts.Items.Add(kvitto);
+                }
                 
             }
-            
+            catch
+            {
+                MessageBox.Show("Det finns inget sparat utkast att ladda");
+            }
 
 
-        }
-
-        private void btnCreateDraft_Click(object sender, RoutedEventArgs e)
-        {
-            reportSaving.Description = tbNotes.Text;
-            reportSaving.Id = 1;
-            reportSaving.NumberOfKilometersDriven = 111;
-            reportSaving.UserId = 12;
-            reportSaving.Status = 1;
-            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
-            tbNotes.Text = "";
-        }
-
-        private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
-        {
-            reportLoading = reportHandler.LoadDraft("DraftReport.xml");
-            lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
-            tbNotes.Text = reportLoading.Description;
         }
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            
+            var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
+                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n";
+
+                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
+                MessageBox.Show("Din rapport har sparats.");
+                
+            }
         }       
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
         {
@@ -107,17 +99,6 @@ namespace Scrumproject
             btnSaveNotes.Visibility = Visibility.Visible;
             btnLoadNotes.Visibility = Visibility.Hidden;
         }
-        //Fyllar listview med användare
-        private void PopulateListViewUsers()
-        {
-            var users = BossRepository.GetAll();
-
-            foreach (var user in users)
-            {
-                lvUsers.Items.Add(user.Username);
-            }
-        }
-       
 
         private void PopulateCurrencyData()
         {
@@ -183,11 +164,9 @@ namespace Scrumproject
             logic.changeStatus(lvUsers.SelectedValue.ToString());
         
         }
-        //Lägger till användare
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Validator validera = new Validator();
-            
             //var BID = Int32.Parse(lbLoggedInUser.Content.ToString());
             var email = tbEmail.Text;
             var firstName = tbFirstName.Text;
@@ -195,42 +174,7 @@ namespace Scrumproject
             var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
 
-            if (validera.ControllFiledNotEmpty(tbEmail))
-            {
-                MessageBox.Show("Du måste ange en e-post!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbSsn))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else
-            {
-                addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
-                tbUsername.IsEnabled = true;
-                tbBoss.IsEnabled = true;
-                tbUserID.IsEnabled = true;
-                tbPassword.Clear();
-                tbFirstName.Clear();
-                tbLastNamne.Clear();
-                tbEmail.Clear();
-                tbSsn.Clear();
-            }
-
-            
-
+            addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
         }
 
         private void CbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -268,92 +212,77 @@ namespace Scrumproject
             }
         }
 
-       
-        //Uppdatera Användare
-        private void btnUpdateInfo_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LogicHandler updateUserHandler = new LogicHandler();
-            Validator validate = new Validator();
-            var bossID = tbBoss.Text;
-            var userID = tbUserID.Text;
+            LvReceipts.Items.Add(tbReceiptFile.Text);
+        }
 
-            var id = Int32.Parse(userID);
-            var username = tbUsername.Text;
-            var firstname = tbFirstName.Text;
-            var lastname = tbLastNamne.Text;
-            var password = tbPassword.Text;
-            var boss = Int32.Parse(bossID);
-            var ssn = tbSsn.Text;
-            var mail = tbEmail.Text;
+        private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = LvReceipts.SelectedItem;
+            LvReceipts.Items.Remove(selectedItem);
+        }
 
-            if (validate.ControllFiledNotEmpty(tbUsername))
+        public void saveDraft()
+        {
+            _reportDraftSaving.Description = tbDoneOnTrip.Text;
+            _reportDraftSaving.NumberOfKilometersDriven = 111;
+            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
+            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
+            tbDoneOnTrip.Text = "";
+        }
+
+        private void btnUpdateTotalDriven_Click(object sender, RoutedEventArgs e)
+        {
+            int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
+            int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
+
+            int totalKmDriven = carTripLength + updatedCarTripLength;
+            TbTotalKm.Text = totalKmDriven.ToString();
+
+            TbTotalKm.IsReadOnly = true;
+           
+        }
+
+        private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdateList_Click(object sender, RoutedEventArgs e)
+        {
+            var dateHandler = new DateHandler();
+            var daysOff = Convert.ToInt32(TbDaysOff.Text);
+            var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
+            LvDays.Items.Add(setDate);
+        }
+
+        private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Du måste ange ett användarnamn!");
+                saveDraft();
+                MessageBox.Show("Utkast sparat.");
+                e.Cancel = false;
             }
-            else if (validate.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbSsn))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbEmail))
-            {
-                MessageBox.Show("Du måste ange en email-adress!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbBoss))
-            {
-                MessageBox.Show("Du måste ange vem som är chef för användaren!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbUserID))
-            {
-                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
-            }
-            
             else
             {
-                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
-            }
-        }
-        //Fyller i TB's med en användare man valt att uppdatera ur Listan
-        private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = lvUsers.SelectedValue.ToString();
-            var users = BossRepository.GetAll();
-
-            foreach (var user in users)
-            {
-                if (selected == user.Username)
+                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
                 {
-                    tbFirstName.Text = user.FirstName;
-                    tbLastNamne.Text = user.LastName;
-                    tbEmail.Text = user.Email;
-                    tbPassword.Text = user.PW;
-                    tbUsername.Text = user.Username;
-                    tbSsn.Text = user.SSN;
-                    tbBoss.Text = user.BID.ToString();
-                    tbUserID.Text = user.UID.ToString();
-
+                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+                    e.Cancel = false;
+                }
+                else
+                {
+                    saveDraft();
+                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+                    e.Cancel = false;
                 }
 
             }
         }
-     
-
-      
-
-
-        
 
     }
 }
