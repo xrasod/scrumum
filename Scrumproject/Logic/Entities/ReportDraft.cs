@@ -9,12 +9,11 @@ namespace Scrumproject.Logic
 {
     public class ReportDraft
     {
-        public int Id { get; set; }
-        public int Status { get; set; }
+        
         public string Description { get; set; }
         public int NumberOfKilometersDriven { get; set; }
         public int TotalSumOfSpending { get; set; }
-        public List<string> imagePath { get; set; }
+        public List<string> imagePathsList { get; set; }
 
     }
 }

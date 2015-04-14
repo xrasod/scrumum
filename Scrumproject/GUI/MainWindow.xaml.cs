@@ -53,7 +53,7 @@ namespace Scrumproject
                 _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
                 lbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
-                foreach (var kvitto in _reportDraftLoading.imagePath)
+                foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     LvReceipts.Items.Add(kvitto);
                 }
@@ -219,10 +219,8 @@ namespace Scrumproject
         private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
-            _reportDraftSaving.Id = 1;
             _reportDraftSaving.NumberOfKilometersDriven = 111;
-            _reportDraftSaving.Status = 1;
-            _reportDraftSaving.imagePath = LvReceipts.Items.Cast<String>().ToList();
+            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
             
