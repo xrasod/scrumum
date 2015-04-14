@@ -85,7 +85,7 @@
                     <Label Content="Belopp för kvitto" Canvas.Left="33" Canvas.Top="429" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label Content="Ladda upp kvitto
                            " Canvas.Left="31" Canvas.Top="352" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="414" Canvas.Top="429" Width="210" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="31"/>
+                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="414" Canvas.Top="429" Width="210" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="31" Click="btnSaveDraft_Click"/>
                     <Button x:Name="btnSendReport" Content="Skicka Rapport
                             " Canvas.Left="406" Canvas.Top="460" Width="210" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="51" Click="btnSendReport_Click" Padding="25,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
                     <Label Content="Maxbelopp för land

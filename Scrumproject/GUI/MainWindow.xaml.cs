@@ -45,30 +45,30 @@ namespace Scrumproject
 
             foreach(var x in hej)
             {
-                CbCountries.Items.Add(x.Name);
+                CbCountries.Items.Add(x.Name);       
+            }
+
+            try
+            {
+                reportLoading = reportHandler.LoadDraft("DraftReport.xml");
+                lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
+                tbNotes.Text = reportLoading.Description;
+                foreach (var kvitto in reportLoading.imagePath)
+                {
+                    LvReceipts.Items.Add(kvitto);
+                }
                 
             }
-            
+            catch(Exception exception)
+            {
+                MessageBox.Show("Det finns inget sparat utkast att ladda");
+            }
 
 
-        }
-
-        private void btnCreateDraft_Click(object sender, RoutedEventArgs e)
-        {
-            reportSaving.Description = tbNotes.Text;
-            reportSaving.Id = 1;
-            reportSaving.NumberOfKilometersDriven = 111;
-            reportSaving.UserId = 12;
-            reportSaving.Status = 1;
-            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
-            tbNotes.Text = "";
         }
 
         private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
         {
-            reportLoading = reportHandler.LoadDraft("DraftReport.xml");
-            lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
-            tbNotes.Text = reportLoading.Description;
         }
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
@@ -214,6 +214,19 @@ namespace Scrumproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             LvReceipts.Items.Add(tbReceiptFile.Text);
+        }
+
+        private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
+        {
+            reportSaving.Description = tbDoneOnTrip.Text;
+            reportSaving.Id = 1;
+            reportSaving.NumberOfKilometersDriven = 111;
+            reportSaving.UserId = 12;
+            reportSaving.Status = 1;
+            reportSaving.imagePath = LvReceipts.Items.Cast<String>().ToList();
+            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
+            tbDoneOnTrip.Text = "";
+            
         }
 
      
