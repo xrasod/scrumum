@@ -76,7 +76,7 @@ namespace Scrumproject
                 var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip + "\n \n \n" +
                               "Antal körda kilometer totalt: " + lbCarTripLength + "\n \n \n";
 
-                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
                 MessageBox.Show("Din rapport har sparats.");
                 
             }
