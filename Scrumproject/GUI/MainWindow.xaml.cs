@@ -211,6 +211,11 @@ namespace Scrumproject
             }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            LvReceipts.Items.Add(tbReceiptFile.Text);
+        }
+
      
 
       
