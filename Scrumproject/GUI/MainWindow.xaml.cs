@@ -52,7 +52,7 @@ namespace Scrumproject
             try
             {
                 _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
-                lbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
+                TbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
@@ -74,7 +74,7 @@ namespace Scrumproject
             if (result == MessageBoxResult.Yes)
             {
                 var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
-                              "Antal körda kilometer totalt: " + lbCarTripLengthKm.Text + "\n \n \n";
+                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n";
 
                 pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
                 MessageBox.Show("Din rapport har sparats.");
@@ -257,6 +257,31 @@ namespace Scrumproject
             _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
+        }
+
+        private void btnUpdateTotalDriven_Click(object sender, RoutedEventArgs e)
+        {
+            int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
+            int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
+
+            int totalKmDriven = carTripLength + updatedCarTripLength;
+            TbTotalKm.Text = totalKmDriven.ToString();
+
+            TbTotalKm.IsReadOnly = true;
+           
+        }
+
+        private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdateList_Click(object sender, RoutedEventArgs e)
+        {
+            var dateHandler = new DateHandler();
+            var daysOff = Convert.ToInt32(TbDaysOff.Text);
+            var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
+            LvDays.Items.Add(setDate);
         }
 
     }
