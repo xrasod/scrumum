@@ -75,8 +75,8 @@
     <Compile Include="GUI\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\DateHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
-    <Compile Include="Logic\Entities\DateHandler.cs" />
     <Compile Include="Logic\Validator.cs" />
     <Compile Include="Service References\CurrencyConvertor\Reference.cs">
       <AutoGen>True</AutoGen>
