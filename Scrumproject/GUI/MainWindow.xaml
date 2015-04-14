@@ -122,7 +122,7 @@
             <TabItem Header="Förskottsansökan" />
             <TabItem Header="Chef" HorizontalAlignment="Left" Width="40" >
                 <Canvas Height="836" Width="656">
-                    <ListView x:Name="lvUsers" Height="136" Width="313" Canvas.Left="30" Canvas.Top="55">
+                    <ListView x:Name="lvUsers" Height="136" Width="313" Canvas.Left="30" Canvas.Top="55" SelectionChanged="lvUsers_SelectionChanged_1">
 
                         <ListView.View>
                             <GridView>
@@ -145,7 +145,7 @@
                     <TextBox x:Name="tbSsn" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="180" Width="119"/>
                     <Label x:Name="lbEmail" Content="E-post: " Canvas.Left="363" Canvas.Top="208" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.45,-0.379"/>
                     <TextBox x:Name="tbEmail" Height="23" Canvas.Left="366" TextWrapping="Wrap" Text="" Canvas.Top="242" Width="120"/>
-                    <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="563" Canvas.Top="283" Width="75"/>
+                    <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="563" Canvas.Top="283" Width="75" Click="btnUpdateInfo_Click"/>
                     <Button x:Name="btnClear" Content="Rensa" Canvas.Left="483" Canvas.Top="308" Width="75"/>
                     <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="563" Canvas.Top="308" Width="75" Click="btnInactive_Click"/>
                     <TextBox x:Name="tbPassword" Height="26" Canvas.Left="498" TextWrapping="Wrap" Text="" Canvas.Top="63" Width="100"/>
