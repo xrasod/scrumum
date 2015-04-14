@@ -74,7 +74,8 @@ namespace Scrumproject
             if (result == MessageBoxResult.Yes)
             {
                 var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
-                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n";
+                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n" +
+                              "Sparade kvitton: " ;
 
                 pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
                 MessageBox.Show("Din rapport har sparats.");
