@@ -172,7 +172,7 @@ namespace Scrumproject
             
             var logic = new LogicHandler();
 
-            logic.changeStatus(lvUsers.SelectedValue.ToString());
+            logic.changeStatus(listBoxUsers.SelectedValue.ToString());
         
         }
 
@@ -355,7 +355,7 @@ namespace Scrumproject
 
             foreach (var user in users)
             {
-                lvUsers.Items.Add(user.Username);
+                listBoxUsers.Items.Add(user.Username);
             }
         }
 
@@ -422,7 +422,7 @@ namespace Scrumproject
         //Fyller i TB's med en användare man valt att uppdatera ur Listan
         private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            var selected = lvUsers.SelectedValue.ToString();
+            var selected = listBoxUsers.SelectedValue.ToString();
             var users = BossRepository.GetAll();
 
             foreach (var user in users)
