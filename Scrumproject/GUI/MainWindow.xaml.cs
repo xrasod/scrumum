@@ -240,12 +240,13 @@ namespace Scrumproject
                 MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                 {
+                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
                     e.Cancel = false;
                 }
                 else
                 {
                     saveDraft();
-                    MessageBox.Show("Okej. Ditt utkast är nu sparat. Puss och kram.");
+                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
                     e.Cancel = false;
                 }
 
