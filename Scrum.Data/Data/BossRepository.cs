@@ -9,26 +9,25 @@ using Scrum.Data;
 
 namespace Scrumproject.Data
 {
-   public class BossRepository
+    public class BossRepository
     {
         public void authorizeReport()
         {
             //Metod som kallas på om chef godkänner rapport
         }
+
         public void denyReport()
         {
             //Metod som kallas på om chef nekar rapport
         }
-
+        //Lägg till användare
         public void adduser(User user)
         {
 
             using (var context = new scrumEntities())
             {
-
                 try
                 {
-
                     context.Users.Add(user);
 
                     context.SaveChanges();
@@ -47,7 +46,15 @@ namespace Scrumproject.Data
 
             }
         }
+        //Skapa list med användarnamn
+        public static List<User> GetMatchingUsers(string name)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Users.Where(x => x.Username.Contains(name)).ToList();
+            }
 
+        } 
         public static List<User> GetAll()
         {
 
@@ -59,8 +66,8 @@ namespace Scrumproject.Data
         }
 
 
-
-        public static void UpdateUser(string username)
+        //Uppdatera status på användare
+        public static void UpdateStatus(string username)
         {
             using (var context = new scrumEntities())
             {
@@ -87,8 +94,9 @@ namespace Scrumproject.Data
             }
         }
 
-
-        public static void UpdatePassword(string username, string newpassword)
+        //Uppdatera användare
+        public static void UpdateUser(int userid, string newusername, string newfirstname, string newlastname,
+            string newpassword, string newssn, string newemail, int newboss)
         {
             using (var context = new scrumEntities())
             {
@@ -96,41 +104,14 @@ namespace Scrumproject.Data
                 try
                 {
                     var u = context.Users
-                        .FirstOrDefault(x => x.Username == username);
-                    u.PW = newpassword;
-
-                    context.SaveChanges();
-                }
-                catch (DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName,
-                                validationError.ErrorMessage);
-                        }
-                    }
-                }
-            }
-        }
-
-
-        public static void UpdateUser(string username, string newusername, string newpassword, string newemail, string newfirstname, string newlastname, string newssn)
-        {
-            using (var context = new scrumEntities())
-            {
-
-                try
-                {
-                    var u = context.Users
-                        .FirstOrDefault(x => x.Username == username);
+                        .FirstOrDefault(x => x.UID == userid);
                     u.PW = newpassword;
                     u.Username = newusername;
                     u.FirstName = newfirstname;
                     u.LastName = newlastname;
                     u.Email = newemail;
                     u.SSN = newssn;
+                    u.BID = newboss;
 
 
                     context.SaveChanges();
@@ -147,9 +128,11 @@ namespace Scrumproject.Data
                     }
                 }
             }
+
+
+
+
+
         }
-
-
-
     }
 }

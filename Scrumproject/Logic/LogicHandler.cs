@@ -56,22 +56,23 @@ namespace Scrumproject.Logic
        {
            notesRepository.Spara(report, sokvag);
        }
-
+       //Lägger till användare.
        public void registeruser(string Firstname, string Lastname, string email, string password, int bossid,
             string personnr)
        {
-           var users = BossRepository.GetAll();
-
-           foreach (var user in users)
+           
+           var userlist = BossRepository.GetMatchingUsers(Firstname.Substring(0, 3) + Lastname.Substring(0, 3));
+           var userName = Firstname.Substring(0, 3) + Lastname.Substring(0, 3);
+           if (userlist.Count == 1)
            {
-               if (Firstname.Substring(0, 3) + Lastname.Substring(0, 3) == user.Username)
-               {
-                   MessageBox.Show("Username already exists.");
-
-               }
+               userName = userName + 1;  
 
            }
-
+           else if (userlist.Count > 1)
+           {
+               userName = userName + (userlist.Count);
+           }
+           
            try
            {
                var user = new Scrum.Data.User
@@ -81,7 +82,7 @@ namespace Scrumproject.Logic
                    FirstName = Firstname,
                    LastName = Lastname,
                    SSN = personnr,
-                   Username = Firstname.Substring(0, 3) + Lastname.Substring(0, 3),
+                   Username = userName,
                    Email = email,
                    Status = true
                };
@@ -94,28 +95,17 @@ namespace Scrumproject.Logic
                Console.WriteLine(ex + "#### Det har blivit fel, ProfileController, Register");
            }
        }
-
+       //Ändra status på användare
        public void changeStatus(string username)
        {
-           BossRepository.UpdateUser(username);
+           BossRepository.UpdateStatus(username);
 
        }
-
-       public void uppdateUser(string username)
+       //Uppdatera användare
+       public void uppdateUser(int userID, string username, string firstname, string lastname, string password, string ssn, string email, int boss)
        {
-           var users = BossRepository.GetAll();
 
-           foreach (var user in users)
-           {
-               if (username == user.Username)
-               {
-
-
-               }
-
-           }
-
-
+           BossRepository.UpdateUser(userID, username, firstname, lastname, password, ssn, email, boss);
 
        }
    }
