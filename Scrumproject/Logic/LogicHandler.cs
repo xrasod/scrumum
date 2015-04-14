@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,11 @@ namespace Scrumproject.Logic
 
       public Report LoadDraft(string sokvag)
       {
-          return reportRepository.Ladda(sokvag);
+          
+          
+              return reportRepository.Ladda(sokvag);
+          
+          
       }
        
        public void SaveDraft(Report report, string sokvag)
@@ -38,7 +43,13 @@ namespace Scrumproject.Logic
 
        public Notes LoadNotes(string sokvag)
        {
-           return notesRepository.Ladda(sokvag);
+           var notes = new Notes();
+           if (File.Exists(sokvag))
+           {
+               return notesRepository.Ladda(sokvag);
+           }
+           notes.Note = "Det finns ingen sparad information";
+           return notes;
        }
 
        public void SaveNotes(Notes report, string sokvag)
