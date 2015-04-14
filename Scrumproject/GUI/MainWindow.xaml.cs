@@ -87,6 +87,7 @@ namespace Scrumproject
             notesHandler.SaveNotes(notesSaving, "Notes.xml");
             tbNotes.Text = "Dina anteckningar är sparade!";
             btnSaveNotes.Visibility = Visibility.Hidden;
+            btnLoadNotes.Visibility = Visibility.Visible;
         }
 
         private void btnLoadNotes_Click(object sender, RoutedEventArgs e)
