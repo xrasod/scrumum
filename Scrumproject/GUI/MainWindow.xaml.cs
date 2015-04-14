@@ -29,6 +29,7 @@ namespace Scrumproject
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
+        LogicHandler pdfHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
@@ -59,7 +60,7 @@ namespace Scrumproject
                 }
                 
             }
-            catch(Exception exception)
+            catch
             {
                 MessageBox.Show("Det finns inget sparat utkast att ladda");
             }
@@ -67,19 +68,19 @@ namespace Scrumproject
 
         }
 
-        private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            
+            var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip + "\n \n \n" +
+                              "Antal körda kilometer totalt: " + lbCarTripLength + "\n \n \n";
+
+                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+                MessageBox.Show("Utkast sparat.");
+                
+            }
         }       
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
         {
@@ -216,11 +217,6 @@ namespace Scrumproject
             LvReceipts.Items.Add(tbReceiptFile.Text);
         }
 
-        private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
-        {
-            saveDraft();     
-        }
-
         private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = LvReceipts.SelectedItem;
@@ -229,10 +225,11 @@ namespace Scrumproject
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 saveDraft();
+                MessageBox.Show("Utkast sparat.");
                 e.Cancel = false;
             }
             else
@@ -261,15 +258,6 @@ namespace Scrumproject
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
         }
-
-        
-
-     
-
-      
-
-
-        
 
     }
 }

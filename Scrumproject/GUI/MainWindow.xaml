@@ -86,7 +86,6 @@
                     <Label Content="Belopp för kvitto" Canvas.Left="33" Canvas.Top="429" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Label Content="Ladda upp kvitto
                            " Canvas.Left="31" Canvas.Top="352" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <Button x:Name="btnSaveDraft" Content="Spara utkast" Canvas.Left="414" Canvas.Top="429" Width="210" RenderTransformOrigin="0.618,-0.243" FontFamily="Myriad Pro" BorderBrush="{x:Null}" Foreground="Black" Background="White" Height="31" Click="btnSaveDraft_Click"/>
                     <Button x:Name="btnSendReport" Content="Skicka Rapport
                             " Canvas.Left="406" Canvas.Top="460" Width="210" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="51" Click="btnSendReport_Click" Padding="25,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
                     <Label Content="Maxbelopp för land
@@ -96,7 +95,7 @@
                     <TextBox x:Name="tbNotes" Height="178" Canvas.Left="410" TextWrapping="Wrap" Text="" Canvas.Top="198" Width="214" Background="Black" Foreground="White"/>
                     <Label x:Name="lblNotes" Content="Anteckningar:" Canvas.Left="410" Canvas.Top="167" Foreground="White" FontWeight="Bold" FontSize="16"/>
                     <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="410" Canvas.Top="383" Width="214" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}" Click="btnLoadNotes_Click"/>
-                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="414" Canvas.Top="406" Width="214" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click"/>
+                    <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="410" Canvas.Top="404" Width="214" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click"/>
                     <Label x:Name="lbTotalDriven" Content="" Canvas.Left="108" Canvas.Top="79" Width="36" RenderTransformOrigin="1.677,0.752" Background="White" Height="21"/>
                     <Button x:Name="btnUpdateTotalDriven" Content="Uppdatera
                             " Canvas.Left="159" Canvas.Top="107" Width="102" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="10,1,1,1"/>
