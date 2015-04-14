@@ -73,8 +73,8 @@ namespace Scrumproject
             var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip + "\n \n \n" +
-                              "Antal körda kilometer totalt: " + lbCarTripLength + "\n \n \n";
+                var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
+                              "Antal körda kilometer totalt: " + lbCarTripLengthKm.Text + "\n \n \n";
 
                 pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
                 MessageBox.Show("Din rapport har sparats.");
