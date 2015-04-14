@@ -216,6 +216,14 @@ namespace Scrumproject
             LvReceipts.Items.Add(tbReceiptFile.Text);
         }
 
+        private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = LvReceipts.SelectedItem;
+            LvReceipts.Items.Remove(selectedItem);
+        }
+
+       
+
      
 
       
