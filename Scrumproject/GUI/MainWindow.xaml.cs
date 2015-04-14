@@ -77,7 +77,7 @@ namespace Scrumproject
                               "Antal körda kilometer totalt: " + lbCarTripLength + "\n \n \n";
 
                 pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
-                MessageBox.Show("Utkast sparat.");
+                MessageBox.Show("Din rapport har sparats.");
                 
             }
         }       
