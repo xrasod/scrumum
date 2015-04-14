@@ -223,33 +223,6 @@ namespace Scrumproject
             LvReceipts.Items.Remove(selectedItem);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                saveDraft();
-                MessageBox.Show("Utkast sparat.");
-                e.Cancel = false;
-            }
-            else
-            {
-                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (res == MessageBoxResult.Yes)
-                {
-                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
-                    e.Cancel = false;
-                }
-                else
-                {
-                    saveDraft();
-                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
-                    e.Cancel = false;
-                }
-
-            }
-        }
-
         public void saveDraft()
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
@@ -282,6 +255,33 @@ namespace Scrumproject
             var daysOff = Convert.ToInt32(TbDaysOff.Text);
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
             LvDays.ItemsSource = setDate;
+        }
+
+        private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                saveDraft();
+                MessageBox.Show("Utkast sparat.");
+                e.Cancel = false;
+            }
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+                    e.Cancel = false;
+                }
+                else
+                {
+                    saveDraft();
+                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+                    e.Cancel = false;
+                }
+
+            }
         }
 
     }

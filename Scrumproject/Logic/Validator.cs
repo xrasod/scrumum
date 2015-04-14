@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Scrumproject.Logic
 {
@@ -21,5 +23,22 @@ namespace Scrumproject.Logic
                 return false;
             }
         }
+
+
+        public bool ControllFiledNotEmpty(TextBox i)
+        {
+            if (!string.IsNullOrEmpty(i.Text))
+            {
+                
+                return false;
+
+            }
+            return true;
+
+        }
+
+        
     }
+
+
 }

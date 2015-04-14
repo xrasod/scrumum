@@ -102,10 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Entities\AdvancePayments.cs" />
-    <Compile Include="Logic\Entities\Boss.cs" />
+    <Compile Include="Logic\Entities\BossEntity.cs" />
     <Compile Include="Logic\Entities\Countries.cs" />
     <Compile Include="Logic\Entities\Notes.cs" />
-    <Compile Include="Logic\Entities\User.cs" />
+    <Compile Include="Logic\Entities\UserEntity.cs" />
     <Compile Include="Logic\LogicHandler.cs" />
     <Compile Include="Logic\Entities\ReportDraft.cs" />
     <Compile Include="Logic\EmailHandler.cs" />
