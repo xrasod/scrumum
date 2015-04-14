@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Scrum.Data.Data;
-using Scrumproject.Logic;
+    using Scrumproject.Data;
+    using Scrumproject.Logic;
 using Scrumproject.Logic.Entities;
 
 
@@ -38,6 +39,11 @@ namespace Scrumproject
         {
             InitializeComponent();
             PopulateCurrencyData();
+            PopulateListViewUsers();
+
+            tbUserID.IsEnabled = false;
+            tbUsername.IsEnabled = false;
+            tbBoss.IsEnabled = false;
 
             var rep = new CountriesRepository();
 
@@ -166,8 +172,12 @@ namespace Scrumproject
         
         }
 
+        //Lägger till användare
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+            Validator validera = new Validator();
+
             //var BID = Int32.Parse(lbLoggedInUser.Content.ToString());
             var email = tbEmail.Text;
             var firstName = tbFirstName.Text;
@@ -175,7 +185,40 @@ namespace Scrumproject
             var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
 
-            addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+            if (validera.ControllFiledNotEmpty(tbEmail))
+            {
+                MessageBox.Show("Du måste ange en e-post!");
+            }
+            else if (validera.ControllFiledNotEmpty(tbFirstName))
+            {
+                MessageBox.Show("Du måste ange ett förnamn!");
+            }
+            else if (validera.ControllFiledNotEmpty(tbLastNamne))
+            {
+                MessageBox.Show("Du måste ange ett efternamn!");
+            }
+            else if (validera.ControllFiledNotEmpty(tbPassword))
+            {
+                MessageBox.Show("Du måste ange ett lösenord!");
+            }
+            else if (validera.ControllFiledNotEmpty(tbSsn))
+            {
+                MessageBox.Show("Du måste ange ett personnummer!");
+            }
+            else
+            {
+                addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
+                tbUsername.IsEnabled = true;
+                tbBoss.IsEnabled = true;
+                tbUserID.IsEnabled = true;
+                tbPassword.Clear();
+                tbFirstName.Clear();
+                tbLastNamne.Clear();
+                tbEmail.Clear();
+                tbSsn.Clear();
+            }
+
         }
 
         private void CbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -255,7 +298,7 @@ namespace Scrumproject
             var dateHandler = new DateHandler();
             var daysOff = Convert.ToInt32(TbDaysOff.Text);
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            LvDays.Items.Add(setDate);
+            LvDays.ItemsSource = setDate;
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
@@ -280,6 +323,101 @@ namespace Scrumproject
                     saveDraft();
                     MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
                     e.Cancel = false;
+                }
+
+            }
+        }
+
+        //Fyllar listview med användare
+        private void PopulateListViewUsers()
+        {
+            var users = BossRepository.GetAll();
+
+            foreach (var user in users)
+            {
+                lvUsers.Items.Add(user.Username);
+            }
+        }
+
+        
+
+        //Uppdatera Användare
+        private void btnUpdateInfo_Click(object sender, RoutedEventArgs e)
+        {
+            LogicHandler updateUserHandler = new LogicHandler();
+            Validator validate = new Validator();
+            var bossID = tbBoss.Text;
+            var userID = tbUserID.Text;
+
+            var id = Int32.Parse(userID);
+            var username = tbUsername.Text;
+            var firstname = tbFirstName.Text;
+            var lastname = tbLastNamne.Text;
+            var password = tbPassword.Text;
+            var boss = Int32.Parse(bossID);
+            var ssn = tbSsn.Text;
+            var mail = tbEmail.Text;
+
+            if (validate.ControllFiledNotEmpty(tbUsername))
+            {
+                MessageBox.Show("Du måste ange ett användarnamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbFirstName))
+            {
+                MessageBox.Show("Du måste ange ett förnamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbLastNamne))
+            {
+                MessageBox.Show("Du måste ange ett efternamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbPassword))
+            {
+                MessageBox.Show("Du måste ange ett lösenord!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbSsn))
+            {
+                MessageBox.Show("Du måste ange ett personnummer!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbEmail))
+            {
+                MessageBox.Show("Du måste ange en email-adress!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbBoss))
+            {
+                MessageBox.Show("Du måste ange vem som är chef för användaren!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbUserID))
+            {
+                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
+            }
+
+            else
+            {
+                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
+                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+            }
+        }
+
+
+        //Fyller i TB's med en användare man valt att uppdatera ur Listan
+        private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = lvUsers.SelectedValue.ToString();
+            var users = BossRepository.GetAll();
+
+            foreach (var user in users)
+            {
+                if (selected == user.Username)
+                {
+                    tbFirstName.Text = user.FirstName;
+                    tbLastNamne.Text = user.LastName;
+                    tbEmail.Text = user.Email;
+                    tbPassword.Text = user.PW;
+                    tbUsername.Text = user.Username;
+                    tbSsn.Text = user.SSN;
+                    tbBoss.Text = user.BID.ToString();
+                    tbUserID.Text = user.UID.ToString();
+
                 }
 
             }

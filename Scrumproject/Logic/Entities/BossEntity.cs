@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Scrumproject.Logic.Entities
 {
-    class User
+    class BossEntity
     {
         public string Id { get; set; }
     }
 }
-
-
-
-
-
