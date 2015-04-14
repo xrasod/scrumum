@@ -40,10 +40,12 @@ namespace Scrumproject
             InitializeComponent();
             PopulateCurrencyData();
             PopulateListViewUsers();
-
+            TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
             tbUsername.IsEnabled = false;
             tbBoss.IsEnabled = false;
+            notesLoading = notesHandler.LoadNotes("Notes.xml");
+            tbNotes.Text = notesLoading.Note;
 
             var rep = new CountriesRepository();
 
