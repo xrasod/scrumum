@@ -218,12 +218,7 @@ namespace Scrumproject
 
         private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
         {
-            _reportDraftSaving.Description = tbDoneOnTrip.Text;
-            _reportDraftSaving.NumberOfKilometersDriven = 111;
-            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
-            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
-            tbDoneOnTrip.Text = "";
-            
+            saveDraft();     
         }
 
         private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
@@ -231,6 +226,42 @@ namespace Scrumproject
             var selectedItem = LvReceipts.SelectedItem;
             LvReceipts.Items.Remove(selectedItem);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                saveDraft();
+                e.Cancel = false;
+            }
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    saveDraft();
+                    MessageBox.Show("Okej. Ditt utkast är nu sparat. Puss och kram.");
+                    e.Cancel = false;
+                }
+
+            }
+        }
+
+        public void saveDraft()
+        {
+            _reportDraftSaving.Description = tbDoneOnTrip.Text;
+            _reportDraftSaving.NumberOfKilometersDriven = 111;
+            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
+            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
+            tbDoneOnTrip.Text = "";
+        }
+
+        
 
      
 

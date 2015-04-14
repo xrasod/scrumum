@@ -76,7 +76,7 @@ namespace WpfApplication1
                 CloudBlobContainer kvittoContainer = client.GetContainerReference("kvitton");
                 kvittoContainer.CreateIfNotExists();
 
-                CloudBlockBlob blob = kvittoContainer.GetBlockBlobReference("APictureFie.jpg"); //Här sätter vi namnet på filen när den laddas upp. Viktigt att få med .jpg liknande
+                CloudBlockBlob blob = kvittoContainer.GetBlockBlobReference(DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".jpg" ); //Här sätter vi namnet på filen när den laddas upp. Viktigt att få med .jpg liknande
                 using (Stream file = System.IO.File.OpenRead(dlg.FileName)) //Använder sökvägen ifrån "openfiledialog" och skapar en stream
                 {
                     blob.UploadFromStream(file); //Själva uppladdningen
