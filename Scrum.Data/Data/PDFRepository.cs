@@ -14,13 +14,13 @@ namespace Scrum.Data.Data
     public class PDFRepository
     {
 
-        public void createPdf(string text, string filnamn)
+        public void createPdf(string report, string filnamn)
         {
             FileStream fs = new FileStream(filnamn, FileMode.Create, FileAccess.Write, FileShare.None);
             Document doc = new Document();
             PdfWriter writer = PdfWriter.GetInstance(doc, fs);
             doc.Open();
-            doc.Add(new Paragraph(text));
+            doc.Add(new Paragraph(report));
             doc.Close();
         }
 
