@@ -24,8 +24,8 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Report reportSaving = new Report();
-        Report reportLoading = new Report();
+        ReportDraft _reportDraftSaving = new ReportDraft();
+        ReportDraft _reportDraftLoading = new ReportDraft();
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
@@ -50,10 +50,10 @@ namespace Scrumproject
 
             try
             {
-                reportLoading = reportHandler.LoadDraft("DraftReport.xml");
-                lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
-                tbNotes.Text = reportLoading.Description;
-                foreach (var kvitto in reportLoading.imagePath)
+                _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
+                lbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
+                tbDoneOnTrip.Text = _reportDraftLoading.Description;
+                foreach (var kvitto in _reportDraftLoading.imagePath)
                 {
                     LvReceipts.Items.Add(kvitto);
                 }
@@ -218,13 +218,12 @@ namespace Scrumproject
 
         private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
         {
-            reportSaving.Description = tbDoneOnTrip.Text;
-            reportSaving.Id = 1;
-            reportSaving.NumberOfKilometersDriven = 111;
-            reportSaving.UserId = 12;
-            reportSaving.Status = 1;
-            reportSaving.imagePath = LvReceipts.Items.Cast<String>().ToList();
-            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
+            _reportDraftSaving.Description = tbDoneOnTrip.Text;
+            _reportDraftSaving.Id = 1;
+            _reportDraftSaving.NumberOfKilometersDriven = 111;
+            _reportDraftSaving.Status = 1;
+            _reportDraftSaving.imagePath = LvReceipts.Items.Cast<String>().ToList();
+            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
             
         }

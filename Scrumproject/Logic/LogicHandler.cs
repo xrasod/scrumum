@@ -16,7 +16,7 @@ namespace Scrumproject.Logic
    public class LogicHandler
     { 
       
-      ReportRepository<Report> reportRepository = new ReportRepository<Report>();
+      ReportRepository<ReportDraft> reportRepository = new ReportRepository<ReportDraft>();
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
@@ -27,7 +27,7 @@ namespace Scrumproject.Logic
        }
 
 
-      public Report LoadDraft(string sokvag)
+      public ReportDraft LoadDraft(string sokvag)
       {
           
           
@@ -36,9 +36,9 @@ namespace Scrumproject.Logic
           
       }
        
-       public void SaveDraft(Report report, string sokvag)
+       public void SaveDraft(ReportDraft reportDraft, string sokvag)
        {
-           reportRepository.Spara(report, sokvag);
+           reportRepository.Spara(reportDraft, sokvag);
        }
 
        public Notes LoadNotes(string sokvag)

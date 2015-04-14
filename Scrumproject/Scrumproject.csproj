@@ -107,7 +107,7 @@
     <Compile Include="Logic\Entities\Notes.cs" />
     <Compile Include="Logic\Entities\User.cs" />
     <Compile Include="Logic\LogicHandler.cs" />
-    <Compile Include="Logic\Entities\Report.cs" />
+    <Compile Include="Logic\Entities\ReportDraft.cs" />
     <Compile Include="Logic\EmailHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
