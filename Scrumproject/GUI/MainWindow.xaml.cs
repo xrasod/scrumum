@@ -24,11 +24,12 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Report reportSaving = new Report();
-        Report reportLoading = new Report();
+        ReportDraft _reportDraftSaving = new ReportDraft();
+        ReportDraft _reportDraftLoading = new ReportDraft();
         LogicHandler reportHandler = new LogicHandler();
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
+        LogicHandler pdfHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
@@ -50,16 +51,16 @@ namespace Scrumproject
 
             try
             {
-                reportLoading = reportHandler.LoadDraft("DraftReport.xml");
-                lbCarTripLengthKm.Text = reportLoading.NumberOfKilometersDriven.ToString();
-                tbNotes.Text = reportLoading.Description;
-                foreach (var kvitto in reportLoading.imagePath)
+                _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
+                lbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
+                tbDoneOnTrip.Text = _reportDraftLoading.Description;
+                foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     LvReceipts.Items.Add(kvitto);
                 }
                 
             }
-            catch(Exception exception)
+            catch
             {
                 MessageBox.Show("Det finns inget sparat utkast att ladda");
             }
@@ -67,19 +68,19 @@ namespace Scrumproject
 
         }
 
-        private void btnLoadDraft_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            
+            var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
+                              "Antal körda kilometer totalt: " + lbCarTripLengthKm.Text + "\n \n \n";
+
+                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
+                MessageBox.Show("Din rapport har sparats.");
+                
+            }
         }       
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
         {
@@ -216,31 +217,47 @@ namespace Scrumproject
             LvReceipts.Items.Add(tbReceiptFile.Text);
         }
 
-        private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
-        {
-            reportSaving.Description = tbDoneOnTrip.Text;
-            reportSaving.Id = 1;
-            reportSaving.NumberOfKilometersDriven = 111;
-            reportSaving.UserId = 12;
-            reportSaving.Status = 1;
-            reportSaving.imagePath = LvReceipts.Items.Cast<String>().ToList();
-            reportHandler.SaveDraft(reportSaving, "DraftReport.xml");
-            tbDoneOnTrip.Text = "";
-            
-        }
-
         private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = LvReceipts.SelectedItem;
             LvReceipts.Items.Remove(selectedItem);
         }
 
-     
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                saveDraft();
+                MessageBox.Show("Utkast sparat.");
+                e.Cancel = false;
+            }
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+                    e.Cancel = false;
+                }
+                else
+                {
+                    saveDraft();
+                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+                    e.Cancel = false;
+                }
 
-      
+            }
+        }
 
-
-        
+        public void saveDraft()
+        {
+            _reportDraftSaving.Description = tbDoneOnTrip.Text;
+            _reportDraftSaving.NumberOfKilometersDriven = 111;
+            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
+            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
+            tbDoneOnTrip.Text = "";
+        }
 
     }
 }
