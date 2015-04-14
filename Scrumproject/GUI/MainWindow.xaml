@@ -22,7 +22,7 @@
             <TabControl.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FFD35D5D" Offset="1"/>
+                    <GradientStop Color="#FF7CA6E2" Offset="1"/>
                 </LinearGradientBrush>
             </TabControl.Background>
             <TabControl.Foreground>
@@ -80,9 +80,9 @@
                     <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="563" Canvas.Top="534" Width="147" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click" Height="22"/>
                     <Button x:Name="btnUpdateTotalDriven" Content="Lägg till" Canvas.Left="279" Canvas.Top="74" Width="127" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="10,1,1,1" Click="btnUpdateTotalDriven_Click" Height="23"/>
                     <Button x:Name="btnDeleteCountry" Content="Ta Bort" Canvas.Left="88" Canvas.Top="315" Width="89" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Height="20"/>
-                    <Label Content="            " Canvas.Left="183" Canvas.Top="241" Width="71" Name="LbTraktamente" Foreground="White" FontWeight="Bold" FontSize="16" Background="#FFAC5F5F" Height="27"/>
+                    <Label Content="            " Canvas.Left="183" Canvas.Top="241" Width="71" Name="LbTraktamente" Foreground="White" FontWeight="Bold" FontSize="16" Background="#FF5F93AC" Height="27"/>
                     <Button x:Name="btnUpdateList" Content="Uppdatera Daglista" Canvas.Left="234" Canvas.Top="24" Width="172" Click="btnUpdateList_Click" Background="White" Foreground="Black" Height="23"/>
-                    <TextBox x:Name="TbTotalKm" Height="23" Canvas.Left="172" TextWrapping="Wrap" Text="0" Canvas.Top="102" Width="102" Foreground="White" Background="#FF894F4F"/>
+                    <TextBox x:Name="TbTotalKm" Height="23" Canvas.Left="172" TextWrapping="Wrap" Text="0" Canvas.Top="102" Width="102" Foreground="White" Background="#FF4F6C89"/>
                     <Label x:Name="LbKm" Content="" Canvas.Left="98" Canvas.Top="71" Foreground="#FF51FF00"/>
                     <Label x:Name="LbTotalKm" Content="Sammanlagd sträcka" Canvas.Left="1" Canvas.Top="97" Foreground="White" FontSize="16" FontWeight="Bold"/>
                     <DatePicker x:Name="dpEndDate" Canvas.Left="309" Canvas.Top="-8" RenderTransformOrigin="0.5,0.5" Width="126">
@@ -110,7 +110,7 @@
                     <Button x:Name="btnAddUser" Content="Lägg till" Canvas.Left="456" Canvas.Top="298" Width="123" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Foreground="White" Background="Black"/>
                     <Label Content="Chef" Canvas.Left="456" Canvas.Top="255" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <Label x:Name="lbLoggedIn" Content="Inloggad:" Canvas.Left="454" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="20"/>
-                    <Label x:Name="lbLoggedInUser" Content="" Canvas.Left="579" Width="121" Foreground="White" Background="#FF875B5B" FontWeight="Bold" FontSize="12" BorderBrush="White" Canvas.Top="25" Height="21"/>
+                    <Label x:Name="lbLoggedInUser" Content="" Canvas.Left="579" Width="121" Foreground="White" Background="#FF5B8187" FontWeight="Bold" FontSize="12" BorderBrush="White" Canvas.Top="25" Height="21"/>
                     <Label x:Name="lbFirstName" Content="Förnamn" Canvas.Left="456" Canvas.Top="166" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                     <TextBox x:Name="tbFirstName" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="173" Width="121" Background="Black" Foreground="White"/>
                     <Label x:Name="lbLastName" Content="Efternamn " Canvas.Left="456" Canvas.Top="197" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -154,12 +154,12 @@
 
                 </Canvas>
             </TabItem>
-            <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Left" Height="63" VerticalAlignment="Bottom" Width="182" Margin="68,-2,-68,2" Padding="6,12,6,2" Background="White" Foreground="Black" FontSize="14" FontWeight="Bold">
+            <TabItem Header="Valutakonverterare&#xD;&#xA;" HorizontalAlignment="Right" Height="63" VerticalAlignment="Bottom" Width="182" Margin="0,-2,-68,2" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="White">
                 <Grid x:Name="MainWindowCurrency">
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
-                            <GradientStop Color="#FFEA6F6F" Offset="1"/>
+                            <GradientStop Color="#FF6FB8EA" Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
