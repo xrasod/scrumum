@@ -118,5 +118,22 @@ namespace Scrumproject.Logic
 
 
        }
+
+       public User loginUser(string username, string password)
+       {
+           UserRepository r = new UserRepository();
+           var user = r.LoginUser(username, password);
+
+           return user;
+       }
+
+       public Boss loginBoss(string username, string password)
+       {
+           UserRepository r = new UserRepository();
+           var boss = r.LoginBoss(username, password);
+
+           return boss;
+       }
+
    }
 }
