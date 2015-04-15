@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Scrum.Data;
+using Scrumproject.Data;
 
 namespace Scrumproject.Logic
 {
@@ -13,9 +15,29 @@ namespace Scrumproject.Logic
 
 
 
-        public static void SendEmail(string reciever)
-        {
+      
 
+        public string GetBossEmailForAUser(string username)
+        {
+          
+            var userRepository = new UserRepository();
+
+                var getAllUsers = userRepository.GetAllUsers();
+                var getAllBosses = userRepository.GetAllBosses();
+
+            var bossEmail = getAllUsers.Join(getAllBosses, u => u.BID, b => b.BID,
+                (u, b) => new {User = u, Boss = b})
+
+                .Where(uAndb => uAndb.User.Username == username)
+                .Where(uAndb => uAndb.User.BID == uAndb.Boss.BID)
+                .Select(x => x.Boss.Email);
+                
+
+                return bossEmail.ToString();
+            }
+        public void SendEmailToBoss(string username)
+        {
+            string reciever = GetBossEmailForAUser(username);
             MailMessage mail = new MailMessage();
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
 
