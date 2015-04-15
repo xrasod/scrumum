@@ -73,10 +73,12 @@ namespace Scrumproject
             try
             {
                 _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
-                TbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
+                TbTotalKm.Text = _reportDraftLoading.NumberOfKilometersDrivenInTotal.ToString();
+                TbCarTripLengthKm.Text = _reportDraftLoading.KilometersDriven.ToString();
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 dpStartDate.Text = _reportDraftLoading.StartDate;
                 dpEndDate.Text = _reportDraftLoading.EndDate;
+                TbDaysOff.Text = _reportDraftLoading.DaysOff;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     listBoxReceipts.Items.Add(kvitto);
@@ -293,24 +295,33 @@ namespace Scrumproject
         public void saveDraft()
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
-            _reportDraftSaving.NumberOfKilometersDriven = Int32.Parse(TbTotalKm.Text);
+            _reportDraftSaving.NumberOfKilometersDrivenInTotal = Int32.Parse(TbTotalKm.Text);
+            _reportDraftSaving.KilometersDriven = Int32.Parse(TbCarTripLengthKm.Text);
             _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
             _reportDraftSaving.StartDate = dpStartDate.Text;
             _reportDraftSaving.EndDate = dpEndDate.Text;
             _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
+            _reportDraftSaving.DaysOff = TbDaysOff.Text;
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
         }
 
         private void btnUpdateTotalDriven_Click(object sender, RoutedEventArgs e)
         {
-            int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
-            int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
+            try
+            {
+                int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
+                int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
 
-            int totalKmDriven = carTripLength + updatedCarTripLength;
-            TbTotalKm.Text = totalKmDriven.ToString();
-            TbTotalKm.IsReadOnly = true;
-           
+                int totalKmDriven = carTripLength + updatedCarTripLength;
+                TbTotalKm.Text = totalKmDriven.ToString();
+                TbTotalKm.IsReadOnly = true;
+            }
+            catch
+            {
+                MessageBox.Show("Du måste ange antal kilometer.");
+            }
+
         }
 
         private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
@@ -335,9 +346,16 @@ namespace Scrumproject
             }
             
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            foreach (var item in setDate)
+            if (setDate.Count == 0)
             {
-                listBoxDays.Items.Add(item);
+                MessageBox.Show("Du kan inte resa mindre dagar än dagar du är ledig eller välja senare start- än slutdatum.");
+            }
+            else
+            {
+                foreach (var item in setDate)
+                {
+                    listBoxDays.Items.Add(item);
+                }
             }
         }
 

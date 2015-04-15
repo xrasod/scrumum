@@ -11,12 +11,14 @@ namespace Scrumproject.Logic
     {
         
         public string Description { get; set; }
-        public int NumberOfKilometersDriven { get; set; }
+        public int NumberOfKilometersDrivenInTotal { get; set; }
+        public int KilometersDriven { get; set; }
         public int TotalSumOfSpending { get; set; }
         public List<string> imagePathsList { get; set; }
         public List<string> daysSpentInCountry { get; set; } 
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string DaysOff { get; set; }
 
     }
 }
