@@ -40,6 +40,8 @@ namespace Scrumproject
             InitializeComponent();
             PopulateCurrencyData();
             PopulateListViewUsers();
+            PupulateListViewCountries();
+
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
             tbUsername.IsEnabled = false;
@@ -358,6 +360,20 @@ namespace Scrumproject
                 listBoxUsers.Items.Add(user.Username);
             }
         }
+        
+        
+        //Fyller listViewn med ländernas namn
+        private void PupulateListViewCountries()
+        {
+            var countries = new CountriesRepository();
+            var count = countries.GetAllCountries();
+
+            foreach (var country in count)
+            {
+                lvCountriesEdit.Items.Add(country.Name);
+            }
+
+        }
 
         
 
@@ -443,10 +459,63 @@ namespace Scrumproject
             }
         }
 
+     
+
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
         }
+        
+        
+        //Fyller Tbs med text av landet man valt.
+        private void lvCountriesEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = lvCountriesEdit.SelectedValue.ToString();
+            var c = new CountriesRepository();
+            var country = c.GetAllCountries();
+           
 
+            foreach (var countries in country)
+            {
+                if (selected == countries.Name)
+                {
+                    tbCountryName.Text = countries.Name;
+                    tbMaxCash.Text = countries.Subsistence.ToString();
+                    tbCurrency.Text = countries.Currency;
+                }
+            }
+        }
+
+        private void btnAddCountry_Click(object sender, RoutedEventArgs e)
+        {
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            if (lvCountriesEdit.Items.Contains(name))
+            {
+                MessageBox.Show("Detta land finns redan!");
+
+            }
+            else
+            {
+                logic.AddNewCountry(name, curr, sub);
+            }
+            
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var currname = lvCountriesEdit.SelectedValue.ToString();
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            
+            
+           logic.uppdateCountry(currname, name, curr, sub);
+            
+
+        }
     }
 }
