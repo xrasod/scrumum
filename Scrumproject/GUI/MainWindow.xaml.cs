@@ -16,6 +16,7 @@ using Scrum.Data.Data;
     using Scrumproject.Data;
     using Scrumproject.Logic;
 using Scrumproject.Logic.Entities;
+using Scrumproject.GUI;
 
 
 namespace Scrumproject
@@ -34,6 +35,17 @@ namespace Scrumproject
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
+        internal static MainWindow main;
+        internal string Status
+        {
+            get { return lbLoggedInAsThisUser.Content.ToString(); }
+            set { Dispatcher.Invoke(new Action(() => { lbLoggedInAsThisUser.Content = value; })); }
+        }
+        internal string BossStatus
+        {
+            get { return lbLoggedInUser.Content.ToString(); }
+            set { Dispatcher.Invoke(new Action(() => { lbLoggedInUser.Content = value; })); }
+        }
 
         public MainWindow()
         {
@@ -47,6 +59,8 @@ namespace Scrumproject
             notesLoading = notesHandler.LoadNotes("Notes.xml");
             tbNotes.Text = notesLoading.Note;
             var rep = new CountriesRepository();
+
+            main = this;
 
             var hej = rep.GetAllCountries();
 
@@ -71,7 +85,7 @@ namespace Scrumproject
                 {
                     listBoxDays.Items.Add(dayinfo);
                 }
-
+                
                 
             }
             catch
@@ -309,17 +323,17 @@ namespace Scrumproject
             listBoxDays.Items.Clear();
             var dateHandler = new DateHandler();
             var daysOff = 0;
-
+            
             if (string.IsNullOrEmpty(TbDaysOff.Text))
             {
                 daysOff = 0;
             }
-
+            
             else
             {
-                daysOff = Convert.ToInt32(TbDaysOff.Text);
+                daysOff = Convert.ToInt32(TbDaysOff.Text);    
             }
-
+            
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
             foreach (var item in setDate)
             {
@@ -516,6 +530,29 @@ namespace Scrumproject
            
         }
 
+        private void BtnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            var source = 2;
+            LoginWindow l = new LoginWindow(source);
+            l.Show();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            lbLoggedInAsThisUser.Content = "";
+            BtnLogIn.Visibility = Visibility.Visible;
+            btnLogOut.Visibility = Visibility.Hidden;
+        }
+
+        private void btnLogOutChef_Click(object sender, RoutedEventArgs e)
+        {
+            lbLoggedInUser.Content = "";
+            btnLogInChef.Visibility = Visibility.Visible;
+            btnLogOutChef.Visibility = Visibility.Hidden;
+        }
+           
+        }
+
         private void btnSaveStartCountry_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -542,6 +579,11 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste välja en dag att ta bort.");
             }
+        private void btnLogInChef_Click(object sender, RoutedEventArgs e)
+        {
+            var source = 1;
+            LoginWindow l = new LoginWindow(source);
+            l.Show();
         }
 
     }
