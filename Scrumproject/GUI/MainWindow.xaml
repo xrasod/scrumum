@@ -65,19 +65,18 @@
                             </TextBox.RenderTransform>
                         </TextBox>
                         <Button x:Name="btnRemoveSelectedReceipt" Content="Ta bort kvitto
-                            " Canvas.Left="319" Canvas.Top="698" Width="93" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="White" Foreground="Black" Background="White" Click="btnRemoveSelectedReceipt_Click" Height="21"/>
+                            " Canvas.Left="319" Canvas.Top="692" Width="93" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="White" Foreground="Black" Background="White" Click="btnRemoveSelectedReceipt_Click" Height="21"/>
                         <Label x:Name="lbReceipts" Content="Kvitton för resa" Canvas.Top="513" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" RenderTransformOrigin="0.465,-1" Canvas.Left="-2"/>
-                        <Label Content="Belopp för kvitto" Canvas.Top="423" Width="144" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                        <Label Content="Ladda upp kvitto
-                           " Canvas.Top="347" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" Width="174"/>
-                        <Button x:Name="btnSendReport" Content="Skicka in din rapport                          " Canvas.Left="467" Canvas.Top="720" Width="254" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="56" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
+                        <Label Content="Ange belopp för kvitto" Canvas.Top="423" Width="197" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                        <Label Content="Välj ett kvitto                        " Canvas.Top="347" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" Width="174"/>
+                        <Button x:Name="btnSendReport" Content="Skicka in din rapport                          " Canvas.Left="534" Canvas.Top="753" Width="254" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="56" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
                         <Label Content="Maxbelopp för valt land                            " Canvas.Left="230" Canvas.Top="214" Width="200" Foreground="White" FontWeight="Bold" FontSize="16"/>
                         <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="142" Canvas.Top="315" Width="87" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Height="20" Click="btnSaveStartCountry_Click"/>
                         <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
-                        <TextBox x:Name="tbNotes" Height="288" Canvas.Left="451" TextWrapping="Wrap" Text="" Canvas.Top="352" Width="298" Background="Black" Foreground="White"/>
+                        <TextBox x:Name="tbNotes" Height="340" Canvas.Left="451" TextWrapping="Wrap" Text="" Canvas.Top="352" Width="298" Background="Black" Foreground="White"/>
                         <Label x:Name="lblNotes" Content="Fria anteckningar" Canvas.Left="448" Canvas.Top="325" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                        <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="563" Canvas.Top="645" Width="147" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}" Click="btnLoadNotes_Click"/>
-                        <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="563" Canvas.Top="647" Width="147" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click" Height="22"/>
+                        <Button x:Name="btnLoadNotes" Content="Ladda Anteckningar" Canvas.Left="602" Canvas.Top="697" Width="147" Foreground="Black" FontFamily="Myriad Pro" Background="White" BorderBrush="{x:Null}" Click="btnLoadNotes_Click"/>
+                        <Button x:Name="btnSaveNotes" Content="Spara Anteckningar" Canvas.Left="602" Canvas.Top="692" Width="147" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Click="btnSaveNotes_Click" Height="22"/>
                         <Button x:Name="btnUpdateTotalDriven" Content="Lägg till" Canvas.Left="279" Canvas.Top="74" Width="127" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Padding="10,1,1,1" Click="btnUpdateTotalDriven_Click" Height="23"/>
                         <Button x:Name="btnDeleteCountry" Content="Ta Bort" Canvas.Left="1" Canvas.Top="315" Width="89" FontFamily="Myriad Pro" Background="White" Foreground="Black" BorderBrush="{x:Null}" Height="20" Click="btnDeleteCountry_Click"/>
                         <Label Content="            " Canvas.Left="236" Canvas.Top="241" Width="71" Name="LbTraktamente" Foreground="White" FontWeight="Bold" FontSize="16" Background="#FF5F93AC" Height="27"/>
@@ -96,7 +95,7 @@
                             </DatePicker.RenderTransform>
                         </DatePicker>
                         <ListBox x:Name="listBoxDays" Height="146" Width="228" Canvas.Left="1" Canvas.Top="169" Background="Black" Foreground="White"/>
-                        <ListBox x:Name="listBoxReceipts" Height="155" Width="411" Canvas.Left="1" Canvas.Top="538" Foreground="White" Background="Black"/>
+                        <ListBox x:Name="listBoxReceipts" Height="155" Width="411" Canvas.Left="1" Canvas.Top="537" Foreground="White" Background="Black"/>
                         <Label x:Name="lbLoggedInAs" Content="Inloggad som: " Canvas.Left="467" Canvas.Top="10" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
                         <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="585" Canvas.Top="15" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
                         <Button x:Name="BtnLogIn" Content="Logga In" Canvas.Left="467" Canvas.Top="48" Width="143" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25"/>
