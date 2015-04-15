@@ -551,7 +551,7 @@ namespace Scrumproject
             btnLogOutChef.Visibility = Visibility.Hidden;
         }
            
-        }
+        
 
         private void btnSaveStartCountry_Click(object sender, RoutedEventArgs e)
         {
@@ -579,12 +579,14 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste välja en dag att ta bort.");
             }
+        }
+
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)
         {
             var source = 1;
             LoginWindow l = new LoginWindow(source);
             l.Show();
         }
-
-    }
 }
+    }
+
