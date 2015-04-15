@@ -315,6 +315,8 @@ namespace Scrumproject
 
         private void btnUpdateList_Click(object sender, RoutedEventArgs e)
         {
+            listBoxDays.Items.Clear(); 
+
             var dateHandler = new DateHandler();
             var daysOff = 0;
             
