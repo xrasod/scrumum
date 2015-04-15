@@ -20,6 +20,8 @@ namespace Scrumproject.Data
         {
             //Metod som kallas på om chef nekar rapport
         }
+
+
         //Lägg till användare
         public void adduser(User user)
         {
@@ -46,6 +48,8 @@ namespace Scrumproject.Data
 
             }
         }
+
+
         //Skapa list med användarnamn
         public static List<User> GetMatchingUsers(string name)
         {
@@ -55,10 +59,9 @@ namespace Scrumproject.Data
             }
 
         } 
+        //Skapar en lista med alla användare
         public static List<User> GetAll()
         {
-
-
             using (var context = new scrumEntities())
             {
                 return context.Users.OrderBy(x => x.FirstName).ToList();
@@ -66,7 +69,7 @@ namespace Scrumproject.Data
         }
 
 
-        //Uppdatera status på användare
+        //Uppdatera status på användare som innebär att användaren blir inaktiverad.
         public static void UpdateStatus(string username)
         {
             using (var context = new scrumEntities())

@@ -24,7 +24,7 @@ namespace Scrumproject.Logic
             }
         }
 
-
+        //Kollar så en textbox inte är tom.
         public bool ControllFiledNotEmpty(TextBox i)
         {
             if (!string.IsNullOrEmpty(i.Text))
