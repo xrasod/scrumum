@@ -202,7 +202,6 @@
                         <Label Content="&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="243.373,39,0,0" VerticalAlignment="Top" Name="lbToCurrency" Height="23" Width="36" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
-                <Label Content="Label" Height="100" Width="100"/>
             </TabControl>
         </Grid>
 
