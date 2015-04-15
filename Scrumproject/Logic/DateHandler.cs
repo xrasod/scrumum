@@ -20,7 +20,7 @@ namespace Scrumproject.Logic
             var totalWorkDays = finalDateDiffrence - daysOff;
 
             BindingList<string> numbers = new BindingList<string>();
-            for (int i = 0; i < totalWorkDays + 1; i++)
+            for (int i = 1; i < totalWorkDays + 2; i++)
             {
                 numbers.Add(i.ToString());
             }
