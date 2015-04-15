@@ -14,6 +14,7 @@ namespace Scrumproject.Logic
         public int NumberOfKilometersDriven { get; set; }
         public int TotalSumOfSpending { get; set; }
         public List<string> imagePathsList { get; set; }
+        public List<string> daysSpentInCountry { get; set; } 
         public string StartDate { get; set; }
         public string EndDate { get; set; }
 

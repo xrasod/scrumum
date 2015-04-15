@@ -67,6 +67,11 @@ namespace Scrumproject
                 {
                     listBoxReceipts.Items.Add(kvitto);
                 }
+                foreach (var dayinfo in _reportDraftLoading.daysSpentInCountry)
+                {
+                    listBoxDays.Items.Add(dayinfo);
+                }
+
                 
             }
             catch
@@ -274,10 +279,11 @@ namespace Scrumproject
         public void saveDraft()
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
-            _reportDraftSaving.NumberOfKilometersDriven = 111;
+            _reportDraftSaving.NumberOfKilometersDriven = Int32.Parse(TbTotalKm.Text);
             _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
             _reportDraftSaving.StartDate = dpStartDate.Text;
             _reportDraftSaving.EndDate = dpEndDate.Text;
+            _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
         }
@@ -289,7 +295,6 @@ namespace Scrumproject
 
             int totalKmDriven = carTripLength + updatedCarTripLength;
             TbTotalKm.Text = totalKmDriven.ToString();
-
             TbTotalKm.IsReadOnly = true;
            
         }
@@ -299,26 +304,33 @@ namespace Scrumproject
 
         }
 
-        private void btnUpdateList_Click(object sender, RoutedEventArgs e)
+        public void updateDays()
         {
+            listBoxDays.Items.Clear();
             var dateHandler = new DateHandler();
             var daysOff = 0;
-            
+
             if (string.IsNullOrEmpty(TbDaysOff.Text))
             {
                 daysOff = 0;
             }
-            
+
             else
             {
-                daysOff = Convert.ToInt32(TbDaysOff.Text);    
+                daysOff = Convert.ToInt32(TbDaysOff.Text);
             }
-            
+
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
             foreach (var item in setDate)
             {
                 listBoxDays.Items.Add(item);
             }
+        }
+
+
+        private void btnUpdateList_Click(object sender, RoutedEventArgs e)
+        {
+            updateDays();
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
@@ -446,6 +458,34 @@ namespace Scrumproject
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
+        }
+
+        private void btnSaveStartCountry_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                              LbTraktamente.Content.ToString() + " kr";
+                listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+            }
+            catch
+            {
+                MessageBox.Show("Du måste välja en dag samt fylla i information att spara.");
+            }
+        }
+
+        private void btnDeleteCountry_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var firstSpace = listBoxDays.SelectedValue.ToString().IndexOf(' ');
+                listBoxDays.Items[listBoxDays.SelectedIndex] = listBoxDays.SelectedValue.ToString()
+                    .Substring(0, firstSpace);
+            }
+            catch
+            {
+                MessageBox.Show("Du måste välja en dag att ta bort.");
+            }
         }
 
     }
