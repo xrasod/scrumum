@@ -40,11 +40,12 @@ namespace Scrumproject
             InitializeComponent();
             PopulateCurrencyData();
             PopulateListViewUsers();
-
+            TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
             tbUsername.IsEnabled = false;
             tbBoss.IsEnabled = false;
-
+            notesLoading = notesHandler.LoadNotes("Notes.xml");
+            tbNotes.Text = notesLoading.Note;
             var rep = new CountriesRepository();
 
             var hej = rep.GetAllCountries();
@@ -60,9 +61,11 @@ namespace Scrumproject
                 _reportDraftLoading = reportHandler.LoadDraft("DraftReport.xml");
                 TbCarTripLengthKm.Text = _reportDraftLoading.NumberOfKilometersDriven.ToString();
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
+                dpStartDate.Text = _reportDraftLoading.StartDate;
+                dpEndDate.Text = _reportDraftLoading.EndDate;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
-                    LvReceipts.Items.Add(kvitto);
+                    listBoxReceipts.Items.Add(kvitto);
                 }
                 
             }
@@ -80,7 +83,8 @@ namespace Scrumproject
             if (result == MessageBoxResult.Yes)
             {
                 var pdfinfo = "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
-                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n";
+                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n" +
+                              "Sparade kvitton: " ;
 
                 pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
                 MessageBox.Show("Din rapport har sparats.");
@@ -149,6 +153,7 @@ namespace Scrumproject
             var content = c.GetSelectedCountrySpecifics(selectedCountry);
 
             lbFromCurrency.Content = content.Currency;
+
         }
 
         private void CbToCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -167,7 +172,7 @@ namespace Scrumproject
             
             var logic = new LogicHandler();
 
-            logic.changeStatus(lvUsers.SelectedValue.ToString());
+            logic.changeStatus(listBoxUsers.SelectedValue.ToString());
         
         }
 
@@ -257,20 +262,22 @@ namespace Scrumproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LvReceipts.Items.Add(tbReceiptFile.Text);
+            listBoxReceipts.Items.Add(tbReceiptFile.Text);
         }
 
         private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = LvReceipts.SelectedItem;
-            LvReceipts.Items.Remove(selectedItem);
+            var selectedItem = listBoxReceipts.SelectedItem;
+            listBoxReceipts.Items.Remove(selectedItem);
         }
 
         public void saveDraft()
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
             _reportDraftSaving.NumberOfKilometersDriven = 111;
-            _reportDraftSaving.imagePathsList = LvReceipts.Items.Cast<String>().ToList();
+            _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
+            _reportDraftSaving.StartDate = dpStartDate.Text;
+            _reportDraftSaving.EndDate = dpEndDate.Text;
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
         }
@@ -295,9 +302,23 @@ namespace Scrumproject
         private void btnUpdateList_Click(object sender, RoutedEventArgs e)
         {
             var dateHandler = new DateHandler();
-            var daysOff = Convert.ToInt32(TbDaysOff.Text);
+            var daysOff = 0;
+            
+            if (string.IsNullOrEmpty(TbDaysOff.Text))
+            {
+                daysOff = 0;
+            }
+            
+            else
+            {
+                daysOff = Convert.ToInt32(TbDaysOff.Text);    
+            }
+            
             var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            LvDays.ItemsSource = setDate;
+            foreach (var item in setDate)
+            {
+                listBoxDays.Items.Add(item);
+            }
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
@@ -334,7 +355,7 @@ namespace Scrumproject
 
             foreach (var user in users)
             {
-                lvUsers.Items.Add(user.Username);
+                listBoxUsers.Items.Add(user.Username);
             }
         }
 
@@ -401,7 +422,7 @@ namespace Scrumproject
         //Fyller i TB's med en användare man valt att uppdatera ur Listan
         private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            var selected = lvUsers.SelectedValue.ToString();
+            var selected = listBoxUsers.SelectedValue.ToString();
             var users = BossRepository.GetAll();
 
             foreach (var user in users)
@@ -420,6 +441,11 @@ namespace Scrumproject
                 }
 
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
         }
 
     }

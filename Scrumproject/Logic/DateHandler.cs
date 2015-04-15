@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Scrumproject.Logic
 {
     public class DateHandler
     {
-        public List<int> GetTimeDiffrence(string dpStartDate, string dpEndDate, int daysOff)
+        public BindingList<string> GetTimeDiffrence(string dpStartDate, string dpEndDate, int daysOff)
         {
 
             var startdate = DateTime.Parse(dpStartDate).Date;
@@ -18,10 +19,10 @@ namespace Scrumproject.Logic
 
             var totalWorkDays = finalDateDiffrence - daysOff;
 
-            List<int> numbers = new List<int>();
+            BindingList<string> numbers = new BindingList<string>();
             for (int i = 0; i < totalWorkDays + 1; i++)
             {
-                numbers.Add(i);
+                numbers.Add(i.ToString());
             }
             return numbers;
         }
