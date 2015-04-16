@@ -10,7 +10,7 @@ namespace Scrum.Data.Data
     {
         public void AddPrepaymentRequest(Prepayment prepayment)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 context.Prepayments.Add(prepayment);
             }

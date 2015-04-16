@@ -12,7 +12,7 @@ namespace Scrum.Data.Data
     {
         public List<Country> GetAllCountries()
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Countries.OrderBy(x => x.Name).ToList();
             }
@@ -20,7 +20,7 @@ namespace Scrum.Data.Data
 
         public Country GetSpecificsFromCountry(string country)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Countries.FirstOrDefault(x => x.Name.Equals(country));
             }
@@ -30,7 +30,7 @@ namespace Scrum.Data.Data
         public void addCountry(Country C)
         {
 
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace Scrum.Data.Data
 
         public static void UpdateCountry(int cID,string newname, string newcurrency, int newsub)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
 
                 try

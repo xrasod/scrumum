@@ -11,7 +11,7 @@ namespace Scrumproject.Data
     {
         public User LoginUser(string username, string password)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Users.FirstOrDefault(x =>
                     x.Username.Equals(username) &&
@@ -21,18 +21,18 @@ namespace Scrumproject.Data
 
         public Boss LoginBoss(string username, string password)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Bosses.FirstOrDefault(x =>
                     x.Username.Equals(username) &&
-                    x.Pv.Equals(password));
+                    x.PW.Equals(password));
             }
         }
 
         public List<User> GetAllUsers()
         {
-            
-            using (var context = new scrumEntities())
+
+            using (var context = new scrumprojectEntities())
             {
                 return context.Users.ToList();
             }
@@ -40,7 +40,7 @@ namespace Scrumproject.Data
 
         public List<Boss> GetAllBosses()
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Bosses.ToList();
             }

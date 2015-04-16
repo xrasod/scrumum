@@ -11,7 +11,7 @@ namespace Scrumproject.Logic
         {
             ReportRepository<Report> reportrepository = new ReportRepository<Report>();
             var reportList = reportrepository.GetAllReports();
-            var newestreports = reportList.OrderByDescending(x => x.)
+            var newestreports = reportList.OrderByDescending(x => x.ReportDate);
             return null;
         }
     }
