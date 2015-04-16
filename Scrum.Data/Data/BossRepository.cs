@@ -26,7 +26,7 @@ namespace Scrumproject.Data
         public void adduser(User user)
         {
 
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 try
                 {
@@ -53,7 +53,7 @@ namespace Scrumproject.Data
         //Skapa list med användarnamn
         public static List<User> GetMatchingUsers(string name)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Users.Where(x => x.Username.Contains(name)).ToList();
             }
@@ -62,7 +62,7 @@ namespace Scrumproject.Data
         //Skapar en lista med alla användare
         public static List<User> GetAll()
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Users.OrderBy(x => x.FirstName).ToList();
             }
@@ -72,7 +72,7 @@ namespace Scrumproject.Data
         //Uppdatera status på användare som innebär att användaren blir inaktiverad.
         public static void UpdateStatus(string username)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
 
                 try
@@ -101,7 +101,7 @@ namespace Scrumproject.Data
         public static void UpdateUser(int userid, string newusername, string newfirstname, string newlastname,
             string newpassword, string newssn, string newemail, int newboss)
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
 
                 try

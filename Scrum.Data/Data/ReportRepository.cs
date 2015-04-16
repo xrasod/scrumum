@@ -38,26 +38,15 @@ namespace Scrum.Data.Data
             
             
         }
+
         public List<Report> GetAllReports()
         {
-            using (var context = new scrumEntities())
+            using (var context = new scrumprojectEntities())
             {
                 return context.Reports.ToList();
             }
         }
 
-        public void RejectAReport(Report updatedReport )
-        {
-             using (var context = new scrumEntities())
-            {
-                try
-                {
-
-                    context.Reports.Add(updatedReport);
-
-                    context.SaveChanges();
-                }
-        }
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 
@@ -11,26 +12,26 @@ namespace Scrumproject.Logic
 
 
         UserRepository userRepository = new UserRepository();
-
+      
 
         public string GetBossEmailForAUser(string username)
         {
+          
+         
 
-
-
-            var getAllUsers = userRepository.GetAllUsers();
-            var getAllBosses = userRepository.GetAllBosses();
+                var getAllUsers = userRepository.GetAllUsers();
+                var getAllBosses = userRepository.GetAllBosses();
 
             var bossEmail = getAllUsers.Join(getAllBosses, u => u.BID, b => b.BID,
-                (u, b) => new { User = u, Boss = b })
+                (u, b) => new {User = u, Boss = b})
 
                 .Where(uAndb => uAndb.User.Username == username)
                 .Where(uAndb => uAndb.User.BID == uAndb.Boss.BID)
                 .Select(x => x.Boss.Email).FirstOrDefault();
+                
 
-
-            return bossEmail;
-        }
+                return bossEmail;
+            }
 
         public string GetUserEmail(string username)
         {
