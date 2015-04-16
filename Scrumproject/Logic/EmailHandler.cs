@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using Scrum.Data;
+
 using Scrumproject.Data;
 
 namespace Scrumproject.Logic
@@ -30,10 +27,10 @@ namespace Scrumproject.Logic
 
                 .Where(uAndb => uAndb.User.Username == username)
                 .Where(uAndb => uAndb.User.BID == uAndb.Boss.BID)
-                .Select(x => x.Boss.Email);
+                .Select(x => x.Boss.Email).FirstOrDefault();
                 
 
-                return bossEmail.ToString();
+                return bossEmail;
             }
         public void SendEmailToBoss(string username)
         {
