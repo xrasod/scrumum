@@ -83,7 +83,6 @@ namespace Scrumproject
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 dpStartDate.Text = _reportDraftLoading.StartDate;
                 dpEndDate.Text = _reportDraftLoading.EndDate;
-                TbDaysOff.Text = _reportDraftLoading.DaysOff;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     listBoxReceipts.Items.Add(kvitto);
@@ -308,7 +307,6 @@ namespace Scrumproject
             _reportDraftSaving.StartDate = dpStartDate.Text;
             _reportDraftSaving.EndDate = dpEndDate.Text;
             _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
-            _reportDraftSaving.DaysOff = TbDaysOff.Text;
             reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
             tbDoneOnTrip.Text = "";
         }
@@ -340,30 +338,20 @@ namespace Scrumproject
         {
             listBoxDays.Items.Clear();
             var dateHandler = new DateHandler();
-            var daysOff = 0;
-            
-            if (string.IsNullOrEmpty(TbDaysOff.Text))
-            {
-                daysOff = 0;
-            }
-            
-            else
-            {
-                daysOff = Convert.ToInt32(TbDaysOff.Text);    
-            }
-            
-            var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            if (setDate.Count == 0)
-            {
-                MessageBox.Show("Du kan inte resa mindre dagar än dagar du är ledig eller välja senare start- än slutdatum.");
-            }
-            else
-            {
+        
+            var setDate = dateHandler.GetDays(dpStartDate.SelectedDate.Value, dpEndDate.SelectedDate.Value);
+            //if (setDate.Count == 0)
+            //{
+            //    MessageBox.Show("Du kan inte resa mindre dagar än dagar du är ledig eller välja senare start- än slutdatum.");
+            //}
+            //else
+            //{
             foreach (var item in setDate)
             {
-                listBoxDays.Items.Add(item);
+                var hej = String.Format(item.Day.ToString() + "/" + item.Month.ToString() + "/" + item.Year.ToString());
+                listBoxDays.Items.Add(hej);
             }
-            }
+            //}
         }
 
 
@@ -645,11 +633,30 @@ namespace Scrumproject
 
         private void btnSaveStartCountry_Click(object sender, RoutedEventArgs e)
         {
+            LogicHandler l = new LogicHandler();
+
+            var dayinfo = "";
+            var breakfast = CHBBreakfast.IsChecked.Value;
+            var lunch = CHBLunch.IsChecked.Value;
+            var dinner = CHBDinner.IsChecked.Value;
+            double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
+
+            var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+
             try
             {
-                var dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                              LbTraktamente.Content.ToString() + " kr";
-                listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                if (CHBVacationday.IsChecked == true)
+                {
+                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                    " LEDIG";
+                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                }
+                else
+                {
+                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                  subsistence + " kr";
+                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                }
             }
             catch
             {
@@ -690,7 +697,6 @@ namespace Scrumproject
                 listBoxDays.Items.Clear();
                 TbTotalKm.Text = "0";
                 TbCarTripLengthKm.Text = "0";
-                TbDaysOff.Text = "";
                 dpStartDate.Text = today;
                 dpEndDate.Text = tomorrow;
                 tbReceiptFile.Text = "";

@@ -39,6 +39,13 @@ namespace Scrum.Data.Data
             
         }
 
+        public List<Report> GetAllReports()
+        {
+            using (var context = new scrumprojectEntities())
+            {
+                return context.Reports.ToList();
+            }
+        }
 
     }
 
