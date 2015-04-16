@@ -22,15 +22,15 @@ namespace Scrumproject.Logic
       PDFRepository pdfRepository = new PDFRepository();
       CountryXML<Country> countryXML = new CountryXML<Country>();
 
-      public Country LoadCountry(string sokvag)
-      {
-          return countryXML.Ladda(sokvag);
-      }
+      //public Country LoadCountry(string sokvag)
+      //{
+      //    return countryXML.Ladda(sokvag);
+      //}
 
-      public void SaveCountry(Country country, string sokvag)
-      {
-          countryXML.Spara(country, sokvag);
-      }
+      //public void SaveCountry(Country country, string sokvag)
+      //{
+      //    countryXML.Spara(country, sokvag);
+      //}
 
       public void CreatePdf(string text, string filnamn)
        {
