@@ -25,7 +25,7 @@ namespace Scrumproject.Data
             {
                 return context.Bosses.FirstOrDefault(x =>
                     x.Username.Equals(username) &&
-                    x.Pv.Equals(password));
+                    x.PW.Equals(password));
             }
         }
 
