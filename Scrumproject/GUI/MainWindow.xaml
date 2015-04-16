@@ -41,7 +41,7 @@
                 <TabItem Header="Rapportering" Margin="-2,-2,-89,0" Background="#FFADBEE4" Foreground="Black" BorderBrush="{x:Null}" FontSize="14" FontWeight="Bold">
                     <Canvas Margin="13,28,223,96">
                         <DatePicker x:Name="dpStartDate" Canvas.Left="191" Canvas.Top="-9" Width="119" Height="27" Background="Black"/>
-                        <Label x:Name="lbStartDate" Content="Välj start/slutdatum                            " Canvas.Top="-9" Width="167" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16"/>
+                        <Label x:Name="lbStartDate" Content="Välj start/slutdatum.                  " Canvas.Top="-9" Width="167" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="16"/>
                         <Label x:Name="lbCarTripLength" Content="Lägg till bilresa" Canvas.Top="71" RenderTransformOrigin="0.362,-0.746" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16"/>
                         <Label x:Name="lbDagar" Content="Dagar" Canvas.Left="1" Canvas.Top="133" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
                         <Label x:Name="lbLand" Content="Välj land" Canvas.Left="231" Canvas.Top="164" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
