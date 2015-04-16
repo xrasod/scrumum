@@ -169,5 +169,25 @@ namespace Scrumproject.Logic
 
        }
 
+       public double CalculateSubsistenceDeduction(bool breakfast, bool lunch, bool dinner, double subsistence)
+       {
+           double percent = 1;
+
+           if (breakfast == true)
+           {
+               percent -= 0.15;
+           }
+           if(lunch == true)
+           {
+               percent -= 0.35;
+           }
+           if (dinner == true)
+           {
+               percent -= 0.35;
+           }
+
+           return subsistence * percent;
+       }
+
    }
 }
