@@ -574,6 +574,23 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
       </edmx:DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams />
+    <edmx:Diagrams >
+      <edmx:Diagram DiagramId="8462d22fe1c64aff8b2471fc7280fa07" Name="Diagram1">
+        <edmx:EntityTypeShape EntityType="scrumModel.Boss" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.Country" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.Prepayment" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.Reciept" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.Report" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.User" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="scrumModel.TravelInfo" Width="1.5" PointX="7.5" PointY="2.375" IsExpanded="true" />
+        <edmx:AssociationConnector Association="scrumModel.FK__Users__BID__38996AB5" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.FK__TravelInfo__CID__45F365D3" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.FK__Prepayment__UID__48CFD27E" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.FK__Reciept__RID__4316F928" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.FK__Report__UID__3E52440B" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.FK__TravelInfo__RID__44FF419A" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="scrumModel.BossFor" ManuallyRouted="false" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
