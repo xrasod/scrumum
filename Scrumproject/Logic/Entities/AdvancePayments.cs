@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Scrumproject.Logic.Entities
 {
-    class AdvancePayments
+    public class AdvancePayments
     {
-        public string Id { get; set; }
+        public int PrepaidId { get; set; }
+        public int UserId { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public bool Status { get; set; }
     }
 }

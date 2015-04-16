@@ -21,6 +21,7 @@ namespace Scrumproject.Logic
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
       CountryXML<Country> countryXML = new CountryXML<Country>();
+      AdvancePaymentsRepository advancePaymentsRepository = new AdvancePaymentsRepository();
 
       //public Country LoadCountry(string sokvag)
       //{
@@ -173,6 +174,20 @@ namespace Scrumproject.Logic
 
            CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
 
+       }
+
+       public void AddPrepaymentRequest(AdvancePayments advancePayment)
+       {
+           var prepay = new Prepayment
+           {
+               PID = advancePayment.PrepaidId,
+               UID = advancePayment.UserId,
+               Amount = advancePayment.Amount,
+               Description = advancePayment.Description,
+               Status = null
+           };
+
+           advancePaymentsRepository.AddPrepaymentRequest(prepay);
        }
 
    }
