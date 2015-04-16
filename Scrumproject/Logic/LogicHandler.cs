@@ -32,29 +32,14 @@ namespace Scrumproject.Logic
           countryXML.Spara(country, sokvag);
       }
 
-      public Report LoadDraft(string sokvag)
-      {
-          return reportRepository.Ladda(sokvag);
-      }
-
-      public void SaveDraft(Report report, string sokvag)
-      {
-          reportRepository.Spara(report, sokvag);
-      }
-
-       public void CreatePdf(string text, string filnamn)
+      public void CreatePdf(string text, string filnamn)
        {
            pdfRepository.createPdf(text, filnamn);
        }
 
-
       public ReportDraft LoadDraft(string sokvag)
-      {
-          
-          
-              return reportRepository.Ladda(sokvag);
-          
-          
+      {          
+              return reportRepository.Ladda(sokvag);   
       }
        
        public void SaveDraft(ReportDraft reportDraft, string sokvag)
