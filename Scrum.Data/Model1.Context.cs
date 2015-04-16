@@ -13,10 +13,10 @@ namespace Scrum.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class scrumEntities : DbContext
+    public partial class scrumprojectEntities : DbContext
     {
-        public scrumEntities()
-            : base("name=scrumEntities")
+        public scrumprojectEntities()
+            : base("name=scrumprojectEntities")
         {
         }
     
@@ -32,5 +32,6 @@ namespace Scrum.Data
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<TravelInfo> TravelInfoes { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }
