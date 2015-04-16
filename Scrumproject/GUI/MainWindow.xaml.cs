@@ -694,7 +694,6 @@ namespace Scrumproject
                 listBoxDays.Items.Clear();
                 TbTotalKm.Text = "0";
                 TbCarTripLengthKm.Text = "0";
-                TbDaysOff.Text = "";
                 dpStartDate.Text = today;
                 dpEndDate.Text = tomorrow;
                 tbReceiptFile.Text = "";

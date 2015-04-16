@@ -22,15 +22,15 @@ namespace Scrumproject.Logic
             return null;
         }
 
-        public void BossRejectPost(string reportname)
-        {
+        //public void BossRejectPost(string reportname)
+        //{
             
 
-            var reportList = reportRepository.GetAllReports();
+        //    var reportList = reportRepository.GetAllReports();
 
-            var rejectspecificpost = reportList.Select(x => x.Description.Contains(reportname)).FirstOrDefault();
+        //    var rejectspecificpost = reportList.Select(x => x.Description.Contains(reportname)).FirstOrDefault();
 
-        List<Report> updatedPost = 
-        }
+        //List<Report> updatedPost = 
+        //}
     }
 }
