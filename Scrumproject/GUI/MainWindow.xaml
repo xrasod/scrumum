@@ -107,9 +107,9 @@
                 </TabItem>
                 <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="#FF6C83B4" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" >
                     <Canvas Margin="0,10,-2,165">
-                        <Label x:Name="lbTotalAmount" Content="Totalsumma" Canvas.Top="594" RenderTransformOrigin="0.362,-0.746" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" Canvas.Left="299"/>
-                        <TextBox x:Name="TbTotalAmount" Height="23" Canvas.Left="406" TextWrapping="Wrap" Text="0" Canvas.Top="600" Width="102" Background="Black" Foreground="White"/>
-                        <Label x:Name="lbWhatwillyoudo" Content="Vad skall du göra under resan?" Canvas.Left="24" Canvas.Top="73" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                        <Label x:Name="lbTotalAmount" Content="Totalsumma" Canvas.Top="507" RenderTransformOrigin="0.362,-0.746" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" Canvas.Left="638"/>
+                        <TextBox x:Name="TbTotalAmount" Height="23" Canvas.Left="638" TextWrapping="Wrap" Text="0" Canvas.Top="543" Width="102" Background="Black" Foreground="White"/>
+                        <Label x:Name="lbWhatwillyoudo" Content="Vad skall du göra under resan?" Canvas.Left="61" Canvas.Top="51" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
                         <TextBox x:Name="tbDoneOnTrip_Copy" Height="490" Canvas.Left="28" TextWrapping="Wrap" Text="" Canvas.Top="105" Width="480" Background="Black" Foreground="White"/>
                         <Button x:Name="btnSendPrepayment" Content="Skicka Förskottsansökan" Canvas.Left="436" Canvas.Top="698" Width="361" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="56" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}"/>
                         <Label x:Name="lbMaxSumSpecificCountry_Copy" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>

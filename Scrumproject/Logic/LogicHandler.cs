@@ -15,13 +15,12 @@ namespace Scrumproject.Logic
 {
    public class LogicHandler
     {
-      AdvancePaymentsRepository advancePaymentsRepository = new AdvancePaymentsRepository();
+      
       ReportRepository<ReportDraft> reportRepository = new ReportRepository<ReportDraft>();
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
       CountryXML<Country> countryXML = new CountryXML<Country>();
-      
 
       //public Country LoadCountry(string sokvag)
       //{
@@ -175,22 +174,6 @@ namespace Scrumproject.Logic
            CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
 
        }
-
-       public void AddPrepaymentRequest(AdvancePayments advancePayment)
-       {
-           var prepay = new Prepayment
-           {
-               PID = advancePayment.PrepayId,
-               UID = advancePayment.UserId,
-               Amount = advancePayment.Amount,
-               Description = advancePayment.Description,
-               Status = null
-           };
-
-           advancePaymentsRepository.AddPrepaymentRequest(prepay);
-       }
-
-
 
    }
 }
