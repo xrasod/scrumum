@@ -20,8 +20,36 @@ namespace Scrumproject.Logic
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
-      CountryXML<Country> countryXML = new CountryXML<Country>();
       AdvancePaymentsRepository advancePaymentsRepository = new AdvancePaymentsRepository();
+      CountryXML<List<Countries>> countryXML = new CountryXML<List<Countries>>();
+      CountriesRepository countryRep = new CountriesRepository();
+
+
+      public void SaveCountriesfromDBtoXML()
+      {
+
+          var countriesList = new List<Countries>();
+          var list = countryRep.GetAllCountries();
+          foreach (var c in list)
+          {
+              var newc = new Countries
+              {
+                  CID = c.CID,
+                  Name = c.Name,
+                  Subsistence = c.Subsistence,
+                  Currency = c.Currency
+
+              };
+              countriesList.Add(newc);
+              countryXML.Spara(countriesList, "Country.xml");
+          }
+
+      }
+
+      //public void SaveCountry(Countries country, string sokvag)
+      //{
+      //    countryXML.Spara(country, sokvag);
+      //}
 
       //public Country LoadCountry(string sokvag)
       //{

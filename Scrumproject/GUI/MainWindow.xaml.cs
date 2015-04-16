@@ -32,6 +32,7 @@ namespace Scrumproject
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
         LogicHandler pdfHandler = new LogicHandler();
+        LogicHandler logicHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
@@ -53,6 +54,7 @@ namespace Scrumproject
             PopulateCurrencyData();
             PopulateListViewUsers();
             PupulateListViewCountries();
+            logicHandler.SaveCountriesfromDBtoXML();
 
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
