@@ -52,6 +52,8 @@ namespace Scrumproject
             InitializeComponent();
             PopulateCurrencyData();
             PopulateListViewUsers();
+            PupulateListViewCountries();
+
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
             tbUsername.IsEnabled = false;
@@ -248,12 +250,14 @@ namespace Scrumproject
 
         private void CbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrencyConverter c = new CurrencyConverter();
-            var selectedCountry = CbCountries.SelectedItem.ToString();
-
-            var content = c.GetSelectedCountrySpecifics(selectedCountry);
-
-            LbTraktamente.Content = content.Subsistence;
+            try
+            {
+                CurrencyConverter c = new CurrencyConverter();
+                var selectedCountry = CbCountries.SelectedItem.ToString();
+                var content = c.GetSelectedCountrySpecifics(selectedCountry);
+                LbTraktamente.Content = content.Subsistence;
+            }
+            catch { }
         }
 
         private void btnUploadReceipt_Click(object sender, RoutedEventArgs e)
@@ -310,18 +314,18 @@ namespace Scrumproject
         {
             try
             {
-                int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
-                int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
+            int carTripLength = Convert.ToInt32(TbCarTripLengthKm.Text);
+            int updatedCarTripLength = Convert.ToInt32(TbTotalKm.Text);
 
-                int totalKmDriven = carTripLength + updatedCarTripLength;
-                TbTotalKm.Text = totalKmDriven.ToString();
-                TbTotalKm.IsReadOnly = true;
+            int totalKmDriven = carTripLength + updatedCarTripLength;
+            TbTotalKm.Text = totalKmDriven.ToString();
+            TbTotalKm.IsReadOnly = true;
             }
             catch
             {
                 MessageBox.Show("Du måste ange antal kilometer.");
             }
-
+           
         }
 
         private void btnSaveDraft_Click(object sender, RoutedEventArgs e)
@@ -352,10 +356,10 @@ namespace Scrumproject
             }
             else
             {
-                foreach (var item in setDate)
-                {
-                    listBoxDays.Items.Add(item);
-                }
+            foreach (var item in setDate)
+            {
+                listBoxDays.Items.Add(item);
+            }
             }
         }
 
@@ -401,6 +405,20 @@ namespace Scrumproject
             {
                 listBoxUsers.Items.Add(user.Username);
             }
+        }
+        
+        
+        //Fyller listViewn med ländernas namn
+        private void PupulateListViewCountries()
+        {
+            var countries = new CountriesRepository();
+            var count = countries.GetAllCountries();
+
+            foreach (var country in count)
+            {
+                lvCountriesEdit.Items.Add(country.Name);
+            }
+
         }
 
         
@@ -548,19 +566,70 @@ namespace Scrumproject
            
         }
 
+        
+        //Fyller Tbs med text av landet man valt.
+        private void lvCountriesEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = lvCountriesEdit.SelectedValue.ToString();
+            var c = new CountriesRepository();
+            var country = c.GetAllCountries();
+           
+
+            foreach (var countries in country)
+            {
+                if (selected == countries.Name)
+                {
+                    tbCountryName.Text = countries.Name;
+                    tbMaxCash.Text = countries.Subsistence.ToString();
+                    tbCurrency.Text = countries.Currency;
+                }
+            }
+        }
+
+        private void btnAddCountry_Click(object sender, RoutedEventArgs e)
+        {
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            if (lvCountriesEdit.Items.Contains(name))
+            {
+                MessageBox.Show("Detta land finns redan!");
+
+            }
+            else
+            {
+                logic.AddNewCountry(name, curr, sub);
+            }
+            
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var currname = lvCountriesEdit.SelectedValue.ToString();
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            
+            
+           logic.uppdateCountry(currname, name, curr, sub);
+            
+
+        }
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
             var source = 2;
             LoginWindow l = new LoginWindow(source);
             l.Show();
-        }
+    }
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             lbLoggedInAsThisUser.Content = "";
             BtnLogIn.Visibility = Visibility.Visible;
             btnLogOut.Visibility = Visibility.Hidden;
-        }
+}
 
         private void btnLogOutChef_Click(object sender, RoutedEventArgs e)
         {
@@ -605,6 +674,37 @@ namespace Scrumproject
             LoginWindow l = new LoginWindow(source);
             l.Show();
         }
+
+        private void btnDeleteDraft_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Vill du verkligen radera allt?", "Radera utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var today = DateTime.Now.ToString();
+                var tomorrow = DateTime.Now.AddDays(1).ToString();
+                tbDoneOnTrip.Text = "";
+                listBoxReceipts.Items.Clear();
+                listBoxDays.Items.Clear();
+                TbTotalKm.Text = "0";
+                TbCarTripLengthKm.Text = "0";
+                TbDaysOff.Text = "";
+                dpStartDate.Text = today;
+                dpEndDate.Text = tomorrow;
+                tbReceiptFile.Text = "";
+                tbSum.Text = "";
+                LbTraktamente.Content = "";
+                CbCountries.SelectedIndex = -1;
+
+                saveDraft();
+                MessageBox.Show("Utkast raderat");
+            }
+            else
+            {
+                MessageBox.Show("Vilken tur att jag frågade");
+            }
+        }
+
+       
 }
     }
 

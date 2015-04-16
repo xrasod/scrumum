@@ -14,26 +14,32 @@ using Scrumproject.Data;
 namespace Scrumproject.Logic
 {
    public class LogicHandler
-    { 
+    {
       
       ReportRepository<ReportDraft> reportRepository = new ReportRepository<ReportDraft>();
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
+      CountryXML<Country> countryXML = new CountryXML<Country>();
 
-       public void CreatePdf(string text, string filnamn)
+      //public Country LoadCountry(string sokvag)
+      //{
+      //    return countryXML.Ladda(sokvag);
+      //}
+
+      //public void SaveCountry(Country country, string sokvag)
+      //{
+      //    countryXML.Spara(country, sokvag);
+      //}
+
+      public void CreatePdf(string text, string filnamn)
        {
            pdfRepository.createPdf(text, filnamn);
        }
 
-
       public ReportDraft LoadDraft(string sokvag)
-      {
-          
-          
-              return reportRepository.Ladda(sokvag);
-          
-          
+      {          
+              return reportRepository.Ladda(sokvag);   
       }
        
        public void SaveDraft(ReportDraft reportDraft, string sokvag)
@@ -123,6 +129,50 @@ namespace Scrumproject.Logic
            var boss = r.LoginBoss(username, password);
 
            return boss;
+       }
+
+
+       public void AddNewCountry(string CountryName, string currency, int Sub)
+       {
+           var countryrep = new CountriesRepository();
+           var check = countryrep.GetAllCountries();
+           
+
+           try
+           {
+               var country = new Scrum.Data.Country()
+               {
+                   Name = CountryName,
+                   Currency = currency,
+                   Subsistence = Sub
+               };
+
+               countryrep.addCountry(country);
+
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine(ex + "#### Det har blivit fel, ProfileController, Register");
+           }
+       }
+
+
+       public void uppdateCountry(string currname, string newname, string newcurr, int newsub)
+       {
+           var countryrep = new CountriesRepository();
+           var list = countryrep.GetAllCountries();
+           var cid = 1;
+           foreach (var c in list)
+           {
+               if (c.Name == currname)
+               {
+                   cid = c.CID;
+               }
+           }
+
+
+           CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
+
        }
 
    }
