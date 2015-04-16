@@ -29,5 +29,22 @@ namespace Scrumproject.Data
             }
         }
 
+        public List<User> GetAllUsers()
+        {
+            
+            using (var context = new scrumEntities())
+            {
+                return context.Users.ToList();
+            }
+        }
+
+        public List<Boss> GetAllBosses()
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Bosses.ToList();
+            }
+        }
+
     }
 }
