@@ -11,7 +11,7 @@ namespace Scrum.Data.Data
     public class CountryXML<T> where T : class
     {
 
-        internal XmlSerializer Xml;
+        public XmlSerializer Xml;
 
         public CountryXML()
         {

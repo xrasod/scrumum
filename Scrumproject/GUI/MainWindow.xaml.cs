@@ -34,6 +34,7 @@ namespace Scrumproject
         LogicHandler pdfHandler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
+        LogicHandler localHandeler = new LogicHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -53,6 +54,8 @@ namespace Scrumproject
             PopulateCurrencyData();
             PopulateListViewUsers();
             PupulateListViewCountries();
+            localHandeler.SaveCountriesfromDBtoXML();
+
 
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
