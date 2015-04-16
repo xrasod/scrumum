@@ -25,7 +25,7 @@ namespace Scrum.Data
         public string LastName { get; set; }
         public string SSN { get; set; }
         public string Username { get; set; }
-        public string PW { get; set; }
+        public string Pv { get; set; }
         public string Email { get; set; }
         public bool Status { get; set; }
         public Nullable<int> AprovalBoss { get; set; }

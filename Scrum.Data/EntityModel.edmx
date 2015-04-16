@@ -261,7 +261,7 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PW" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pv" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="AprovalBoss" Type="Int32" />
@@ -470,7 +470,7 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="SSN" ColumnName="SSN" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="PW" ColumnName="PW" />
+                <ScalarProperty Name="Pv" ColumnName="PW" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="AprovalBoss" ColumnName="AprovalBoss" />
