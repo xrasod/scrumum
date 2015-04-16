@@ -86,6 +86,7 @@
     <Compile Include="Data\AdvancePaymentsRepository.cs" />
     <Compile Include="Data\BossRepository.cs" />
     <Compile Include="Data\CountriesRepository.cs" />
+    <Compile Include="Data\CountryXML.cs" />
     <Compile Include="Data\PDFRepository.cs" />
     <Compile Include="Data\ReportRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />

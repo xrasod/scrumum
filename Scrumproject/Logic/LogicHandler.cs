@@ -20,6 +20,27 @@ namespace Scrumproject.Logic
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
+      CountryXML<Country> countryXML = new CountryXML<Country>();
+
+      public Country LoadCountry(string sokvag)
+      {
+          return countryXML.Ladda(sokvag);
+      }
+
+      public void SaveCountry(Country country, string sokvag)
+      {
+          countryXML.Spara(country, sokvag);
+      }
+
+      public Report LoadDraft(string sokvag)
+      {
+          return reportRepository.Ladda(sokvag);
+      }
+
+      public void SaveDraft(Report report, string sokvag)
+      {
+          reportRepository.Spara(report, sokvag);
+      }
 
        public void CreatePdf(string text, string filnamn)
        {

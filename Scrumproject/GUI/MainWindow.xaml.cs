@@ -250,12 +250,14 @@ namespace Scrumproject
 
         private void CbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrencyConverter c = new CurrencyConverter();
-            var selectedCountry = CbCountries.SelectedItem.ToString();
-
-            var content = c.GetSelectedCountrySpecifics(selectedCountry);
-
-            LbTraktamente.Content = content.Subsistence;
+            try
+            {
+                CurrencyConverter c = new CurrencyConverter();
+                var selectedCountry = CbCountries.SelectedItem.ToString();
+                var content = c.GetSelectedCountrySpecifics(selectedCountry);
+                LbTraktamente.Content = content.Subsistence;
+            }
+            catch { }
         }
 
         private void btnUploadReceipt_Click(object sender, RoutedEventArgs e)
@@ -672,6 +674,37 @@ namespace Scrumproject
             LoginWindow l = new LoginWindow(source);
             l.Show();
         }
+
+        private void btnDeleteDraft_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Vill du verkligen radera allt?", "Radera utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var today = DateTime.Now.ToString();
+                var tomorrow = DateTime.Now.AddDays(1).ToString();
+                tbDoneOnTrip.Text = "";
+                listBoxReceipts.Items.Clear();
+                listBoxDays.Items.Clear();
+                TbTotalKm.Text = "0";
+                TbCarTripLengthKm.Text = "0";
+                TbDaysOff.Text = "";
+                dpStartDate.Text = today;
+                dpEndDate.Text = tomorrow;
+                tbReceiptFile.Text = "";
+                tbSum.Text = "";
+                LbTraktamente.Content = "";
+                CbCountries.SelectedIndex = -1;
+
+                saveDraft();
+                MessageBox.Show("Utkast raderat");
+            }
+            else
+            {
+                MessageBox.Show("Vilken tur att jag frågade");
+            }
+        }
+
+       
 }
     }
 
