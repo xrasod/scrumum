@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Scrumproject.Logic.Entities
 {
-    class Countries
+    public class Countries
     {
-        public string Id { get; set; }
+        public int CID { get; set; }
+        public string Name { get; set; }
+        public string Currency { get; set; }
+        public int Subsistence { get; set; }
     }
 }

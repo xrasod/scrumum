@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Scrum.Data.Data;
+    using System.Windows.Shell;
+    using iTextSharp.text.pdf;
+    using Scrum.Data;
+    using Scrum.Data.Data;
     using Scrumproject.Data;
     using Scrumproject.Logic;
 using Scrumproject.Logic.Entities;
@@ -32,6 +35,7 @@ namespace Scrumproject
         LogicHandler notesHandler = new LogicHandler();
         LogicHandler addUserHandler = new LogicHandler();
         LogicHandler pdfHandler = new LogicHandler();
+        LogicHandler localHandeler = new LogicHandler();
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
 
@@ -61,6 +65,7 @@ namespace Scrumproject
             notesLoading = notesHandler.LoadNotes("Notes.xml");
             tbNotes.Text = notesLoading.Note;
             var rep = new CountriesRepository();
+            localHandeler.SaveCountriesfromDBtoXML();
 
             main = this;
 
@@ -244,6 +249,8 @@ namespace Scrumproject
                 tbLastNamne.Clear();
                 tbEmail.Clear();
                 tbSsn.Clear();
+                listBoxUsers.Items.Clear();
+                PopulateListViewUsers();
             }
 
         }
@@ -397,11 +404,12 @@ namespace Scrumproject
         //Fyllar listview med användare
         private void PopulateListViewUsers()
         {
-            var users = BossRepository.GetAll();
+            var logic = new LogicHandler();
+            var users = logic.getInfoOnSelectedUser();
 
             foreach (var user in users)
             {
-                listBoxUsers.Items.Add(user.Username);
+                listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
             }
         }
         
@@ -409,8 +417,8 @@ namespace Scrumproject
         //Fyller listViewn med ländernas namn
         private void PupulateListViewCountries()
         {
-            var countries = new CountriesRepository();
-            var count = countries.GetAllCountries();
+            var logic = new LogicHandler();
+            var count = logic.getInfoOnSelectedCountry();
 
             foreach (var country in count)
             {
@@ -475,146 +483,22 @@ namespace Scrumproject
             {
                 updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
                 MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+                listBoxUsers.SelectedValue = tbUsername.Text;
+                listBoxUsers.Items.Clear();
+                PopulateListViewUsers();
             }
         }
 
 
-        //Fyller i TB's med en användare man valt att uppdatera ur Listan
-        private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = listBoxUsers.SelectedValue.ToString();
-            var users = BossRepository.GetAll();
 
-            foreach (var user in users)
-            {
-                if (selected == user.Username)
-                {
-                    tbFirstName.Text = user.FirstName;
-                    tbLastNamne.Text = user.LastName;
-                    tbEmail.Text = user.Email;
-                    tbPassword.Text = user.PW;
-                    tbUsername.Text = user.Username;
-                    tbSsn.Text = user.SSN;
-                    tbBoss.Text = user.BID.ToString();
-                    tbUserID.Text = user.UID.ToString();
-
-                }
-
-            }
-        }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
         }
 
         
-        //Fyller Tbs med text av landet man valt.
-        private void lvCountriesEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = lvCountriesEdit.SelectedValue.ToString();
-            var c = new CountriesRepository();
-            var country = c.GetAllCountries();
-           
-
-            foreach (var countries in country)
-            {
-                if (selected == countries.Name)
-                {
-                    tbCountryName.Text = countries.Name;
-                    tbMaxCash.Text = countries.Subsistence.ToString();
-                    tbCurrency.Text = countries.Currency;
-                }
-            }
-        }
-
-        private void btnAddCountry_Click(object sender, RoutedEventArgs e)
-        {
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            if (lvCountriesEdit.Items.Contains(name))
-            {
-                MessageBox.Show("Detta land finns redan!");
-
-            }
-            else
-            {
-                logic.AddNewCountry(name, curr, sub);
-            }
-            
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            var currname = lvCountriesEdit.SelectedValue.ToString();
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            
-            
-           logic.uppdateCountry(currname, name, curr, sub);
-            
-
-        }
+  
+        
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
             var source = 2;
@@ -672,6 +556,115 @@ namespace Scrumproject
             LoginWindow l = new LoginWindow(source);
             l.Show();
         }
-}
+
+        //Fyller i TB's med en användare man valt att uppdatera ur Listan
+        private void listBoxUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbUserID.IsEnabled = true;
+            tbUsername.IsEnabled = true;
+            tbBoss.IsEnabled = true;
+            var logic =  new LogicHandler();
+            var selected = listBoxUsers.SelectedValue.ToString();
+            var u = logic.getInfoOnSelectedUser();
+
+            var val = logic.checkIfDigits(selected);
+            
+            
+            foreach (var user in u.Where(user => val.Equals(user.UID)))
+            {
+                tbFirstName.Text = user.FirstName;
+                tbLastNamne.Text = user.LastName;
+                tbEmail.Text = user.Email;
+                tbPassword.Text = user.PW;
+                tbUsername.Text = user.Username;
+                tbSsn.Text = user.SSN;
+                tbBoss.Text = user.BID.ToString();
+                tbUserID.Text = user.UID.ToString();
+            }
+            
+        }
+        //Uppdaterar land
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var currname = lvCountriesEdit.SelectedValue.ToString();
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+
+
+            logic.uppdateCountry(currname, name, curr, sub);
+            lvCountriesEdit.Items.Clear();
+            PupulateListViewCountries();
+        }
+
+        //Fyller Tbs med text av landet man valt.
+        
+        private void lvCountriesEdit_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            var logic = new LogicHandler();
+
+            var selected = lvCountriesEdit.SelectedValue.ToString();
+            var count = logic.getInfoOnSelectedCountry();
+
+            foreach (var countries in count)
+            {
+                if (selected == countries.Name)
+                {
+                    tbCountryName.Text = countries.Name;
+                    tbMaxCash.Text = countries.Subsistence.ToString();
+                    tbCurrency.Text = countries.Currency;
+                }
+            }
+
+          
+        
+        }
+        //Lägg till land
+        private void btnAddCountry_Click_1(object sender, RoutedEventArgs e)
+        {
+                  
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            if (lvCountriesEdit.Items.Contains(name))
+            {
+                MessageBox.Show("Detta land finns redan!");
+
+            }
+            else
+            {
+                logic.AddNewCountry(name, curr, sub);
+                lvCountriesEdit.Items.Clear();
+                PupulateListViewCountries();
+                
+            }
+            
+        }
+
+        //Söka användare
+        private void btnSearchUser1_Click(object sender, RoutedEventArgs e)
+        {
+            var search = tbSearchUser.Text.ToLower();
+            var logic = new LogicHandler();
+            var allUsers = logic.getInfoOnSelectedUser();
+
+            listBoxUsers.Items.Clear();
+
+            var u = (from m in allUsers where m.FirstName.ToLower().Contains(search) select m);
+
+            foreach (var item in u)
+            {
+                
+                
+                listBoxUsers.Items.Add("Anst nr: " + item.UID + " " + item.FirstName + " " + item.LastName);
+            }
+            
+        }
+
+       
+        }
     }
+
 

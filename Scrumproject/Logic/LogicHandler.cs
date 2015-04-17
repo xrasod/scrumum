@@ -21,6 +21,34 @@ namespace Scrumproject.Logic
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
 
+      CountryXML<List<Countries>> countryXML = new CountryXML<List<Countries>>();
+      CountriesRepository countryRep = new CountriesRepository();
+      //public Countries LoadCountry(string sokvag)
+      //{
+      //    return countryXML.Ladda(sokvag);
+      //}
+      public void SaveCountriesfromDBtoXML()
+      {
+          var countriesList = new List<Countries>();
+          var list = countryRep.GetAllCountries();
+          foreach (var c in list)
+          {
+              var newc = new Countries
+              {
+                  CID = c.CID,
+                  Name = c.Name,
+                  Subsistence = c.Subsistence,
+                  Currency = c.Currency
+              };
+              countriesList.Add(newc);
+              countryXML.Spara(countriesList, "Country.xml");
+          }
+      }
+      //public void SaveCountry(Countries country, string sokvag)
+      //{
+      //    countryXML.Spara(country, sokvag);
+      //}
+
        public void CreatePdf(string text, string filnamn)
        {
            pdfRepository.createPdf(text, filnamn);
@@ -168,6 +196,42 @@ namespace Scrumproject.Logic
            CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
 
        }
+
+
+       //Returnerar lista med länder
+       public List<Country> getInfoOnSelectedCountry()
+       {
+           
+           var c = new CountriesRepository();
+           var count = c.GetAllCountries();
+
+           return count;
+       }
+
+       //Returnerar lista med alla användare
+       public List<User> getInfoOnSelectedUser()
+       {
+           var u = new UserRepository();
+           var user = u.GetAllUsers();
+
+           return user;
+       }
+
+       //Kollar om en sträng innehåller siffror
+       public int checkIfDigits(string s)
+       {
+           var b = string.Empty;
+           int val = 0;
+
+           b = s.Where(t => Char.IsDigit(t)).Aggregate(b, (current, t) => current + t);
+
+           if (b.Length > 0)
+               val = Int32.Parse(b);
+
+           return val;
+       }
+
+
 
    }
 }
