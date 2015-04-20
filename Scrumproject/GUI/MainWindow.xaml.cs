@@ -104,20 +104,39 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            try
             {
-                var pdfinfo = "Resperiod: " + dpStartDate.Text + " - " + dpEndDate.Text + "\n \n \n" +
-                              "Antal lediga dagar: " + TbDaysOff.Text + "\n \n \n" +
-                              "Vad har gjorts under resan: " + tbDoneOnTrip.Text + "\n \n \n" +
-                              "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n \n \n";
-                             // "Sparade kvitton: " + listBoxReceipts + "\n \n \n" +
-                              //"Besökta länder: " + listBoxDays + "\n \n \n";
+                List<string> savedReceipts = new List<string>();
+                List<string> visitedCountries = new List<string>();
+                foreach (var receipt in listBoxReceipts.Items)
+                {
+                    savedReceipts.Add(receipt.ToString());
+                }
+                foreach (var country in listBoxDays.Items)
+                {
+                    visitedCountries.Add("Dag " + country.ToString() + " maxtraktamente.");
+                }
+                var receiptsinfo = string.Join("\n", savedReceipts.ToArray());
+                var countryinfo = string.Join("\n", visitedCountries.ToArray());
+                var chef = pdfHandler.GetUsersBoss(lbLoggedInAsThisUser.Content.ToString());
+                var user = pdfHandler.GetFullNameFromTheUserName(lbLoggedInAsThisUser.Content.ToString());
+                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var pdfinfo = "Ansökande: " + user + "\n" + "Chef: " + chef + "\n" +
+                                  "Resperiod: " + dpStartDate.Text + " - " + dpEndDate.Text + "\n" +
+                                  "Antal lediga dagar: " + TbDaysOff.Text + "\n" +
+                                  "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n\n" +
+                                  "Besökta länder " + "\n" + countryinfo + "\n\n" +
+                                  "Sparade kvitton " + "\n" + receiptsinfo + "\n\n" +
+                                  "Resebeskrivning " + "\n" + tbDoneOnTrip.Text + "\n\n";
 
-                pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".pdf");
-                MessageBox.Show("Din rapport har sparats.");
-                
+                    pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+                    MessageBox.Show("Din rapport har sparats.");
+
+                }
             }
+            catch { MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); }
         }       
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
