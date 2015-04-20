@@ -185,7 +185,7 @@
                         <Label Content="Valuta" Canvas.Left="467" Canvas.Top="645" Foreground="White" RenderTransformOrigin="0.853,0.552"/>
                         <Button x:Name="btnAddCountry" Content="Lägg till" Canvas.Left="467" Canvas.Top="679" Width="75" Background="Black" Foreground="White" TabIndex="33" Click="btnAddCountry_Click_2"/>
                         <Button x:Name="btnUpdateCountry" Content="Uppdatera" Canvas.Left="547" Canvas.Top="679" Width="88" Background="Black" Foreground="White" TabIndex="34" Click="btnUpdateCountry_Click"/>
-                        <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="643" Canvas.Top="679" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35"/>
+                        <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="643" Canvas.Top="679" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35" Click="btnRemoveCountry_Click"/>
                         <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="30" Canvas.Top="539" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
                         <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="721" Canvas.Top="6" Width="75" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogOutChef_Click" Visibility="Hidden"/>
                         <Button x:Name="btnLogInChef" Content="Logga in" Canvas.Left="329" Canvas.Top="-45" Width="93" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogInChef_Click"/>

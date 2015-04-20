@@ -578,19 +578,6 @@ namespace Scrumproject
         }
 
 
-        //Ta bort land
-        private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
-        {
-            var cName = tbCountryName.Text;
-            var cCurr = tbCurrency.Text;
-            var cSub = Int32.Parse(tbMaxCash.Text);
-
-            localHandeler.DeletSelectedCountry(cName, cCurr, cSub);
-        }
-
-
-
-
         //Fyllar listview med användare
         private void PopulateListViewUsers()
         {
@@ -792,6 +779,21 @@ namespace Scrumproject
             var list = Xmlreader.GetAllCountries();
             CbCountries.ItemsSource = list;
 
+        }
+
+        //Ta bort land
+        private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = lvCountriesEdit.SelectedValue.ToString();
+
+            localHandeler.DeletSelectedCountry(selected);
+            MessageBox.Show(selected + " Har tagits bort!");
+            lvCountriesEdit.Items.Clear();
+            tbCountryName.Clear();
+            tbMaxCash.Clear();
+            tbCurrency.Clear();
+            PupulateListViewCountries();
+            
         }
        
 }
