@@ -236,7 +236,7 @@ namespace Scrumproject
             var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
 
-            if (validera.ControllFiledNotEmpty(tbEmail))
+            if (validera.IsEmailValid(email))
             {
                 MessageBox.Show("Du måste ange en e-post!");
             }
@@ -659,7 +659,7 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste ange ett personnummer!");
             }
-            else if (validate.ControllFiledNotEmpty(tbEmail))
+            else if (validate.IsEmailValid(mail))
             {
                 MessageBox.Show("Du måste ange en email-adress!");
             }
