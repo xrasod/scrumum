@@ -10,6 +10,8 @@ using Scrum.Data.Data;
 using Scrumproject.Logic.Entities;
 using iTextSharp.text.pdf;
 using Scrumproject.Data;
+using iTextSharp;
+
 
 namespace Scrumproject.Logic
 {
