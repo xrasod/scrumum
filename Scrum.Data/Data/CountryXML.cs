@@ -13,24 +13,25 @@ namespace Scrum.Data.Data
 
         public XmlSerializer Xml;
 
-        public CountryXML()
-        {
-            Xml = new XmlSerializer(typeof(T));
-        }
 
-        public void Spara(T obj, string sokvag)
+
+
+
+        public void Spara(List<T> obj, string sokvag)
         {
+            Xml = new XmlSerializer(typeof(List<T>));
             using (var streamwriter = new StreamWriter(sokvag))
             {
                 Xml.Serialize(streamwriter, obj);
             }
         }
 
-        public T Ladda(string sokvag)
+        public List<T> Ladda(string sokvag)
         {
+            Xml = new XmlSerializer(typeof(List<T>));
             using (var streamreader = new StreamReader(sokvag))
             {
-                return Xml.Deserialize(streamreader) as T;
+                return Xml.Deserialize(streamreader) as List<T>;
             }
         }
 
