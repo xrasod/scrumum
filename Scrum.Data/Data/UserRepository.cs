@@ -66,5 +66,14 @@ namespace Scrumproject.Data
             }
         }
 
+        public int GetUserId(string username)
+        {
+            using (var context = new scrumEntities())
+            {
+                var user = context.Users.SingleOrDefault(x => x.Username == username);
+                return user.UID;
+            }
+        }
+
     }
 }
