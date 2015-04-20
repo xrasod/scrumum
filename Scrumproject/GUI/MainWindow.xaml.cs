@@ -431,11 +431,10 @@ namespace Scrumproject
         private void lvCountriesEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = lvCountriesEdit.SelectedValue.ToString();
-            var c = new CountriesRepository();
-            var country = c.GetAllCountries();
+            var allCountries = localHandeler.getAllCountriesToList();
            
 
-            foreach (var countries in country)
+            foreach (var countries in allCountries)
             {
                 if (selected == countries.Name)
                 {
@@ -600,7 +599,7 @@ namespace Scrumproject
         //Fyllar listview med användare
         private void PopulateListViewUsers()
         {
-            var users = BossRepository.GetAll();
+            var users = localHandeler.getInfoOnSelectedUser();
 
             foreach (var user in users)
             {
@@ -612,10 +611,9 @@ namespace Scrumproject
         //Fyller listViewn med ländernas namn
         private void PupulateListViewCountries()
         {
-            var countries = new CountriesRepository();
-            var count = countries.GetAllCountries();
+            var allCountries = localHandeler.getAllCountriesToList();
 
-            foreach (var country in count)
+            foreach (var country in allCountries)
             {
                 lvCountriesEdit.Items.Add(country.Name);
             }
@@ -727,10 +725,9 @@ namespace Scrumproject
             try
             {
                 var selected = lvCountriesEdit.SelectedValue.ToString();
-                var c = new CountriesRepository();
-                var country = c.GetAllCountries();
+                var allCountries = localHandeler.getAllCountriesToList();
 
-                foreach (var countries in country)
+                foreach (var countries in allCountries)
                 {
                     if (selected == countries.Name)
                     {

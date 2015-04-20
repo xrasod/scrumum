@@ -214,6 +214,15 @@ namespace Scrumproject.Logic
            return user;
        }
 
+       //Retunerar lista med alla länder
+       public List<Country> getAllCountriesToList()
+       {
+           var c = new CountriesRepository();
+           var cc = c.GetAllCountries();
+
+           return cc;
+       } 
+
        //Kollar om en sträng innehåller siffror
        public int checkIfDigits(string s)
        {
