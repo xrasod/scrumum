@@ -24,6 +24,7 @@ namespace Scrumproject.Logic
       PDFRepository pdfRepository = new PDFRepository();
       CountryXML<List<Countries>> countryXML = new CountryXML<List<Countries>>();
       CountriesRepository countryRep = new CountriesRepository();
+      UserRepository userRep = new UserRepository();
 
 
       //public Countries LoadCountry(string sokvag)
@@ -198,6 +199,16 @@ namespace Scrumproject.Logic
 
            CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
 
+       }
+
+       public string GetUsersBoss(string username)
+       {
+         return userRep.GetBossForUser(username);
+       }
+
+       public string GetFullNameFromTheUserName(string username)
+       {
+           return userRep.GetFullNameFromUsername(username);
        }
 
    }
