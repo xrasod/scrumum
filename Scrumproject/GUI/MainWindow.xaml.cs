@@ -35,6 +35,7 @@ namespace Scrumproject
         Notes notesSaving = new Notes();
         Notes notesLoading = new Notes();
         LogicHandler localHandeler = new LogicHandler();
+        XmlReader Xmlreader = new XmlReader();
 
         internal static MainWindow main;
         internal string Status
@@ -55,6 +56,7 @@ namespace Scrumproject
             PopulateListViewUsers();
             PupulateListViewCountries();
             localHandeler.SaveCountriesfromDBtoXML();
+            getcountriesfromXML();
 
 
             TbTotalKm.IsReadOnly = true;
@@ -67,13 +69,10 @@ namespace Scrumproject
 
             main = this;
 
-            var hej = rep.GetAllCountries();
+          
 
 
-            foreach(var x in hej)
-            {
-                CbCountries.Items.Add(x.Name);       
-            }
+         
 
             try
             {
@@ -421,171 +420,7 @@ namespace Scrumproject
             }
         }
 
-        //Fyllar listview med användare
-        private void PopulateListViewUsers()
-        {
-            var users = BossRepository.GetAll();
-
-            foreach (var user in users)
-            {
-                listBoxUsers.Items.Add(user.Username);
-            }
-        }
-        
-        
-        //Fyller listViewn med ländernas namn
-        private void PupulateListViewCountries()
-        {
-            var countries = new CountriesRepository();
-            var count = countries.GetAllCountries();
-
-            foreach (var country in count)
-            {
-                lvCountriesEdit.Items.Add(country.Name);
-            }
-
-        }
-
-        
-
-        //Uppdatera Användare
-        private void btnUpdateInfo_Click(object sender, RoutedEventArgs e)
-        {
-            LogicHandler updateUserHandler = new LogicHandler();
-            Validator validate = new Validator();
-            var bossID = tbBoss.Text;
-            var userID = tbUserID.Text;
-
-            var id = Int32.Parse(userID);
-            var username = tbUsername.Text;
-            var firstname = tbFirstName.Text;
-            var lastname = tbLastNamne.Text;
-            var password = tbPassword.Text;
-            var boss = Int32.Parse(bossID);
-            var ssn = tbSsn.Text;
-            var mail = tbEmail.Text;
-
-            if (validate.ControllFiledNotEmpty(tbUsername))
-            {
-                MessageBox.Show("Du måste ange ett användarnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbSsn))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbEmail))
-            {
-                MessageBox.Show("Du måste ange en email-adress!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbBoss))
-            {
-                MessageBox.Show("Du måste ange vem som är chef för användaren!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbUserID))
-            {
-                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
-            }
-
-            else
-            {
-                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
-            }
-        }
-
-
-        //Fyller i TB's med en användare man valt att uppdatera ur Listan
-        private void lvUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = listBoxUsers.SelectedValue.ToString();
-            var users = BossRepository.GetAll();
-
-            foreach (var user in users)
-            {
-                if (selected == user.Username)
-                {
-                    tbFirstName.Text = user.FirstName;
-                    tbLastNamne.Text = user.LastName;
-                    tbEmail.Text = user.Email;
-                    tbPassword.Text = user.PW;
-                    tbUsername.Text = user.Username;
-                    tbSsn.Text = user.SSN;
-                    tbBoss.Text = user.BID.ToString();
-                    tbUserID.Text = user.UID.ToString();
-
-                }
-
-            }
-        }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+ 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
@@ -729,6 +564,254 @@ namespace Scrumproject
             }
         }
 
+        //Fyller tb's med användar info
+        public void fillUserInfoOnChange(int userID)
+        {
+            try
+            {
+
+
+                var users = localHandeler.getInfoOnSelectedUser();
+
+                foreach (var user in users)
+                {
+                    if (userID == user.UID)
+                    {
+                        tbFirstName.Text = user.FirstName;
+                        tbLastNamne.Text = user.LastName;
+                        tbEmail.Text = user.Email;
+                        tbPassword.Text = user.PW;
+                        tbUsername.Text = user.Username;
+                        tbSsn.Text = user.SSN;
+                        tbBoss.Text = user.BID.ToString();
+                        tbUserID.Text = user.UID.ToString();
+
+                    }
+
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("ee");
+            }
+        }
+
+
+        //Ta bort land
+        private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
+        {
+            var cName = tbCountryName.Text;
+            var cCurr = tbCurrency.Text;
+            var cSub = Int32.Parse(tbMaxCash.Text);
+
+            localHandeler.DeletSelectedCountry(cName, cCurr, cSub);
+        }
+
+
+
+
+        //Fyllar listview med användare
+        private void PopulateListViewUsers()
+        {
+            var users = BossRepository.GetAll();
+
+            foreach (var user in users)
+            {
+                listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
+            }
+        }
+
+
+        //Fyller listViewn med ländernas namn
+        private void PupulateListViewCountries()
+        {
+            var countries = new CountriesRepository();
+            var count = countries.GetAllCountries();
+
+            foreach (var country in count)
+            {
+                lvCountriesEdit.Items.Add(country.Name);
+            }
+
+        }
+
+
+
+        //Uppdatera Användare
+        private void btnUpdateInfo_Click(object sender, RoutedEventArgs e)
+        {
+            LogicHandler updateUserHandler = new LogicHandler();
+            Validator validate = new Validator();
+            var bossID = tbBoss.Text;
+            var userID = tbUserID.Text;
+
+            var id = Int32.Parse(userID);
+            var username = tbUsername.Text;
+            var firstname = tbFirstName.Text;
+            var lastname = tbLastNamne.Text;
+            var password = tbPassword.Text;
+            var boss = Int32.Parse(bossID);
+            var ssn = tbSsn.Text;
+            var mail = tbEmail.Text;
+
+            if (validate.ControllFiledNotEmpty(tbUsername))
+            {
+                MessageBox.Show("Du måste ange ett användarnamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbFirstName))
+            {
+                MessageBox.Show("Du måste ange ett förnamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbLastNamne))
+            {
+                MessageBox.Show("Du måste ange ett efternamn!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbPassword))
+            {
+                MessageBox.Show("Du måste ange ett lösenord!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbSsn))
+            {
+                MessageBox.Show("Du måste ange ett personnummer!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbEmail))
+            {
+                MessageBox.Show("Du måste ange en email-adress!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbBoss))
+            {
+                MessageBox.Show("Du måste ange vem som är chef för användaren!");
+            }
+            else if (validate.ControllFiledNotEmpty(tbUserID))
+            {
+                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
+            }
+
+            else
+            {
+                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
+                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+            }
+        }
+
+
+        //Fyller i TB's med en användare man valt att uppdatera ur Listan
+        private void listBoxUsers_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+            try
+            {
+                var selected = listBoxUsers.SelectedValue.ToString();
+                var id = localHandeler.checkIfDigits(selected);
+                fillUserInfoOnChange(id);
+            }
+            catch (Exception ee)
+            {
+
+            }
+
+        
+        }
+
+        //Lägg till land
+        private void btnAddCountry_Click_2(object sender, RoutedEventArgs e)
+        {
+                 
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+            if (lvCountriesEdit.Items.Contains(name))
+            {
+                MessageBox.Show("Detta land finns redan!");
+
+            }
+            else
+            {
+                logic.AddNewCountry(name, curr, sub);
+            }
+        
+        }
+
+        //Fyller Tbs med text av landet man valt.
+        private void lvCountriesEdit_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+             
+            try
+            {
+                var selected = lvCountriesEdit.SelectedValue.ToString();
+                var c = new CountriesRepository();
+                var country = c.GetAllCountries();
+
+                foreach (var countries in country)
+                {
+                    if (selected == countries.Name)
+                    {
+                        tbCountryName.Text = countries.Name;
+                        tbMaxCash.Text = countries.Subsistence.ToString();
+                        tbCurrency.Text = countries.Currency;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        
+        }
+
+        //Update Country
+        private void btnUpdateCountry_Click(object sender, RoutedEventArgs e)
+        {
+                    
+            var currname = lvCountriesEdit.SelectedValue.ToString();
+            var name = tbCountryName.Text;
+            var curr = tbCurrency.Text;
+            var sub = Int32.Parse(tbMaxCash.Text);
+            var logic = new LogicHandler();
+
+
+            logic.uppdateCountry(currname, name, curr, sub);
+            lvCountriesEdit.Items.Clear();
+            PupulateListViewCountries();
+            MessageBox.Show(tbCountryName.Text + " Har uppdaterats!");
+     
+        }
+
+        //Söka användare
+        private void btnSearchUser1_Click(object sender, RoutedEventArgs e)
+        {                   
+        
+            try
+            {
+                var search = tbSearchUser.Text.ToLower();
+                var logic = new LogicHandler();
+                var allUsers = logic.getInfoOnSelectedUser();
+                listBoxUsers.Items.Clear();
+
+                var u = (from m in allUsers where m.FirstName.ToLower().Contains(search) select m);
+
+                foreach (var item in u)
+                {
+                    listBoxUsers.Items.Add("Anst nr: " + item.UID + " " + item.FirstName + " " + item.LastName);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        
+        }
+        //Hämtar länder från XML
+        public void getcountriesfromXML()
+        {
+            var list = Xmlreader.GetAllCountries();
+            CbCountries.ItemsSource = list;
+
+        }
        
 }
     }
