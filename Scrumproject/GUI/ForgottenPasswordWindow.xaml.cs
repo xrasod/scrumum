@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Scrumproject.Logic;
 
 namespace Scrumproject.GUI
 {
@@ -22,6 +23,18 @@ namespace Scrumproject.GUI
         public Window1()
         {
             InitializeComponent();
+        }
+
+        private void ButtonSendForgotten_Click(object sender, RoutedEventArgs e)
+        {
+            EmailHandler EmailHandler = new EmailHandler();
+
+            string username = tbForgottenUsername.Text;
+           
+            EmailHandler.SendEmailToBoss(username);
+            EmailHandler.SendEmailToUser(username);
+            
+
         }
     }
 }

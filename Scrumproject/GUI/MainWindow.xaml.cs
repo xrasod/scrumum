@@ -900,6 +900,12 @@ namespace Scrumproject
             LoginWindow l = new LoginWindow(source);
             l.Show();
         }
+
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 window1 = new Window1();
+            window1.Show();
+        }
        
 }
     }
