@@ -215,6 +215,15 @@ namespace Scrumproject.Logic
            return user;
        }
 
+       //Retunerar lista med alla länder
+       public List<Country> getAllCountriesToList()
+       {
+           var c = new CountriesRepository();
+           var cc = c.GetAllCountries();
+
+           return cc;
+       } 
+
        //Kollar om en sträng innehåller siffror
        public int checkIfDigits(string s)
        {
@@ -230,35 +239,19 @@ namespace Scrumproject.Logic
        }
 
        //Ta bort ett land
-       public void DeletSelectedCountry(string name, string currency, int sub)
+       public void DeletSelectedCountry(string name)
        {
            var countryrep = new CountriesRepository();
            var allCountries = countryrep.GetAllCountries();
-           try
+
+           foreach (var item in allCountries)
            {
-               foreach (var c in allCountries)
+               if (name == item.Name)
                {
-                   if (name == c.Name)
-                   {
-                       var country = new Scrum.Data.Country()
-                       {
-                           Name = name,
-                           Currency = currency,
-                           Subsistence = sub
-                       };
-                       countryrep.DeleteCountry(country);
-                   }
+
+                   countryrep.DeleteCountry(name);
                }
-
-
-
-
            }
-           catch (Exception ex)
-           {
-               Console.WriteLine(ex + "#### Det har blivit fel, ProfileController, Register");
-           }
-
        }
 
        public string GetUsersBoss(string username)

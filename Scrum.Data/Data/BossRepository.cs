@@ -131,11 +131,27 @@ namespace Scrumproject.Data
                     }
                 }
             }
-
-
-
-
-
         }
+
+        public List<User> SeeWhoWorksForMe(string username)
+        {
+            using (var context = new scrumEntities())
+            {
+                var loggedInUser = context.Bosses.FirstOrDefault(x => x.Username == username);
+                var listofUsers = context.Users.Where(x => x.BID == loggedInUser.BID).ToList();
+                return listofUsers;
+            } 
+        }
+
+        public List<Boss> SeeBossesICanApprove(string username)
+        {
+            using (var context = new scrumEntities())
+            {
+                var loggedInUser = context.Bosses.FirstOrDefault(x => x.Username == username);
+                var listofUsers = context.Bosses.Where(x => x.AprovalBoss == loggedInUser.BID).ToList();
+                return listofUsers;
+            }
+        } 
+
     }
 }
