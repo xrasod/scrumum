@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <TabControl Grid.ColumnSpan="7" BorderBrush="Black" Margin="10,0,-186,-107" HorizontalAlignment="Left" Width="828" Height="1069" VerticalAlignment="Top" Grid.RowSpan="2" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl Grid.ColumnSpan="7" BorderBrush="Black" Margin="0,0,-186,-106" HorizontalAlignment="Left" Width="838" Height="1069" VerticalAlignment="Top" Grid.RowSpan="2" SelectionChanged="TabControl_SelectionChanged">
                 <TabControl.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -107,18 +107,18 @@
                 </TabItem>
                 <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="#FF6C83B4" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" >
                     <Canvas Width="818" Margin="2,10,2,70">
-                        <Label x:Name="lbDagar_Copy" Content="Beskriv varför du söker ersättning" Canvas.Left="31" Canvas.Top="45" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Totalt belopp" Canvas.Left="140" Canvas.Top="315" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
-                        <TextBox x:Name="tbTotalAmounth" Height="31" Canvas.Left="250" TextWrapping="Wrap" Text="" Canvas.Top="316" Width="148" Background="Black" Foreground="White" TabIndex="4"/>
-                        <Button x:Name="btnSendPrepaymet" Content="Skicka in din förskottsansökan&#xA;" Canvas.Left="431" Canvas.Top="71" Width="362" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="275" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}" TabIndex="5" Click="btnSendPrepaymet_Click"/>
+                        <Label x:Name="lbDagar_Copy" Content="Beskriv varför och vad du söker ersättning för" Canvas.Left="31" Canvas.Top="40" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Ange totalt belopp" Canvas.Left="35" Canvas.Top="404" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                        <TextBox x:Name="tbTotalAmounth" Height="31" Canvas.Left="188" TextWrapping="Wrap" Text="" Canvas.Top="406" Width="98" Background="Black" Foreground="White" TabIndex="4"/>
+                        <Button x:Name="btnSendPrepaymet" Content="Skicka&#xA;" Canvas.Left="640" Canvas.Top="404" Width="129" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="33" Padding="1" FontSize="24" FontWeight="Bold" Margin="0" Background="Black" TabIndex="5" Click="btnSendPrepaymet_Click"/>
                         <Label x:Name="lbMaxSumSpecificCountry_Copy" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
                         <Label x:Name="LbKm_Copy" Content="" Canvas.Left="98" Canvas.Top="71" Foreground="#FF51FF00"/>
-                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="431" Canvas.Top="30" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
-                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="553" Canvas.Top="36" Width="134" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
-                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="321" Canvas.Top="34" Width="77" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
+                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="431" Canvas.Top="39" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
+                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="553" Canvas.Top="41" Width="134" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
+                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="692" Canvas.Top="41" Width="77" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
                         <Button x:Name="btnLogOut_Copy" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
                         <Button x:Name="btnLogOut1" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
-                        <TextBox x:Name="tbDescriptionPrepay" Height="243" TextWrapping="Wrap" Text="" Width="363" Background="Black" Foreground="White" TabIndex="4" Canvas.Left="35" Canvas.Top="71"/>
+                        <TextBox x:Name="tbDescriptionPrepay" Height="328" TextWrapping="Wrap" Text="" Width="734" Background="Black" Foreground="White" TabIndex="4" Canvas.Left="35" Canvas.Top="71"/>
                     </Canvas>
                 </TabItem>
                 <TabItem Header="Chef" HorizontalAlignment="Left" Width="182" Margin="78,-2,-78,2" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" >
@@ -195,7 +195,7 @@
                     </Canvas>
                 </TabItem>
                 <TabItem Header="Valutakonverterare&#xA;" HorizontalAlignment="Right" Height="63" VerticalAlignment="Bottom" Width="182" Margin="0,-2,-68,2" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FF96A9D3">
-                    <Grid x:Name="MainWindowCurrency" Margin="0,10,0,34">
+                    <Grid x:Name="MainWindowCurrency" Margin="0">
                         <Grid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="Black" Offset="0"/>
@@ -206,15 +206,22 @@
                             <ColumnDefinition Width="268*"/>
                             <ColumnDefinition Width="475*"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="146,46,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="CbFromCurrency_SelectionChanged" TabIndex="1"/>
-                        <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="147,84,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="CbToCurrency_SelectionChanged" TabIndex="2"/>
-                        <Button x:Name="BtnConvert" Content="Konvertera&#xA;" HorizontalAlignment="Left" Margin="183,286,0,0" VerticalAlignment="Top" Width="117" Click="BtnConvert_Click" Height="23" Grid.ColumnSpan="2" TabIndex="4"/>
-                        <TextBox x:Name="TbToCurrency" HorizontalAlignment="Left" Height="78" Margin="38,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" IsEnabled="False" Grid.ColumnSpan="2"/>
-                        <TextBox x:Name="TbFromCurrency" HorizontalAlignment="Left" Height="23" Margin="147,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TabIndex="3"/>
-                        <Label Content="Summa" HorizontalAlignment="Left" Margin="38,122,0,0" VerticalAlignment="Top" Width="111" Foreground="White"/>
-                        <Label Content="Valuta från" HorizontalAlignment="Left" Margin="37,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.192" Foreground="White"/>
-                        <Label Content="Valuta till" HorizontalAlignment="Left" Margin="38,84,0,0" VerticalAlignment="Top" Width="96" Foreground="White"/>
-                        <Label Content="Resultat" HorizontalAlignment="Left" Margin="36,177,0,0" VerticalAlignment="Top" Foreground="White"/>
+                        <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="165,51,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="CbFromCurrency_SelectionChanged" TabIndex="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="166,89,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="CbToCurrency_SelectionChanged" TabIndex="2" Grid.ColumnSpan="2"/>
+                        <Button x:Name="BtnConvert" Content="Konvertera&#xA;" HorizontalAlignment="Left" Margin="221,170,0,0" VerticalAlignment="Top" Width="98" Click="BtnConvert_Click" Height="26" TabIndex="4" Foreground="White" FontSize="14" BorderBrush="White" Padding="1" Grid.ColumnSpan="2">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Color="#FF363636" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <TextBox x:Name="TbToCurrency" HorizontalAlignment="Left" Height="78" Margin="57,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" IsEnabled="False" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="TbFromCurrency" HorizontalAlignment="Left" Height="23" Margin="166,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" TabIndex="3" Grid.ColumnSpan="2"/>
+                        <Label Content="Summa" HorizontalAlignment="Left" Margin="57,127,0,0" VerticalAlignment="Top" Width="111" Foreground="White"/>
+                        <Label Content="Valuta från" HorizontalAlignment="Left" Margin="56,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.192" Foreground="White"/>
+                        <Label Content="Valuta till" HorizontalAlignment="Left" Margin="57,89,0,0" VerticalAlignment="Top" Width="96" Foreground="White"/>
+                        <Label Content="Resultat" HorizontalAlignment="Left" Margin="56,199,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <Label Content="&#xA;" HorizontalAlignment="Left" Margin="271,45,0,0" VerticalAlignment="Top" x:Name="lbFromCurrency" Width="91" Height="29" Foreground="White" Grid.ColumnSpan="2"/>
                         <Label Content="&#xA;&#xA;" HorizontalAlignment="Left" Margin="272,79,0,0" VerticalAlignment="Top" x:Name="lbToCurrency" Height="34" Width="72" Foreground="White" Grid.ColumnSpan="2"/>
                     </Grid>
