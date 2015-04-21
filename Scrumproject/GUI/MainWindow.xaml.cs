@@ -252,7 +252,7 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste ange ett lösenord!");
             }
-            else if (validera.ControllFiledNotEmpty(tbSsn))
+            else if (validera.IsSsnValid(SSN))
             {
                 MessageBox.Show("Du måste ange ett personnummer!");
             }
