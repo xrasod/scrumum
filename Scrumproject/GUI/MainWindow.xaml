@@ -99,7 +99,7 @@
                         <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="585" Canvas.Top="15" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
                         <Button x:Name="BtnLogIn" Content="Logga In" Canvas.Left="467" Canvas.Top="48" Width="143" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
                         <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
-                        <Button x:Name="btnForgotPassword" Content="Glömt Lösenord" Canvas.Left="615" Canvas.Top="48" Width="138" Background="White" Foreground="Black" Height="25" TabIndex="2"/>
+                        <Button x:Name="btnForgotPassword" Content="Glömt Lösenord" Canvas.Left="615" Canvas.Top="48" Width="138" Background="White" Foreground="Black" Height="25" TabIndex="2" Click="btnForgotPassword_Click"/>
                         <Button x:Name="btnDeleteDraft" Content="Rensa Utkast" Height="30" Width="150" Canvas.Left="1" Canvas.Top="779" Background="White" Click="btnDeleteDraft_Click"/>
 
 
