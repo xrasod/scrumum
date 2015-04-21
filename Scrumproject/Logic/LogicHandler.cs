@@ -25,6 +25,7 @@ namespace Scrumproject.Logic
       CountryXML<Countries> countryXML = new CountryXML<Countries>();
       CountriesRepository countryRep = new CountriesRepository();
       UserRepository userRep = new UserRepository();
+      AdvancePaymentsRepository advpayRep = new AdvancePaymentsRepository();
 
 
       //public Countries LoadCountry(string sokvag)
@@ -261,6 +262,22 @@ namespace Scrumproject.Logic
        public string GetFullNameFromTheUserName(string username)
        {
            return userRep.GetFullNameFromUsername(username);
+       }
+
+       public void AddPrepayment(AdvancePayments advancePayment)
+       {
+           var prepayment = new Prepayment();
+           prepayment.UID = advancePayment.UserID;
+           prepayment.Amount = advancePayment.Amount;
+           prepayment.Description = advancePayment.Description;
+           prepayment.Status = null;
+           
+           advpayRep.AddAdvancePayment(prepayment);
+       }
+
+       public int GetUserId(string usernamn)
+       {
+           return userRep.GetUserId(usernamn);
        }
 
    }

@@ -796,7 +796,26 @@ namespace Scrumproject
             CbCountries.ItemsSource = list;
 
         }
+       
+        private void btnSendPrepaymet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var prepayment = new AdvancePayments();
 
+                prepayment.UserID = localHandeler.GetUserId(lbLoggedInAsThisUser.Content.ToString());
+                prepayment.Description = tbDescriptionPrepay.Text;
+                prepayment.Amount = Decimal.Parse(tbTotalAmounth.Text);
+
+                localHandeler.AddPrepayment(prepayment);
+                MessageBox.Show("Förskottsansökan skickad.");
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först.");
+            }
+        }
+       
         //Ta bort land
         private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
         {

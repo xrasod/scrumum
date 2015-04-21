@@ -106,19 +106,19 @@
                 </TabItem>
                 <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="#FF6C83B4" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" >
                     <Canvas Width="818" Margin="2,10,2,70">
-                        <Label x:Name="lbDagar_Copy" Content="Beskrivning" Canvas.Left="35" Canvas.Top="26" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Totalt belopp" Canvas.Left="19" Canvas.Top="349" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
-                        <TextBox x:Name="tbTotalAmounth" Height="35" Canvas.Left="10" TextWrapping="Wrap" Text="" Canvas.Top="385" Width="218" Background="Black" Foreground="White" TabIndex="4"/>
-                        <Button x:Name="btnSendPrepaymet" Content="Skicka in din förskottsansökan&#xD;&#xA;" Canvas.Left="438" Canvas.Top="385" Width="370" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="56" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}" TabIndex="5"/>
+                        <Label x:Name="lbDagar_Copy" Content="Beskrivning" Canvas.Left="35" Canvas.Top="40" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Totalt belopp" Canvas.Left="35" Canvas.Top="319" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                        <TextBox x:Name="tbTotalAmounth" Height="35" Canvas.Left="150" TextWrapping="Wrap" Text="" Canvas.Top="319" Width="148" Background="Black" Foreground="White" TabIndex="4"/>
+                        <Button x:Name="btnSendPrepaymet" Content="Skicka in din förskottsansökan&#xD;&#xA;" Canvas.Left="413" Canvas.Top="510" Width="370" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="35" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}" TabIndex="5" Click="btnSendPrepaymet_Click"/>
                         <Label x:Name="lbMaxSumSpecificCountry_Copy" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
                         <Label x:Name="LbKm_Copy" Content="" Canvas.Left="98" Canvas.Top="71" Foreground="#FF51FF00"/>
-                        <ListBox x:Name="LbDescription" Height="245" Width="404" Canvas.Left="10" Canvas.Top="90" Background="Black" Foreground="White" IsTabStop="True" TabIndex="3"/>
-                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="467" Canvas.Top="10" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
-                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="585" Canvas.Top="15" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
-                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="467" Canvas.Top="48" Width="143" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
+                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="467" Canvas.Top="71" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
+                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="585" Canvas.Top="76" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
+                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="467" Canvas.Top="109" Width="143" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
                         <Button x:Name="btnLogOut_Copy" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
-                        <Button x:Name="btnForgotPassword_Copy" Content="Glömt Lösenord" Canvas.Left="615" Canvas.Top="48" Width="138" Background="White" Foreground="Black" Height="25" TabIndex="2"/>
+                        <Button x:Name="btnForgotPassword_Copy" Content="Glömt Lösenord" Canvas.Left="615" Canvas.Top="109" Width="138" Background="White" Foreground="Black" Height="25" TabIndex="2"/>
                         <Button x:Name="btnLogOut1" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
+                        <TextBox x:Name="tbDescriptionPrepay" Height="243" TextWrapping="Wrap" Text="" Width="363" Background="Black" Foreground="White" TabIndex="4" Canvas.Left="35" Canvas.Top="71"/>
                     </Canvas>
                 </TabItem>
                 <TabItem Header="Chef" HorizontalAlignment="Left" Width="182" Margin="78,-2,-78,2" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" >
@@ -170,7 +170,7 @@
                         <Label x:Name="lbUserID" Content="Anst. nr" Canvas.Left="456" Canvas.Top="36" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <TextBox x:Name="tbUserID" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="42" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" IsTabStop="False"/>
                         <ListBox x:Name="listBoxUsers" Height="166" Width="398" Canvas.Left="30" Background="Black" Foreground="White" Canvas.Top="-16" IsTabStop="True" TabIndex="7" SelectionChanged="listBoxUsers_SelectionChanged_1"/>
-                        <ListView x:Name="lvCountriesEdit" Height="176" Canvas.Left="30" Canvas.Top="565" Width="398" RenderTransformOrigin="-2.41,0.58" Background="Black" TabIndex="12" SelectionChanged="lvCountriesEdit_SelectionChanged_1">
+                        <ListView x:Name="lvCountriesEdit" Height="176" Canvas.Left="30" Canvas.Top="565" Width="398" RenderTransformOrigin="-2.41,0.58" Background="Black" TabIndex="12" SelectionChanged="lvCountriesEdit_SelectionChanged_1" Foreground="White">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn/>
