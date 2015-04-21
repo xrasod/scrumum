@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Mapping;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
@@ -54,7 +55,7 @@ namespace Scrumproject.Logic
         //Kollar så att personnummer är inmatat rätt.
         public bool IsSsnValid(string persnr)
         {
-            return !Regex.IsMatch(persnr, @"^\d{6}-\d{4}$");
+            return !Regex.IsMatch(persnr, @"^[12]{1}[90]{1}[0-9]{6}-[0-9]{4}$");
 
         }
 

@@ -830,6 +830,18 @@ namespace Scrumproject
             PupulateListViewCountries();
             
         }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbUserID.Clear();
+            tbUsername.Clear();
+            tbBoss.Clear();
+            tbFirstName.Clear();
+            tbLastNamne.Clear();
+            tbEmail.Clear();
+            tbPassword.Clear();
+            tbSsn.Clear();
+        }
        
 }
     }
