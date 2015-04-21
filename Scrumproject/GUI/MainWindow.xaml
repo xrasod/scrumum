@@ -123,7 +123,7 @@
                 </TabItem>
                 <TabItem Header="Chef" HorizontalAlignment="Left" Width="182" Margin="78,-2,-78,2" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" >
                     <Canvas Height="836" Margin="10,0,81,-9">
-                        <Label x:Name="lbUsers" Content="Användare" Canvas.Left="26" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" Canvas.Top="-45" />
+                        <Label x:Name="lbUsers" Content="Användare" Canvas.Left="26" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" Canvas.Top="-71" />
                         <Label x:Name="lbUsernameLabel" Content="Användarnamn" Canvas.Left="454" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-22"/>
                         <Label x:Name="lbPasswordLabel" Content="Lösenord" Canvas.Left="456" Width="93" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="7"/>
                         <Button x:Name="btnAddUser" Content="Lägg till" Canvas.Left="456" Canvas.Top="227" Width="123" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Foreground="White" Background="Black" TabIndex="25"/>
@@ -188,7 +188,7 @@
                         <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="643" Canvas.Top="679" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35" Click="btnRemoveCountry_Click"/>
                         <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="30" Canvas.Top="539" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
                         <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="721" Canvas.Top="6" Width="75" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogOutChef_Click" Visibility="Hidden"/>
-                        <Button x:Name="btnLogInChef" Content="Logga in" Canvas.Left="329" Canvas.Top="-45" Width="93" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogInChef_Click"/>
+                        <Button x:Name="btnFillListWithUsersIAmBossFor" Content="Visa användare jag är auktoriserad att godkänna rapporter för" Canvas.Left="30" Canvas.Top="-41" Width="398" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" FontSize="12" Click="btnFillListWithUsersIAmBossFor_Click"/>
 
                     </Canvas>
                 </TabItem>
@@ -217,7 +217,6 @@
                         <Label Content="&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="272,79,0,0" VerticalAlignment="Top" Name="lbToCurrency" Height="34" Width="72" Foreground="White" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
-                <TextBox x:Name="tbDoneOnTrip_Copy" Height="135" TextWrapping="Wrap" Text="" Width="300" Background="Black" Foreground="White" Margin="348,177,174,686"/>
             </TabControl>
         </Grid>
 

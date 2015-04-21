@@ -527,13 +527,6 @@ namespace Scrumproject
             }
         }
 
-        private void btnLogInChef_Click(object sender, RoutedEventArgs e)
-        {
-            var source = 1;
-            LoginWindow l = new LoginWindow(source);
-            l.Show();
-        }
-
         private void btnDeleteDraft_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Vill du verkligen radera allt?", "Radera utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -829,6 +822,31 @@ namespace Scrumproject
             tbCurrency.Clear();
             PupulateListViewCountries();
             
+        }
+
+        private void btnFillListWithUsersIAmBossFor_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                listBoxUsers.Items.Clear();
+                var myUsers = localHandeler.GetUsersWhoWorksForMe(lbLoggedInAsThisUser.Content.ToString());
+                var myBosses = localHandeler.GetBossesICanApprove(lbLoggedInAsThisUser.Content.ToString());
+
+                foreach (var user in myUsers)
+                {
+                    listBoxUsers.Items.Add(user.FirstName + " " + user.LastName);
+                }
+                foreach (var boss in myBosses)
+                {
+                    listBoxUsers.Items.Add(boss.FirstName + " " + boss.LastName);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först.");
+            }
         }
        
 }
