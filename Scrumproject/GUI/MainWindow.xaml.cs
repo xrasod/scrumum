@@ -37,6 +37,7 @@ namespace Scrumproject
         LogicHandler localHandeler = new LogicHandler();
         XmlReader Xmlreader = new XmlReader();
         ReportHandler reportDanger = new ReportHandler();
+        StatisticsHandler statisticsHandler = new StatisticsHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -58,7 +59,8 @@ namespace Scrumproject
             PupulateListViewCountries();
             localHandeler.SaveCountriesfromDBtoXML();
             getcountriesfromXML();
-
+            PopulateStatisticsWindowCountryCB();
+            
 
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
@@ -918,6 +920,21 @@ namespace Scrumproject
             tbPassword.Clear();
             tbSsn.Clear();
         }
+
+        public void PopulateStatisticsWindowCountryCB()
+        {
+
+            cbAllCountriesStatistics.ItemsSource = statisticsHandler.SendCountriesToGui();
+        }
+
+        private void cbAllCountriesStatistics_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbReports.ItemsSource =
+                statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
+                    cbAllCountriesStatistics.SelectedItem.ToString());
+        }
+
+      
        
 }
     }
