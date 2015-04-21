@@ -395,29 +395,29 @@ namespace Scrumproject
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                saveDraft();
-                MessageBox.Show("Utkast sparat.");
-                e.Cancel = false;
-            }
-            else
-            {
-                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (res == MessageBoxResult.Yes)
-                {
-                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
-                    e.Cancel = false;
-                }
-                else
-                {
-                    saveDraft();
-                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
-                    e.Cancel = false;
-                }
+            //MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    saveDraft();
+            //    MessageBox.Show("Utkast sparat.");
+            //    e.Cancel = false;
+            //}
+            //else
+            //{
+            //    MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    if (res == MessageBoxResult.Yes)
+            //    {
+            //        MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+            //        e.Cancel = false;
+            //    }
+            //    else
+            //    {
+            //        saveDraft();
+            //        MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+            //        e.Cancel = false;
+            //    }
 
-            }
+            //}
         }
 
  
@@ -580,7 +580,7 @@ namespace Scrumproject
                         tbUserID.Text = user.UID.ToString();
                     }
 
-                }
+                    }
 
                 foreach (var boss in bosses)
                 {
@@ -594,9 +594,9 @@ namespace Scrumproject
                         tbSsn.Text = boss.SSN;
                         tbBoss.Text = boss.AprovalBoss.ToString();
                         tbUserID.Text = boss.BID.ToString();
-                    }
-
                 }
+
+            }
 
 
             }
@@ -870,6 +870,13 @@ namespace Scrumproject
             {
                 MessageBox.Show("Logga in först.");
             }
+        }
+
+        private void btnShowReports_Click(object sender, RoutedEventArgs e)
+        {
+            ReportHandler reportHandler = new ReportHandler();
+
+            lbShowReports.ItemsSource = reportHandler.GetReportList();
         }
 
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)

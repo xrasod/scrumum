@@ -81,6 +81,8 @@
     </Compile>
     <Compile Include="Logic\DateHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
+    <Compile Include="Logic\ReportHandler.cs" />
+    <Compile Include="Logic\StatisticsHandler.cs" />
     <Compile Include="Logic\Validator.cs" />
     <Compile Include="Logic\XmlReader.cs" />
     <Compile Include="Service References\CurrencyConvertor\Reference.cs">
