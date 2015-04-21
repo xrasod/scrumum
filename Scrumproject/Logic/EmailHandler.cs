@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Mail;
-
+using Scrum.Data.Data;
 using Scrumproject.Data;
 
 namespace Scrumproject.Logic

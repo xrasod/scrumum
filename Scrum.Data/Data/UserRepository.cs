@@ -90,7 +90,7 @@ namespace Scrum.Data.Data
             }
         }
 
-        public static User GetUserID(string user)
+        public static User GetUserIDS(string user)
         {
             using (var context = new scrumEntities())
             {
