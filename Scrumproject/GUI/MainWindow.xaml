@@ -4,7 +4,7 @@
         xmlns:scrumproject="clr-namespace:Scrumproject"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Scrumproject.MainWindow"
         Title="MainWindow" Height="953.703" Width="831.493" Closing="Window_Closing_1">
-    <ScrollViewer Margin="0,0,-89,-21">
+    <ScrollViewer Margin="0,0,-89,-40">
         <Grid Margin="0,0,-8,0" HorizontalAlignment="Left" Width="652">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
@@ -107,17 +107,16 @@
                 </TabItem>
                 <TabItem Header="Förskottsansökan" Margin="82,-2,-82,1" Background="#FF6C83B4" Foreground="Black" Width="182" Height="63" FontSize="14" FontWeight="Bold" >
                     <Canvas Width="818" Margin="2,10,2,70">
-                        <Label x:Name="lbDagar_Copy" Content="Beskrivning" Canvas.Left="35" Canvas.Top="40" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Totalt belopp" Canvas.Left="35" Canvas.Top="319" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
-                        <TextBox x:Name="tbTotalAmounth" Height="35" Canvas.Left="150" TextWrapping="Wrap" Text="" Canvas.Top="319" Width="148" Background="Black" Foreground="White" TabIndex="4"/>
-                        <Button x:Name="btnSendPrepaymet" Content="Skicka in din förskottsansökan&#xA;" Canvas.Left="413" Canvas.Top="510" Width="370" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="35" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}" TabIndex="5" Click="btnSendPrepaymet_Click"/>
+                        <Label x:Name="lbDagar_Copy" Content="Beskriv varför du söker ersättning" Canvas.Left="31" Canvas.Top="45" RenderTransformOrigin="0.362,-0.746" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                        <Label x:Name="lbWhatHaveIDoneToday_Copy" Content="Totalt belopp" Canvas.Left="140" Canvas.Top="315" RenderTransformOrigin="0.659,0.185" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                        <TextBox x:Name="tbTotalAmounth" Height="31" Canvas.Left="250" TextWrapping="Wrap" Text="" Canvas.Top="316" Width="148" Background="Black" Foreground="White" TabIndex="4"/>
+                        <Button x:Name="btnSendPrepaymet" Content="Skicka in din förskottsansökan&#xA;" Canvas.Left="431" Canvas.Top="71" Width="362" FontFamily="Myriad Pro" BorderBrush="White" Foreground="White" Height="275" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="{x:Null}" TabIndex="5" Click="btnSendPrepaymet_Click"/>
                         <Label x:Name="lbMaxSumSpecificCountry_Copy" Content="" Canvas.Left="363" Canvas.Top="279" RenderTransformOrigin="1.556,2.432" Width="93"/>
                         <Label x:Name="LbKm_Copy" Content="" Canvas.Left="98" Canvas.Top="71" Foreground="#FF51FF00"/>
-                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="467" Canvas.Top="71" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
-                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="585" Canvas.Top="76" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
-                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="467" Canvas.Top="109" Width="143" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
+                        <Label x:Name="lbLoggedInAs_Copy" Content="Inloggad som: " Canvas.Left="431" Canvas.Top="30" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16"/>
+                        <Label x:Name="lbLoggedInAsThisUser_Copy" Content="" Canvas.Left="553" Canvas.Top="36" Width="134" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
+                        <Button x:Name="BtnLogIn_Copy" Content="Logga In" Canvas.Left="321" Canvas.Top="34" Width="77" Foreground="Black" Background="White" Click="BtnLogIn_Click" Height="25" TabIndex="1"/>
                         <Button x:Name="btnLogOut_Copy" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
-                        <Button x:Name="btnForgotPassword_Copy" Content="Glömt Lösenord" Canvas.Left="615" Canvas.Top="109" Width="138" Background="White" Foreground="Black" Height="25" TabIndex="2"/>
                         <Button x:Name="btnLogOut1" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
                         <TextBox x:Name="tbDescriptionPrepay" Height="243" TextWrapping="Wrap" Text="" Width="363" Background="Black" Foreground="White" TabIndex="4" Canvas.Left="35" Canvas.Top="71"/>
                     </Canvas>
@@ -145,7 +144,7 @@
                         <TextBox x:Name="tbPassword" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="13" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" Canvas.Top="-16" TabIndex="1" IsTabStop="False"/>
                         <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="26" Canvas.Top="213" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="456" Canvas.Top="284" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29">
+                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="455" Canvas.Top="287" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -156,8 +155,8 @@
                             </Button.RenderTransform>
                         </Button>
                         <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="456" Canvas.Top="308" Width="244" Background="Black" Foreground="White" Height="38" TabIndex="30" Click="btnApprove_Click"/>
-                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="601" Canvas.Top="512" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
-                        <TextBox x:Name="tbWhyDenied" Height="131" Canvas.Left="456" TextWrapping="Wrap" Text="" Canvas.Top="376" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
+                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="601" Canvas.Top="495" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
+                        <TextBox x:Name="tbWhyDenied" Height="117" Canvas.Left="456" TextWrapping="Wrap" Text="" Canvas.Top="376" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
                         <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="452" Canvas.Top="351" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <CheckBox x:Name="cbSortByDate" Content="Datum" Canvas.Left="297" Canvas.Top="207" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="20"/>
                         <CheckBox x:Name="cbSortByName" Content="Namn" Canvas.Left="368" Canvas.Top="209" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22"/>
@@ -169,29 +168,29 @@
                         <Label x:Name="lbUserID" Content="Anst. nr" Canvas.Left="456" Canvas.Top="36" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <TextBox x:Name="tbUserID" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="42" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" IsTabStop="False"/>
                         <ListBox x:Name="listBoxUsers" Height="166" Width="398" Canvas.Left="30" Background="Black" Foreground="White" Canvas.Top="-16" IsTabStop="True" TabIndex="7" SelectionChanged="listBoxUsers_SelectionChanged_1"/>
-                        <ListView x:Name="lvCountriesEdit" Height="176" Canvas.Left="30" Canvas.Top="589" Width="398" RenderTransformOrigin="-2.41,0.58" Background="Black" TabIndex="12" SelectionChanged="lvCountriesEdit_SelectionChanged_1" Foreground="White">
+                        <ListView x:Name="lvCountriesEdit" Height="176" Canvas.Left="30" Canvas.Top="563" Width="398" RenderTransformOrigin="-2.41,0.58" Background="Black" TabIndex="12" SelectionChanged="lvCountriesEdit_SelectionChanged_1" Foreground="White">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <TextBox x:Name="tbCountryName" Height="23" Canvas.Left="564" TextWrapping="Wrap" Text="" Canvas.Top="589" Width="120"  Background="Black" TabIndex="17" Foreground="White"/>
-                        <TextBox x:Name="tbMaxCash" Height="23" Canvas.Left="564" TextWrapping="Wrap" Text="" Canvas.Top="617" Width="120" Background="Black" TabIndex="18" Foreground="White"/>
-                        <TextBox x:Name="tbCurrency" Height="23" Canvas.Left="564" TextWrapping="Wrap" Text="" Canvas.Top="645" Width="120" Background="Black" TabIndex="19" Foreground="White" />
-                        <Label x:Name="lbCountryName" Content="Landnamn:" Canvas.Left="467" Canvas.Top="583" Foreground="White"/>
-                        <Label x:Name="lbMaxCash" Content="Traktamente" Canvas.Left="467" Canvas.Top="612" Foreground="White"/>
-                        <Label Content="Valuta" Canvas.Left="467" Canvas.Top="645" Foreground="White" RenderTransformOrigin="0.853,0.552"/>
-                        <Button x:Name="btnAddCountry" Content="Lägg till" Canvas.Left="467" Canvas.Top="679" Width="75" Background="Black" Foreground="White" TabIndex="33" Click="btnAddCountry_Click_2"/>
-                        <Button x:Name="btnUpdateCountry" Content="Uppdatera" Canvas.Left="547" Canvas.Top="679" Width="88" Background="Black" Foreground="White" TabIndex="34" Click="btnUpdateCountry_Click"/>
-                        <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="643" Canvas.Top="679" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35" Click="btnRemoveCountry_Click"/>
-                        <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="30" Canvas.Top="555" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
-                        <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="721" Canvas.Top="6" Width="75" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogOutChef_Click" Visibility="Hidden"/>
+                        <TextBox x:Name="tbCountryName" Height="23" Canvas.Left="535" TextWrapping="Wrap" Text="" Canvas.Top="641" Width="150"  Background="Black" TabIndex="17" Foreground="White"/>
+                        <TextBox x:Name="tbMaxCash" Height="23" Canvas.Left="535" TextWrapping="Wrap" Text="" Canvas.Top="664" Width="150" Background="Black" TabIndex="18" Foreground="White"/>
+                        <TextBox x:Name="tbCurrency" Height="23" Canvas.Left="535" TextWrapping="Wrap" Text="" Canvas.Top="687" Width="150" Background="Black" TabIndex="19" Foreground="White" />
+                        <Label x:Name="lbCountryName" Content="Landnamn" Canvas.Left="437" Canvas.Top="636" Foreground="White"/>
+                        <Label x:Name="lbMaxCash" Content="Traktamente" Canvas.Left="437" Canvas.Top="659" Foreground="White"/>
+                        <Label Content="Valuta" Canvas.Left="437" Canvas.Top="684" Foreground="White" RenderTransformOrigin="0.853,0.552"/>
+                        <Button x:Name="btnAddCountry" Content="Lägg till" Canvas.Left="437" Canvas.Top="716" Width="75" Background="Black" Foreground="White" TabIndex="33" Click="btnAddCountry_Click_2"/>
+                        <Button x:Name="btnUpdateCountry" Content="Uppdatera" Canvas.Left="517" Canvas.Top="716" Width="88" Background="Black" Foreground="White" TabIndex="34" Click="btnUpdateCountry_Click"/>
+                        <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="610" Canvas.Top="716" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35" Click="btnRemoveCountry_Click"/>
+                        <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="30" Canvas.Top="534" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
+                        <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="720" Canvas.Top="4" Width="75" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogOutChef_Click" Visibility="Hidden"/>
                         <Button x:Name="btnFillListWithUsersIAmBossFor" Content="Visa användare jag är auktoriserad att godkänna rapporter för" Canvas.Left="30" Canvas.Top="-41" Width="398" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" FontSize="12" Click="btnFillListWithUsersIAmBossFor_Click"/>
                         <ListBox x:Name="lbShowReports" Height="251" Canvas.Left="30" Canvas.Top="242" Width="398" Background="Black" Foreground="White"/>
                         <Button x:Name="btnSearchReport" Content="Sök" Canvas.Left="226" Canvas.Top="495" Width="36" RenderTransformOrigin="0.505,0.304" Background="Black" Foreground="White"/>
                         <TextBox x:Name="tbSearchReport" Height="23" Canvas.Left="30" TextWrapping="Wrap" Canvas.Top="495" Width="193" RenderTransformOrigin="0.454,0.148" Foreground="White" Background="Black"/>
-                        <Button x:Name="btnLogInChef" Content="Logga in" Height="84" Width="75" Canvas.Left="721" Canvas.Top="-77" Background="Black" Foreground="White" Click="btnLogInChef_Click"/>
+                        <Button x:Name="btnLogInChef" Content="Logga in" Height="29" Width="75" Canvas.Left="352" Canvas.Top="-73" Background="Black" Foreground="White" Click="btnLogInChef_Click"/>
 
                     </Canvas>
                 </TabItem>
