@@ -48,14 +48,16 @@ namespace Scrumproject.GUI
                 MainWindow.main.Status = loggedUser.Username;
                 MainWindow.main.btnLogOut.Visibility = Visibility.Visible;
                 MainWindow.main.BtnLogIn.Visibility = Visibility.Hidden;
+                MainWindow.main.listBoxUsers.Items.Clear();
                 this.Close();
             }
             else if (loggedBoss != null && source == 1)
             {
-                var isBoss = String.Format(loggedBoss.Username + " (Chef)");
+                var isBoss = String.Format(loggedBoss.Username);
                 MainWindow.main.BossStatus = isBoss;
                 MainWindow.main.btnLogOutChef.Visibility = Visibility.Visible;
-                MainWindow.main.btnFillListWithUsersIAmBossFor.Visibility = Visibility.Hidden;
+                MainWindow.main.btnLogInChef.Visibility = Visibility.Hidden;
+                MainWindow.main.listBoxUsers.Items.Clear();
                 this.Close();
             }
             else

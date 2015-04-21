@@ -8,6 +8,7 @@ namespace Scrumproject.Logic.Entities
 {
     public class UserEntity
     {
+        public int UID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SSN { get; set; }
