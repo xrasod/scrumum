@@ -51,6 +51,13 @@ namespace Scrumproject.Logic
                 RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
         }
 
+        //Kollar så att personnummer är inmatat rätt.
+        public bool IsSsnValid(string persnr)
+        {
+            return !Regex.IsMatch(persnr, @"^\d{6}-\d{4}$");
+
+        }
+
        
         
     }
