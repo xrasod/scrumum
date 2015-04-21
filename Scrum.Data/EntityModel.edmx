@@ -62,7 +62,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           </Key>
           <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UID" Type="int" Nullable="false" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="varchar" MaxLength="15" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Kilometers" Type="decimal" Precision="5" Scale="1" />
           <Property Name="TotalAmount" Type="decimal" Precision="6" Scale="2" />
@@ -302,7 +302,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="UID" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="String" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Kilometers" Type="Decimal" Precision="5" Scale="1" />
           <Property Name="TotalAmount" Type="Decimal" Precision="6" Scale="2" />
