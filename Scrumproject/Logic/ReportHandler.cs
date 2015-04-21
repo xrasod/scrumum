@@ -25,7 +25,7 @@ namespace Scrumproject.Logic
                 (r, u) => new {Report = r, User = u})
                 .OrderByDescending(ur => ur.Report.ReportDate)
 
-                .Select(ur => "Datum   :" + ur.Report.ReportDate + " " + " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " +  ur.Report.Status).ToList();
+                .Select(ur => " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " +  ur.Report.Status).ToList();
             
             
              
@@ -50,19 +50,19 @@ namespace Scrumproject.Logic
 
         public void Rejectpost(string reportname)
         {
-            int reportId = GetReportId(reportname);
+            int reportId = CheckReportId(reportname);
 
-            string setStatusNotAccepted = "Avslag";
+            string setStatusNotAccepted = "Nekad";
             ReportTestClass.SaveUpdatedReportStatus(reportId, setStatusNotAccepted);
         }
 
         public void Acceptpost(string reportname)
         {
-            int reportId = GetReportId(reportname);
+            int reportId = CheckReportId(reportname);
             string setStatusAccepted = "Godkänd";
             ReportTestClass.SaveUpdatedReportStatus(reportId,setStatusAccepted);
         }
-        public int checkReportID(string s)
+        public int CheckReportId(string s)
         {
             var b = string.Empty;
             int val = 0;
