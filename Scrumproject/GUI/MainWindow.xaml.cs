@@ -494,7 +494,7 @@ namespace Scrumproject
         private void btnLogOutChef_Click(object sender, RoutedEventArgs e)
         {
             lbLoggedInUser.Content = "";
-            btnFillListWithUsersIAmBossFor.Visibility = Visibility.Visible;
+            btnLogInChef.Visibility = Visibility.Visible;
             btnLogOutChef.Visibility = Visibility.Hidden;
         }
            
@@ -565,6 +565,7 @@ namespace Scrumproject
 
 
                 var users = localHandeler.getInfoOnSelectedUser();
+                var bosses = localHandeler.getInfoOnSelectedBoss();
 
                 foreach (var user in users)
                 {
@@ -578,14 +579,31 @@ namespace Scrumproject
                         tbSsn.Text = user.SSN;
                         tbBoss.Text = user.BID.ToString();
                         tbUserID.Text = user.UID.ToString();
+                    }
 
                     }
 
+                foreach (var boss in bosses)
+                {
+                    if (userID == boss.BID)
+                    {
+                        tbFirstName.Text = boss.FirstName;
+                        tbLastNamne.Text = boss.LastName;
+                        tbEmail.Text = boss.Email;
+                        tbPassword.Text = boss.PW;
+                        tbUsername.Text = boss.Username;
+                        tbSsn.Text = boss.SSN;
+                        tbBoss.Text = boss.AprovalBoss.ToString();
+                        tbUserID.Text = boss.BID.ToString();
                 }
+
             }
-            catch (Exception ee)
+
+
+            }
+            catch
             {
-                MessageBox.Show("ee");
+                MessageBox.Show("Något blev fel.");
             }
         }
 
@@ -594,10 +612,15 @@ namespace Scrumproject
         private void PopulateListViewUsers()
         {
             var users = localHandeler.getInfoOnSelectedUser();
+            var bosses = localHandeler.getInfoOnSelectedBoss();
 
             foreach (var user in users)
             {
                 listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
+            }
+            foreach (var boss in bosses)
+            {
+                listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
             }
         }
 
@@ -831,16 +854,16 @@ namespace Scrumproject
             try
             {
                 listBoxUsers.Items.Clear();
-                var myUsers = localHandeler.GetUsersWhoWorksForMe(lbLoggedInAsThisUser.Content.ToString());
-                var myBosses = localHandeler.GetBossesICanApprove(lbLoggedInAsThisUser.Content.ToString());
+                var myUsers = localHandeler.GetUsersWhoWorksForMe(lbLoggedInUser.Content.ToString());
+                var myBosses = localHandeler.GetBossesICanApprove(lbLoggedInUser.Content.ToString());
 
                 foreach (var user in myUsers)
                 {
-                    listBoxUsers.Items.Add(user.FirstName + " " + user.LastName);
+                    listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
                 }
                 foreach (var boss in myBosses)
                 {
-                    listBoxUsers.Items.Add(boss.FirstName + " " + boss.LastName);
+                    listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
                 }
 
             }
@@ -869,6 +892,13 @@ namespace Scrumproject
 
             string fullstringbitch = lbShowReports.SelectedItem.ToString();
             reportDanger.Rejectpost(fullstringbitch);
+        }
+
+        private void btnLogInChef_Click(object sender, RoutedEventArgs e)
+        {
+            var source = 1;
+            LoginWindow l = new LoginWindow(source);
+            l.Show();
         }
        
 }

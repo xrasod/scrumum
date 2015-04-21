@@ -68,6 +68,14 @@ namespace Scrumproject.Data
             }
         }
 
+        public List<Boss> GetAllBosses()
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Bosses.OrderBy(x => x.FirstName).ToList();
+            }
+        }
+
 
         //Uppdatera status på användare som innebär att användaren blir inaktiverad.
         public static void UpdateStatus(string username)
