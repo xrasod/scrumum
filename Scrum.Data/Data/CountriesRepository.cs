@@ -86,12 +86,14 @@ namespace Scrum.Data.Data
 
         }
 
-        public void DeleteCountry(Country c)
+        public void DeleteCountry(string countryName)
         {
             using (var context = new scrumEntities())
             {
                 try
                 {
+                    var c = context.Countries
+                        .FirstOrDefault(x => x.Name == countryName);
 
                     context.Countries.Remove(c);
 

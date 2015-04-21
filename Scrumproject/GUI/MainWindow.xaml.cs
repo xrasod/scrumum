@@ -236,7 +236,7 @@ namespace Scrumproject
             var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
 
-            if (validera.ControllFiledNotEmpty(tbEmail))
+            if (validera.IsEmailValid(email))
             {
                 MessageBox.Show("Du måste ange en e-post!");
             }
@@ -431,11 +431,10 @@ namespace Scrumproject
         private void lvCountriesEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = lvCountriesEdit.SelectedValue.ToString();
-            var c = new CountriesRepository();
-            var country = c.GetAllCountries();
+            var allCountries = localHandeler.getAllCountriesToList();
            
 
-            foreach (var countries in country)
+            foreach (var countries in allCountries)
             {
                 if (selected == countries.Name)
                 {
@@ -597,23 +596,10 @@ namespace Scrumproject
         }
 
 
-        //Ta bort land
-        private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
-        {
-            var cName = tbCountryName.Text;
-            var cCurr = tbCurrency.Text;
-            var cSub = Int32.Parse(tbMaxCash.Text);
-
-            localHandeler.DeletSelectedCountry(cName, cCurr, cSub);
-        }
-
-
-
-
         //Fyllar listview med användare
         private void PopulateListViewUsers()
         {
-            var users = BossRepository.GetAll();
+            var users = localHandeler.getInfoOnSelectedUser();
 
             foreach (var user in users)
             {
@@ -625,10 +611,9 @@ namespace Scrumproject
         //Fyller listViewn med ländernas namn
         private void PupulateListViewCountries()
         {
-            var countries = new CountriesRepository();
-            var count = countries.GetAllCountries();
+            var allCountries = localHandeler.getAllCountriesToList();
 
-            foreach (var country in count)
+            foreach (var country in allCountries)
             {
                 lvCountriesEdit.Items.Add(country.Name);
             }
@@ -674,7 +659,7 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste ange ett personnummer!");
             }
-            else if (validate.ControllFiledNotEmpty(tbEmail))
+            else if (validate.IsEmailValid(mail))
             {
                 MessageBox.Show("Du måste ange en email-adress!");
             }
@@ -740,10 +725,9 @@ namespace Scrumproject
             try
             {
                 var selected = lvCountriesEdit.SelectedValue.ToString();
-                var c = new CountriesRepository();
-                var country = c.GetAllCountries();
+                var allCountries = localHandeler.getAllCountriesToList();
 
-                foreach (var countries in country)
+                foreach (var countries in allCountries)
                 {
                     if (selected == countries.Name)
                     {
@@ -811,6 +795,21 @@ namespace Scrumproject
             var list = Xmlreader.GetAllCountries();
             CbCountries.ItemsSource = list;
 
+        }
+
+        //Ta bort land
+        private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = lvCountriesEdit.SelectedValue.ToString();
+
+            localHandeler.DeletSelectedCountry(selected);
+            MessageBox.Show(selected + " Har tagits bort!");
+            lvCountriesEdit.Items.Clear();
+            tbCountryName.Clear();
+            tbMaxCash.Clear();
+            tbCurrency.Clear();
+            PupulateListViewCountries();
+            
         }
        
 }
