@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Boss">
           <Key>
             <PropertyRef Name="BID" />
@@ -62,10 +62,11 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           </Key>
           <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UID" Type="int" Nullable="false" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="varchar" MaxLength="15" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Kilometers" Type="decimal" Precision="5" Scale="1" />
           <Property Name="TotalAmount" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="ReportDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -94,8 +95,6 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="BID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Association Name="FK__BossFor__BID__3A81B327">
           <End Role="Boss" Type="Self.Boss" Multiplicity="1" />
           <End Role="BossFor" Type="Self.BossFor" Multiplicity="*" />
@@ -193,19 +192,19 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="scrumModelStoreContainer">
-          <EntitySet Name="Boss" EntityType="Self.Boss" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Prepayment" EntityType="Self.Prepayment" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Reciept" EntityType="Self.Reciept" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="BossFor" EntityType="Self.BossFor" store:Type="Tables" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+          <EntitySet Name="Boss" EntityType="Self.Boss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prepayment" EntityType="Self.Prepayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reciept" EntityType="Self.Reciept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BossFor" EntityType="Self.BossFor" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [BossFor].[BID] AS [BID], 
     [BossFor].[UID] AS [UID]
     FROM [dbo].[BossFor] AS [BossFor]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="TravelInfo" EntityType="Self.TravelInfo" store:Type="Tables" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+          <EntitySet Name="TravelInfo" EntityType="Self.TravelInfo" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TravelInfo].[RID] AS [RID], 
     [TravelInfo].[CID] AS [CID], 
@@ -247,8 +246,7 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="scrumModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -304,13 +302,14 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="UID" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="String" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Kilometers" Type="Decimal" Precision="5" Scale="1" />
           <Property Name="TotalAmount" Type="Decimal" Precision="6" Scale="2" />
           <NavigationProperty Name="Reciepts" Relationship="Self.FK__Reciept__RID__4316F928" FromRole="Report" ToRole="Reciept" />
           <NavigationProperty Name="User" Relationship="Self.FK__Report__UID__3E52440B" FromRole="Report" ToRole="Users" />
           <NavigationProperty Name="TravelInfoes" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="Report" ToRole="TravelInfo" />
+          <Property Name="ReportDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -510,6 +509,7 @@ warning 6002: The table/view 'scrumprojekt.sys.database_firewall_rules' does not
           <EntitySetMapping Name="Reports">
             <EntityTypeMapping TypeName="scrumModel.Report">
               <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
                 <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

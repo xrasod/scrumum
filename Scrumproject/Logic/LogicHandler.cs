@@ -10,6 +10,8 @@ using Scrum.Data.Data;
 using Scrumproject.Logic.Entities;
 using iTextSharp.text.pdf;
 using Scrumproject.Data;
+using iTextSharp;
+
 
 namespace Scrumproject.Logic
 {
@@ -20,8 +22,10 @@ namespace Scrumproject.Logic
       ReportRepository<Notes> notesRepository = new ReportRepository<Notes>();
       BossRepository bossRepository = new BossRepository();
       PDFRepository pdfRepository = new PDFRepository();
-      CountryXML<List<Countries>> countryXML = new CountryXML<List<Countries>>();
+      CountryXML<Countries> countryXML = new CountryXML<Countries>();
       CountriesRepository countryRep = new CountriesRepository();
+      UserRepository userRep = new UserRepository();
+      AdvancePaymentsRepository advpayRep = new AdvancePaymentsRepository();
 
 
       //public Countries LoadCountry(string sokvag)
@@ -29,26 +33,28 @@ namespace Scrumproject.Logic
       //    return countryXML.Ladda(sokvag);
       //}
 
-       public void SaveCountriesfromDBtoXML()
-       {
+      public void SaveCountriesfromDBtoXML()
+      {
 
-           var countriesList = new List<Countries>();
-           var list = countryRep.GetAllCountries();
-           foreach (var c in list)
-           {
-               var newc = new Countries
-               {
-                   CID = c.CID,
-                   Name = c.Name,
-                   Subsistence = c.Subsistence,
-                   Currency = c.Currency
 
-               };
-               countriesList.Add(newc);
-               countryXML.Spara(countriesList, "Country.xml");
-           }
-           
-       }
+          var countriesList = new List<Countries>();
+
+          var list = countryRep.GetAllCountries();
+          foreach (var c in list)
+          {
+              var newc = new Countries
+              {
+                  CID = c.CID,
+                  Name = c.Name,
+                  Subsistence = c.Subsistence,
+                  Currency = c.Currency
+
+              };
+              countriesList.Add(newc);
+              countryXML.Spara(countriesList, "Country.xml");
+          }
+
+      }
 
        //public void SaveCountry(Countries country, string sokvag)
        //{
@@ -155,11 +161,13 @@ namespace Scrumproject.Logic
        }
 
 
+
+       //Lägg till nytt land
        public void AddNewCountry(string CountryName, string currency, int Sub)
        {
            var countryrep = new CountriesRepository();
            var check = countryrep.GetAllCountries();
-           
+
 
            try
            {
@@ -179,7 +187,7 @@ namespace Scrumproject.Logic
            }
        }
 
-
+       //Uppdatera ett land
        public void uppdateCountry(string currname, string newname, string newcurr, int newsub)
        {
            var countryrep = new CountriesRepository();
@@ -194,9 +202,130 @@ namespace Scrumproject.Logic
            }
 
 
-           CountriesRepository.UpdateCountry(cid,newname,newcurr,newsub);
+           CountriesRepository.UpdateCountry(cid, newname, newcurr, newsub);
 
        }
+
+       //Returnerar lista med alla användare
+       public List<User> getInfoOnSelectedUser()
+       {
+           var u = new UserRepository();
+           var user = u.GetAllUsers();
+
+           return user;
+       }
+
+       //Retunerar lista med alla länder
+       public List<Country> getAllCountriesToList()
+       {
+           var c = new CountriesRepository();
+           var cc = c.GetAllCountries();
+
+           return cc;
+       } 
+
+       //Kollar om en sträng innehåller siffror
+       public int checkIfDigits(string s)
+       {
+           var b = string.Empty;
+           int val = 0;
+
+           b = s.Where(t => Char.IsDigit(t)).Aggregate(b, (current, t) => current + t);
+
+           if (b.Length > 0)
+               val = Int32.Parse(b);
+
+           return val;
+       }
+
+       //Ta bort ett land
+       public void DeletSelectedCountry(string name)
+       {
+           var countryrep = new CountriesRepository();
+           var allCountries = countryrep.GetAllCountries();
+
+           foreach (var item in allCountries)
+           {
+               if (name == item.Name)
+               {
+
+                   countryrep.DeleteCountry(name);
+               }
+           }
+       }
+
+       public string GetUsersBoss(string username)
+       {
+         return userRep.GetBossForUser(username);
+       }
+
+       public string GetFullNameFromTheUserName(string username)
+       {
+           return userRep.GetFullNameFromUsername(username);
+       }
+
+       public void AddPrepayment(AdvancePayments advancePayment)
+       {
+           var prepayment = new Prepayment();
+           prepayment.UID = advancePayment.UserID;
+           prepayment.Amount = advancePayment.Amount;
+           prepayment.Description = advancePayment.Description;
+           prepayment.Status = null;
+           
+           advpayRep.AddAdvancePayment(prepayment);
+       }
+
+       public int GetUserId(string usernamn)
+       {
+           return userRep.GetUserId(usernamn);
+       }
+
+       public List<BossEntity> GetBossesICanApprove(string username)
+       {
+           var bossesList = bossRepository.SeeBossesICanApprove(username);
+           var returnlist = new List<BossEntity>();
+           var theboss = new BossEntity();
+           
+           foreach (var boss in bossesList)
+           {
+               theboss.ApprovalBoss = boss.AprovalBoss;
+               theboss.Email = boss.Email;
+               theboss.FirstName = boss.FirstName;
+               theboss.LastName = boss.LastName;
+               theboss.SSN = boss.SSN;
+               theboss.Status = boss.Status;
+               theboss.UserName = boss.Username;
+               theboss.Password = boss.PW;
+               returnlist.Add(theboss);
+           }
+
+           return returnlist;
+
+       }
+
+       public List<UserEntity> GetUsersWhoWorksForMe(string username)
+       {
+           var usersList = bossRepository.SeeWhoWorksForMe(username);
+           var returnlist = new List<UserEntity>();
+           var theuser = new UserEntity();
+
+           foreach (var user in usersList)
+           {
+               theuser.BID = user.BID;
+               theuser.Email = user.Email;
+               theuser.FirstName = user.FirstName;
+               theuser.LastName = user.LastName;
+               theuser.SSN = user.SSN;
+               theuser.Status = user.Status;
+               theuser.UserName = user.Username;
+               theuser.Password = user.PW;
+               returnlist.Add(theuser);
+           }
+
+           return returnlist;
+
+       } 
+
 
    }
 }

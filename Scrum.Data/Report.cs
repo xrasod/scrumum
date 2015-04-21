@@ -22,11 +22,11 @@ namespace Scrum.Data
     
         public int RID { get; set; }
         public int UID { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public string Status { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> Kilometers { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
-    
+        public Nullable<DateTime> ReportDate { get; set; }
         public virtual ICollection<Reciept> Reciepts { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<TravelInfo> TravelInfoes { get; set; }

@@ -85,5 +85,32 @@ namespace Scrum.Data.Data
             }
 
         }
+
+        public void DeleteCountry(string countryName)
+        {
+            using (var context = new scrumEntities())
+            {
+                try
+                {
+                    var c = context.Countries
+                        .FirstOrDefault(x => x.Name == countryName);
+
+                    context.Countries.Remove(c);
+
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName,
+                                validationError.ErrorMessage);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
