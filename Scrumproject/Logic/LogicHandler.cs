@@ -215,6 +215,13 @@ namespace Scrumproject.Logic
            return user;
        }
 
+       public List<Boss> getInfoOnSelectedBoss()
+       {
+           var b = new BossRepository();
+           return b.GetAllBosses();
+       }
+
+
        //Retunerar lista med alla länder
        public List<Country> getAllCountriesToList()
        {
@@ -279,6 +286,57 @@ namespace Scrumproject.Logic
        {
            return userRep.GetUserId(usernamn);
        }
+
+       public List<BossEntity> GetBossesICanApprove(string username)
+       {
+           var bossesList = bossRepository.SeeBossesICanApprove(username);
+           var returnlist = new List<BossEntity>();
+           
+           
+           foreach (var boss in bossesList)
+           {
+               var theboss = new BossEntity();
+               theboss.ApprovalBoss = boss.AprovalBoss;
+               theboss.Email = boss.Email;
+               theboss.FirstName = boss.FirstName;
+               theboss.LastName = boss.LastName;
+               theboss.SSN = boss.SSN;
+               theboss.Status = boss.Status;
+               theboss.UserName = boss.Username;
+               theboss.Password = boss.PW;
+               theboss.BID = boss.BID;
+               returnlist.Add(theboss);
+           }
+
+           return returnlist;
+
+       }
+
+       public List<UserEntity> GetUsersWhoWorksForMe(string username)
+       {
+           var usersList = bossRepository.SeeWhoWorksForMe(username);
+           var returnlist = new List<UserEntity>();
+          
+
+           foreach (var user in usersList)
+           {
+               var theuser = new UserEntity();
+               theuser.BID = user.BID;
+               theuser.Email = user.Email;
+               theuser.FirstName = user.FirstName;
+               theuser.LastName = user.LastName;
+               theuser.SSN = user.SSN;
+               theuser.Status = user.Status;
+               theuser.UserName = user.Username;
+               theuser.Password = user.PW;
+               theuser.UID = user.UID;
+               returnlist.Add(theuser);
+           }
+
+           return returnlist;
+
+       } 
+
 
    }
 }

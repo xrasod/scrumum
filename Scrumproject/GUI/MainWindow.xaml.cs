@@ -36,6 +36,7 @@ namespace Scrumproject
         Notes notesLoading = new Notes();
         LogicHandler localHandeler = new LogicHandler();
         XmlReader Xmlreader = new XmlReader();
+        ReportHandler reportDanger = new ReportHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -324,7 +325,7 @@ namespace Scrumproject
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
             _reportDraftSaving.NumberOfKilometersDrivenInTotal = Int32.Parse(TbTotalKm.Text);
-            _reportDraftSaving.KilometersDriven = Int32.Parse(TbCarTripLengthKm.Text);
+            _reportDraftSaving.KilometersDriven = Int32.Parse(TbTotalKm.Text);
             _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
             _reportDraftSaving.StartDate = dpStartDate.Text;
             _reportDraftSaving.EndDate = dpEndDate.Text;
@@ -395,29 +396,29 @@ namespace Scrumproject
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                saveDraft();
-                MessageBox.Show("Utkast sparat.");
-                e.Cancel = false;
-            }
-            else
-            {
-                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (res == MessageBoxResult.Yes)
-                {
-                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
-                    e.Cancel = false;
-                }
-                else
-                {
-                    saveDraft();
-                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
-                    e.Cancel = false;
-                }
+            //MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    saveDraft();
+            //    MessageBox.Show("Utkast sparat.");
+            //    e.Cancel = false;
+            //}
+            //else
+            //{
+            //    MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    if (res == MessageBoxResult.Yes)
+            //    {
+            //        MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+            //        e.Cancel = false;
+            //    }
+            //    else
+            //    {
+            //        saveDraft();
+            //        MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+            //        e.Cancel = false;
+            //    }
 
-            }
+            //}
         }
 
  
@@ -527,13 +528,6 @@ namespace Scrumproject
             }
         }
 
-        private void btnLogInChef_Click(object sender, RoutedEventArgs e)
-        {
-            var source = 1;
-            LoginWindow l = new LoginWindow(source);
-            l.Show();
-        }
-
         private void btnDeleteDraft_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Vill du verkligen radera allt?", "Radera utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -571,6 +565,7 @@ namespace Scrumproject
 
 
                 var users = localHandeler.getInfoOnSelectedUser();
+                var bosses = localHandeler.getInfoOnSelectedBoss();
 
                 foreach (var user in users)
                 {
@@ -584,14 +579,31 @@ namespace Scrumproject
                         tbSsn.Text = user.SSN;
                         tbBoss.Text = user.BID.ToString();
                         tbUserID.Text = user.UID.ToString();
+                    }
 
                     }
 
+                foreach (var boss in bosses)
+                {
+                    if (userID == boss.BID)
+                    {
+                        tbFirstName.Text = boss.FirstName;
+                        tbLastNamne.Text = boss.LastName;
+                        tbEmail.Text = boss.Email;
+                        tbPassword.Text = boss.PW;
+                        tbUsername.Text = boss.Username;
+                        tbSsn.Text = boss.SSN;
+                        tbBoss.Text = boss.AprovalBoss.ToString();
+                        tbUserID.Text = boss.BID.ToString();
+                    }
+
                 }
+
+
             }
-            catch (Exception ee)
+            catch
             {
-                MessageBox.Show("ee");
+                MessageBox.Show("Något blev fel.");
             }
         }
 
@@ -600,11 +612,16 @@ namespace Scrumproject
         private void PopulateListViewUsers()
         {
             var users = localHandeler.getInfoOnSelectedUser();
+            var bosses = localHandeler.getInfoOnSelectedBoss();
 
             foreach (var user in users)
             {
                 listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
             }
+            foreach (var boss in bosses)
+            {
+                listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
+        }
         }
 
 
@@ -831,6 +848,65 @@ namespace Scrumproject
             
         }
 
+        private void btnFillListWithUsersIAmBossFor_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                listBoxUsers.Items.Clear();
+                var myUsers = localHandeler.GetUsersWhoWorksForMe(lbLoggedInUser.Content.ToString());
+                var myBosses = localHandeler.GetBossesICanApprove(lbLoggedInUser.Content.ToString());
+
+                foreach (var user in myUsers)
+                {
+                    listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
+                }
+                foreach (var boss in myBosses)
+                {
+                    listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först.");
+            }
+        }
+
+        private void btnShowReports_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
+        }
+
+        private void btnApprove_Click(object sender, RoutedEventArgs e)
+        {
+            string fullstringbitch = lbShowReports.SelectedItem.ToString();
+            reportDanger.Acceptpost(fullstringbitch);
+
+        }
+
+        private void btnDeny_Click(object sender, RoutedEventArgs e)
+        {
+
+            string fullstringbitch = lbShowReports.SelectedItem.ToString();
+            reportDanger.Rejectpost(fullstringbitch);
+        }
+
+        private void btnLogInChef_Click(object sender, RoutedEventArgs e)
+        {
+            var source = 1;
+            LoginWindow l = new LoginWindow(source);
+            l.Show();
+        }
+
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 window1 = new Window1();
+            window1.Show();
+        }
+       
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             tbUserID.Clear();
