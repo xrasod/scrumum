@@ -92,6 +92,7 @@
     <Compile Include="Data\CountryXML.cs" />
     <Compile Include="Data\PDFRepository.cs" />
     <Compile Include="Data\ReportRepository.cs" />
+    <Compile Include="Data\ReportTestClass.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
