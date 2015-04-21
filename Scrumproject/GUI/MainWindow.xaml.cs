@@ -37,6 +37,7 @@ namespace Scrumproject
         LogicHandler localHandeler = new LogicHandler();
         XmlReader Xmlreader = new XmlReader();
         ReportHandler reportDanger = new ReportHandler();
+        StatisticsHandler statisticsHandler = new StatisticsHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -58,7 +59,8 @@ namespace Scrumproject
             PupulateListViewCountries();
             localHandeler.SaveCountriesfromDBtoXML();
             getcountriesfromXML();
-
+            PopulateStatisticsWindowCountryCB();
+            
 
             TbTotalKm.IsReadOnly = true;
             tbUserID.IsEnabled = false;
@@ -595,9 +597,9 @@ namespace Scrumproject
                         tbSsn.Text = boss.SSN;
                         tbBoss.Text = boss.AprovalBoss.ToString();
                         tbUserID.Text = boss.BID.ToString();
-                }
+                    }
 
-            }
+                }
 
 
             }
@@ -621,7 +623,7 @@ namespace Scrumproject
             foreach (var boss in bosses)
             {
                 listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
-            }
+        }
         }
 
 
@@ -906,6 +908,33 @@ namespace Scrumproject
             Window1 window1 = new Window1();
             window1.Show();
         }
+       
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbUserID.Clear();
+            tbUsername.Clear();
+            tbBoss.Clear();
+            tbFirstName.Clear();
+            tbLastNamne.Clear();
+            tbEmail.Clear();
+            tbPassword.Clear();
+            tbSsn.Clear();
+        }
+
+        public void PopulateStatisticsWindowCountryCB()
+        {
+
+            cbAllCountriesStatistics.ItemsSource = statisticsHandler.SendCountriesToGui();
+        }
+
+        private void cbAllCountriesStatistics_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbReports.ItemsSource =
+                statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
+                    cbAllCountriesStatistics.SelectedItem.ToString());
+        }
+
+      
        
 }
     }
