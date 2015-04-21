@@ -155,8 +155,8 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="456" Canvas.Top="308" Width="244" Background="Black" Foreground="White" Height="38" TabIndex="30"/>
-                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="601" Canvas.Top="512" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32"/>
+                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="456" Canvas.Top="308" Width="244" Background="Black" Foreground="White" Height="38" TabIndex="30" Click="btnApprove_Click"/>
+                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="601" Canvas.Top="512" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
                         <TextBox x:Name="tbWhyDenied" Height="131" Canvas.Left="456" TextWrapping="Wrap" Text="" Canvas.Top="376" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
                         <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="452" Canvas.Top="351" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <CheckBox x:Name="cbSortByDate" Content="Datum" Canvas.Left="297" Canvas.Top="207" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="20"/>

@@ -36,6 +36,7 @@ namespace Scrumproject
         Notes notesLoading = new Notes();
         LogicHandler localHandeler = new LogicHandler();
         XmlReader Xmlreader = new XmlReader();
+        ReportHandler reportDanger = new ReportHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -874,9 +875,23 @@ namespace Scrumproject
 
         private void btnShowReports_Click(object sender, RoutedEventArgs e)
         {
-            ReportHandler reportHandler = new ReportHandler();
+            
 
-            lbShowReports.ItemsSource = reportHandler.GetReportList();
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
+        }
+
+        private void btnApprove_Click(object sender, RoutedEventArgs e)
+        {
+            string fullstringbitch = lbShowReports.SelectedItem.ToString();
+            reportDanger.Acceptpost(fullstringbitch);
+
+        }
+
+        private void btnDeny_Click(object sender, RoutedEventArgs e)
+        {
+
+            string fullstringbitch = lbShowReports.SelectedItem.ToString();
+            reportDanger.Rejectpost(fullstringbitch);
         }
 
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)
