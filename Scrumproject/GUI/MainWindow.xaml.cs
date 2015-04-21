@@ -595,9 +595,9 @@ namespace Scrumproject
                         tbSsn.Text = boss.SSN;
                         tbBoss.Text = boss.AprovalBoss.ToString();
                         tbUserID.Text = boss.BID.ToString();
-                }
+                    }
 
-            }
+                }
 
 
             }
@@ -621,7 +621,7 @@ namespace Scrumproject
             foreach (var boss in bosses)
             {
                 listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
-            }
+        }
         }
 
 
@@ -905,6 +905,18 @@ namespace Scrumproject
         {
             Window1 window1 = new Window1();
             window1.Show();
+        }
+       
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbUserID.Clear();
+            tbUsername.Clear();
+            tbBoss.Clear();
+            tbFirstName.Clear();
+            tbLastNamne.Clear();
+            tbEmail.Clear();
+            tbPassword.Clear();
+            tbSsn.Clear();
         }
        
 }

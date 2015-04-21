@@ -224,6 +224,26 @@
                         <Label Content="&#xA;&#xA;" HorizontalAlignment="Left" Margin="282,51,0,0" VerticalAlignment="Top" x:Name="lbToCurrency" Height="34" Width="72" Foreground="White" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
+                <TextBox x:Name="tbDoneOnTrip_Copy" Height="135" TextWrapping="Wrap" Text="" Width="300" Background="Black" Foreground="White" Margin="348,177,174,686"/>
+                <TabItem Header="Statistik&#xD;&#xA;" HorizontalAlignment="Left" Height="63" VerticalAlignment="Top" Width="127" Margin="-2.4,-2,-69.4,0">
+                    <Grid x:Name="Statistik" Background="#FFE5E5E5" Margin="0,-10,-0.4,9.6">
+                        <Label x:Name="lbTotalKilometer" Content="Antal Kilometer: " HorizontalAlignment="Left" Margin="10,675,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cbAllCountries" HorizontalAlignment="Left" Margin="543,246,0,0" VerticalAlignment="Top" Width="196"/>
+                        <ComboBox x:Name="cbAllUsers" HorizontalAlignment="Left" Margin="329,246,0,0" VerticalAlignment="Top" Width="187"/>
+                        <Label x:Name="lbSelectUser" Content="Välj Användare" HorizontalAlignment="Left" Margin="329,215,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbSelectCountry" Content="Välj Land" HorizontalAlignment="Left" Margin="543,215,0,0" VerticalAlignment="Top"/>
+                        <ListBox x:Name="lbReports" HorizontalAlignment="Left" Height="154" Margin="10,246,0,0" VerticalAlignment="Top" Width="291"/>
+                        <Label x:Name="lbSelectReport" Content="Välj Rapport" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="chbMonth" Content="Månad" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="chbQuater" Content="Kvartal" HorizontalAlignment="Left" Margin="104,104,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbChoseCheckBox" Content="Välj antingen månad eller kvartals översikt!" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbCash" Content="Total Summa:" HorizontalAlignment="Left" Margin="10,706,0,0" VerticalAlignment="Top"/>
+                        <ListBox x:Name="lbUserStatisic" HorizontalAlignment="Left" Height="205" Margin="10,470,0,0" VerticalAlignment="Top" Width="291"/>
+                        <ListBox x:Name="lbCountriesStatistic" HorizontalAlignment="Left" Height="205" Margin="329,470,0,0" VerticalAlignment="Top" Width="291"/>
+                        <Label x:Name="lbUserStatistic" Content="Användare" HorizontalAlignment="Left" Margin="10,439,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbCountryStatistic" Content="Länder" HorizontalAlignment="Left" Margin="329,439,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
             </TabControl>
         </Grid>
 

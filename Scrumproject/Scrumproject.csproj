@@ -79,6 +79,9 @@
     <Compile Include="GUI\ForgottenPasswordWindow.xaml.cs">
       <DependentUpon>ForgottenPasswordWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logic\DateHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
     <Compile Include="Logic\ReportHandler.cs" />
@@ -107,6 +110,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="GUI\ForgottenPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Map.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
