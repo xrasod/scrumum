@@ -929,9 +929,15 @@ namespace Scrumproject
 
         private void cbAllCountriesStatistics_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        
+        }
+
+        private void cbAllCountriesStatistics_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
             lbReports.ItemsSource =
-                statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
-                    cbAllCountriesStatistics.SelectedItem.ToString());
+            statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
+                cbAllCountriesStatistics.SelectedItem.ToString());
+
         }
 
       

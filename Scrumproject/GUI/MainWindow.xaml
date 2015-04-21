@@ -237,7 +237,7 @@
                             </LinearGradientBrush>
                         </Grid.Background>
                         <Label x:Name="lbTotalKilometer" Content="Antal Kilometer: " HorizontalAlignment="Left" Margin="43,521,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <ComboBox x:Name="cbAllCountries" HorizontalAlignment="Left" Margin="356.731,136,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1"/>
+                        <ComboBox x:Name="cbAllCountriesStatistics" HorizontalAlignment="Left" Margin="356.731,136,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1" SelectionChanged="cbAllCountriesStatistics_SelectionChanged_1"/>
                         <ComboBox x:Name="cbAllUsers" HorizontalAlignment="Left" Margin="10.731,136,0,0" VerticalAlignment="Top" Width="168" Grid.Column="1"/>
                         <Label x:Name="lbSelectUser" Content="Välj Användare" HorizontalAlignment="Left" Margin="427,136,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <Label x:Name="lbSelectCountry" Content="Välj Land" HorizontalAlignment="Left" Margin="262,133,0,0" VerticalAlignment="Top" Foreground="White" Width="90" Grid.Column="1"/>
