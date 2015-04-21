@@ -28,18 +28,14 @@ namespace Scrum.Data.Data
         }
 
         public T Ladda(string sokvag)
-        {
-            
-            
+        {             
                 using (var streamreader = new StreamReader(sokvag))
                 {
                     return Xml.Deserialize(streamreader) as T;
-                }
-            
-            
+                }     
         }
 
-
+        
     }
 
 
