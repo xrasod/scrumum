@@ -83,6 +83,7 @@
       <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\DateHandler.cs" />
+    <Compile Include="Logic\DayHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
     <Compile Include="Logic\ReportHandler.cs" />
     <Compile Include="Logic\StatisticsHandler.cs" />

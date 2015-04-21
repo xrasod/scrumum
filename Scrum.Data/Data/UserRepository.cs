@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Scrum.Data;
 
-namespace Scrumproject.Data
+namespace Scrum.Data.Data
 {
     public class UserRepository
     {
@@ -32,7 +30,7 @@ namespace Scrumproject.Data
 
         public List<User> GetAllUsers()
         {
-            
+
             using (var context = new scrumEntities())
             {
                 return context.Users.ToList();
@@ -51,7 +49,7 @@ namespace Scrumproject.Data
         {
             using (var context = new scrumEntities())
             {
-                var loggedInUser = context.Users.FirstOrDefault(x => x.Username == username); 
+                var loggedInUser = context.Users.FirstOrDefault(x => x.Username == username);
                 var chef = context.Bosses.FirstOrDefault(x => x.BID == loggedInUser.BID);
                 return chef.FirstName + " " + chef.LastName;
             }
@@ -75,5 +73,58 @@ namespace Scrumproject.Data
             }
         }
 
+        public User GetUserID(string user)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Users.FirstOrDefault(x => x.Username.Equals(user));
+            }
+        }
+
+
+        public static void SaveTravelInfo(TravelInfo ti)
+        {
+            using (var context = new scrumEntities())
+            {
+                context.TravelInfoes.Add(ti);
+            }
+        }
+
+        public static User GetUserIDS(string user)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Users.FirstOrDefault(x => x.Username.Equals(user));
+            }
+        }
+
+        public int SaveReport(Report r)
+        {
+            using (var context = new scrumEntities())
+            {
+                context.Reports.Add(r);
+                context.SaveChanges();
+
+                int id = r.RID;
+                return id;
+            }
+        }
+
+        public static void SaveReciept(Reciept ri)
+        {
+            using (var context = new scrumEntities())
+            {
+                context.Reciepts.Add(ri);
+                context.SaveChanges();
+            }
+        }
+
+        public static Country GetCountryID(string name)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Countries.FirstOrDefault(x => x.Name.Equals(name));
+            }
+        }
     }
 }
