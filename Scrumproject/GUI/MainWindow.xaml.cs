@@ -324,7 +324,7 @@ namespace Scrumproject
         {
             _reportDraftSaving.Description = tbDoneOnTrip.Text;
             _reportDraftSaving.NumberOfKilometersDrivenInTotal = Int32.Parse(TbTotalKm.Text);
-            _reportDraftSaving.KilometersDriven = Int32.Parse(TbCarTripLengthKm.Text);
+            _reportDraftSaving.KilometersDriven = Int32.Parse(TbTotalKm.Text);
             _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
             _reportDraftSaving.StartDate = dpStartDate.Text;
             _reportDraftSaving.EndDate = dpEndDate.Text;
