@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <TabControl Grid.ColumnSpan="7" BorderBrush="Black" Margin="0,0,-629,-106" HorizontalAlignment="Left" Width="1281" Height="1069" VerticalAlignment="Top" Grid.RowSpan="2" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl Grid.ColumnSpan="7" BorderBrush="Black" Margin="0,0,-629,-106" HorizontalAlignment="Left" Width="1281" Height="1069" VerticalAlignment="Top" Grid.RowSpan="2" SelectionChanged="TabControl_SelectionChanged" FontFamily="Myriad Pro">
                 <TabControl.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -121,27 +121,27 @@
                 </TabItem>
                 <TabItem Header="Chef" HorizontalAlignment="Left" Width="211" Margin="99,-1,-99,1" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" FontFamily="Myriad Pro" >
                     <Canvas Margin="10,86,81,390">
-                        <Label x:Name="lbUsers" Content="Användare" Canvas.Left="10" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" Canvas.Top="-74" />
-                        <Label x:Name="lbUsernameLabel" Content="Användarnamn" Canvas.Left="503" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-30"/>
-                        <Label x:Name="lbPasswordLabel" Content="Lösenord" Canvas.Left="505" Width="93" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-1"/>
+                        <Label x:Name="lbUsers" Content="Användare" Canvas.Left="10" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" Canvas.Top="-74" FontFamily="Myriad Pro" />
+                        <Label x:Name="lbUsernameLabel" Content="Användarnamn" Canvas.Left="503" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-30" FontFamily="Myriad Pro"/>
+                        <Label x:Name="lbPasswordLabel" Content="Lösenord" Canvas.Left="505" Width="93" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-1" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnAddUser" Content="Lägg till" Canvas.Left="505" Canvas.Top="219" Width="123" RenderTransformOrigin="0.5,0.5" Click="Button_Click" Foreground="White" Background="Black" TabIndex="25"/>
                         <Label Content="Chef" Canvas.Left="505" Canvas.Top="176" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <Label x:Name="lbLoggedIn" Content="Inloggad:" Canvas.Left="503" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-79"/>
+                        <Label x:Name="lbLoggedIn" Content="Inloggad:" Canvas.Left="503" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-79" FontFamily="Myriad Pro"/>
                         <Label x:Name="lbLoggedInUser" Content="" Canvas.Left="628" Width="121" Foreground="White" FontWeight="Bold" FontSize="12" BorderBrush="White" Height="29" Canvas.Top="-79"/>
-                        <Label x:Name="lbFirstName" Content="Förnamn" Canvas.Left="505" Canvas.Top="87" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Label x:Name="lbFirstName" Content="Förnamn" Canvas.Left="505" Canvas.Top="87" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
                         <TextBox x:Name="tbFirstName" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="94" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" RenderTransformOrigin="0.505,-3.09" TabIndex="3"/>
-                        <Label x:Name="lbLastName" Content="Efternamn " Canvas.Left="505" Canvas.Top="118" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Label x:Name="lbLastName" Content="Efternamn " Canvas.Left="505" Canvas.Top="118" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
                         <TextBox x:Name="tbLastNamne" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="124" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="4" />
-                        <Label x:Name="lbSSN" Content="Personnummer " Canvas.Left="505" Canvas.Top="59" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Label x:Name="lbSSN" Content="Personnummer " Canvas.Left="505" Canvas.Top="59" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
                         <TextBox x:Name="tbSsn" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="65" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="2"/>
-                        <Label x:Name="lbEmail" Content="E-post " Canvas.Left="505" Canvas.Top="147" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.45,-0.379"/>
+                        <Label x:Name="lbEmail" Content="E-post " Canvas.Left="505" Canvas.Top="147" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.45,-0.379" FontFamily="Myriad Pro"/>
                         <TextBox x:Name="tbEmail" Height="23" Canvas.Left="629" TextWrapping="Wrap" Text="" Canvas.Top="153" Width="120" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="5"/>
                         <Button x:Name="btnUpdateInfo" Content="Uppdatera" Canvas.Left="629" Canvas.Top="219" Width="120" Click="btnUpdateInfo_Click" Background="Black" Foreground="White" TabIndex="26"/>
                         <Button x:Name="btnClear" Content="Rensa" Canvas.Left="505" Canvas.Top="240" Width="123" Background="Black" Foreground="White" TabIndex="27"/>
                         <Button x:Name="btnInactive" Content="Inaktivera" Canvas.Left="629" Canvas.Top="240" Width="120" Click="btnInactive_Click" Foreground="White" Background="Black" TabIndex="28"/>
                         <TextBox x:Name="tbPassword" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="5" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1" IsTabStop="False" Canvas.Top="-24"/>
-                        <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="10" Canvas.Top="210" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="10" Canvas.Top="210" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="504" Canvas.Top="279" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29">
                             <Button.RenderTransform>
                                 <TransformGroup>
@@ -163,7 +163,7 @@
                         <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="14" TextWrapping="Wrap" Text="" Canvas.Top="152" Width="294" Background="Black" Foreground="White" TabIndex="8"/>
                         <Button x:Name="btnSearchUser1" Content="Sök" Canvas.Left="313" Canvas.Top="152" Width="99" Background="Black" Foreground="White" Height="23" Click="btnSearchUser1_Click"/>
                         <TextBox x:Name="tbBoss" Height="23" Canvas.Left="629" TextWrapping="Wrap" Text="" Canvas.Top="181" Width="120" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="6"/>
-                        <Label x:Name="lbUserID" Content="Anst. nr" Canvas.Left="505" Canvas.Top="28" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Label x:Name="lbUserID" Content="Anst. nr" Canvas.Left="505" Canvas.Top="28" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
                         <TextBox x:Name="tbUserID" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="34" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" IsTabStop="False"/>
                         <ListBox x:Name="listBoxUsers" Height="166" Width="398" Canvas.Left="14" Background="Black" Foreground="White" Canvas.Top="-19" IsTabStop="True" TabIndex="7" SelectionChanged="listBoxUsers_SelectionChanged_1"/>
                         <ListView x:Name="lvCountriesEdit" Height="402" Canvas.Left="843" Canvas.Top="-30" Width="326" RenderTransformOrigin="-2.41,0.58" Background="Black" TabIndex="12" SelectionChanged="lvCountriesEdit_SelectionChanged_1" Foreground="White">
@@ -176,19 +176,19 @@
                         <TextBox x:Name="tbCountryName" Height="23" Canvas.Left="943" TextWrapping="Wrap" Text="" Canvas.Top="372" Width="226"  Background="Black" TabIndex="17" Foreground="White"/>
                         <TextBox x:Name="tbMaxCash" Height="23" Canvas.Left="943" TextWrapping="Wrap" Text="" Canvas.Top="395" Width="226" Background="Black" TabIndex="18" Foreground="White"/>
                         <TextBox x:Name="tbCurrency" Height="23" Canvas.Left="943" TextWrapping="Wrap" Text="" Canvas.Top="418" Width="226" Background="Black" TabIndex="19" Foreground="White" />
-                        <Label x:Name="lbCountryName" Content="Landnamn" Canvas.Left="843" Canvas.Top="368" Foreground="White"/>
-                        <Label x:Name="lbMaxCash" Content="Traktamente" Canvas.Left="843" Canvas.Top="389" Foreground="White"/>
+                        <Label x:Name="lbCountryName" Content="Landnamn" Canvas.Left="843" Canvas.Top="368" Foreground="White" FontFamily="Myriad Pro"/>
+                        <Label x:Name="lbMaxCash" Content="Traktamente" Canvas.Left="843" Canvas.Top="389" Foreground="White" FontFamily="Myriad Pro"/>
                         <Label Content="Valuta" Canvas.Left="845" Canvas.Top="415" Foreground="White" RenderTransformOrigin="0.853,0.552"/>
                         <Button x:Name="btnAddCountry" Content="Lägg till" Canvas.Left="843" Canvas.Top="447" Width="75" Background="Black" Foreground="White" TabIndex="33" Click="btnAddCountry_Click_2" RenderTransformOrigin="0.613,0.609"/>
                         <Button x:Name="btnUpdateCountry" Content="Uppdatera" Canvas.Left="918" Canvas.Top="447" Width="88" Background="Black" Foreground="White" TabIndex="34" Click="btnUpdateCountry_Click" RenderTransformOrigin="0.875,0.478"/>
                         <Button x:Name="btnRemoveCountry" Content="Ta bort" Canvas.Left="1094" Canvas.Top="447" Width="75" RenderTransformOrigin="-0.227,0.63" Foreground="White" Background="Black" TabIndex="35" Click="btnRemoveCountry_Click"/>
-                        <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="843" Canvas.Top="-59" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
+                        <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="843" Canvas.Top="-59" RenderTransformOrigin="-1.322,0.379" Foreground="White" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="337" Canvas.Top="-74" Width="75" RenderTransformOrigin="0.413,-0.391" Background="Black" Foreground="White" Click="btnLogOutChef_Click" Visibility="Hidden"/>
-                        <Button x:Name="btnFillListWithUsersIAmBossFor" Content="Visa användare jag är auktoriserad att godkänna rapporter för" Canvas.Left="14" Canvas.Top="-44" Width="398" RenderTransformOrigin="0.413,-0.391" Background="Black" Foreground="White" FontSize="12" Click="btnFillListWithUsersIAmBossFor_Click"/>
+                        <Button x:Name="btnFillListWithUsersIAmBossFor" Content="Visa användare jag är auktoriserad att godkänna rapporter för" Canvas.Left="14" Canvas.Top="-44" Width="398" RenderTransformOrigin="0.413,-0.391" Background="Black" Foreground="White" FontSize="12" Click="btnFillListWithUsersIAmBossFor_Click" FontFamily="Myriad Pro"/>
                         <ListBox x:Name="lbShowReports" Height="205" Canvas.Left="14" Canvas.Top="239" Width="398" Background="Black" Foreground="White"/>
                         <Button x:Name="btnSearchReport" Content="Sök" Canvas.Left="212" Canvas.Top="449" Width="36" RenderTransformOrigin="0.505,0.304" Background="Black" Foreground="White"/>
                         <TextBox x:Name="tbSearchReport" Height="23" Canvas.Left="14" TextWrapping="Wrap" Canvas.Top="449" Width="193" RenderTransformOrigin="0.454,0.148" Foreground="White" Background="Black"/>
-                        <Button x:Name="btnLogInChef" Content="Logga in" Height="27" Width="75" Canvas.Left="336" Canvas.Top="-74" Background="Black" Foreground="White" Click="btnLogInChef_Click"/>
+                        <Button x:Name="btnLogInChef" Content="Logga in" Height="27" Width="75" Canvas.Left="336" Canvas.Top="-74" Background="Black" Foreground="White" Click="btnLogInChef_Click" FontFamily="Myriad Pro"/>
 
                     </Canvas>
                 </TabItem>
