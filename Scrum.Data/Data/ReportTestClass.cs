@@ -13,7 +13,7 @@ namespace Scrum.Data.Data
             }
         }
 
-        public void SaveUpdatedReportStatus(int id, bool status)
+        public void SaveUpdatedReportStatus(int id, string status)
         {
 
             using (var context = new scrumEntities())

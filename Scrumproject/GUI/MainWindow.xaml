@@ -144,7 +144,6 @@
                         <TextBox x:Name="tbPassword" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Canvas.Top="13" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="579" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" Canvas.Top="-16" TabIndex="1" IsTabStop="False"/>
                         <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="26" Canvas.Top="213" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <TextBox x:Name="tbSentInReports" Height="270" Canvas.Left="30" TextWrapping="Wrap" Text="" Canvas.Top="237" Width="398" Background="Black" Foreground="White" TabIndex="9"/>
                         <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="456" Canvas.Top="284" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29">
                             <Button.RenderTransform>
                                 <TransformGroup>
@@ -162,8 +161,7 @@
                         <CheckBox x:Name="cbSortByDate" Content="Datum" Canvas.Left="297" Canvas.Top="207" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="20"/>
                         <CheckBox x:Name="cbSortByName" Content="Namn" Canvas.Left="368" Canvas.Top="209" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22"/>
                         <Label Content="Sortering" Canvas.Left="216" Canvas.Top="201" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <TextBox x:Name="tbSearchReports" Height="23" Canvas.Left="30" TextWrapping="Wrap" Text="" Canvas.Top="512" Width="298" Background="Black" Foreground="White" TabIndex="10"/>
-                        <Button x:Name="btnSearchReports" Content="Sök" Canvas.Left="333" Canvas.Top="512" Width="95" Background="Black" Foreground="White" Height="23" TabIndex="31"/>
+                        <Button x:Name="btnShowReports" Content="Visa Rapporter" Canvas.Left="333" Canvas.Top="512" Width="95" Background="Black" Foreground="White" Height="23" TabIndex="31" Click="btnShowReports_Click"/>
                         <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="30" TextWrapping="Wrap" Text="" Canvas.Top="155" Width="294" Background="Black" Foreground="White" TabIndex="8"/>
                         <Button x:Name="btnSearchUser1" Content="Sök" Canvas.Left="329" Canvas.Top="155" Width="99" Background="Black" Foreground="White" Height="23" Click="btnSearchUser1_Click"/>
                         <TextBox x:Name="tbBoss" Height="23" Canvas.Left="580" TextWrapping="Wrap" Text="" Canvas.Top="189" Width="120" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="6"/>
@@ -189,6 +187,7 @@
                         <Label Content="Välj ett land att uppdatera eller lägg till nytt" Canvas.Left="30" Canvas.Top="539" RenderTransformOrigin="-1.322,0.379" Foreground="White"/>
                         <Button x:Name="btnLogOutChef" Content="Logga ut" Canvas.Left="721" Canvas.Top="6" Width="75" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" Click="btnLogOutChef_Click" Visibility="Hidden"/>
                         <Button x:Name="btnFillListWithUsersIAmBossFor" Content="Visa användare jag är auktoriserad att godkänna rapporter för" Canvas.Left="30" Canvas.Top="-41" Width="398" RenderTransformOrigin="0.413,-0.391" Background="White" Foreground="Black" FontSize="12" Click="btnFillListWithUsersIAmBossFor_Click"/>
+                        <ListBox x:Name="lbShowReports" Height="251" Canvas.Left="30" Canvas.Top="242" Width="398"/>
 
                     </Canvas>
                 </TabItem>

@@ -24,8 +24,8 @@ namespace Scrumproject.Logic
             var filteredReportList = reportList.Join(userList, r => r.UID, u => u.UID,
                 (r, u) => new {Report = r, User = u})
                 .OrderByDescending(ur => ur.Report.ReportDate)
-                
-                .Select(ur => ur.User.Username +  "    -  " + ur.Report.RID + "   -  " +ur.Report.Status ).ToList();
+
+                .Select(ur => "Datum   :" + ur.Report.ReportDate + " " + " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " +  ur.Report.Status).ToList();
             
             
              
@@ -52,14 +52,27 @@ namespace Scrumproject.Logic
         {
             int reportId = GetReportId(reportname);
 
-
-            ReportTestClass.SaveUpdatedReportStatus(reportId, false);
+            string setStatusNotAccepted = "Avslag";
+            ReportTestClass.SaveUpdatedReportStatus(reportId, setStatusNotAccepted);
         }
 
         public void Acceptpost(string reportname)
         {
             int reportId = GetReportId(reportname);
-            ReportTestClass.SaveUpdatedReportStatus(reportId, true);
+            string setStatusAccepted = "Godkänd";
+            ReportTestClass.SaveUpdatedReportStatus(reportId,setStatusAccepted);
+        }
+        public int checkReportID(string s)
+        {
+            var b = string.Empty;
+            int val = 0;
+
+            b = s.Where(t => Char.IsDigit(t)).Aggregate(b, (current, t) => current + t);
+
+            if (b.Length > 0)
+                val = Int32.Parse(b);
+
+            return val;
         }
     }
 }
