@@ -493,7 +493,7 @@ namespace Scrumproject
         private void btnLogOutChef_Click(object sender, RoutedEventArgs e)
         {
             lbLoggedInUser.Content = "";
-            btnLogInChef.Visibility = Visibility.Visible;
+            btnFillListWithUsersIAmBossFor.Visibility = Visibility.Visible;
             btnLogOutChef.Visibility = Visibility.Hidden;
         }
            
