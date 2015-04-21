@@ -23,7 +23,7 @@ namespace Scrumproject.Logic
             var userList = UserRepository.GetAllUsers();
             var filteredReportList = reportList.Join(userList, r => r.UID, u => u.UID,
                 (r, u) => new {Report = r, User = u})
-                .OrderByDescending(ur => ur.Report.ReportDate)
+                .OrderByDescending(ur => ur.Report.RID)
 
                 .Select(ur => " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " +  ur.Report.Status).ToList();
             
