@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Boss">
           <Key>
             <PropertyRef Name="BID" />
@@ -12,7 +12,7 @@
           <Property Name="BID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="SSN" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="PW" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -64,8 +64,8 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="UID" Type="int" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="15" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Kilometers" Type="decimal" Precision="5" Scale="1" />
-          <Property Name="TotalAmount" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Kilometers" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="ReportDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -88,7 +88,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="SSN" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="PW" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -257,7 +257,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSN" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PW" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -302,10 +302,10 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="UID" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" />
+          <Property Name="Status" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Kilometers" Type="Decimal" Precision="5" Scale="1" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Kilometers" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Reciepts" Relationship="Self.FK__Reciept__RID__4316F928" FromRole="Report" ToRole="Reciept" />
           <NavigationProperty Name="User" Relationship="Self.FK__Report__UID__3E52440B" FromRole="Report" ToRole="Users" />
           <NavigationProperty Name="TravelInfoes" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="Report" ToRole="TravelInfo" />
@@ -318,7 +318,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSN" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PW" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />

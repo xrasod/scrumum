@@ -49,6 +49,7 @@ namespace Scrumproject.Logic
         {
             DayHandler d = new DayHandler();
             d.country = "hej";
+
             d.subsistence = 1;
             list.Add(d);
             var count = 0;
@@ -71,6 +72,7 @@ namespace Scrumproject.Logic
                 if (country != item.country && count != 0)
                 {
                     if (item.date != null)
+                        //behöver en fix
                     {
                         Country c = new Country();
                         c = UserRepository.GetCountryID(item.country);
