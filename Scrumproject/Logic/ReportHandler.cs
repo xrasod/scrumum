@@ -119,11 +119,10 @@ namespace Scrumproject.Logic
                     join travel in TravelList on report.RID equals travel.RID
                     join country in CountriesList on travel.CID equals country.CID
                     where
-                        user.FirstName == s || user.LastName == s || country.Name == s ||
-                        travel.StartDate == Convert.ToDateTime(s)
+                        user.FirstName == s || user.LastName == s || country.Name == s
                     orderby report.RID
                     select
-                        "Använadre: " + user.FirstName + " " + user.LastName +" "+ country.Name + " ID:" + report.RID + " " + report.Status).ToList();
+                        "Anv: " + user.FirstName + " " + user.LastName +" Land: "+ country.Name + " ID:" + report.RID + " " + report.Status).ToList();
 
 
             return filteredResultList;
