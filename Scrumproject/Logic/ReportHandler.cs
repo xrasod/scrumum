@@ -6,6 +6,7 @@ using Scrum.Data;
 using Scrum.Data.Data;
 using Scrumproject.Data;
 
+
 namespace Scrumproject.Logic
 {
     public class ReportHandler
@@ -13,6 +14,8 @@ namespace Scrumproject.Logic
 
         ReportTestClass ReportTestClass = new ReportTestClass();
         UserRepository UserRepository = new UserRepository();
+        CountriesRepository countryRepository = new CountriesRepository();
+        TravelRepository travelRepository = new TravelRepository();
 
 
 
@@ -73,6 +76,33 @@ namespace Scrumproject.Logic
                 val = Int32.Parse(b);
 
             return val;
+        }
+
+        public List<string> searchReports(string s)
+        {
+            //var BossesList = UserRepository.GetAllBosses();
+            var UsersList = BossRepository.GetAll();
+            var CountriesList = countryRepository.GetAllCountries();
+            var ReportsList = ReportTestClass.GetAllReports();
+            var TravelList = travelRepository.GetAllTravels();
+                
+                var filteredResultList = (from user in UsersList
+                    join report in ReportsList on user.UID equals report.UID
+                    join travel in TravelList on report.RID equals travel.RID
+                    join country in CountriesList on travel.CID equals country.CID
+                    where
+                        user.FirstName == s || user.LastName == s || country.Name == s ||
+                        travel.StartDate == Convert.ToDateTime(s)
+                    orderby report.RID
+                    select
+                        "Använadre: " + user.FirstName + " " + user.LastName +" "+ country.Name + " ID:" + report.RID + " " + report.Status).ToList();
+
+
+            return filteredResultList;
+
+
+
+
         }
     }
 }

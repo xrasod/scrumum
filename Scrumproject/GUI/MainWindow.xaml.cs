@@ -934,6 +934,18 @@ namespace Scrumproject
                     cbAllCountriesStatistics.SelectedItem.ToString());
         }
 
+        private void btnSearchReport_Click(object sender, RoutedEventArgs e)
+        {
+            var search = tbSearchReport.Text;
+
+            
+
+            lbShowReports.ItemsSource = reportDanger.searchReports(search);
+
+
+
+        }
+
       
        
 }
