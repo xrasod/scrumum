@@ -14,9 +14,6 @@ namespace Scrum.Data.Data
         public XmlSerializer Xml;
 
 
-
-
-
         public void Spara(List<T> obj, string sokvag)
         {
             Xml = new XmlSerializer(typeof(List<T>));
@@ -34,9 +31,6 @@ namespace Scrum.Data.Data
                 return Xml.Deserialize(streamreader) as List<T>;
             }
         }
-
-
-
 
     }
 }
