@@ -40,6 +40,13 @@ namespace Scrumproject.Logic
             var countryList = countriesRepositoryMethodAccesor.GetAllCountries();
             var countryName = countryList.Select(x => x.Name).ToList();
             return countryName;
-        } 
+        }
+
+        public List<string> SendUsersToGui()
+        {
+            var userList = userRepositoryMethodAccessor.GetAllUsers();
+            var userName = userList.Select(x => x.Username).ToList();
+            return userName;
+        }
     }
 }
