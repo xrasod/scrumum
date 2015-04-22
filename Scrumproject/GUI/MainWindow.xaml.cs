@@ -38,6 +38,7 @@ namespace Scrumproject
         XmlReader Xmlreader = new XmlReader();
         ReportHandler reportDanger = new ReportHandler();
         StatisticsHandler statisticsHandler = new StatisticsHandler();
+        List<DayHandler> dayhandler = new List<DayHandler>();
 
         internal static MainWindow main;
         internal string Status
@@ -107,6 +108,45 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
+            string[] arr = new string[3];
+            List<DayHandler> d = new List<DayHandler>();
+            List<string> list = new List<string>();
+            var j = listBoxDays.Items;
+
+            for (int i = 0; listBoxDays.Items.Count > i; i++)
+            {
+                j.MoveCurrentToNext();
+                list.Add(j.CurrentItem.ToString());
+            }
+
+            foreach (var h in list)
+            {
+                DayHandler dh = new DayHandler();
+                h.Trim();
+                string replaced = h.Replace("kr", "");
+                string[] words = replaced.Split('-');
+                dh.date = words[0].Trim();
+                dh.country = words[1].Trim();
+                var o = words[2];
+                double dou = Convert.ToDouble(o);
+                dh.subsistence = dou;
+                d.Add(dh);
+            }
+
+            List<string> recieptList = new List<string>();
+            for (int i = 0; listBoxReceipts.Items.Count > i; i++)
+            {
+                recieptList.Add(listBoxReceipts.Items[i].ToString());
+            }
+            DayHandler day = new DayHandler();
+            var totalkm = TbTotalKm.Text;
+            var totalreciept = tbTotalRecieptAmount.Text;
+            var totalrecieptdec = Convert.ToDouble(totalreciept);
+            double totalkmdec = Convert.ToDouble(totalkm);
+            decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
+            var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
+            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptList);
+
             try
             {
                 List<string> savedReceipts = new List<string>();
@@ -315,6 +355,20 @@ namespace Scrumproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             listBoxReceipts.Items.Add(tbReceiptFile.Text);
+
+            try
+            {
+                double reciept = Convert.ToDouble(tbSum.Text);
+                double TotalReciept = Convert.ToDouble(tbTotalRecieptAmount.Text);
+
+                double totalRecieptAmount = reciept + TotalReciept;
+                tbTotalRecieptAmount.Text = totalRecieptAmount.ToString();
+                tbTotalRecieptAmount.IsReadOnly = true;
+            }
+            catch
+            {
+                MessageBox.Show("Ange summa!");
+            }
         }
 
         private void btnRemoveSelectedReceipt_Click(object sender, RoutedEventArgs e)
@@ -364,30 +418,20 @@ namespace Scrumproject
         {
             listBoxDays.Items.Clear();
             var dateHandler = new DateHandler();
-            var daysOff = 0;
-            
-            if (string.IsNullOrEmpty(TbDaysOff.Text))
-            {
-                daysOff = 0;
-            }
-            
-            else
-            {
-                daysOff = Convert.ToInt32(TbDaysOff.Text);    
-            }
-            
-            var setDate = dateHandler.GetTimeDiffrence(dpStartDate.Text, dpEndDate.Text, daysOff);
-            if (setDate.Count == 0)
-            {
-                MessageBox.Show("Du kan inte resa mindre dagar än dagar du är ledig eller välja senare start- än slutdatum.");
-            }
-            else
-            {
+
+            var setDate = dateHandler.GetDays(dpStartDate.SelectedDate.Value, dpEndDate.SelectedDate.Value);
+            //if (setDate.Count == 0)
+            //{
+            //    MessageBox.Show("Du kan inte resa mindre dagar än dagar du är ledig eller välja senare start- än slutdatum.");
+            //}
+            //else
+            //{
             foreach (var item in setDate)
             {
-                listBoxDays.Items.Add(item);
+                var hej = String.Format(item.Year.ToString() + "/" + item.Month.ToString() + "/" + item.Day.ToString());
+                listBoxDays.Items.Add(hej);
             }
-            }
+            //}
         }
 
 
@@ -499,16 +543,48 @@ namespace Scrumproject
             btnLogInChef.Visibility = Visibility.Visible;
             btnLogOutChef.Visibility = Visibility.Hidden;
         }
-           
-        
+
+
 
         private void btnSaveStartCountry_Click(object sender, RoutedEventArgs e)
         {
+            LogicHandler l = new LogicHandler();
+            DayHandler d = new DayHandler();
+
+            var dayinfo = "";
+            var breakfast = CHBBreakfast.IsChecked.Value;
+            var lunch = CHBLunch.IsChecked.Value;
+            var dinner = CHBDinner.IsChecked.Value;
+            double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
+
+            var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+
             try
             {
-                var dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                              LbTraktamente.Content.ToString() + " kr";
-                listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                if (CHBVacationday.IsChecked == true)
+                {
+                    d.date = listBoxDays.SelectedItem.ToString();
+                    d.country = CbCountries.SelectedItem.ToString();
+
+                    d.subsistence = 0;
+
+                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                    "0 kr";
+                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                }
+                else
+                {
+                    d.date = listBoxDays.SelectedItem.ToString();
+                    d.country = CbCountries.SelectedItem.ToString();
+
+                    d.subsistence = subsistence;
+
+                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                  subsistence + " kr";
+                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                }
+                dayhandler.Add(d);
+                //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
             }
             catch
             {
@@ -520,6 +596,22 @@ namespace Scrumproject
         {
             try
             {
+                var count = 0;
+                for (int i = 0; i < dayhandler.Count; i++)
+                {
+
+                    foreach (var day in dayhandler)
+                    {
+
+                        if (day.date.Contains(listBoxDays.SelectedValue.ToString()))
+                        {
+                            dayhandler.RemoveAt(count);
+                        }
+
+                    }
+                    count++;
+                }
+
                 var firstSpace = listBoxDays.SelectedValue.ToString().IndexOf(' ');
                 listBoxDays.Items[listBoxDays.SelectedIndex] = listBoxDays.SelectedValue.ToString()
                     .Substring(0, firstSpace);
