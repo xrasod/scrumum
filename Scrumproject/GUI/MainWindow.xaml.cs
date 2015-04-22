@@ -296,7 +296,7 @@ namespace Scrumproject
             // Set filter for file extension and default file extension
             dlg.DefaultExt = ".png";
             dlg.Filter =
-                "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+                "JPG Files (*.jpg)|*.jpeg|PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpg|GIF Files (*.gif)|*.gif";
 
 
             // Display OpenFileDialog by calling ShowDialog method
@@ -944,6 +944,18 @@ namespace Scrumproject
         {
             var reportId = localHandeler.checkIfDigits(lbShowReports.SelectedValue.ToString());
             reportDanger.createPdfFromDbReport(reportId);
+
+        }
+
+        private void btnSearchReport_Click(object sender, RoutedEventArgs e)
+        {
+            var search = tbSearchReport.Text;
+
+            
+
+            lbShowReports.ItemsSource = reportDanger.searchReports(search);
+
+
 
         }
 
