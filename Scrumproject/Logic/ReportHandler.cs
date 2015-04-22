@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using Scrum.Data;
 using Scrum.Data.Data;
 using Scrumproject.Data;
+using Scrumproject.Logic.Entities;
 
 namespace Scrumproject.Logic
 {
@@ -13,6 +14,7 @@ namespace Scrumproject.Logic
 
         ReportTestClass ReportTestClass = new ReportTestClass();
         UserRepository UserRepository = new UserRepository();
+        PDFRepository pdfRep = new PDFRepository();
 
 
 
@@ -74,5 +76,18 @@ namespace Scrumproject.Logic
 
             return val;
         }
+
+        public void createPdfFromDbReport(int id)
+        {
+            var report = ReportTestClass.GetSingleReport(id);
+
+            var pdfReport = "Inskickad av: " + report.User.FirstName + report.User.LastName;
+
+            pdfRep.createPdfandOpen(pdfReport, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+
+
+        }
+
+
     }
 }

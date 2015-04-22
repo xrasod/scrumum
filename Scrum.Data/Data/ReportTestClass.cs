@@ -26,6 +26,16 @@ namespace Scrum.Data.Data
                     context.SaveChanges();
                 }
             }
+        }
+
+        public Report GetSingleReport(int id)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Reports.FirstOrDefault(x => x.RID == id);
+            }
         } 
+
+
     }
 }

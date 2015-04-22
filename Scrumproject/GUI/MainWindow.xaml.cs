@@ -940,6 +940,13 @@ namespace Scrumproject
 
         }
 
+        private void btnShowPDF_Click(object sender, RoutedEventArgs e)
+        {
+            var reportId = localHandeler.checkIfDigits(lbShowReports.SelectedValue.ToString());
+            reportDanger.createPdfFromDbReport(reportId);
+
+        }
+
       
        
 }

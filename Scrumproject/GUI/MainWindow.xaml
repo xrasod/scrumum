@@ -142,7 +142,7 @@
                         <TextBox x:Name="tbPassword" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="5" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1" IsTabStop="False" Canvas.Top="-24"/>
                         <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="10" Canvas.Top="210" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="504" Canvas.Top="279" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29">
+                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="504" Canvas.Top="279" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29" Click="btnShowPDF_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
