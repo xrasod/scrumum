@@ -26,6 +26,17 @@ namespace Scrum.Data.Data
             doc.Close();
         }
 
+        public void createPdfandOpen(string report, string filnamn)
+        {
+            FileStream fs = new FileStream(filnamn, FileMode.Create, FileAccess.Write, FileShare.None);
+            Document doc = new iTextSharp.text.Document();
+            PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+            doc.Open();
+            doc.Add(new Paragraph(report));
+            doc.Close();
+            System.Diagnostics.Process.Start(filnamn);
+        }
+
 
 
 

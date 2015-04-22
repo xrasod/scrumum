@@ -336,7 +336,7 @@ namespace Scrumproject
             // Set filter for file extension and default file extension
             dlg.DefaultExt = ".png";
             dlg.Filter =
-                "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+                "JPG Files (*.jpg)|*.jpeg|PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpg|GIF Files (*.gif)|*.gif";
 
 
             // Display OpenFileDialog by calling ShowDialog method
@@ -1021,9 +1021,34 @@ namespace Scrumproject
 
         private void cbAllCountriesStatistics_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        
+        }
+
+        private void cbAllCountriesStatistics_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
             lbReports.ItemsSource =
-                statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
-                    cbAllCountriesStatistics.SelectedItem.ToString());
+            statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
+                cbAllCountriesStatistics.SelectedItem.ToString());
+
+        }
+
+        private void btnShowPDF_Click(object sender, RoutedEventArgs e)
+        {
+            var reportId = localHandeler.checkIfDigits(lbShowReports.SelectedValue.ToString());
+            reportDanger.createPdfFromDbReport(reportId);
+
+        }
+
+        private void btnSearchReport_Click(object sender, RoutedEventArgs e)
+        {
+            var search = tbSearchReport.Text;
+
+            
+
+            lbShowReports.ItemsSource = reportDanger.searchReports(search);
+
+
+
         }
 
       
