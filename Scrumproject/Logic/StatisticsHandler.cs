@@ -16,10 +16,6 @@ namespace Scrumproject.Logic
         private TravelRepository travelRepository = new TravelRepository();
        
 
-
-
-
-
         public List<string> GetStatisticsOverCountriesWhereUsersBeen(string country)
         {
             
