@@ -100,8 +100,7 @@ namespace Scrumproject.Logic
                             "Info om resor" + "\n" + infoOnTravels; 
 
             pdfRep.createPdfandOpen(pdfReport, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
-
-
+            ;
         }
 
 
