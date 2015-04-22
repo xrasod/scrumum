@@ -15,6 +15,8 @@ namespace Scrumproject.Logic
         ReportTestClass ReportTestClass = new ReportTestClass();
         UserRepository UserRepository = new UserRepository();
         PDFRepository pdfRep = new PDFRepository();
+        TravelRepository travelRep = new TravelRepository();
+        CountriesRepository countryRep = new CountriesRepository();
 
 
 
@@ -80,8 +82,21 @@ namespace Scrumproject.Logic
         public void createPdfFromDbReport(int id)
         {
             var report = ReportTestClass.GetSingleReport(id);
-
-            var pdfReport = "Inskickad av: " + report.User.FirstName + report.User.LastName;
+            var user = UserRepository.GetAllUsers().FirstOrDefault(x => x.UID == report.UID);
+            var travelinfos = travelRep.GetAllTravels().Where(x => x.RID == report.RID).ToList();
+            var countries = countryRep.GetAllCountries();
+            var listOftravelinfos = new List<String>();
+            foreach (var travel in travelinfos)
+            {
+                var visitedcountry = countryRep.GetCountryFromId(travel.CID);
+                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " + travel.StartDate.Value.ToShortDateString() +" - " + travel.EndDate.Value.ToShortDateString() + " och var ledig " + travel.VacationDays + " dagar.");
+            }
+            var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+            
+            var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName +"\n" +
+                            "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
+                            "Total summa spenderad: " + report.TotalAmount + "\n\n" +
+                            "Info om resor" + "\n" + infoOnTravels; 
 
             pdfRep.createPdfandOpen(pdfReport, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
 

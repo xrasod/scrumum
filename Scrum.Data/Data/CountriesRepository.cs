@@ -26,6 +26,14 @@ namespace Scrum.Data.Data
             }
         }
 
+        public Country GetCountryFromId(int Cid)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Countries.FirstOrDefault(x => x.CID.Equals(Cid));
+            }
+        }
+
 
         public void addCountry(Country C)
         {
