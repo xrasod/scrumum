@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using Scrum.Data;
 using Scrum.Data.Data;
 using Scrumproject.Logic.Entities;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
+
 
 namespace Scrumproject.Logic
 {
@@ -16,6 +21,8 @@ namespace Scrumproject.Logic
         public string country { set; get; }
         //public bool vacation { set; get; }
         public double subsistence { set; get; }
+        public string accountName = "scrumprojekt";
+        public string accessKey = "J0b3PkuN5FHd5QNjnjS7080NRdWAILm/uSJV32rhEjB8Sxw3tuKyGyyqsi9JxM0LrfvVx7U1qzJN4uNJdn88cw==";
 
         public void StoreReport(List<DayHandler> list, decimal distance, string description, decimal totalAmount, string user, List<RecieptHandler> listan)
         {
@@ -38,14 +45,50 @@ namespace Scrumproject.Logic
 
         public void StoreReciept(int i, List<RecieptHandler> listan)
         {
-            foreach (var r in listan)
+           
+
+            try
             {
-                Reciept ri = new Reciept();
-                ri.RID = i;
-                ri.TravelReciept = r.TravelReciept;
-                ri.RecieptAmount = r.RecieptAmount;
-                UserRepository.SaveReciept(ri);
+                StorageCredentials creds = new StorageCredentials(accountName, accessKey);
+                CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
+
+                CloudBlobClient client = account.CreateCloudBlobClient();
+                //Den Storage container jag skapat för att lagra kvitton
+                //Här kan vi göra valet att lägga alla kvitton i samma container (mapp) och autogenerera kvittonamnen så att de blir unika
+                //Alternativt kan man skapa en container för varje användare. Vet faktiskt inte vad som är smartast. 
+                CloudBlobContainer kvittoContainer = client.GetContainerReference("kvitton");
+                kvittoContainer.CreateIfNotExists();
+                Random random = new Random();
+                
+                foreach (var item in listan)
+                { 
+
+                 string sokvag = random.Next(1000,1000000000).ToString() + ".jpg";
+                CloudBlockBlob blob = kvittoContainer.GetBlockBlobReference(sokvag); //Här sätter vi namnet på filen när den laddas upp. Viktigt att få med .jpg liknande
+                using (Stream file = System.IO.File.OpenRead(item.TravelReciept)) //Använder sökvägen ifrån "openfiledialog" och skapar en stream
+               
+
+                  
+                
+                {
+                    blob.UploadFromStream(file); //Själva uppladdningen
+                    Reciept ri = new Reciept();
+                    ri.RID = i;
+                    ri.TravelReciept = "http://scrumprojekt.blob.core.windows.net/kvitton/" + sokvag;
+                    ri.RecieptAmount = item.RecieptAmount;
+                    UserRepository.SaveReciept(ri);
+                }
+                
+                }
+                
+
+
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
         }
 
         public static void StoreTravelInfo(int RID, List<DayHandler> list)
