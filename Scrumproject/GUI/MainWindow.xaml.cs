@@ -68,9 +68,6 @@ namespace Scrumproject
             
 
             TbTotalKm.IsReadOnly = true;
-            tbUserID.IsEnabled = false;
-            tbUsername.IsEnabled = false;
-            tbBoss.IsEnabled = false;
             notesLoading = notesHandler.LoadNotes("Notes.xml");
             tbNotes.Text = notesLoading.Note;
             var rep = new CountriesRepository();
@@ -223,23 +220,30 @@ namespace Scrumproject
 
         private void BtnConvert_Click(object sender, RoutedEventArgs e)
         {
-            string fromCurrency= lbFromCurrency.Content.ToString();
-            string toCurrency = lbToCurrency.Content.ToString();
-            string amount = TbFromCurrency.Text.ToString();
-            DateTime date = DPdate.SelectedDate.Value;
-            
+            try
+            {
+                string fromCurrency = lbFromCurrency.Content.ToString();
+                string toCurrency = lbToCurrency.Content.ToString();
+                string amount = TbFromCurrency.Text.ToString();
+                DateTime date = DPdate.SelectedDate.Value;
 
-            if (Validator.ControlInputConverter(amount))
-            {
-            double amounten = Convert.ToDouble(amount);
-            CurrencyConverter c = new CurrencyConverter();
-            
-                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten,date);
-                TbToCurrency.Text = hej;
+
+                if (Validator.ControlInputConverter(amount))
+                {
+                    double amounten = Convert.ToDouble(amount);
+                    CurrencyConverter c = new CurrencyConverter();
+
+                    string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten, date);
+                    TbToCurrency.Text = hej;
+                }
+                else
+                {
+                    TbToCurrency.Text = "failed to convert";
+                }
             }
-            else
+            catch (Exception ee)
             {
-                TbToCurrency.Text = "failed to convert";
+                MessageBox.Show("Du måste välja valuta att konvertera!");
             }
         }
 
@@ -268,11 +272,16 @@ namespace Scrumproject
 
         private void btnInactive_Click(object sender, RoutedEventArgs e)
         {
-            
-            var logic = new LogicHandler();
+            try
+            {
+                var logic = new LogicHandler();
 
-            logic.changeStatus(listBoxUsers.SelectedValue.ToString());
-        
+                logic.changeStatus(listBoxUsers.SelectedValue.ToString());
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Du måste välja en anställd!");
+            }
         }
 
         //Lägger till användare
@@ -287,39 +296,43 @@ namespace Scrumproject
             var lastName = tbLastNamne.Text;
             var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
+            try
+            {
 
-            if (validera.IsEmailValid(email))
-            {
-                MessageBox.Show("Du måste ange en e-post!");
+                if (validera.IsEmailValid(email))
+                {
+                    MessageBox.Show("Du måste ange en e-post!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbFirstName))
+                {
+                    MessageBox.Show("Du måste ange ett förnamn!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbLastNamne))
+                {
+                    MessageBox.Show("Du måste ange ett efternamn!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbPassword))
+                {
+                    MessageBox.Show("Du måste ange ett lösenord!");
+                }
+                else if (validera.IsSsnValid(SSN))
+                {
+                    MessageBox.Show("Du måste ange ett personnummer!");
+                }
+                else
+                {
+                    addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                    MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
+                    tbPassword.Clear();
+                    tbFirstName.Clear();
+                    tbLastNamne.Clear();
+                    tbEmail.Clear();
+                    tbSsn.Clear();
+                }
             }
-            else if (validera.ControllFiledNotEmpty(tbFirstName))
+            catch (Exception ee)
             {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validera.IsSsnValid(SSN))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else
-            {
-                addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
-                tbUsername.IsEnabled = true;
-                tbBoss.IsEnabled = true;
-                tbUserID.IsEnabled = true;
-                tbPassword.Clear();
-                tbFirstName.Clear();
-                tbLastNamne.Clear();
-                tbEmail.Clear();
-                tbSsn.Clear();
+                MessageBox.Show(ee.Message);
             }
 
         }
@@ -570,12 +583,14 @@ namespace Scrumproject
             var breakfast = CHBBreakfast.IsChecked.Value;
             var lunch = CHBLunch.IsChecked.Value;
             var dinner = CHBDinner.IsChecked.Value;
-            double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
-
-            var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+            
 
             try
             {
+                double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
+
+                var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+
                 if (CHBVacationday.IsChecked == true)
                 {
                     d.date = listBoxDays.SelectedItem.ToString();
@@ -756,52 +771,59 @@ namespace Scrumproject
             var bossID = tbBoss.Text;
             var userID = tbUserID.Text;
 
-            var id = Int32.Parse(userID);
-            var username = tbUsername.Text;
-            var firstname = tbFirstName.Text;
-            var lastname = tbLastNamne.Text;
-            var password = tbPassword.Text;
-            var boss = Int32.Parse(bossID);
-            var ssn = tbSsn.Text;
-            var mail = tbEmail.Text;
+            try
+            {
+                var id = Int32.Parse(userID);
+                var username = tbUsername.Text;
+                var firstname = tbFirstName.Text;
+                var lastname = tbLastNamne.Text;
+                var password = tbPassword.Text;
+                var boss = Int32.Parse(bossID);
+                var ssn = tbSsn.Text;
+                var mail = tbEmail.Text;
 
-            if (validate.ControllFiledNotEmpty(tbUsername))
-            {
-                MessageBox.Show("Du måste ange ett användarnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbSsn))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else if (validate.IsEmailValid(mail))
-            {
-                MessageBox.Show("Du måste ange en email-adress!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbBoss))
-            {
-                MessageBox.Show("Du måste ange vem som är chef för användaren!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbUserID))
-            {
-                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
-            }
+                if (validate.ControllFiledNotEmpty(tbUsername))
+                {
+                    MessageBox.Show("Du måste ange ett användarnamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbFirstName))
+                {
+                    MessageBox.Show("Du måste ange ett förnamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbLastNamne))
+                {
+                    MessageBox.Show("Du måste ange ett efternamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbPassword))
+                {
+                    MessageBox.Show("Du måste ange ett lösenord!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbSsn))
+                {
+                    MessageBox.Show("Du måste ange ett personnummer!");
+                }
+                else if (validate.IsEmailValid(mail))
+                {
+                    MessageBox.Show("Du måste ange en email-adress!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbBoss))
+                {
+                    MessageBox.Show("Du måste ange vem som är chef för användaren!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbUserID))
+                {
+                    MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
+                }
 
-            else
+                else
+                {
+                    updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
+                    MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+                }
+            }
+            catch (Exception ee)
             {
-                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+                MessageBox.Show("Du måste välja en anställd!");
             }
         }
 
@@ -828,21 +850,27 @@ namespace Scrumproject
         //Lägg till land
         private void btnAddCountry_Click_2(object sender, RoutedEventArgs e)
         {
-                 
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            if (lvCountriesEdit.Items.Contains(name))
+            try
             {
-                MessageBox.Show("Detta land finns redan!");
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
+                if (lvCountriesEdit.Items.Contains(name))
+                {
+                    MessageBox.Show("Detta land finns redan!");
 
+                }
+                else
+                {
+                    logic.AddNewCountry(name, curr, sub);
+                }
             }
-            else
+            catch (Exception ee)
             {
-                logic.AddNewCountry(name, curr, sub);
+                MessageBox.Show("Du måste fylla i alla uppgifter innan du lägger till ett land!");
             }
-        
+
         }
 
         //Fyller Tbs med text av landet man valt.
@@ -874,19 +902,24 @@ namespace Scrumproject
         //Update Country
         private void btnUpdateCountry_Click(object sender, RoutedEventArgs e)
         {
-                    
-            var currname = lvCountriesEdit.SelectedValue.ToString();
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
+            try
+            {
+                var currname = lvCountriesEdit.SelectedValue.ToString();
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
 
 
-            logic.uppdateCountry(currname, name, curr, sub);
-            lvCountriesEdit.Items.Clear();
-            PupulateListViewCountries();
-            MessageBox.Show(tbCountryName.Text + " Har uppdaterats!");
-     
+                logic.uppdateCountry(currname, name, curr, sub);
+                lvCountriesEdit.Items.Clear();
+                PupulateListViewCountries();
+                MessageBox.Show(tbCountryName.Text + " Har uppdaterats!");
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Du måste välja ett land att uppdatera!");
+            }
         }
 
         //Söka användare
@@ -946,16 +979,22 @@ namespace Scrumproject
         //Ta bort land
         private void btnRemoveCountry_Click(object sender, RoutedEventArgs e)
         {
-            var selected = lvCountriesEdit.SelectedValue.ToString();
+            try
+            {
+                var selected = lvCountriesEdit.SelectedValue.ToString();
 
-            localHandeler.DeletSelectedCountry(selected);
-            MessageBox.Show(selected + " Har tagits bort!");
-            lvCountriesEdit.Items.Clear();
-            tbCountryName.Clear();
-            tbMaxCash.Clear();
-            tbCurrency.Clear();
-            PupulateListViewCountries();
-            
+                localHandeler.DeletSelectedCountry(selected);
+                MessageBox.Show(selected + " Har tagits bort!");
+                lvCountriesEdit.Items.Clear();
+                tbCountryName.Clear();
+                tbMaxCash.Clear();
+                tbCurrency.Clear();
+                PupulateListViewCountries();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Du måste välja ett land att ta bort!");
+            }
         }
 
         private void btnFillListWithUsersIAmBossFor_Click(object sender, RoutedEventArgs e)
@@ -992,21 +1031,59 @@ namespace Scrumproject
 
         private void btnApprove_Click(object sender, RoutedEventArgs e)
         {
-            string fullstringbitch = lbShowReports.SelectedItem.ToString();
-            reportDanger.Acceptpost(fullstringbitch);
-            lbShowReports.ItemsSource = null;
-            lbShowReports.ItemsSource = reportDanger.GetReportList();
+            try
+            {
+                if (cbShowPrepayments.IsChecked.HasValue.Equals(true))
+                {
+                    string Prepaymentwindowfullstring = lbShowReports.SelectedItem.ToString();
+                    prepaymentHandler.SaveStatusUpdateForAccept(Prepaymentwindowfullstring);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
 
+                }
+                else
+                {
+
+                    string fullstringbitch = lbShowReports.SelectedItem.ToString();
+                    reportDanger.Acceptpost(fullstringbitch);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = reportDanger.GetReportList();
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Du måste välja en rapport eller förskottsansökan att godkänna!");
+            }
         }
 
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (cbShowPrepayments.IsChecked.HasValue.Equals(true))
+                {
 
-            string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
-            string motivation = tbWhyDenied.Text;
-            reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
-            lbShowReports.ItemsSource = null;
-            lbShowReports.ItemsSource = reportDanger.GetReportList();
+                    string Prepaymentwindowfullstring = lbShowReports.SelectedItem.ToString();
+                    string Motivation = tbWhyDenied.Text;
+                    prepaymentHandler.SaveStatusUpdateForDenial(Prepaymentwindowfullstring, Motivation);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
+
+                }
+
+                else
+                {
+                    string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
+                    string motivation = tbWhyDenied.Text;
+                    reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = reportDanger.GetReportList();
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Du måste välja en rapport eller förskottsansökan att neka!");
+            }
 
         }
 
@@ -1098,7 +1175,18 @@ namespace Scrumproject
         {
             lbShowReports.ItemsSource = sortHandler.GetReportsForSpecificUser(id);
         }
-      
+
+        private void rbSortDate_Checked(object sender, RoutedEventArgs e)
+        {
+            lbShowReports.ItemsSource = sortHandler.GetReportsByDate();
+        }
+
+        private void rbSortName_Checked(object sender, RoutedEventArgs e)
+        {
+            lbShowReports.ItemsSource = sortHandler.GetReportsByName();
+        }
+        
+
        
 }
     }

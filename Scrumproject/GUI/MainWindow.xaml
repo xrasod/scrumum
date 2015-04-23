@@ -160,8 +160,6 @@
                         <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="650" Canvas.Top="447" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
                         <TextBox x:Name="tbWhyDenied" Height="76" Canvas.Left="505" TextWrapping="Wrap" Text="" Canvas.Top="368" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
                         <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="501" Canvas.Top="343" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <CheckBox x:Name="cbSortByDate" Content="Datum" Canvas.Left="91" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="20"/>
-                        <CheckBox x:Name="cbSortByName" Content="Namn" Canvas.Left="161" Canvas.Top="192" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22"/>
                         <Label Content="Sortering" Canvas.Left="14" Canvas.Top="186" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <Button x:Name="btnShowReports" Content="Visa Rapporter" Canvas.Left="305" Canvas.Top="449" Width="107" Background="Black" Foreground="White" Height="23" TabIndex="31" Click="btnShowReports_Click"/>
                         <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="14" TextWrapping="Wrap" Text="" Canvas.Top="152" Width="294" Background="Black" Foreground="White" TabIndex="8"/>
@@ -195,6 +193,8 @@
                         <Button x:Name="btnLogInChef" Content="Logga in" Height="27" Width="75" Canvas.Left="336" Canvas.Top="-74" Background="Black" Foreground="White" Click="btnLogInChef_Click" FontFamily="Myriad Pro"/>
                         <CheckBox x:Name="cbShowPrepayments" Content="Förskottsansökningar" Canvas.Left="226" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22" Checked="cbShowPrepayments_Checked"/>
                         <ComboBox x:Name="cbSortReports" Width="120" Canvas.Left="103" Canvas.Top="213" SelectionChanged="cbSortReports_SelectionChanged"/>
+                        <RadioButton x:Name="rbSortDate" Content="Datum" Canvas.Left="88" Canvas.Top="192" Width="69" GroupName="rbSort" Checked="rbSortDate_Checked"/>
+                        <RadioButton x:Name="rbSortName" Content="Namn" Canvas.Left="157" Canvas.Top="192" GroupName="rbSort" Checked="rbSortName_Checked"/>
 
                     </Canvas>
                 </TabItem>
