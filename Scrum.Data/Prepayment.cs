@@ -18,7 +18,7 @@ namespace Scrum.Data
         public int UID { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public string Status { get; set; }
     
         public virtual User User { get; set; }
     }

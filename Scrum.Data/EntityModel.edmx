@@ -46,7 +46,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="UID" Type="int" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <EntityType Name="Reciept">
           <Key>
@@ -275,7 +275,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="UID" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="String" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__Prepayment__UID__48CFD27E" FromRole="Prepayment" ToRole="Users" />
         </EntityType>
         <EntityType Name="Reciept">
