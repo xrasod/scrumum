@@ -87,6 +87,7 @@
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
     <Compile Include="Logic\Entities\RealReportEntity.cs" />
     <Compile Include="Logic\Entities\ReceiptsEntity.cs" />
+    <Compile Include="Logic\Entities\RecieptHandler.cs" />
     <Compile Include="Logic\Entities\TravelInfoEntity.cs" />
     <Compile Include="Logic\PrepaymentHandler.cs" />
     <Compile Include="Logic\ReportHandler.cs" />

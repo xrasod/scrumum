@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Scrum.Data;
 using Scrum.Data.Data;
+using Scrumproject.Logic.Entities;
 
 namespace Scrumproject.Logic
 {
@@ -15,7 +16,8 @@ namespace Scrumproject.Logic
         public string country { set; get; }
         //public bool vacation { set; get; }
         public double subsistence { set; get; }
-        public void StoreReport(List<DayHandler> list, decimal distance, string description, decimal totalAmount, string user, List<string> reciept)
+
+        public void StoreReport(List<DayHandler> list, decimal distance, string description, decimal totalAmount, string user, List<RecieptHandler> listan)
         {
             Report rp = new Report();
             TravelInfo ti = new TravelInfo();
@@ -30,17 +32,18 @@ namespace Scrumproject.Logic
             rp.ReportDate = DateTime.Now;
 
             int i = ur.SaveReport(rp);
-            StoreReciept(i, reciept);
+            StoreReciept(i, listan);
             StoreTravelInfo(i, list);
         }
 
-        public void StoreReciept(int i, List<string> reciept)
+        public void StoreReciept(int i, List<RecieptHandler> listan)
         {
-            foreach (var r in reciept)
+            foreach (var r in listan)
             {
                 Reciept ri = new Reciept();
                 ri.RID = i;
-                ri.TravelReciept = r;
+                ri.TravelReciept = r.TravelReciept;
+                ri.RecieptAmount = r.RecieptAmount;
                 UserRepository.SaveReciept(ri);
             }
         }
