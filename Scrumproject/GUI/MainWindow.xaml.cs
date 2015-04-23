@@ -815,6 +815,7 @@ namespace Scrumproject
                 var selected = listBoxUsers.SelectedValue.ToString();
                 var id = localHandeler.checkIfDigits(selected);
                 fillUserInfoOnChange(id);
+                DisplayReportsForUser(id);
             }
             catch (Exception ee)
             {
@@ -1093,6 +1094,10 @@ namespace Scrumproject
             cbSortReports.ItemsSource = sortHandler.GetCbSortList();
         }
 
+        public void DisplayReportsForUser(int id)
+        {
+            lbShowReports.ItemsSource = sortHandler.GetReportsForSpecificUser(id);
+        }
       
        
 }
