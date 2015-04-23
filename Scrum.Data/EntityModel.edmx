@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="scrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Boss">
           <Key>
             <PropertyRef Name="BID" />
@@ -55,6 +55,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="REID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RID" Type="int" Nullable="false" />
           <Property Name="TravelReciept" Type="nvarchar(max)" />
+          <Property Name="RecieptAmount" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -68,17 +69,15 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="ReportDate" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TravelInfo">
           <Key>
-            <PropertyRef Name="RID" />
-            <PropertyRef Name="CID" />
+            <PropertyRef Name="TID" />
           </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RID" Type="int" Nullable="false" />
           <Property Name="CID" Type="int" Nullable="false" />
-          <Property Name="StartDate" Type="date" />
-          <Property Name="EndDate" Type="date" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="VacationDays" Type="int" />
         </EntityType>
         <EntityType Name="Users">
@@ -155,7 +154,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TravelInfo__CID__45F365D3">
+        <Association Name="FK__TravelInfo__CID__70DDC3D8">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -167,7 +166,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TravelInfo__RID__44FF419A">
+        <Association Name="FK__TravelInfo__RID__6FE99F9F">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
           <End Role="TravelInfo" Type="Self.TravelInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -197,21 +196,13 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <EntitySet Name="Prepayment" EntityType="Self.Prepayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reciept" EntityType="Self.Reciept" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelInfo" EntityType="Self.TravelInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BossFor" EntityType="Self.BossFor" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [BossFor].[BID] AS [BID], 
     [BossFor].[UID] AS [UID]
     FROM [dbo].[BossFor] AS [BossFor]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TravelInfo" EntityType="Self.TravelInfo" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TravelInfo].[RID] AS [RID], 
-    [TravelInfo].[CID] AS [CID], 
-    [TravelInfo].[StartDate] AS [StartDate], 
-    [TravelInfo].[EndDate] AS [EndDate], 
-    [TravelInfo].[VacationDays] AS [VacationDays]
-    FROM [dbo].[TravelInfo] AS [TravelInfo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__BossFor__BID__3A81B327" Association="Self.FK__BossFor__BID__3A81B327">
             <End Role="Boss" EntitySet="Boss" />
@@ -233,11 +224,11 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
             <End Role="Users" EntitySet="Users" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK__TravelInfo__CID__45F365D3" Association="Self.FK__TravelInfo__CID__45F365D3">
+          <AssociationSet Name="FK__TravelInfo__CID__70DDC3D8" Association="Self.FK__TravelInfo__CID__70DDC3D8">
             <End Role="Country" EntitySet="Country" />
             <End Role="TravelInfo" EntitySet="TravelInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__TravelInfo__RID__44FF419A" Association="Self.FK__TravelInfo__RID__44FF419A">
+          <AssociationSet Name="FK__TravelInfo__RID__6FE99F9F" Association="Self.FK__TravelInfo__RID__6FE99F9F">
             <End Role="Report" EntitySet="Report" />
             <End Role="TravelInfo" EntitySet="TravelInfo" />
           </AssociationSet>
@@ -295,6 +286,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Property Name="RID" Type="Int32" Nullable="false" />
           <Property Name="TravelReciept" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Report" Relationship="Self.FK__Reciept__RID__4316F928" FromRole="Reciept" ToRole="Report" />
+          <Property Name="RecieptAmount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -333,14 +325,16 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <Key>
             <PropertyRef Name="RID" />
             <PropertyRef Name="CID" />
+            <PropertyRef Name="TID" />
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" />
           <Property Name="CID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="VacationDays" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="Self.FK__TravelInfo__CID__45F365D3" FromRole="TravelInfo" ToRole="Country" />
           <NavigationProperty Name="Report" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="TravelInfo" ToRole="Report" />
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK__Users__BID__38996AB5">
           <End Role="Boss" Type="Self.Boss" Multiplicity="1" />
@@ -500,6 +494,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <EntitySetMapping Name="Reciepts">
             <EntityTypeMapping TypeName="scrumModel.Reciept">
               <MappingFragment StoreEntitySet="Reciept">
+                <ScalarProperty Name="RecieptAmount" ColumnName="RecieptAmount" />
                 <ScalarProperty Name="REID" ColumnName="REID" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
                 <ScalarProperty Name="TravelReciept" ColumnName="TravelReciept" />
@@ -537,6 +532,7 @@ warning 6002: The table/view 'scrumprojekt.dbo.TravelInfo' does not have a prima
           <EntitySetMapping Name="TravelInfoes">
             <EntityTypeMapping TypeName="scrumModel.TravelInfo">
               <MappingFragment StoreEntitySet="TravelInfo">
+                <ScalarProperty Name="TID" ColumnName="TID" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
                 <ScalarProperty Name="CID" ColumnName="CID" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />

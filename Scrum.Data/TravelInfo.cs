@@ -14,6 +14,7 @@ namespace Scrum.Data
     
     public partial class TravelInfo
     {
+        public int TID { get; set; }
         public int RID { get; set; }
         public int CID { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
