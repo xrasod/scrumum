@@ -886,14 +886,20 @@ namespace Scrumproject
         {
             string fullstringbitch = lbShowReports.SelectedItem.ToString();
             reportDanger.Acceptpost(fullstringbitch);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
 
         }
 
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
 
-            string fullstringbitch = lbShowReports.SelectedItem.ToString();
-            reportDanger.Rejectpost(fullstringbitch);
+            string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
+            string motivation = tbWhyDenied.Text;
+            reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
+
         }
 
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)
