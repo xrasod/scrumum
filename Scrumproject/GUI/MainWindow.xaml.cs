@@ -39,6 +39,8 @@ namespace Scrumproject
         ReportHandler reportDanger = new ReportHandler();
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         List<DayHandler> dayhandler = new List<DayHandler>();
+        PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
+        
 
         internal static MainWindow main;
         internal string Status
@@ -1046,12 +1048,15 @@ namespace Scrumproject
         {
             var search = tbSearchReport.Text;
 
-            
-
             lbShowReports.ItemsSource = reportDanger.searchReports(search);
 
+        }
 
+        private void cbShowPrepayments_Checked(object sender, RoutedEventArgs e)
+        {
+            lbShowReports.Items.Clear();
 
+            lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
         }
 
       

@@ -6,23 +6,22 @@ using System.Threading.Tasks;
 
 namespace Scrum.Data.Data
 {
-    public class AdvancePaymentsRepository
+    public class ReceiptRepository
     {
-        public void AddAdvancePayment(Prepayment prepayment)
+        public List<Reciept> GetAllReceipts()
         {
             using (var context = new scrumEntities())
             {
-                context.Prepayments.Add(prepayment);
-                context.SaveChanges();
+                return context.Reciepts.OrderBy(x => x.TravelReciept).ToList();
             }
+        }
+        public Reciept GetSingleReciept(int id)
+        {
+            using (var context = new scrumEntities())
+            {
+                return context.Reciepts.FirstOrDefault(x => x.RID.Equals(id));
+            } 
         }
 
-        public List<Prepayment> GetAllPrepayments()
-        {
-            using (var context = new scrumEntities())
-            {
-                return context.Prepayments.OrderBy(x => x.PID).ToList();
-            }
-        }
     }
 }

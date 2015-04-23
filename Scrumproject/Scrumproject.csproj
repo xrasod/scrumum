@@ -88,7 +88,9 @@
     <Compile Include="Logic\Entities\RealReportEntity.cs" />
     <Compile Include="Logic\Entities\ReceiptsEntity.cs" />
     <Compile Include="Logic\Entities\TravelInfoEntity.cs" />
+    <Compile Include="Logic\PrepaymentHandler.cs" />
     <Compile Include="Logic\ReportHandler.cs" />
+    <Compile Include="Logic\SortHandler.cs" />
     <Compile Include="Logic\StatisticsHandler.cs" />
     <Compile Include="Logic\Validator.cs" />
     <Compile Include="Logic\XmlReader.cs" />
