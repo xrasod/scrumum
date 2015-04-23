@@ -19,6 +19,7 @@ namespace Scrum.Data
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> VacationDays { get; set; }
+        public int TID { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual Report Report { get; set; }
