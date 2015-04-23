@@ -41,6 +41,7 @@ namespace Scrumproject
         List<DayHandler> dayhandler = new List<DayHandler>();
         PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
         SortHandler sortHandler = new SortHandler();
+        List<RecieptHandler> recieptInfo = new List<RecieptHandler>(); 
 
         internal static MainWindow main;
         internal string Status
@@ -113,6 +114,7 @@ namespace Scrumproject
         {
             string[] arr = new string[3];
             List<DayHandler> d = new List<DayHandler>();
+            RecieptHandler rh = new RecieptHandler();
             List<string> list = new List<string>();
             var j = listBoxDays.Items;
 
@@ -135,12 +137,13 @@ namespace Scrumproject
                 dh.subsistence = dou;
                 d.Add(dh);
             }
+  
 
-            List<string> recieptList = new List<string>();
-            for (int i = 0; listBoxReceipts.Items.Count > i; i++)
-            {
-                recieptList.Add(listBoxReceipts.Items[i].ToString());
-            }
+            //List<string> recieptList = new List<string>();
+            //for (int i = 0; listBoxReceipts.Items.Count > i; i++)
+            //{
+            //    recieptList.Add(listBoxReceipts.Items[i].ToString());
+            //}
             DayHandler day = new DayHandler();
             var totalkm = TbTotalKm.Text;
             var totalreciept = tbTotalRecieptAmount.Text;
@@ -148,7 +151,7 @@ namespace Scrumproject
             double totalkmdec = Convert.ToDouble(totalkm);
             decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
             var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
-            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptList);
+            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
 
             try
             {
@@ -361,6 +364,7 @@ namespace Scrumproject
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             listBoxReceipts.Items.Add(tbReceiptFile.Text);
+            RecieptHandler rh = new RecieptHandler();
 
             try
             {
@@ -370,6 +374,11 @@ namespace Scrumproject
                 double totalRecieptAmount = reciept + TotalReciept;
                 tbTotalRecieptAmount.Text = totalRecieptAmount.ToString();
                 tbTotalRecieptAmount.IsReadOnly = true;
+                var tbSumma = tbSum.Text;
+                var tbSummaDecimal = Convert.ToDecimal(tbSumma);
+                rh.RecieptAmount = tbSummaDecimal;
+                rh.TravelReciept = tbReceiptFile.Text;
+                recieptInfo.Add(rh);
             }
             catch
             {
