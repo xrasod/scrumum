@@ -55,6 +55,8 @@ namespace Scrumproject.Logic
             var count = 0;
             var country = "";
             var VACdays = 0;
+            var lastloop = 0;
+         
             List<DayHandler> countryList = new List<DayHandler>();
             List<string> lastdate = new List<string>();
 
@@ -71,14 +73,13 @@ namespace Scrumproject.Logic
                 }
                 if (country != item.country && count != 0)
                 {
-                    if (item.date != null)
-                        //behöver en fix
+                    if (lastloop != 1)
                     {
                         Country c = new Country();
-                        c = UserRepository.GetCountryID(item.country);
+                        c = UserRepository.GetCountryID(country);
                         TravelInfo ti = new TravelInfo();
-                        //DateTime startdate = DateTime.ParseExact(date, "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                        //DateTime enddate = DateTime.ParseExact(lastdate.Last(), "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                        
+                        
                         DateTime startdate = DateTime.Parse(lastdate.First());
                         DateTime enddate = DateTime.Parse(lastdate.Last());
                         ti.RID = RID;
@@ -88,41 +89,27 @@ namespace Scrumproject.Logic
                         ti.VacationDays = VACdays;
                         UserRepository.SaveTravelInfo(ti);
                     }
-                    Console.WriteLine(lastdate.First());
-                    Console.WriteLine(lastdate.Last());
-                    Console.WriteLine(VACdays);
-
-                    //d.date = date;
-                    ////d.lastdate = 
-                    //d.subsistence = subsistence;
-                    //countryList.Add(d);
-                    //foreach (var c in countryList)
-                    //{
-                    //    Console.WriteLine(c.country);
-
-                    //Console.WriteLine(d.date);
-                    //Console.WriteLine(d.lastdate);
-
-                    //    Console.WriteLine(c.date.LastOrDefault());
-                    //}
+                    
                     lastdate.Clear();
                     lastdate.Add(item.date);
                     count = 0;
                     VACdays = 0;
-                    //if (item.subsistence == 0)
-                    //{
-                    //    //checkVAC = 1;
-                    //    VACdays++;
-                    //}
+                 
 
+                }
+                if(item.country.Equals("hej"))
+                {
+                    lastloop = 1;
                 }
                 if (item.subsistence == 0)
                 {
                     //checkVAC = 0;
                     VACdays++;
                 }
+                
                 country = item.country;
                 count++;
+          
             }
 
 
