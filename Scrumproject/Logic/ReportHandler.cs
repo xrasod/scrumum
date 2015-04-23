@@ -18,7 +18,7 @@ namespace Scrumproject.Logic
         PDFRepository pdfRep = new PDFRepository();
         TravelRepository travelRep = new TravelRepository();
         CountriesRepository countryRep = new CountriesRepository();
-
+        ReceiptRepository receiptRep = new ReceiptRepository();
 
 
         public List<string> GetReportList()
@@ -53,13 +53,7 @@ namespace Scrumproject.Logic
             return reportId;
         }
 
-        public void Rejectpost(string reportname)
-        {
-            int reportId = CheckReportId(reportname);
-
-            string setStatusNotAccepted = "Nekad";
-            ReportTestClass.SaveUpdatedReportStatus(reportId, setStatusNotAccepted);
-        }
+     
 
         public void Acceptpost(string reportname)
         {
@@ -87,6 +81,9 @@ namespace Scrumproject.Logic
             var travelinfos = travelRep.GetAllTravels().Where(x => x.RID == report.RID).ToList();
             var countries = countryRep.GetAllCountries();
             var listOftravelinfos = new List<String>();
+            var receiptInfo = receiptRep.GetAllReceipts().Where(x=> x.RID == report.RID).ToList();
+            var listOfReceipts = new List<String>();
+            
             var statusonreport = "";
             
             foreach (var travel in travelinfos)
@@ -96,13 +93,20 @@ namespace Scrumproject.Logic
             }
             var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
             
+            foreach(var receipt in receiptInfo)
+            {
+                var savedReceipts = receiptRep.GetSingleReciept(receipt.RID);
+                listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +" Här ska pris hämtas <3 - " );
+            }
+            var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
             var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName +"\n" +
                             "Status: " + report.Status + "\n" +
                             "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
                             "Total summa spenderad: " + report.TotalAmount + "\n" +
                             "Antal kilometer körda: " + report.Kilometers + "\n\n" +
                             "Beskrivning av resa" + "\n" + report.Description + "\n\n" +
-                            "Info om resor" + "\n" + infoOnTravels; 
+                            "Info om resor" + "\n" + infoOnTravels + "\n\n" +
+                            "Info om kvitton \n" + infoOnReceipts; 
 
             pdfRep.createPdfandOpen(pdfReport, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
             ;
@@ -134,6 +138,15 @@ namespace Scrumproject.Logic
 
 
 
+        }
+        public void SaveStatusUpdateForDenial(string fullreport, string motivation)
+        {
+            int reportId = CheckReportId(fullreport);
+            
+
+            string setStatusNotAccepted = "Nekad";
+            ReportTestClass.SaveDeny(reportId, setStatusNotAccepted, motivation);
+      
         }
     }
 }

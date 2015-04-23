@@ -222,12 +222,15 @@ namespace Scrumproject
             string fromCurrency= lbFromCurrency.Content.ToString();
             string toCurrency = lbToCurrency.Content.ToString();
             string amount = TbFromCurrency.Text.ToString();
+            DateTime date = DPdate.SelectedDate.Value;
+            
+
             if (Validator.ControlInputConverter(amount))
             {
             double amounten = Convert.ToDouble(amount);
             CurrencyConverter c = new CurrencyConverter();
             
-                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten);
+                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten,date);
                 TbToCurrency.Text = hej;
             }
             else
@@ -980,14 +983,20 @@ namespace Scrumproject
         {
             string fullstringbitch = lbShowReports.SelectedItem.ToString();
             reportDanger.Acceptpost(fullstringbitch);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
 
         }
 
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
 
-            string fullstringbitch = lbShowReports.SelectedItem.ToString();
-            reportDanger.Rejectpost(fullstringbitch);
+            string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
+            string motivation = tbWhyDenied.Text;
+            reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
+
         }
 
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)

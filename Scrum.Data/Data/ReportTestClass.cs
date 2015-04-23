@@ -32,7 +32,20 @@ namespace Scrum.Data.Data
             {
                 return context.Reports.FirstOrDefault(x => x.RID == id);
             }
-        } 
+        }
+        public void SaveDeny(int id, string status, string motivation)
+        {
+
+            using (var context = new scrumEntities())
+            {
+                var updatereportquery = context.Reports.First(reportId => reportId.RID == id);
+                updatereportquery.Status = status;
+                updatereportquery.Description = motivation;
+                {
+                    context.SaveChanges();
+                }
+            }
+        }
 
 
     }
