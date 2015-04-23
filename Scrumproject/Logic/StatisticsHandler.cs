@@ -35,6 +35,11 @@ namespace Scrumproject.Logic
             return filterUserDependingOnCountry.ToList();
         }
 
+        public List<string> GetStatisticsOverTheCountriesAUsersBeenIn()
+        {
+            return null;
+        }
+
         public List<string> SendCountriesToGui()
         {
             var countryList = countriesRepositoryMethodAccesor.GetAllCountries();
@@ -48,5 +53,7 @@ namespace Scrumproject.Logic
             var userName = userList.Select(x => x.Username).ToList();
             return userName;
         }
+
+      
     }
 }

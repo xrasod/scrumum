@@ -193,7 +193,8 @@
                         <Button x:Name="btnSearchReport" Content="Sök" Canvas.Left="212" Canvas.Top="449" Width="36" RenderTransformOrigin="0.505,0.304" Background="Black" Foreground="White" Click="btnSearchReport_Click"/>
                         <TextBox x:Name="tbSearchReport" Height="23" Canvas.Left="14" TextWrapping="Wrap" Canvas.Top="449" Width="193" RenderTransformOrigin="0.454,0.148" Foreground="White" Background="Black"/>
                         <Button x:Name="btnLogInChef" Content="Logga in" Height="27" Width="75" Canvas.Left="336" Canvas.Top="-74" Background="Black" Foreground="White" Click="btnLogInChef_Click" FontFamily="Myriad Pro"/>
-                        <CheckBox x:Name="cbShowPrepayments" Content="Förskottsansökningar" Canvas.Left="226" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22"/>
+                        <CheckBox x:Name="cbShowPrepayments" Content="Förskottsansökningar" Canvas.Left="226" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22" Checked="cbShowPrepayments_Checked"/>
+                        <ComboBox x:Name="cbSortReports" Width="120" Canvas.Left="103" Canvas.Top="213" SelectionChanged="cbSortReports_SelectionChanged"/>
 
                     </Canvas>
                 </TabItem>
@@ -211,7 +212,7 @@
                         </Grid.ColumnDefinitions>
                         <ComboBox x:Name="CbFromCurrency" HorizontalAlignment="Left" Margin="127,18,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="CbFromCurrency_SelectionChanged" TabIndex="1"/>
                         <ComboBox x:Name="CbToCurrency" HorizontalAlignment="Left" Margin="128,56,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="CbToCurrency_SelectionChanged" TabIndex="2"/>
-                        <Button x:Name="BtnConvert" Content="Konvertera&#xA;" HorizontalAlignment="Left" Margin="183,137,0,0" VerticalAlignment="Top" Width="98" Click="BtnConvert_Click" Height="26" TabIndex="4" Foreground="White" FontSize="14" BorderBrush="White" Padding="1">
+                        <Button x:Name="BtnConvert" Content="Konvertera&#xA;" HorizontalAlignment="Left" Margin="352,141,0,0" VerticalAlignment="Top" Width="98" Click="BtnConvert_Click" Height="26" TabIndex="4" Foreground="White" FontSize="14" BorderBrush="White" Padding="1">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="Black" Offset="0"/>
@@ -227,6 +228,7 @@
                         <Label Content="Resultat" HorizontalAlignment="Left" Margin="18,166,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <Label Content="&#xA;" HorizontalAlignment="Left" Margin="284,15,0,0" VerticalAlignment="Top" x:Name="lbFromCurrency" Width="91" Height="29" Foreground="White" Grid.ColumnSpan="2"/>
                         <Label Content="&#xA;&#xA;" HorizontalAlignment="Left" Margin="282,51,0,0" VerticalAlignment="Top" x:Name="lbToCurrency" Height="34" Width="72" Foreground="White" Grid.ColumnSpan="2"/>
+                        <DatePicker x:Name="DPdate" HorizontalAlignment="Left" Margin="163,139,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Statistik&#xD;&#xA;" HorizontalAlignment="Left" Height="61" VerticalAlignment="Top" Width="183" Margin="100,0,-100,0" FontFamily="Myriad Pro" FontSize="14" FontWeight="Bold" Background="#FF6688D1" BorderBrush="{x:Null}">

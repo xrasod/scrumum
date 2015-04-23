@@ -39,6 +39,8 @@ namespace Scrumproject
         ReportHandler reportDanger = new ReportHandler();
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         List<DayHandler> dayhandler = new List<DayHandler>();
+        PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
+        SortHandler sortHandler = new SortHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -61,6 +63,7 @@ namespace Scrumproject
             localHandeler.SaveCountriesfromDBtoXML();
             getcountriesfromXML();
             PopulateStatisticsWindowCountryCB();
+            fillCbOfStatuses();
             
 
             TbTotalKm.IsReadOnly = true;
@@ -220,12 +223,15 @@ namespace Scrumproject
             string fromCurrency= lbFromCurrency.Content.ToString();
             string toCurrency = lbToCurrency.Content.ToString();
             string amount = TbFromCurrency.Text.ToString();
+            DateTime date = DPdate.SelectedDate.Value;
+            
+
             if (Validator.ControlInputConverter(amount))
             {
             double amounten = Convert.ToDouble(amount);
             CurrencyConverter c = new CurrencyConverter();
             
-                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten);
+                string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten,date);
                 TbToCurrency.Text = hej;
             }
             else
@@ -978,14 +984,20 @@ namespace Scrumproject
         {
             string fullstringbitch = lbShowReports.SelectedItem.ToString();
             reportDanger.Acceptpost(fullstringbitch);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
 
         }
 
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
 
-            string fullstringbitch = lbShowReports.SelectedItem.ToString();
-            reportDanger.Rejectpost(fullstringbitch);
+            string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
+            string motivation = tbWhyDenied.Text;
+            reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
+            lbShowReports.ItemsSource = null;
+            lbShowReports.ItemsSource = reportDanger.GetReportList();
+
         }
 
         private void btnLogInChef_Click(object sender, RoutedEventArgs e)
@@ -1043,12 +1055,33 @@ namespace Scrumproject
         {
             var search = tbSearchReport.Text;
 
-            
-
             lbShowReports.ItemsSource = reportDanger.searchReports(search);
 
+        }
 
+        private void cbShowPrepayments_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               
 
+                lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void cbSortReports_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            lbShowReports.ItemsSource = sortHandler.GetSortByStatusResult(cbSortReports.SelectedValue.ToString());
+        }
+
+        public void fillCbOfStatuses()
+        {
+            cbSortReports.ItemsSource = sortHandler.GetCbSortList();
         }
 
       
