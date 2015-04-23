@@ -40,7 +40,7 @@ namespace Scrumproject
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         List<DayHandler> dayhandler = new List<DayHandler>();
         PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
-        
+        SortHandler sortHandler = new SortHandler();
 
         internal static MainWindow main;
         internal string Status
@@ -63,6 +63,7 @@ namespace Scrumproject
             localHandeler.SaveCountriesfromDBtoXML();
             getcountriesfromXML();
             PopulateStatisticsWindowCountryCB();
+            fillCbOfStatuses();
             
 
             TbTotalKm.IsReadOnly = true;
@@ -1063,6 +1064,17 @@ namespace Scrumproject
             lbShowReports.Items.Clear();
 
             lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
+        }
+
+        private void cbSortReports_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            lbShowReports.ItemsSource = sortHandler.GetSortByStatusResult(cbSortReports.SelectedValue.ToString());
+        }
+
+        public void fillCbOfStatuses()
+        {
+            cbSortReports.ItemsSource = sortHandler.GetCbSortList();
         }
 
       

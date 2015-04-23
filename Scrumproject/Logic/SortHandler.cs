@@ -4,25 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Scrum.Data;
+using Scrum.Data.Data;
 
 namespace Scrumproject.Logic
 {
    public class SortHandler
     {
 
-       //public List<string> SortReportStatus(List<string> reports, string status)
-       //{
-       //    var sortedList = new List<String>();
+        ReportTestClass ReportTestClass = new ReportTestClass();
+        UserRepository UserRepository = new UserRepository();
 
-       //    foreach (var item in reports)
-       //    {
-       //        if (item.status == status)
-       //        {
-       //            sortedList.Add(item);
-       //        }
-       //    }
+       public List<String> GetCbSortList()
+       {
+          ReportTestClass reporttestClass = new ReportTestClass();
+           var listofreports = reporttestClass.GetAllReports();
 
-       //}
+           var getcategories = listofreports.Select(x => x.Status).Distinct().ToList();
+
+           return getcategories;
+       }
+
+       public List<String> GetSortByStatusResult(string status)
+       {
+           var reportList = ReportTestClass.GetAllReports();
+           var userList = UserRepository.GetAllUsers();
+           var filteredReportList = reportList.Join(userList, r => r.UID, u => u.UID,
+               (r, u) => new { Report = r, User = u }).Where(r => r.Report.Status == status)
+               .OrderBy(ur => ur.Report.RID)
+
+               .Select(ur => " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " + ur.Report.Status).ToList();
+
+
+
+
+           return filteredReportList;
+       } 
 
     }
 }
