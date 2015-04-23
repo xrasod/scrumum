@@ -19,12 +19,13 @@ namespace Scrumproject.Logic.Entities
             return hej;
         }
 
-        public string ConvertCurrency(string FromCurrency, string ToCurrency, double amount)
+        public string ConvertCurrency(string FromCurrency, string ToCurrency, double amount, DateTime date)
         {   
             WebClient web = new WebClient();
+            var Converteddate = String.Format(date.Year.ToString() + "-" + date.Month.ToString() + "-" + date.Day.ToString());
 
-            const string urlPattern = "http://finance.yahoo.com/d/quotes.csv?s={0}{1}=X&f=l1";
-            string url = String.Format(urlPattern, FromCurrency,ToCurrency);
+            const string urlPattern = "http://currencies.apps.grandtrunk.net/getrate/";
+            string url = String.Format(urlPattern + Converteddate + "/" + FromCurrency + "/" + ToCurrency);
             string response = web.DownloadString(url);
 
             double exchangeRate =
