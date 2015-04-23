@@ -1089,7 +1089,18 @@ namespace Scrumproject
         {
             lbShowReports.ItemsSource = sortHandler.GetReportsForSpecificUser(id);
         }
-      
+
+        private void rbSortDate_Checked(object sender, RoutedEventArgs e)
+        {
+            lbShowReports.ItemsSource = sortHandler.GetReportsByDate();
+        }
+
+        private void rbSortName_Checked(object sender, RoutedEventArgs e)
+        {
+            lbShowReports.ItemsSource = sortHandler.GetReportsByName();
+        }
+        
+
        
 }
     }
