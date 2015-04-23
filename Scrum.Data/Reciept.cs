@@ -17,6 +17,7 @@ namespace Scrum.Data
         public int REID { get; set; }
         public int RID { get; set; }
         public string TravelReciept { get; set; }
+        public Nullable<decimal> RecieptAmount { get; set; }
     
         public virtual Report Report { get; set; }
     }

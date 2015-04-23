@@ -92,7 +92,7 @@ namespace Scrumproject.Logic
             foreach (var travel in travelinfos)
             {
                 var visitedcountry = countryRep.GetCountryFromId(travel.CID);
-                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " + travel.StartDate.Value.ToShortDateString() +" - " + travel.EndDate.Value.ToShortDateString() + " och var ledig " + travel.VacationDays + " dagar.");
+                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " + travel.StartDate.Value.ToShortDateString() +" - " + travel.EndDate.Value.ToShortDateString()  + " och var ledig " + travel.VacationDays + " dagar.");
             }
             var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
             
