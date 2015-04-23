@@ -27,6 +27,42 @@ namespace Scrumproject.Logic
             return listOfPreypaments;
         }
 
+        public int CheckPrePaymentId(string s)
+        {
+            var b = string.Empty;
+            int val = 0;
+
+            b = s.Where(t => Char.IsDigit(t)).Aggregate(b, (current, t) => current + t);
+
+            if (b.Length > 0)
+                val = Int32.Parse(b);
+
+            return val;
+        }
+
+        public void SaveStatusUpdateForDenial(string fullPrepayment, string motivation)
+        {
+            string PrePaymentString = fullPrepayment.Substring(0,2);
+            var PrePaymentId = CheckPrePaymentId(PrePaymentString);
+
+
+            string setStatusNotAccepted = "Nekad";
+            prepaymentRepository.SaveDeny(PrePaymentId, setStatusNotAccepted, motivation);
+
+        }
+
+         public void SaveStatusUpdateForAccept(string fullPrepayment)
+        {
+            string PrePaymentString = fullPrepayment.Substring(0, 2);
+            var PrePaymentId = CheckPrePaymentId(PrePaymentString);
+
+            string setStatusAccepted = "Godkänd";
+            prepaymentRepository.SaveAccept(PrePaymentId, setStatusAccepted);
+            
+
+        }
+
+        
     }
     
 
