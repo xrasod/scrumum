@@ -38,7 +38,23 @@ namespace Scrumproject.Logic
 
 
            return filteredReportList;
-       } 
+       }
+
+       public List<String> GetReportsForSpecificUser(int id)
+       {
+           var reportList = ReportTestClass.GetAllReports();
+           var userList = UserRepository.GetAllUsers();
+           var filteredReportList = reportList.Join(userList, r => r.UID, u => u.UID,
+               (r, u) => new { Report = r, User = u }).Where(r => r.Report.UID == id)
+               .OrderBy(ur => ur.Report.RID)
+
+               .Select(ur => " Användare : " + " " + ur.User.Username + " " + " ID : " + ur.Report.RID + " " + "Status : " + ur.Report.Status).ToList();
+
+
+
+
+           return filteredReportList;
+       }
 
     }
 }
