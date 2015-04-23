@@ -87,6 +87,8 @@ namespace Scrumproject.Logic
             var travelinfos = travelRep.GetAllTravels().Where(x => x.RID == report.RID).ToList();
             var countries = countryRep.GetAllCountries();
             var listOftravelinfos = new List<String>();
+            var statusonreport = "";
+            
             foreach (var travel in travelinfos)
             {
                 var visitedcountry = countryRep.GetCountryFromId(travel.CID);
@@ -95,8 +97,11 @@ namespace Scrumproject.Logic
             var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
             
             var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName +"\n" +
+                            "Status: " + report.Status + "\n" +
                             "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
-                            "Total summa spenderad: " + report.TotalAmount + "\n\n" +
+                            "Total summa spenderad: " + report.TotalAmount + "\n" +
+                            "Antal kilometer körda: " + report.Kilometers + "\n\n" +
+                            "Beskrivning av resa" + "\n" + report.Description + "\n\n" +
                             "Info om resor" + "\n" + infoOnTravels; 
 
             pdfRep.createPdfandOpen(pdfReport, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
