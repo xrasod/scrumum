@@ -53,13 +53,7 @@ namespace Scrumproject.Logic
             return reportId;
         }
 
-        public void Rejectpost(string reportname)
-        {
-            int reportId = CheckReportId(reportname);
-
-            string setStatusNotAccepted = "Nekad";
-            ReportTestClass.SaveUpdatedReportStatus(reportId, setStatusNotAccepted);
-        }
+     
 
         public void Acceptpost(string reportname)
         {
@@ -131,6 +125,15 @@ namespace Scrumproject.Logic
 
 
 
+        }
+        public void SaveStatusUpdateForDenial(string fullreport, string motivation)
+        {
+            int reportId = CheckReportId(fullreport);
+            
+
+            string setStatusNotAccepted = "Nekad";
+            ReportTestClass.SaveDeny(reportId, setStatusNotAccepted, motivation);
+      
         }
     }
 }
