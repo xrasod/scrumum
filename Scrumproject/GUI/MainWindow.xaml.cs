@@ -1061,9 +1061,16 @@ namespace Scrumproject
 
         private void cbShowPrepayments_Checked(object sender, RoutedEventArgs e)
         {
-            lbShowReports.Items.Clear();
+            try
+            {
+               
 
-            lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
+                lbShowReports.ItemsSource = prepaymentHandler.GetAllPrepaymentsRequest();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void cbSortReports_SelectionChanged(object sender, SelectionChangedEventArgs e)
