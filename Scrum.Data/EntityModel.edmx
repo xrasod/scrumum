@@ -76,8 +76,8 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
           <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RID" Type="int" Nullable="false" />
           <Property Name="CID" Type="int" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
           <Property Name="VacationDays" Type="int" />
         </EntityType>
         <EntityType Name="Users">
@@ -323,14 +323,12 @@ warning 6002: The table/view 'scrumprojekt.dbo.BossFor' does not have a primary 
         </EntityType>
         <EntityType Name="TravelInfo">
           <Key>
-            <PropertyRef Name="RID" />
-            <PropertyRef Name="CID" />
             <PropertyRef Name="TID" />
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" />
           <Property Name="CID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="VacationDays" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="Self.FK__TravelInfo__CID__45F365D3" FromRole="TravelInfo" ToRole="Country" />
           <NavigationProperty Name="Report" Relationship="Self.FK__TravelInfo__RID__44FF419A" FromRole="TravelInfo" ToRole="Report" />
