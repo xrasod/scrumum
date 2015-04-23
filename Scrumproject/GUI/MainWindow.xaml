@@ -123,7 +123,7 @@
                         <TextBox x:Name="tbDescriptionPrepay" Height="328" TextWrapping="Wrap" Text="" Width="780" Background="Black" Foreground="White" TabIndex="4" Canvas.Left="-202" Canvas.Top="41"/>
                     </Canvas>
                 </TabItem>
-                <TabItem Header="Chef" HorizontalAlignment="Left" Width="211" Margin="99,-1,-99,1" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Cursor="None" Height="63" FontSize="14" FontWeight="Bold" FontFamily="Myriad Pro" >
+                <TabItem Header="Chef" HorizontalAlignment="Right" Width="211" Margin="0,-1,-99,1" Background="#FF7B9CE2" BorderBrush="{x:Null}" Foreground="Black" Height="63" FontSize="14" FontWeight="Bold" FontFamily="Myriad Pro" >
                     <Canvas Margin="10,86,81,390">
                         <Label x:Name="lbUsers" Content="Användare" Canvas.Left="10" Width="100" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.48,0.724" Canvas.Top="-74" FontFamily="Myriad Pro" />
                         <Label x:Name="lbUsernameLabel" Content="Användarnamn" Canvas.Left="503" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" Canvas.Top="-30" FontFamily="Myriad Pro"/>
@@ -160,8 +160,6 @@
                         <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="650" Canvas.Top="447" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
                         <TextBox x:Name="tbWhyDenied" Height="76" Canvas.Left="505" TextWrapping="Wrap" Text="" Canvas.Top="368" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
                         <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="501" Canvas.Top="343" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
-                        <CheckBox x:Name="cbSortByDate" Content="Datum" Canvas.Left="91" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="20"/>
-                        <CheckBox x:Name="cbSortByName" Content="Namn" Canvas.Left="161" Canvas.Top="192" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22"/>
                         <Label Content="Sortering" Canvas.Left="14" Canvas.Top="186" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <Button x:Name="btnShowReports" Content="Visa Rapporter" Canvas.Left="305" Canvas.Top="449" Width="107" Background="Black" Foreground="White" Height="23" TabIndex="31" Click="btnShowReports_Click"/>
                         <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="14" TextWrapping="Wrap" Text="" Canvas.Top="152" Width="294" Background="Black" Foreground="White" TabIndex="8"/>
@@ -194,10 +192,13 @@
                         <TextBox x:Name="tbSearchReport" Height="23" Canvas.Left="14" TextWrapping="Wrap" Canvas.Top="449" Width="193" RenderTransformOrigin="0.454,0.148" Foreground="White" Background="Black"/>
                         <Button x:Name="btnLogInChef" Content="Logga in" Height="27" Width="75" Canvas.Left="336" Canvas.Top="-74" Background="Black" Foreground="White" Click="btnLogInChef_Click" FontFamily="Myriad Pro"/>
                         <CheckBox x:Name="cbShowPrepayments" Content="Förskottsansökningar" Canvas.Left="226" Canvas.Top="191" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" TabIndex="22" Checked="cbShowPrepayments_Checked"/>
+                        <ComboBox x:Name="cbSortReports" Width="120" Canvas.Left="103" Canvas.Top="213" SelectionChanged="cbSortReports_SelectionChanged"/>
+                        <RadioButton x:Name="rbSortDate" Content="Datum" Canvas.Left="88" Canvas.Top="192" Width="69" GroupName="rbSort" Checked="rbSortDate_Checked"/>
+                        <RadioButton x:Name="rbSortName" Content="Namn" Canvas.Left="157" Canvas.Top="192" GroupName="rbSort" Checked="rbSortName_Checked"/>
 
                     </Canvas>
                 </TabItem>
-                <TabItem Header="Valutakonverterare&#xA;" HorizontalAlignment="Right" Height="63" VerticalAlignment="Bottom" Width="214" Margin="0,-1,-99,1" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FF96A9D3" FontFamily="Myriad Pro">
+                <TabItem Header="Valutakonverterare&#xA;" Height="63" VerticalAlignment="Bottom" Margin="99,-1,-121,1" Padding="6,12,6,2" FontSize="14" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FF96A9D3" FontFamily="Myriad Pro">
                     <Grid x:Name="MainWindowCurrency" Margin="0">
                         <Grid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -230,7 +231,7 @@
                         <DatePicker x:Name="DPdate" HorizontalAlignment="Left" Margin="163,139,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Statistik&#xD;&#xA;" HorizontalAlignment="Left" Height="61" VerticalAlignment="Top" Width="183" Margin="100,0,-100,0" FontFamily="Myriad Pro" FontSize="14" FontWeight="Bold" Background="#FF6688D1" BorderBrush="{x:Null}">
+                <TabItem Header="Statistik&#xD;&#xA;" HorizontalAlignment="Left" Height="61" VerticalAlignment="Top" Width="183" Margin="121,0,-121,0" FontFamily="Myriad Pro" FontSize="14" FontWeight="Bold" Background="#FF6688D1" BorderBrush="{x:Null}">
                     <Grid x:Name="Statistik" Margin="0,-10,-0.4,9.6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="539*"/>
