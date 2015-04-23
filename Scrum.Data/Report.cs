@@ -26,7 +26,8 @@ namespace Scrum.Data
         public string Description { get; set; }
         public Nullable<decimal> Kilometers { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
-        public Nullable<DateTime> ReportDate { get; set; }
+        public Nullable<System.DateTime> ReportDate { get; set; }
+    
         public virtual ICollection<Reciept> Reciepts { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<TravelInfo> TravelInfoes { get; set; }

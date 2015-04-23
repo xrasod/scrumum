@@ -26,6 +26,21 @@ namespace Scrumproject.Logic
             }
             return numbers;
         }
+
+        public List<DateTime> GetDays(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> allDates = new List<DateTime>();
+
+            int starting = startDate.Day;
+            int ending = endDate.Day;
+
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                allDates.Add(date);
+            }
+
+            return allDates;
+        }
     }
 }
         
