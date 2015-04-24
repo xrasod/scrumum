@@ -1303,48 +1303,58 @@ namespace Scrumproject
 
         private void btnSeeReportSummary_Click(object sender, RoutedEventArgs e)
         {
-            SeeReportInfoWIndow reportSumWindow = new SeeReportInfoWIndow();
-            reportSumWindow.InitializeComponent();
-            var selected = lbShowReports.SelectedValue.ToString();
-            var id = localHandeler.checkIfDigits(selected);
-            var selectedReport = localHandeler.GetSingleReport(id);
-
-            var user = reportDanger.GetSingleUser(selectedReport.UID);
-            var travelinfos = reportDanger.GetTravelInfoForSpecificReport(selectedReport.RID);
-            var receipts = reportDanger.GetReceiptsForSpecificReport(selectedReport.RID);
-
-            var listOftravelinfos = new List<String>();
-            var listOfReceipts = new List<String>();
-            foreach (var travel in travelinfos)
+            try
             {
-                var visitedcountry = localHandeler.getSingleCountry(travel.CID);
-                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " + travel.StartDate.Value.ToShortDateString() +" - " + travel.EndDate.Value.ToShortDateString()  + " och var ledig " + travel.VacationDays + " dagar.");
-            }
-            var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+                SeeReportInfoWIndow reportSumWindow = new SeeReportInfoWIndow();
+                reportSumWindow.InitializeComponent();
+                var selected = lbShowReports.SelectedValue.ToString();
+                var id = localHandeler.checkIfDigits(selected);
+                var selectedReport = localHandeler.GetSingleReport(id);
 
-            foreach(var receipt in receipts)
+                var user = reportDanger.GetSingleUser(selectedReport.UID);
+                var travelinfos = reportDanger.GetTravelInfoForSpecificReport(selectedReport.RID);
+                var receipts = reportDanger.GetReceiptsForSpecificReport(selectedReport.RID);
+
+                var listOftravelinfos = new List<String>();
+                var listOfReceipts = new List<String>();
+                foreach (var travel in travelinfos)
+                {
+                    var visitedcountry = localHandeler.getSingleCountry(travel.CID);
+                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " +
+                                          travel.StartDate.Value.ToShortDateString() + " - " +
+                                          travel.EndDate.Value.ToShortDateString() + " och var ledig " +
+                                          travel.VacationDays + " dagar.");
+                }
+                var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+
+                foreach (var receipt in receipts)
+                {
+                    var savedReceipts = reportDanger.GetSingleReceipt(receipt.RID);
+                    listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +
+                                       savedReceipts.RecieptAmount);
+                }
+                var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
+
+                reportSumWindow.lblNameofReportCreator.Content = user.FirstName + " " + user.LastName;
+                reportSumWindow.lblReportCreatedDate.Content = selectedReport.ReportDate.Value.ToShortDateString();
+                reportSumWindow.lblTotalAmountSpent.Content = selectedReport.TotalAmount;
+                reportSumWindow.tbDescription.Text = selectedReport.Description;
+                reportSumWindow.tbInfoVisitedCountries.Text = infoOnTravels;
+                reportSumWindow.tbInfoReceipts.Text = infoOnReceipts;
+                reportSumWindow.lblKilometersDriven.Content = selectedReport.Kilometers.ToString();
+                reportSumWindow.lblStatusOnReport.Content = selectedReport.Status;
+
+                if (selectedReport.Status == null)
+                {
+                    reportSumWindow.lblStatusOnReport.Content = "Ej behandlad";
+                }
+
+                reportSumWindow.Show();
+            }
+            catch
             {
-                var savedReceipts = reportDanger.GetSingleReceipt(receipt.RID);
-                listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " + savedReceipts.RecieptAmount);
+                MessageBox.Show("Du måste välja en rapport.");
             }
-            var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
-
-            reportSumWindow.lblNameofReportCreator.Content = user.FirstName + " " + user.LastName;
-            reportSumWindow.lblReportCreatedDate.Content = selectedReport.ReportDate.Value.ToShortDateString();
-            reportSumWindow.lblTotalAmountSpent.Content = selectedReport.TotalAmount;
-            reportSumWindow.tbDescription.Text = selectedReport.Description;
-            reportSumWindow.tbInfoVisitedCountries.Text = infoOnTravels;
-            reportSumWindow.tbInfoReceipts.Text = infoOnReceipts;
-            reportSumWindow.lblKilometersDriven.Content = selectedReport.Kilometers.ToString();
-            reportSumWindow.lblStatusOnReport.Content = selectedReport.Status;
-            
-            if (selectedReport.Status == null)
-            {
-                reportSumWindow.lblStatusOnReport.Content = "Ej behandlad"; 
-            }
-            
-            reportSumWindow.Show();
-
         }
 
         
