@@ -43,6 +43,7 @@ namespace Scrumproject
         SortHandler sortHandler = new SortHandler();
         List<RecieptHandler> recieptInfo = new List<RecieptHandler>(); 
         Validator validera = new Validator();
+        
 
         internal static MainWindow main;
         internal string Status
@@ -1128,7 +1129,7 @@ namespace Scrumproject
         {
             try
             {
-                if (cbShowPrepayments.IsChecked.HasValue.Equals(true))
+                if (cbShowPrepayments.IsChecked == true)
                 {
                     string Prepaymentwindowfullstring = lbShowReports.SelectedItem.ToString();
                     prepaymentHandler.SaveStatusUpdateForAccept(Prepaymentwindowfullstring);
@@ -1147,15 +1148,16 @@ namespace Scrumproject
             }
             catch (Exception ee)
             {
-                MessageBox.Show("Du måste välja en rapport eller förskottsansökan att godkänna!");
+                MessageBox.Show("Du måste välja en rapport eller förskottsansökan att godkänna!" + ee.Message);
             }
         }
+
 
         private void btnDeny_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (cbShowPrepayments.IsChecked.HasValue.Equals(true))
+                if (cbShowPrepayments.IsChecked == true)
                 {
 
                     string Prepaymentwindowfullstring = lbShowReports.SelectedItem.ToString();
@@ -1283,9 +1285,8 @@ namespace Scrumproject
 
         private void btnSeeReportSummary_Click(object sender, RoutedEventArgs e)
         {
-            var reportSumWindow = new SeeReportInfoWIndow();
+            SeeReportInfoWIndow reportSumWindow = new SeeReportInfoWIndow();
             reportSumWindow.InitializeComponent();
-            reportSumWindow.Show();
             var selected = lbShowReports.SelectedValue.ToString();
             var id = localHandeler.checkIfDigits(selected);
             var selectedReport = localHandeler.GetSingleReport(id);
@@ -1311,18 +1312,26 @@ namespace Scrumproject
             var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
 
             reportSumWindow.lblNameofReportCreator.Content = user.FirstName + " " + user.LastName;
-            reportSumWindow.lblReportCreatedDate.Content = selectedReport.ReportDate.ToString();
+            reportSumWindow.lblReportCreatedDate.Content = selectedReport.ReportDate.Value.ToShortDateString();
             reportSumWindow.lblTotalAmountSpent.Content = selectedReport.TotalAmount;
             reportSumWindow.tbDescription.Text = selectedReport.Description;
             reportSumWindow.tbInfoVisitedCountries.Text = infoOnTravels;
             reportSumWindow.tbInfoReceipts.Text = infoOnReceipts;
-
-
+            reportSumWindow.lblKilometersDriven.Content = selectedReport.Kilometers.ToString();
+            reportSumWindow.lblStatusOnReport.Content = selectedReport.Status;
+            
+            if (selectedReport.Status == null)
+            {
+                reportSumWindow.lblStatusOnReport.Content = "Ej behandlad"; 
+            }
+            
+            reportSumWindow.Show();
 
         }
+
         
 
-       
-}
+
+    }
     }
 
