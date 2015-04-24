@@ -110,48 +110,48 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            string[] arr = new string[3];
-            List<DayHandler> d = new List<DayHandler>();
-            RecieptHandler rh = new RecieptHandler();
-            List<string> list = new List<string>();
-            var j = listBoxDays.Items;
-
-            for (int i = 0; listBoxDays.Items.Count > i; i++)
-            {
-                j.MoveCurrentToNext();
-                list.Add(j.CurrentItem.ToString());
-            }
-
-            foreach (var h in list)
-            {
-                DayHandler dh = new DayHandler();
-                h.Trim();
-                string replaced = h.Replace("kr", "");
-                string[] words = replaced.Split('-');
-                dh.date = words[0].Trim();
-                dh.country = words[1].Trim();
-                var o = words[2];
-                double dou = Convert.ToDouble(o);
-                dh.subsistence = dou;
-                d.Add(dh);
-            }
-  
-
-            //List<string> recieptList = new List<string>();
-            //for (int i = 0; listBoxReceipts.Items.Count > i; i++)
-            //{
-            //    recieptList.Add(listBoxReceipts.Items[i].ToString());
-            //}
-            DayHandler day = new DayHandler();
-            var totalkm = TbTotalKm.Text;
-            var totalreciept = tbTotalRecieptAmount.Text;
-            var totalrecieptdec = Convert.ToDouble(totalreciept);
-            double totalkmdec = Convert.ToDouble(totalkm);
-            decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
-            var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
-            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
-
             try
+            {
+                string[] arr = new string[3];
+                List<DayHandler> d = new List<DayHandler>();
+                RecieptHandler rh = new RecieptHandler();
+                List<string> list = new List<string>();
+                var j = listBoxDays.Items;
+                
+                for (int i = 0; listBoxDays.Items.Count > i; i++)
+                {
+                    j.MoveCurrentToNext();
+                    list.Add(j.CurrentItem.ToString());
+
+                }
+                
+                
+
+                foreach (var h in list)
+                {
+                    DayHandler dh = new DayHandler();
+                    h.Trim();
+                    string replaced = h.Replace("kr", "");
+                    string[] words = replaced.Split('-');
+                    dh.date = words[0].Trim();
+                    dh.country = words[1].Trim();
+                    var o = words[2];
+                    double dou = Convert.ToDouble(o);
+                    dh.subsistence = dou;
+                    d.Add(dh);
+                }
+
+                DayHandler day = new DayHandler();
+                var totalkm = TbTotalKm.Text;
+                var totalreciept = tbTotalRecieptAmount.Text;
+                var totalrecieptdec = Convert.ToDouble(totalreciept);
+                double totalkmdec = Convert.ToDouble(totalkm);
+                decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
+                var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
+                day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
+
+                j.Clear();
+                try
             {
                 List<string> savedReceipts = new List<string>();
                 List<string> visitedCountries = new List<string>();
@@ -181,10 +181,20 @@ namespace Scrumproject
                     pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
                     MessageBox.Show("Din rapport har sparats.");
 
+                    }
                 }
-            }
-            catch { MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); }
+               catch 
+                { 
+                MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); 
+                }
         }       
+            
+            catch
+            {
+                MessageBox.Show("Alla fält måste vara ifyllda!");
+            }
+
+        }
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
         {
@@ -377,26 +387,34 @@ namespace Scrumproject
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            listBoxReceipts.Items.Add(tbReceiptFile.Text);
-            RecieptHandler rh = new RecieptHandler();
+            
+            if (Validator.CheckIfText(tbSum.Text.ToString()) && !validera.ControllFiledNotEmpty(tbReceiptFile))
+            {               
+                try
+                {
+                    listBoxReceipts.Items.Add(tbReceiptFile.Text);
+                    RecieptHandler rh = new RecieptHandler();
+                    double reciept = Convert.ToDouble(tbSum.Text);
+                    double TotalReciept = Convert.ToDouble(tbTotalRecieptAmount.Text);
 
-            try
-            {
-                double reciept = Convert.ToDouble(tbSum.Text);
-                double TotalReciept = Convert.ToDouble(tbTotalRecieptAmount.Text);
+                    double totalRecieptAmount = reciept + TotalReciept;
+                    tbTotalRecieptAmount.Text = totalRecieptAmount.ToString();
+                    tbTotalRecieptAmount.IsReadOnly = true;
+                    var tbSumma = tbSum.Text;
+                    var tbSummaDecimal = Convert.ToDecimal(tbSumma);
+                    rh.RecieptAmount = tbSummaDecimal;
+                    rh.TravelReciept = tbReceiptFile.Text;
+                    recieptInfo.Add(rh);
 
-                double totalRecieptAmount = reciept + TotalReciept;
-                tbTotalRecieptAmount.Text = totalRecieptAmount.ToString();
-                tbTotalRecieptAmount.IsReadOnly = true;
-                var tbSumma = tbSum.Text;
-                var tbSummaDecimal = Convert.ToDecimal(tbSumma);
-                rh.RecieptAmount = tbSummaDecimal;
-                rh.TravelReciept = tbReceiptFile.Text;
-                recieptInfo.Add(rh);
+                }
+                catch
+                {
+                    MessageBox.Show("Ange summa!");
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Ange summa!");
+                MessageBox.Show("Du måste välja kvitto samt belopp, tack!");
             }
         }
 

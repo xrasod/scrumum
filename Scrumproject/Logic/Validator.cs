@@ -70,8 +70,19 @@ namespace Scrumproject.Logic
             else
             {
                 return true;
+            }         
+        }
+
+        public static bool CheckIfText(string input)
+        {
+            if (input.All(Char.IsLetter))
+            {
+                return false;
             }
-            
+            else
+            {              
+                return true;
+            }
         }
 
 
