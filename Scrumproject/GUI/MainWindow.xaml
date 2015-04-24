@@ -146,7 +146,7 @@
                         <TextBox x:Name="tbPassword" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="5" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1" IsTabStop="False" Canvas.Top="-24"/>
                         <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="10" Canvas.Top="210" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="504" Canvas.Top="279" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29" Click="btnShowPDF_Click">
+                        <Button x:Name="btnShowPDF" Content="Öppna rapport som pdf" Canvas.Left="504" Canvas.Top="294" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29" Click="btnShowPDF_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -156,7 +156,7 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="505" Canvas.Top="300" Width="244" Background="Black" Foreground="White" Height="38" TabIndex="30" Click="btnApprove_Click"/>
+                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="505" Canvas.Top="315" Width="244" Background="Black" Foreground="White" Height="23" TabIndex="30" Click="btnApprove_Click"/>
                         <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="650" Canvas.Top="447" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
                         <TextBox x:Name="tbWhyDenied" Height="76" Canvas.Left="505" TextWrapping="Wrap" Text="" Canvas.Top="368" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
                         <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="501" Canvas.Top="343" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
@@ -195,6 +195,7 @@
                         <ComboBox x:Name="cbSortReports" Width="120" Canvas.Left="103" Canvas.Top="213" SelectionChanged="cbSortReports_SelectionChanged"/>
                         <RadioButton x:Name="rbSortDate" Content="Datum" Canvas.Left="88" Canvas.Top="192" Width="69" GroupName="rbSort" Checked="rbSortDate_Checked" Foreground="White"/>
                         <RadioButton x:Name="rbSortName" Content="Namn" Canvas.Left="157" Canvas.Top="192" GroupName="rbSort" Checked="rbSortName_Checked" Foreground="White"/>
+                        <Button x:Name="btnSeeReportSummary" Content="Visa sammanställning av rapport" Width="244" Canvas.Left="504" Canvas.Top="272" Background="Black" Foreground="White" Click="btnSeeReportSummary_Click"/>
 
                     </Canvas>
                 </TabItem>

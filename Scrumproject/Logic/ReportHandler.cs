@@ -113,6 +113,16 @@ namespace Scrumproject.Logic
         }
 
 
+        public User GetSingleUser(int reportId)
+        {
+            return UserRepository.GetAllUsers().FirstOrDefault(x => x.UID == reportId);
+        }
+
+        public Reciept GetSingleReceipt(int reportId)
+        {
+            return receiptRep.GetSingleReciept(reportId);
+        }
+
 
         public List<string> searchReports(string s)
         {
@@ -148,5 +158,16 @@ namespace Scrumproject.Logic
             ReportTestClass.SaveDeny(reportId, setStatusNotAccepted, motivation);
       
         }
+
+        public List<TravelInfo> GetTravelInfoForSpecificReport(int reportId)
+        {
+            return travelRep.GetAllTravels().Where(x => x.RID == reportId).ToList();
+        }
+
+        public List<Reciept> GetReceiptsForSpecificReport(int reportId)
+        {
+            return receiptRep.GetAllReceipts().Where(x => x.RID == reportId).ToList();
+        } 
+
     }
 }
