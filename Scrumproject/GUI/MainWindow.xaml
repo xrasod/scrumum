@@ -89,7 +89,7 @@
                                 </TransformGroup>
                             </DatePicker.RenderTransform>
                         </DatePicker>
-                        <ListBox x:Name="listBoxDays" Height="257" Width="228" Canvas.Left="1" Canvas.Top="169" Background="Black" Foreground="White"/>
+                        <ListBox x:Name="listBoxDays" Height="257" Width="228" Canvas.Left="1" Canvas.Top="169" Background="Black" Foreground="White" SelectionMode="Multiple"/>
                         <ListBox x:Name="listBoxReceipts" Height="232" Width="391" Canvas.Left="434" Canvas.Top="271" Foreground="White" Background="Black"/>
                         <Label x:Name="lbLoggedInAs" Content="Inloggad som: " Canvas.Left="926" Canvas.Top="-13" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16" FontFamily="Myriad Pro"/>
                         <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="1053" Canvas.Top="-9" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>

@@ -597,7 +597,7 @@ namespace Scrumproject
                     d.country = CbCountries.SelectedItem.ToString();
 
                     d.subsistence = 0;
-
+                    
                     dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
                     "0 kr";
                     listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
@@ -606,12 +606,25 @@ namespace Scrumproject
                 {
                     d.date = listBoxDays.SelectedItem.ToString();
                     d.country = CbCountries.SelectedItem.ToString();
-
                     d.subsistence = subsistence;
+                    var selectedDays = listBoxDays.SelectedItems.Count;
 
-                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                  subsistence + " kr";
-                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    if (selectedDays > 1)
+                    {
+                        for (int i = 0; selectedDays > i; i++ )
+                        {
+                            dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                            listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                        }
+                    }
+                    else
+                    {
+                        dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                        listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    }
+                    
                 }
                 dayhandler.Add(d);
                 //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
@@ -704,8 +717,7 @@ namespace Scrumproject
                         tbBoss.Text = user.BID.ToString();
                         tbUserID.Text = user.UID.ToString();
                     }
-
-                    }
+                 }
 
                 foreach (var boss in bosses)
                 {
