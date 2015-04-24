@@ -94,7 +94,7 @@
                         <Label x:Name="lbLoggedInAs" Content="Inloggad som: " Canvas.Left="926" Canvas.Top="-13" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16" FontFamily="Myriad Pro"/>
                         <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="1053" Canvas.Top="-9" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
                         <Button x:Name="BtnLogIn" Content="Logga In" Canvas.Left="1074" Canvas.Top="23" Width="143" Foreground="White" Background="Black" Click="BtnLogIn_Click" Height="25" TabIndex="1" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
+                        <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="1074" Canvas.Top="26" Width="143" Background="Black" Foreground="White" Visibility="Hidden" Click="btnLogOut_Click"/>
                         <Button x:Name="btnForgotPassword" Content="Glömt Lösenord" Canvas.Left="926" Canvas.Top="23" Width="134" Background="Black" Foreground="White" Height="25" TabIndex="2" Click="btnForgotPassword_Click" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnDeleteDraft" Content="Rensa Utkast" Height="41" Width="241" Canvas.Top="488" Background="Black" Click="btnDeleteDraft_Click" Foreground="White" BorderBrush="#FFCBCBCB" FontSize="24" FontFamily="Myriad Pro"/>
                         <CheckBox x:Name="CHBVacationday" Content="Ledig" Canvas.Left="236" Canvas.Top="300" RenderTransformOrigin="0.155,-0.438" Background="White" Foreground="White"/>
