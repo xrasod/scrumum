@@ -107,6 +107,9 @@
     <Compile Include="GUI\Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\SeeReportInfoWIndow.xaml.cs">
+      <DependentUpon>SeeReportInfoWIndow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logic\DateHandler.cs" />
     <Compile Include="Logic\DayHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\SeeReportInfoWIndow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

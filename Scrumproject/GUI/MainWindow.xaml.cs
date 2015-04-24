@@ -1298,6 +1298,46 @@ namespace Scrumproject
         {
             lbShowReports.ItemsSource = sortHandler.GetReportsByName();
         }
+
+        private void btnSeeReportSummary_Click(object sender, RoutedEventArgs e)
+        {
+            var reportSumWindow = new SeeReportInfoWIndow();
+            reportSumWindow.InitializeComponent();
+            reportSumWindow.Show();
+            var selected = lbShowReports.SelectedValue.ToString();
+            var id = localHandeler.checkIfDigits(selected);
+            var selectedReport = localHandeler.GetSingleReport(id);
+
+            var user = reportDanger.GetSingleUser(selectedReport.UID);
+            var travelinfos = reportDanger.GetTravelInfoForSpecificReport(selectedReport.RID);
+            var receipts = reportDanger.GetReceiptsForSpecificReport(selectedReport.RID);
+
+            var listOftravelinfos = new List<String>();
+            var listOfReceipts = new List<String>();
+            foreach (var travel in travelinfos)
+            {
+                var visitedcountry = localHandeler.getSingleCountry(travel.CID);
+                    listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " + travel.StartDate.Value.ToShortDateString() +" - " + travel.EndDate.Value.ToShortDateString()  + " och var ledig " + travel.VacationDays + " dagar.");
+            }
+            var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+
+            foreach(var receipt in receipts)
+            {
+                var savedReceipts = reportDanger.GetSingleReceipt(receipt.RID);
+                listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " + savedReceipts.RecieptAmount);
+            }
+            var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
+
+            reportSumWindow.lblNameofReportCreator.Content = user.FirstName + " " + user.LastName;
+            reportSumWindow.lblReportCreatedDate.Content = selectedReport.ReportDate.ToString();
+            reportSumWindow.lblTotalAmountSpent.Content = selectedReport.TotalAmount;
+            reportSumWindow.tbDescription.Text = selectedReport.Description;
+            reportSumWindow.tbInfoVisitedCountries.Text = infoOnTravels;
+            reportSumWindow.tbInfoReceipts.Text = infoOnReceipts;
+
+
+
+        }
         
 
        

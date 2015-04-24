@@ -9,7 +9,7 @@ namespace Scrumproject.Logic.Entities
         public int Uid { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
-        public decimal KilometersDriven { get; set; }
+        public decimal? KilometersDriven { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime ReportDate { get; set; }
         public List<ReceiptsEntity> ListOfReceipts { get; set; }
