@@ -51,7 +51,7 @@
                         <ComboBox x:Name="CbCountries" Canvas.Left="234" Canvas.Top="191" Width="172" SelectionChanged="CbCountries_SelectionChanged" Height="25"/>
                         <Button x:Name="BtnSaveReceipt" Content="Spara Kvitto                             " Canvas.Left="737" Canvas.Top="508" Width="88" RenderTransformOrigin="0.77,2.2" FontFamily="Myriad Pro" Background="Black" Foreground="White" BorderBrush="#FFCBCBCB" Padding="5,1,1,1" Click="Button_Click_1" Height="21"/>
                         <Button x:Name="btnUploadReceipt" Content="Bläddra" Canvas.Top="243" Width="64" FontFamily="Myriad Pro" Background="Black" Foreground="White" BorderBrush="#FFCBCBCB" Click="btnUploadReceipt_Click" RenderTransformOrigin="0.566,-2.278" Canvas.Left="761" Height="23"/>
-                        <TextBox x:Name="tbReceiptFile" Height="23" TextWrapping="Wrap" Text="" Canvas.Top="243" Width="175" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White" Canvas.Left="581"/>
+                        <TextBox x:Name="tbReceiptFile" Height="23" TextWrapping="Wrap" Text="" Canvas.Top="243" Width="175" RenderTransformOrigin="0.67,0.409" Background="Black" Foreground="White" Canvas.Left="581" IsEnabled="False"/>
                         <TextBox x:Name="tbSum" Height="23" TextWrapping="Wrap" Text="" Canvas.Top="508" Width="67" RenderTransformOrigin="0.5,0.5" Background="Black" Foreground="White" Canvas.Left="659">
                             <TextBox.RenderTransform>
                                 <TransformGroup>
@@ -64,7 +64,7 @@
                         </TextBox>
                         <Button x:Name="btnRemoveSelectedReceipt" Content="Ta bort kvitto                             " Canvas.Left="434" Canvas.Top="508" Width="89" RenderTransformOrigin="1.09,0.237" FontFamily="Myriad Pro" BorderBrush="#FFCBCBCB" Foreground="White" Background="Black" Click="btnRemoveSelectedReceipt_Click" Height="21"/>
                         <Label Content="Välj kvitto/belopp                        " Canvas.Top="237" RenderTransformOrigin="0.537,0.874" Background="{x:Null}" Foreground="White" FontWeight="Bold" FontSize="16" Width="174" Canvas.Left="434" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnSendReport" Content="Skicka in din rapport                          " Canvas.Left="963" Canvas.Top="486" Width="254" BorderBrush="#FFCBCBCB" Foreground="White" Height="43" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="Black" FontFamily="Myriad Pro"/>
+                        <Button x:Name="btnSendReport" Content="Skicka in din rapport                          " Canvas.Left="963" Canvas.Top="486" Width="264" BorderBrush="#FFCBCBCB" Foreground="White" Height="43" Click="btnSendReport_Click" Padding="15,1,1,1" FontSize="24" FontWeight="Bold" Margin="0" Background="Black" FontFamily="Myriad Pro"/>
                         <Label Content="Maxbelopp" Canvas.Left="231" Canvas.Top="214" Width="200" Foreground="White" FontWeight="Bold" FontSize="16" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnSaveStartCountry" Content="Spara land" Canvas.Left="236" Canvas.Top="275" Width="93" FontFamily="Myriad Pro" Background="Black" Foreground="White" BorderBrush="#FFCBCBCB" Height="20" Click="btnSaveStartCountry_Click" RenderTransformOrigin="0.575,0.45"/>
                         <Label x:Name="lbMaxSumSpecificCountry" Content="" Canvas.Left="236" Canvas.Top="241" RenderTransformOrigin="1.556,2.432" Width="93"/>
@@ -94,7 +94,7 @@
                         <Label x:Name="lbLoggedInAs" Content="Inloggad som: " Canvas.Left="926" Canvas.Top="-13" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16" FontFamily="Myriad Pro"/>
                         <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="1053" Canvas.Top="-9" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
                         <Button x:Name="BtnLogIn" Content="Logga In" Canvas.Left="1074" Canvas.Top="23" Width="143" Foreground="White" Background="Black" Click="BtnLogIn_Click" Height="25" TabIndex="1" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="563" Canvas.Top="25" Width="75" Background="White" Foreground="Black" Visibility="Hidden" Click="btnLogOut_Click"/>
+                        <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="1074" Canvas.Top="26" Width="143" Background="Black" Foreground="White" Visibility="Hidden" Click="btnLogOut_Click"/>
                         <Button x:Name="btnForgotPassword" Content="Glömt Lösenord" Canvas.Left="926" Canvas.Top="23" Width="134" Background="Black" Foreground="White" Height="25" TabIndex="2" Click="btnForgotPassword_Click" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnDeleteDraft" Content="Rensa Utkast" Height="41" Width="241" Canvas.Top="488" Background="Black" Click="btnDeleteDraft_Click" Foreground="White" BorderBrush="#FFCBCBCB" FontSize="24" FontFamily="Myriad Pro"/>
                         <CheckBox x:Name="CHBVacationday" Content="Ledig" Canvas.Left="236" Canvas.Top="300" RenderTransformOrigin="0.155,-0.438" Background="White" Foreground="White"/>
@@ -102,7 +102,7 @@
                         <CheckBox x:Name="CHBLunch" Content="Lunch" Canvas.Left="236" Canvas.Top="342" Background="White" Foreground="White"/>
                         <CheckBox x:Name="CHBDinner" Content="Middag" Canvas.Left="236" Canvas.Top="363" Background="White" Foreground="White"/>
                         <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120"/>
-                        <TextBox x:Name="tbTotalRecieptAmount" Height="23" Canvas.Left="663" TextWrapping="Wrap" Text="TextBox" Canvas.Top="534" Width="120"/>
+                        <TextBox x:Name="tbTotalRecieptAmount" Height="23" Canvas.Left="663" TextWrapping="Wrap" Text="0" Canvas.Top="534" Width="120" IsEnabled="False"/>
 
 
                     </Canvas>
@@ -146,7 +146,7 @@
                         <TextBox x:Name="tbPassword" Height="22" Canvas.Left="628" TextWrapping="Wrap" Text="" Canvas.Top="41" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1"/>
                         <TextBox x:Name="tbUsername" Height="23" Canvas.Left="628" TextWrapping="Wrap" Text="" Width="121" Background="Black" Foreground="White" SelectionBrush="#FF4375A6" TabIndex="1" IsTabStop="False" Canvas.Top="11"/>
                         <Label x:Name="lbSentInReports" Content="Rapporter" Canvas.Left="10" Canvas.Top="210" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14" FontFamily="Myriad Pro"/>
-                        <Button x:Name="btnShowPDF" Content="Visa PDF" Canvas.Left="504" Canvas.Top="314" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29" Click="btnShowPDF_Click">
+                        <Button x:Name="btnShowPDF" Content="Öppna rapport som pdf" Canvas.Left="504" Canvas.Top="294" Width="244" RenderTransformOrigin="0.5,0.5" Foreground="White" Background="Black" Height="20" TabIndex="29" Click="btnShowPDF_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -156,10 +156,10 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="505" Canvas.Top="340" Width="244" Background="Black" Foreground="White" Height="38" TabIndex="30" Click="btnApprove_Click"/>
-                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="650" Canvas.Top="486" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="22" TabIndex="32" Click="btnDeny_Click"/>
-                        <TextBox x:Name="tbWhyDenied" Height="76" Canvas.Left="505" TextWrapping="Wrap" Text="" Canvas.Top="400" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
-                        <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="501" Canvas.Top="378" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
+                        <Button x:Name="btnApprove" Content="Godkänn Rapport" Canvas.Left="505" Canvas.Top="315" Width="244" Background="Black" Foreground="White" Height="23" TabIndex="30" Click="btnApprove_Click"/>
+                        <Button x:Name="btnDeny" Content="Neka Rapport" Canvas.Left="650" Canvas.Top="447" Width="99" Foreground="White" Background="Black" RenderTransformOrigin="0.483,-0.8" Height="23" TabIndex="32" Click="btnDeny_Click"/>
+                        <TextBox x:Name="tbWhyDenied" Height="76" Canvas.Left="505" TextWrapping="Wrap" Text="" Canvas.Top="368" Width="244" Background="Black" Foreground="White" TabIndex="16"/>
+                        <Label x:Name="lbWhyDenied" Content="Motvering till nekande" Canvas.Left="501" Canvas.Top="343" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <Label Content="Sortering" Canvas.Left="14" Canvas.Top="186" Foreground="White" Background="{x:Null}" FontWeight="Bold" FontSize="14"/>
                         <Button x:Name="btnShowReports" Content="Visa Rapporter" Canvas.Left="305" Canvas.Top="449" Width="107" Background="Black" Foreground="White" Height="23" TabIndex="31" Click="btnShowReports_Click"/>
                         <TextBox x:Name="tbSearchUser" Height="23" Canvas.Left="14" TextWrapping="Wrap" Text="" Canvas.Top="152" Width="294" Background="Black" Foreground="White" TabIndex="8"/>
@@ -197,6 +197,7 @@
                         <RadioButton x:Name="rbSortName" Content="Namn" Canvas.Left="157" Canvas.Top="192" GroupName="rbSort" Checked="rbSortName_Checked" Foreground="White"/>
                         <CheckBox x:Name="cbwanttoadd" Content="Jag vill lägga till en anv." Canvas.Left="505" Canvas.Top="-42" Foreground="White" Background="White" FontWeight="Bold" FontSize="14" TabIndex="22" Checked="cbwanttoadd_Checked"/>
                         <CheckBox x:Name="cbwanttoupdate" Content="Jag vill uppdatera en anv." Canvas.Left="505" Canvas.Top="-21" Foreground="White" Background="White" FontWeight="Bold" FontSize="14" TabIndex="22" Checked="cbwanttoupdate_Checked"/>
+                        <Button x:Name="btnSeeReportSummary" Content="Visa sammanställning av rapport" Width="244" Canvas.Left="504" Canvas.Top="272" Background="Black" Foreground="White" Click="btnSeeReportSummary_Click"/>
 
                     </Canvas>
                 </TabItem>
