@@ -491,29 +491,29 @@ namespace Scrumproject
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    saveDraft();
-            //    MessageBox.Show("Utkast sparat.");
-            //    e.Cancel = false;
-            //}
-            //else
-            //{
-            //    MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            //    if (res == MessageBoxResult.Yes)
-            //    {
-            //        MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
-            //        e.Cancel = false;
-            //    }
-            //    else
-            //    {
-            //        saveDraft();
-            //        MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
-            //        e.Cancel = false;
-            //    }
+            MessageBoxResult result = MessageBox.Show("Vill du spara ett utkast av din resa som laddas vid nästa körning?", "Utkast", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                saveDraft();
+                MessageBox.Show("Utkast sparat.");
+                e.Cancel = false;
+            }
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Är du verkligen säker? Du måste fylla i allt igen annars", "Säker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (res == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show("Skyll dig själv. Allt du fyllde i är nu raderat för alltid. Farväl.");
+                    e.Cancel = false;
+                }
+                else
+                {
+                    saveDraft();
+                    MessageBox.Show("Bra val min vän. Ditt utkast har nu sparats. Puss och kram.");
+                    e.Cancel = false;
+                }
 
-            //}
+            }
         }
 
  
@@ -660,7 +660,7 @@ namespace Scrumproject
                     d.country = CbCountries.SelectedItem.ToString();
 
                     d.subsistence = 0;
-
+                    
                     dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
                     "0 kr";
                     listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
@@ -669,12 +669,25 @@ namespace Scrumproject
                 {
                     d.date = listBoxDays.SelectedItem.ToString();
                     d.country = CbCountries.SelectedItem.ToString();
-
                     d.subsistence = subsistence;
+                    var selectedDays = listBoxDays.SelectedItems.Count;
 
-                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                  subsistence + " kr";
-                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    if (selectedDays > 1)
+                    {
+                        for (int i = 0; selectedDays > i; i++ )
+                        {
+                            dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                            listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                        }
+                    }
+                    else
+                    {
+                        dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                        listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    }
+                    
                 }
                 dayhandler.Add(d);
                 //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
@@ -774,8 +787,7 @@ namespace Scrumproject
                         tbBoss.Text = user.BID.ToString();
                         tbUserID.Text = user.UID.ToString();
                     }
-
-                    }
+                 }
 
                 foreach (var boss in bosses)
                 {
