@@ -87,6 +87,7 @@ namespace Scrum.Data.Data
             using (var context = new scrumEntities())
             {
                 context.TravelInfoes.Add(ti);
+                context.SaveChanges();
             }
         }
 
