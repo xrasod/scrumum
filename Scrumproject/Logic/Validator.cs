@@ -34,13 +34,10 @@ namespace Scrumproject.Logic
         public bool ControllFiledNotEmpty(TextBox i)
         {
             if (!string.IsNullOrEmpty(i.Text))
-            {
-                
+            {             
                 return false;
-
             }
             return true;
-
         }
 
         //Kollar om det är en korrekt mailadress.

@@ -92,7 +92,6 @@
                         <ListBox x:Name="listBoxDays" Height="257" Width="228" Canvas.Left="1" Canvas.Top="169" Background="Black" Foreground="White" SelectionMode="Multiple"/>
                         <ListBox x:Name="listBoxReceipts" Height="232" Width="391" Canvas.Left="434" Canvas.Top="271" Foreground="White" Background="Black"/>
                         <Label x:Name="lbLoggedInAs" Content="Inloggad som: " Canvas.Left="926" Canvas.Top="-13" RenderTransformOrigin="0.3,0.534" Foreground="White" FontSize="16" FontFamily="Myriad Pro"/>
-                        <Label x:Name="lbLoggedInAsThisUser" Content="" Canvas.Left="1053" Canvas.Top="-9" Width="164" Foreground="White" FontSize="16" Background="#FF749ABF" Height="25"/>
                         <Button x:Name="BtnLogIn" Content="Logga In" Canvas.Left="1074" Canvas.Top="23" Width="143" Foreground="White" Background="Black" Click="BtnLogIn_Click" Height="25" TabIndex="1" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
                         <Button x:Name="btnLogOut" Content="Logga ut" Canvas.Left="1074" Canvas.Top="26" Width="143" Background="Black" Foreground="White" Visibility="Hidden" Click="btnLogOut_Click"/>
                         <Button x:Name="btnForgotPassword" Content="Glömt Lösenord" Canvas.Left="926" Canvas.Top="23" Width="134" Background="Black" Foreground="White" Height="25" TabIndex="2" Click="btnForgotPassword_Click" BorderBrush="#FFCBCBCB" FontFamily="Myriad Pro"/>
@@ -103,6 +102,7 @@
                         <CheckBox x:Name="CHBDinner" Content="Middag" Canvas.Left="236" Canvas.Top="363" Background="White" Foreground="White"/>
                         <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120" Visibility="Hidden"/>
                         <TextBox x:Name="tbTotalRecieptAmount" Height="23" Canvas.Left="663" TextWrapping="Wrap" Text="0" Canvas.Top="534" Width="120" IsEnabled="False"/>
+                        <TextBlock Canvas.Left="1070" Name="tbLoggedInAsThisUser" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="-22"/>
 
 
                     </Canvas>
