@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
     using System.ServiceModel.Channels;
-    using System.Text;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,8 +51,8 @@ namespace Scrumproject
 
         internal string Status
         {
-            get { return lbLoggedInAsThisUser.Content.ToString(); }
-            set { Dispatcher.Invoke(new Action(() => { lbLoggedInAsThisUser.Content = value; })); }
+            get { return tbLoggedInAsThisUser.Text; }
+            set { Dispatcher.Invoke(new Action(() => { tbLoggedInAsThisUser.Text = value; })); }
         }
 
         internal string BossStatus
@@ -132,8 +132,35 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
+            var loopis = 0;
+            var m = listBoxDays.Items;
 
+            List<string> listis = new List<string>();
 
+            for (int i = 0; listBoxDays.Items.Count > i; i++)
+            {
+                m.MoveCurrentToNext();
+                if (m.CurrentItem != null)
+                {
+                    listis.Add(m.CurrentItem.ToString());
+                }
+            }
+
+            foreach (var item in listis)
+            {
+                if (item.Contains("-"))
+                {
+                    loopis++;
+                }
+            }
+            m.MoveCurrentToPosition(-1);
+       
+                if (tbLoggedInAsThisUser.Text != null && tbLoggedInAsThisUser.Text != "")
+                {
+                    if (!validera.ControllFiledNotEmpty(tbDoneOnTrip))
+                    {
+                        if (listBoxDays.Items.Count > 0 && loopis == listBoxDays.Items.Count)
+                        {
                 string[] arr = new string[3];
                 List<DayHandler> d = new List<DayHandler>();
                 RecieptHandler rh = new RecieptHandler();
@@ -171,11 +198,12 @@ namespace Scrumproject
                 decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
                 var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
                 var rid = day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount,
-                    lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
+                                tbLoggedInAsThisUser.Text, recieptInfo);
 
                 j.Clear();
 
-                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
                 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -228,17 +256,31 @@ namespace Scrumproject
 
                      catch (Exception ex)
                      { 
-                        MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. " + ex.Message); 
+                                    MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. sopa " + ex.Message);
                      }
                 }
 
-                string bossemail = emailHandler.GetBossEmailForAUser(lbLoggedInAsThisUser.Content.ToString());
-                string useremail = emailHandler.GetUserEmail(lbLoggedInAsThisUser.Content.ToString());
-                emailHandler.SendEmailToBoss(bossemail);
-                emailHandler.SendEmailToUser(useremail);
+                            string userfuckyou = tbLoggedInAsThisUser.Text;
+                            emailHandler.SendEmailToBoss(userfuckyou);
+                            emailHandler.SendEmailToUser(userfuckyou);
                 
-
+                        }
+                        else
+                        {
+                            MessageBox.Show("helo, fyll i dina resor, dina dagar osv");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fyll i vad du gjort under resan!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Dax att logga in");
+                }
             }
+
 
 
 
@@ -386,7 +428,6 @@ namespace Scrumproject
             var email = tbEmail.Text;
             var firstName = tbFirstName.Text;
             var lastName = tbLastNamne.Text;
-            var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
             try
             {
@@ -403,17 +444,22 @@ namespace Scrumproject
                 {
                     MessageBox.Show("Du måste ange ett efternamn!");
                 }
-                else if (validera.ControllFiledNotEmpty(tbPassword))
+                else if (validera.checkIfChar(firstName))
                 {
-                    MessageBox.Show("Du måste ange ett lösenord!");
+                    MessageBox.Show("Förnamnet får ej innehålla siffror!");
                 }
+                else if (validera.checkIfChar(lastName))
+                {
+                    MessageBox.Show("Efternamnet får ej innehålla siffror!");
+                }
+              
                 else if (validera.IsSsnValid(SSN))
                 {
                     MessageBox.Show("Du måste ange ett personnummer!");
                 }
                 else
                 {
-                    addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                    addUserHandler.registeruser(firstName, lastName, email, 1, SSN);
                     MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
                     tbPassword.Clear();
                     tbFirstName.Clear();
@@ -594,8 +640,12 @@ namespace Scrumproject
 
         private void btnUpdateList_Click(object sender, RoutedEventArgs e)
         {
+            var startdate = DateTime.Parse(dpStartDate.Text);
+            var enddate = DateTime.Parse(dpEndDate.Text);
+
             try
             {
+                
                 updateDays();
             }
             catch (Exception ee)
@@ -727,7 +777,7 @@ namespace Scrumproject
         {
             try
             {
-                lbLoggedInAsThisUser.Content = "";
+                tbLoggedInAsThisUser.Text = "";
                 BtnLogIn.Visibility = Visibility.Visible;
                 btnLogOut.Visibility = Visibility.Hidden;
             }
@@ -1197,7 +1247,7 @@ namespace Scrumproject
             {
                 var prepayment = new AdvancePayments();
 
-                prepayment.UserID = localHandeler.GetUserId(lbLoggedInAsThisUser.Content.ToString());
+                prepayment.UserID = localHandeler.GetUserId(tbLoggedInAsThisUser.Text);
                 prepayment.Description = tbDescriptionPrepay.Text;
                 prepayment.Amount = Decimal.Parse(tbTotalAmounth.Text);
                 Console.WriteLine(prepayment.UserID.ToString());
@@ -1634,7 +1684,7 @@ namespace Scrumproject
             try
             {
                 ShowAllMyReports showAllMyReports = new ShowAllMyReports();
-                var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+                var UserId = localHandeler.GetUserId(MainWindow.main.tbLoggedInAsThisUser.Text);
                 var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
                 showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
 

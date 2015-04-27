@@ -95,12 +95,13 @@ namespace Scrumproject.Logic
            notesRepository.Spara(report, sokvag);
        }
        //Lägger till användare.
-       public void registeruser(string Firstname, string Lastname, string email, string password, int bossid,
+       public void registeruser(string Firstname, string Lastname, string email, int bossid,
             string personnr)
        {
            
            var userlist = BossRepository.GetMatchingUsers(Firstname.Substring(0, 3) + Lastname.Substring(0, 3));
            var userName = Firstname.Substring(0, 3) + Lastname.Substring(0, 3);
+           var password = "1" + Firstname.Substring(0, 3) + Lastname.Substring(0, 3) + "1";
            if (userlist.Count == 1)
            {
                userName = userName + 1;  

@@ -35,12 +35,9 @@ namespace Scrumproject.Logic
         {
             if (!string.IsNullOrEmpty(i.Text))
             {
-                
                 return false;
-
             }
             return true;
-
         }
 
         //Kollar om det är en korrekt mailadress.
@@ -84,6 +81,24 @@ namespace Scrumproject.Logic
                 return true;
             }
         }
+
+        public bool checkIfChar(string s)
+        {
+
+            if (s.Any(c => char.IsDigit(c)))
+            {
+                return true;
+
+            }
+                    
+            
+            return false;
+        }
+
+       
+        
+
+    
 
 
 
