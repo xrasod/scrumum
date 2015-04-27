@@ -219,7 +219,7 @@ namespace Scrumproject
                                         "Info om kvitton \n" + infoOnReceipts;
 
                         reportDanger.CreatePdfAndOpen(pdfReport,
-                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");   
 
                     MessageBox.Show("Din rapport har sparats.");
 
