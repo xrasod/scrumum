@@ -34,7 +34,7 @@ namespace Scrumproject.Logic
         public bool ControllFiledNotEmpty(TextBox i)
         {
             if (!string.IsNullOrEmpty(i.Text))
-            {             
+            {
                 return false;
             }
             return true;
@@ -81,6 +81,24 @@ namespace Scrumproject.Logic
                 return true;
             }
         }
+
+        public bool checkIfChar(string s)
+        {
+
+            if (s.Any(c => char.IsDigit(c)))
+            {
+                return true;
+
+            }
+                    
+            
+            return false;
+        }
+
+       
+        
+
+    
 
 
 

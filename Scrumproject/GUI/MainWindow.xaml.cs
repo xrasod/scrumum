@@ -1,6 +1,7 @@
 ﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
+    using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -109,7 +110,7 @@ namespace Scrumproject
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 dpStartDate.Text = _reportDraftLoading.StartDate;
                 dpEndDate.Text = _reportDraftLoading.EndDate;
-                TbDaysOff.Text = _reportDraftLoading.DaysOff;
+                tbTotalRecieptAmount.Text = _reportDraftLoading.TotalReceiptAmount;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     listBoxReceipts.Items.Add(kvitto);
@@ -160,109 +161,109 @@ namespace Scrumproject
                     {
                         if (listBoxDays.Items.Count > 0 && loopis == listBoxDays.Items.Count)
                         {
-                            string[] arr = new string[3];
-                            List<DayHandler> d = new List<DayHandler>();
-                            RecieptHandler rh = new RecieptHandler();
-                            List<string> list = new List<string>();
-                            var j = listBoxDays.Items;
+                string[] arr = new string[3];
+                List<DayHandler> d = new List<DayHandler>();
+                RecieptHandler rh = new RecieptHandler();
+                List<string> list = new List<string>();
+                var j = listBoxDays.Items;
+                
+                for (int i = 0; listBoxDays.Items.Count > i; i++)
+                {
+                    j.MoveCurrentToNext();
+                    list.Add(j.CurrentItem.ToString());
 
-                            for (int i = 0; listBoxDays.Items.Count > i; i++)
-                            {
-                                j.MoveCurrentToNext();
-                                list.Add(j.CurrentItem.ToString());
+                }
+                
+                
 
-                            }
+                foreach (var h in list)
+                {
+                    DayHandler dh = new DayHandler();
+                    h.Trim();
+                    string replaced = h.Replace("kr", "");
+                    string[] words = replaced.Split('-');
+                    dh.date = words[0].Trim();
+                    dh.country = words[1].Trim();
+                    var o = words[2];
+                    double dou = Convert.ToDouble(o);
+                    dh.subsistence = dou;
+                    d.Add(dh);
+                }
 
-
-
-                            foreach (var h in list)
-                            {
-                                DayHandler dh = new DayHandler();
-                                h.Trim();
-                                string replaced = h.Replace("kr", "");
-                                string[] words = replaced.Split('-');
-                                dh.date = words[0].Trim();
-                                dh.country = words[1].Trim();
-                                var o = words[2];
-                                double dou = Convert.ToDouble(o);
-                                dh.subsistence = dou;
-                                d.Add(dh);
-                            }
-
-                            DayHandler day = new DayHandler();
-                            var totalkm = TbTotalKm.Text;
-                            var totalreciept = tbTotalRecieptAmount.Text;
-                            var totalrecieptdec = Convert.ToDouble(totalreciept);
-                            double totalkmdec = Convert.ToDouble(totalkm);
-                            decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
-                            var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
-                            var rid = day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount,
+                DayHandler day = new DayHandler();
+                var totalkm = TbTotalKm.Text;
+                var totalreciept = tbTotalRecieptAmount.Text;
+                var totalrecieptdec = Convert.ToDouble(totalreciept);
+                double totalkmdec = Convert.ToDouble(totalkm);
+                decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
+                var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
+                var rid = day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount,
                                 tbLoggedInAsThisUser.Text, recieptInfo);
 
-                            j.Clear();
+                j.Clear();
+
+                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+                
+                if (result == MessageBoxResult.Yes)
+                {
+                try
+            {
 
 
+                        var report = reportDanger.GetSingleReport(rid);
+                        var user = localHandeler.GetAllUsers().FirstOrDefault(x => x.UID == report.UID);
+                        var travelinfos = localHandeler.GetAllTravels().Where(x => x.RID == report.RID).ToList();
+                        var countries = localHandeler.GetAllCountries();
+                        var listOftravelinfos = new List<String>();
+                        var receiptInfo = localHandeler.GetAllReceipts().Where(x => x.RID == report.RID).ToList();
+                        var listOfReceipts = new List<String>();
 
-                            var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                try
-                                {
+                        var statusonreport = "";
 
+                        foreach (var travel in travelinfos)
+                {
+                            var visitedcountry = localHandeler.GetCountryFromId(travel.CID);
+                            listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " +
+                                                  travel.StartDate.Value.ToShortDateString() + " - " +
+                                                  travel.EndDate.Value.ToShortDateString() + " och var ledig " +
+                                                  travel.VacationDays + " dagar.");
+                }
+                        var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
 
-                                    var report = reportDanger.GetSingleReport(rid);
-                                    var user = localHandeler.GetAllUsers().FirstOrDefault(x => x.UID == report.UID);
-                                    var travelinfos = localHandeler.GetAllTravels().Where(x => x.RID == report.RID).ToList();
-                                    var countries = localHandeler.GetAllCountries();
-                                    var listOftravelinfos = new List<String>();
-                                    var receiptInfo = localHandeler.GetAllReceipts().Where(x => x.RID == report.RID).ToList();
-                                    var listOfReceipts = new List<String>();
+                        foreach (var receipt in receiptInfo)
+                {
+                            var savedReceipts = localHandeler.GetSingleReceipt(receipt.RID);
+                            listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +
+                                               receipt.RecieptAmount);
+                }
+                        var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
+                        var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName + "\n" +
+                                        "Status: " + report.Status + "\n" +
+                                        "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
+                                        "Total summa spenderad: " + report.TotalAmount + "\n" +
+                                        "Antal kilometer körda: " + report.Kilometers + "\n\n" +
+                                        "Beskrivning av resa" + "\n" + report.Description + "\n\n" +
+                                        "Info om resor" + "\n" + infoOnTravels + "\n\n" +
+                                        "Info om kvitton \n" + infoOnReceipts;
 
-                                    var statusonreport = "";
+                        reportDanger.CreatePdfAndOpen(pdfReport,
+                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");   
 
-                                    foreach (var travel in travelinfos)
-                                    {
-                                        var visitedcountry = localHandeler.GetCountryFromId(travel.CID);
-                                        listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " +
-                                                              travel.StartDate.Value.ToShortDateString() + " - " +
-                                                              travel.EndDate.Value.ToShortDateString() + " och var ledig " +
-                                                              travel.VacationDays + " dagar.");
-                                    }
-                                    var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+                    MessageBox.Show("Din rapport har sparats.");
 
-                                    foreach (var receipt in receiptInfo)
-                                    {
-                                        var savedReceipts = localHandeler.GetSingleReceipt(receipt.RID);
-                                        listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +
-                                                           receipt.RecieptAmount);
-                                    }
-                                    var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
-                                    var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName + "\n" +
-                                                    "Status: " + report.Status + "\n" +
-                                                    "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
-                                                    "Total summa spenderad: " + report.TotalAmount + "\n" +
-                                                    "Antal kilometer körda: " + report.Kilometers + "\n\n" +
-                                                    "Beskrivning av resa" + "\n" + report.Description + "\n\n" +
-                                                    "Info om resor" + "\n" + infoOnTravels + "\n\n" +
-                                                    "Info om kvitton \n" + infoOnReceipts;
+                    }
 
-                                    reportDanger.CreatePdfAndOpen(pdfReport,
-                                        DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
-
-                                    MessageBox.Show("Din rapport har sparats.");
-
-                                }
-
-                                catch (Exception ex)
-                                {
+                     catch (Exception ex)
+                     { 
                                     MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. sopa " + ex.Message);
-                                }
-                            }
+                     }
+                }
 
                             string userfuckyou = tbLoggedInAsThisUser.Text;
                             emailHandler.SendEmailToBoss(userfuckyou);
                             emailHandler.SendEmailToUser(userfuckyou);
-
+                
                         }
                         else
                         {
@@ -279,7 +280,7 @@ namespace Scrumproject
                     MessageBox.Show("Dax att logga in");
                 }
             }
-        
+
 
 
 
@@ -427,7 +428,6 @@ namespace Scrumproject
             var email = tbEmail.Text;
             var firstName = tbFirstName.Text;
             var lastName = tbLastNamne.Text;
-            var pw = tbPassword.Text;
             var SSN = tbSsn.Text;
             try
             {
@@ -444,17 +444,22 @@ namespace Scrumproject
                 {
                     MessageBox.Show("Du måste ange ett efternamn!");
                 }
-                else if (validera.ControllFiledNotEmpty(tbPassword))
+                else if (validera.checkIfChar(firstName))
                 {
-                    MessageBox.Show("Du måste ange ett lösenord!");
+                    MessageBox.Show("Förnamnet får ej innehålla siffror!");
                 }
+                else if (validera.checkIfChar(lastName))
+                {
+                    MessageBox.Show("Efternamnet får ej innehålla siffror!");
+                }
+              
                 else if (validera.IsSsnValid(SSN))
                 {
                     MessageBox.Show("Du måste ange ett personnummer!");
                 }
                 else
                 {
-                    addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                    addUserHandler.registeruser(firstName, lastName, email, 1, SSN);
                     MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
                     tbPassword.Clear();
                     tbFirstName.Clear();
@@ -576,7 +581,7 @@ namespace Scrumproject
                 _reportDraftSaving.StartDate = dpStartDate.Text;
                 _reportDraftSaving.EndDate = dpEndDate.Text;
                 _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
-                _reportDraftSaving.DaysOff = TbDaysOff.Text;
+                _reportDraftSaving.TotalReceiptAmount = tbTotalRecieptAmount.Text;
                 reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
                 tbDoneOnTrip.Text = "";
             }
@@ -635,8 +640,12 @@ namespace Scrumproject
 
         private void btnUpdateList_Click(object sender, RoutedEventArgs e)
         {
+            var startdate = DateTime.Parse(dpStartDate.Text);
+            var enddate = DateTime.Parse(dpEndDate.Text);
+
             try
             {
+                
                 updateDays();
             }
             catch (Exception ee)
@@ -1658,6 +1667,24 @@ namespace Scrumproject
                 statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
 
     }
+
+        private void btnShowMyReports_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ShowAllMyReports showAllMyReports = new ShowAllMyReports();
+                var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+                var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
+                showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
+
+                showAllMyReports.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först");
+            }
+
+        }
     }
     }
 

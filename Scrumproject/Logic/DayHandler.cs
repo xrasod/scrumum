@@ -32,7 +32,7 @@ namespace Scrumproject.Logic
             var userid = ur.GetUserId(user);
  
             rp.UID = userid;
-            rp.Status = null;
+            rp.Status = "Pågående";
             rp.Description = description;
             rp.Kilometers = distance;
             rp.TotalAmount = totalAmount;
