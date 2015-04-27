@@ -101,7 +101,7 @@
                         <CheckBox x:Name="CHBBreakfast" Content="Frukost" Canvas.Left="236" Canvas.Top="321" Background="White" Foreground="White"/>
                         <CheckBox x:Name="CHBLunch" Content="Lunch" Canvas.Left="236" Canvas.Top="342" Background="White" Foreground="White"/>
                         <CheckBox x:Name="CHBDinner" Content="Middag" Canvas.Left="236" Canvas.Top="363" Background="White" Foreground="White"/>
-                        <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120"/>
+                        <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120" Visibility="Hidden"/>
                         <TextBox x:Name="tbTotalRecieptAmount" Height="23" Canvas.Left="663" TextWrapping="Wrap" Text="0" Canvas.Top="534" Width="120" IsEnabled="False"/>
 
 

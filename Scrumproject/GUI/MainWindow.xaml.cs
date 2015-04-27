@@ -664,51 +664,66 @@ namespace Scrumproject
             var breakfast = CHBBreakfast.IsChecked.Value;
             var lunch = CHBLunch.IsChecked.Value;
             var dinner = CHBDinner.IsChecked.Value;
-            
+            bool confirmed = false;
 
             try
             {
-                double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
-
-                var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
-
-                if (CHBVacationday.IsChecked == true)
+                List<string> stränglistan = new List<string>();
+                foreach (var item in listBoxDays.SelectedItems)
                 {
-                    d.date = listBoxDays.SelectedItem.ToString();
-                    d.country = CbCountries.SelectedItem.ToString();
-
-                    d.subsistence = 0;
-                    
-                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                    "0 kr";
-                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    stränglistan.Add(item.ToString());
                 }
-                else
+                foreach (var item in stränglistan)
                 {
-                    d.date = listBoxDays.SelectedItem.ToString();
-                    d.country = CbCountries.SelectedItem.ToString();
-                    d.subsistence = subsistence;
-                    var selectedDays = listBoxDays.SelectedItems.Count;
-
-                    if (selectedDays > 1)
+                    if (item.Contains("-"))
                     {
-                        for (int i = 0; selectedDays > i; i++ )
-                        {
-                            dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                          subsistence + " kr";
-                            listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
-                        }
+                        confirmed = true;
+                    }
+                }
+                if (confirmed == false)
+                {
+                    double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
+
+                    var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+
+                    if (CHBVacationday.IsChecked == true)
+                    {
+                        d.date = listBoxDays.SelectedItem.ToString();
+                        d.country = CbCountries.SelectedItem.ToString();
+
+                        d.subsistence = 0;
+
+                        dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                        "0 kr";
+                        listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
                     }
                     else
                     {
-                        dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                          subsistence + " kr";
-                        listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                        d.date = listBoxDays.SelectedItem.ToString();
+                        d.country = CbCountries.SelectedItem.ToString();
+                        d.subsistence = subsistence;
+                        var selectedDays = listBoxDays.SelectedItems.Count;
+
+                        if (selectedDays > 1)
+                        {
+                            for (int i = 0; selectedDays > i; i++)
+                            {
+                                dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                              subsistence + " kr";
+                                listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                            }
+                        }
+                        else
+                        {
+                            dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                              subsistence + " kr";
+                            listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                        }
+
                     }
-                    
+                    dayhandler.Add(d);
+                    //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
                 }
-                dayhandler.Add(d);
-                //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
             }
             catch
             {
