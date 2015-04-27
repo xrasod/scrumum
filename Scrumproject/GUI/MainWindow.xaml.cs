@@ -1600,23 +1600,34 @@ namespace Scrumproject
 
         private void btnFilterByDate_Click(object sender, RoutedEventArgs e)
         {
-            DateTime startDate = dpStartDate.DisplayDate;
-            DateTime endDate = dpEndDate.DisplayDate;
-            string user = (cbAllUsers.SelectedItem.ToString());
-            lbUserStatisic.ItemsSource = null;
-           lbUserStatisic.ItemsSource = statisticsHandler.GetStatisticsOverCountriesWhereUsersBeenSortedByDate(
-                cbAllCountriesStatistics.SelectedItem.ToString(),startDate,endDate);
+            if ((cbAllUsers.SelectedItem == null) || (cbAllCountriesStatistics.SelectedItem == null))
+            {
+                MessageBox.Show("Välj något i combo-boxarna först");
+            }
+            else if((dpStatisticsStartDate.SelectedDate == null) || (dpStatisticsEndDate.SelectedDate == null))
+            {
+                MessageBox.Show("Välj datum innan du klickar på knappen");
+            }
+            else
+            {
+                DateTime startDate = dpStartDate.DisplayDate;
+                DateTime endDate = dpEndDate.DisplayDate;
+                string user = (cbAllUsers.SelectedItem.ToString());
+                lbUserStatisic.ItemsSource = null;
+                lbUserStatisic.ItemsSource = statisticsHandler.GetStatisticsOverCountriesWhereUsersBeenSortedByDate(
+                    cbAllCountriesStatistics.SelectedItem.ToString(), startDate, endDate);
 
-            lbReports.ItemsSource = null;
-            lbReports.ItemsSource = statisticsHandler.SendReportToGuiDependingOnDate(user, startDate, endDate);
-        
-            tbKmStatistics.Text =
-            statisticsHandler.GetSumOfASelectedUsersTravelDistancesSortedByDate(user, startDate, endDate).ToString();
+                lbReports.ItemsSource = null;
+                lbReports.ItemsSource = statisticsHandler.SendReportToGuiDependingOnDate(user, startDate, endDate);
 
-            tbTotalSumMoneyStatistics.Text =
-                statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
+                tbKmStatistics.Text =
+                    statisticsHandler.GetSumOfASelectedUsersTravelDistancesSortedByDate(user, startDate, endDate)
+                        .ToString();
 
-    }
+                tbTotalSumMoneyStatistics.Text =
+                    statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
+            }
+        }
 
         private void btnShowMyReports_Click(object sender, RoutedEventArgs e)
         {
