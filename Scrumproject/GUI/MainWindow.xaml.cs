@@ -131,6 +131,7 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
+            
 
 
                 string[] arr = new string[3];
@@ -138,15 +139,15 @@ namespace Scrumproject
                 RecieptHandler rh = new RecieptHandler();
                 List<string> list = new List<string>();
                 var j = listBoxDays.Items;
-                
+
                 for (int i = 0; listBoxDays.Items.Count > i; i++)
                 {
                     j.MoveCurrentToNext();
                     list.Add(j.CurrentItem.ToString());
 
                 }
-                
-                
+
+
 
                 foreach (var h in list)
                 {
@@ -174,12 +175,13 @@ namespace Scrumproject
 
                 j.Clear();
 
-                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                
+                var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
-                try
-            {
+                    try
+                    {
 
 
                         var report = reportDanger.GetSingleReport(rid);
@@ -193,21 +195,21 @@ namespace Scrumproject
                         var statusonreport = "";
 
                         foreach (var travel in travelinfos)
-                {
+                        {
                             var visitedcountry = localHandeler.GetCountryFromId(travel.CID);
                             listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " +
                                                   travel.StartDate.Value.ToShortDateString() + " - " +
                                                   travel.EndDate.Value.ToShortDateString() + " och var ledig " +
                                                   travel.VacationDays + " dagar.");
-                }
+                        }
                         var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
 
                         foreach (var receipt in receiptInfo)
-                {
+                        {
                             var savedReceipts = localHandeler.GetSingleReceipt(receipt.RID);
                             listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +
                                                receipt.RecieptAmount);
-                }
+                        }
                         var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
                         var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName + "\n" +
                                         "Status: " + report.Status + "\n" +
@@ -221,23 +223,24 @@ namespace Scrumproject
                         reportDanger.CreatePdfAndOpen(pdfReport,
                             DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
 
-                    MessageBox.Show("Din rapport har sparats.");
+                        MessageBox.Show("Din rapport har sparats.");
 
                     }
 
-                     catch (Exception ex)
-                     { 
-                        MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. " + ex.Message); 
-                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. " + ex.Message);
+                    }
                 }
 
                 string bossemail = emailHandler.GetBossEmailForAUser(lbLoggedInAsThisUser.Content.ToString());
                 string useremail = emailHandler.GetUserEmail(lbLoggedInAsThisUser.Content.ToString());
                 emailHandler.SendEmailToBoss(bossemail);
                 emailHandler.SendEmailToUser(useremail);
-                
+            
 
-            }
+
+        }
 
 
 
@@ -384,8 +387,7 @@ namespace Scrumproject
             //var BID = Int32.Parse(lbLoggedInUser.Content.ToString());
             var email = tbEmail.Text;
             var firstName = tbFirstName.Text;
-            var lastName = tbLastNamne.Text;
-            var pw = tbPassword.Text;
+            var lastName = tbLastNamne.Text;           
             var SSN = tbSsn.Text;
             try
             {
@@ -402,17 +404,22 @@ namespace Scrumproject
                 {
                     MessageBox.Show("Du måste ange ett efternamn!");
                 }
-                else if (validera.ControllFiledNotEmpty(tbPassword))
+                else if (validera.checkIfChar(firstName))
                 {
-                    MessageBox.Show("Du måste ange ett lösenord!");
+                    MessageBox.Show("Förnamnet får ej innehålla siffror!");
                 }
+                else if (validera.checkIfChar(lastName))
+                {
+                    MessageBox.Show("Efternamnet får ej innehålla siffror!");
+                }
+              
                 else if (validera.IsSsnValid(SSN))
                 {
                     MessageBox.Show("Du måste ange ett personnummer!");
                 }
                 else
                 {
-                    addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                    addUserHandler.registeruser(firstName, lastName, email, 1, SSN);
                     MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
                     tbPassword.Clear();
                     tbFirstName.Clear();
@@ -593,8 +600,12 @@ namespace Scrumproject
 
         private void btnUpdateList_Click(object sender, RoutedEventArgs e)
         {
+            var startdate = DateTime.Parse(dpStartDate.Text);
+            var enddate = DateTime.Parse(dpEndDate.Text);
+
             try
             {
+                
                 updateDays();
             }
             catch (Exception ee)

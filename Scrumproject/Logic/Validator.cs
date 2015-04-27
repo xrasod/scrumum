@@ -85,6 +85,24 @@ namespace Scrumproject.Logic
             }
         }
 
+        public bool checkIfChar(string s)
+        {
+
+            if (s.Any(c => char.IsDigit(c)))
+            {
+                return true;
+
+            }
+                    
+            
+            return false;
+        }
+
+       
+        
+
+    
+
 
 
        
