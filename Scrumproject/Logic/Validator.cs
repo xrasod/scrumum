@@ -59,6 +59,34 @@ namespace Scrumproject.Logic
 
         }
 
+        //Kollar om ett lbvärde är null
+        public bool IsLbEmptyPDF(ListBox listBox)
+        {
+            if (listBox.Items.IsEmpty)
+            {
+                MessageBox.Show("Du måste välja en rapport att visa i PDF!");
+                return false;
+            }
+            else
+            {
+                return true;
+            }         
+        }
+
+        public static bool CheckIfText(string input)
+        {
+            if (input.All(Char.IsLetter))
+            {
+                return false;
+            }
+            else
+            {              
+                return true;
+            }
+        }
+
+
+
        
         
     }

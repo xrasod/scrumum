@@ -26,6 +26,7 @@ namespace Scrumproject.Logic
       CountriesRepository countryRep = new CountriesRepository();
       UserRepository userRep = new UserRepository();
       AdvancePaymentsRepository advpayRep = new AdvancePaymentsRepository();
+      ReportTestClass reportRep = new ReportTestClass();
 
 
       //public Countries LoadCountry(string sokvag)
@@ -355,6 +356,16 @@ namespace Scrumproject.Logic
            }
 
            return subsistence * percent;
+       }
+
+       public Report GetSingleReport(int id)
+       {
+           return reportRep.GetSingleReport(id);
+       }
+
+       public Country getSingleCountry(int countryId)
+       {
+           return countryRep.GetCountryFromId(countryId);
        }
 
 
