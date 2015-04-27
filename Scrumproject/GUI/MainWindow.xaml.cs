@@ -1,7 +1,8 @@
 ﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+    using System.ServiceModel.Channels;
+    using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -109,7 +110,7 @@ namespace Scrumproject
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 dpStartDate.Text = _reportDraftLoading.StartDate;
                 dpEndDate.Text = _reportDraftLoading.EndDate;
-                TbDaysOff.Text = _reportDraftLoading.DaysOff;
+                tbTotalRecieptAmount.Text = _reportDraftLoading.TotalReceiptAmount;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     listBoxReceipts.Items.Add(kvitto);
@@ -221,7 +222,7 @@ namespace Scrumproject
                                         "Info om kvitton \n" + infoOnReceipts;
 
                         reportDanger.CreatePdfAndOpen(pdfReport,
-                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");   
 
                         MessageBox.Show("Din rapport har sparats.");
 
@@ -541,7 +542,7 @@ namespace Scrumproject
                 _reportDraftSaving.StartDate = dpStartDate.Text;
                 _reportDraftSaving.EndDate = dpEndDate.Text;
                 _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
-                _reportDraftSaving.DaysOff = TbDaysOff.Text;
+                _reportDraftSaving.TotalReceiptAmount = tbTotalRecieptAmount.Text;
                 reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
                 tbDoneOnTrip.Text = "";
             }
@@ -1627,6 +1628,24 @@ namespace Scrumproject
                 statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
 
     }
+
+        private void btnShowMyReports_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ShowAllMyReports showAllMyReports = new ShowAllMyReports();
+                var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+                var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
+                showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
+
+                showAllMyReports.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först");
+            }
+
+        }
     }
     }
 

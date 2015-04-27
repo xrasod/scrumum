@@ -83,9 +83,7 @@ namespace Scrumproject.Logic
             var listOftravelinfos = new List<String>();
             var receiptInfo = receiptRep.GetAllReceipts().Where(x=> x.RID == report.RID).ToList();
             var listOfReceipts = new List<String>();
-            
-            var statusonreport = "";
-            
+
             foreach (var travel in travelinfos)
             {
                 var visitedcountry = countryRep.GetCountryFromId(travel.CID);

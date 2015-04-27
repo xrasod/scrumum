@@ -18,7 +18,7 @@ namespace Scrumproject.Logic
         public List<string> daysSpentInCountry { get; set; } 
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public string DaysOff { get; set; }
+        public string TotalReceiptAmount { get; set; }
 
     }
 }
