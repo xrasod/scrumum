@@ -127,8 +127,8 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            
+           
             string[] arr = new string[3];
             List<DayHandler> d = new List<DayHandler>();
             RecieptHandler rh = new RecieptHandler();
@@ -204,13 +204,9 @@ namespace Scrumproject
                 { 
                 MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); 
         }       
-        }       
+              
 
-            catch
-            {
-                MessageBox.Show("Alla fält måste vara ifyllda!");
-            }
-
+            
         }
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
