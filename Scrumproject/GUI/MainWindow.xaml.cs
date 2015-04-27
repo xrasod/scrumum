@@ -109,7 +109,7 @@ namespace Scrumproject
                 tbDoneOnTrip.Text = _reportDraftLoading.Description;
                 dpStartDate.Text = _reportDraftLoading.StartDate;
                 dpEndDate.Text = _reportDraftLoading.EndDate;
-                TbDaysOff.Text = _reportDraftLoading.DaysOff;
+                tbTotalRecieptAmount.Text = _reportDraftLoading.TotalReceiptAmount;
                 foreach (var kvitto in _reportDraftLoading.imagePathsList)
                 {
                     listBoxReceipts.Items.Add(kvitto);
@@ -534,7 +534,7 @@ namespace Scrumproject
                 _reportDraftSaving.StartDate = dpStartDate.Text;
                 _reportDraftSaving.EndDate = dpEndDate.Text;
                 _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
-                _reportDraftSaving.DaysOff = TbDaysOff.Text;
+                _reportDraftSaving.TotalReceiptAmount = tbTotalRecieptAmount.Text;
                 reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
                 tbDoneOnTrip.Text = "";
             }
@@ -1616,6 +1616,18 @@ namespace Scrumproject
                 statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
 
     }
+
+        private void btnShowMyReports_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllMyReports showAllMyReports = new ShowAllMyReports();
+            var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+            var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
+            showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
+
+            showAllMyReports.Show();
+
+
+        }
     }
     }
 

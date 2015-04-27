@@ -110,6 +110,9 @@
     <Compile Include="GUI\SeeReportInfoWIndow.xaml.cs">
       <DependentUpon>SeeReportInfoWIndow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ShowAllMyReports.xaml.cs">
+      <DependentUpon>ShowAllMyReports.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logic\DateHandler.cs" />
     <Compile Include="Logic\DayHandler.cs" />
     <Compile Include="Logic\Entities\CurrencyConverter.cs" />
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\SeeReportInfoWIndow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ShowAllMyReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

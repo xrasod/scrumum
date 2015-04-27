@@ -31,7 +31,11 @@ namespace Scrumproject.GUI
         public SeeReportInfoWIndow()
         {
             InitializeComponent();
-            report = SelectedReport();
+            try
+            {
+                report = SelectedReport();
+            }
+            catch { }
 
         }
 
@@ -116,11 +120,17 @@ namespace Scrumproject.GUI
 
         public Report SelectedReport()
         {
+            try
+            {
                 var selected = MainWindow.main.lbShowReports.SelectedValue.ToString();
                 var id = logic.checkIfDigits(selected);
                 var selectedReport = logic.GetSingleReport(id);
                 lblStatusOnReport.Content = selectedReport.Status;
                 return selectedReport;
+            }
+            catch { }
+
+            return report;
         }
 
     }
