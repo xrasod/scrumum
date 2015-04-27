@@ -1673,7 +1673,7 @@ namespace Scrumproject
             try
             {
                 ShowAllMyReports showAllMyReports = new ShowAllMyReports();
-                var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+                var UserId = localHandeler.GetUserId(MainWindow.main.tbLoggedInAsThisUser.Text);
                 var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
                 showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
 
