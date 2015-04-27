@@ -172,6 +172,7 @@ namespace Scrumproject
             day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
 
                 j.Clear();
+                dayhandler.Clear();
             try
             {
                 List<string> savedReceipts = new List<string>();
