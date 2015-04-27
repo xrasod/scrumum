@@ -26,24 +26,24 @@ namespace Scrumproject
     /// </summary>
     public partial class MainWindow : Window
     {
-        ReportDraft _reportDraftSaving = new ReportDraft();
-        ReportDraft _reportDraftLoading = new ReportDraft();
-        LogicHandler reportHandler = new LogicHandler();
-        LogicHandler notesHandler = new LogicHandler();
-        LogicHandler addUserHandler = new LogicHandler();
-        LogicHandler pdfHandler = new LogicHandler();
-        Notes notesSaving = new Notes();
-        Notes notesLoading = new Notes();
-        LogicHandler localHandeler = new LogicHandler();
-        XmlReader Xmlreader = new XmlReader();
-        ReportHandler reportDanger = new ReportHandler();
-        StatisticsHandler statisticsHandler = new StatisticsHandler();
-        List<DayHandler> dayhandler = new List<DayHandler>();
-        PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
-        SortHandler sortHandler = new SortHandler();
-        List<RecieptHandler> recieptInfo = new List<RecieptHandler>(); 
-        Validator validera = new Validator();
-        EmailHandler emailHandler = new EmailHandler();
+        private ReportDraft _reportDraftSaving = new ReportDraft();
+        private ReportDraft _reportDraftLoading = new ReportDraft();
+        private LogicHandler reportHandler = new LogicHandler();
+        private LogicHandler notesHandler = new LogicHandler();
+        private LogicHandler addUserHandler = new LogicHandler();
+        private LogicHandler pdfHandler = new LogicHandler();
+        private Notes notesSaving = new Notes();
+        private Notes notesLoading = new Notes();
+        private LogicHandler localHandeler = new LogicHandler();
+        private XmlReader Xmlreader = new XmlReader();
+        private ReportHandler reportDanger = new ReportHandler();
+        private StatisticsHandler statisticsHandler = new StatisticsHandler();
+        private List<DayHandler> dayhandler = new List<DayHandler>();
+        private PrepaymentHandler prepaymentHandler = new PrepaymentHandler();
+        private SortHandler sortHandler = new SortHandler();
+        private List<RecieptHandler> recieptInfo = new List<RecieptHandler>();
+        private Validator validera = new Validator();
+        private EmailHandler emailHandler = new EmailHandler();
 
 
         internal static MainWindow main;
@@ -71,7 +71,7 @@ namespace Scrumproject
             PopulateStatisticsWindowCountryCB();
             fillCbOfStatuses();
             fillUserCbStatistics();
-            
+
 
             tbUserID.IsEnabled = false;
             tbBoss.IsEnabled = false;
@@ -84,10 +84,10 @@ namespace Scrumproject
             btnAddUser.IsEnabled = false;
             btnUpdateInfo.IsEnabled = false;
 
-            
 
-            
-            
+
+
+
 
             TbTotalKm.IsReadOnly = true;
             notesLoading = notesHandler.LoadNotes("Notes.xml");
@@ -96,10 +96,10 @@ namespace Scrumproject
 
             main = this;
 
-          
 
 
-         
+
+
 
             try
             {
@@ -118,8 +118,8 @@ namespace Scrumproject
                 {
                     listBoxDays.Items.Add(dayinfo);
                 }
-                
-                
+
+
             }
             catch
             {
@@ -131,8 +131,8 @@ namespace Scrumproject
 
         private void btnSendReport_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+
+
             string[] arr = new string[3];
             List<DayHandler> d = new List<DayHandler>();
             RecieptHandler rh = new RecieptHandler();
@@ -146,7 +146,7 @@ namespace Scrumproject
 
             }
 
-                
+
 
             foreach (var h in list)
             {
@@ -169,10 +169,10 @@ namespace Scrumproject
             double totalkmdec = Convert.ToDouble(totalkm);
             decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
             var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
-            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
+            day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount,
+                lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
 
-                j.Clear();
-                dayhandler.Clear();
+            j.Clear();
             try
             {
                 List<string> savedReceipts = new List<string>();
@@ -214,15 +214,12 @@ namespace Scrumproject
             {
                 MessageBox.Show("Du måste logga in för att kunna skicka din ansökan.");
             }
-              
-        }       
-
-            catch
-            {
-                MessageBox.Show("Alla fält måste vara ifyllda!");
-            }
 
         }
+    
+
+
+
 
         private void btnSaveNotes_Click(object sender, RoutedEventArgs e)
         {
@@ -283,24 +280,24 @@ namespace Scrumproject
             try
             {
                 string fromCurrency = lbFromCurrency.Content.ToString();
-            string toCurrency = lbToCurrency.Content.ToString();
-            string amount = TbFromCurrency.Text.ToString();
-            DateTime date = DPdate.SelectedDate.Value;
-            
+                string toCurrency = lbToCurrency.Content.ToString();
+                string amount = TbFromCurrency.Text.ToString();
+                DateTime date = DPdate.SelectedDate.Value;
 
-            if (Validator.ControlInputConverter(amount))
-            {
-            double amounten = Convert.ToDouble(amount);
-            CurrencyConverter c = new CurrencyConverter();
-            
+
+                if (Validator.ControlInputConverter(amount))
+                {
+                    double amounten = Convert.ToDouble(amount);
+                    CurrencyConverter c = new CurrencyConverter();
+
                     string hej = c.ConvertCurrency(fromCurrency, toCurrency, amounten, date);
-                TbToCurrency.Text = hej;
+                    TbToCurrency.Text = hej;
+                }
+                else
+                {
+                    TbToCurrency.Text = "failed to convert";
+                }
             }
-            else
-            {
-                TbToCurrency.Text = "failed to convert";
-            }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show("Du måste välja valuta att konvertera!");
@@ -348,10 +345,10 @@ namespace Scrumproject
         {
             try
             {
-            var logic = new LogicHandler();
+                var logic = new LogicHandler();
 
-            logic.changeStatus(listBoxUsers.SelectedValue.ToString());
-        }
+                logic.changeStatus(listBoxUsers.SelectedValue.ToString());
+            }
             catch (Exception ee)
             {
                 MessageBox.Show("Du måste välja en anställd!");
@@ -371,36 +368,36 @@ namespace Scrumproject
             try
             {
 
-            if (validera.IsEmailValid(email))
-            {
-                MessageBox.Show("Du måste ange en e-post!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validera.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validera.IsSsnValid(SSN))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else
-            {
-                addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
-                tbPassword.Clear();
-                tbFirstName.Clear();
-                tbLastNamne.Clear();
-                tbEmail.Clear();
-                tbSsn.Clear();
-            }
+                if (validera.IsEmailValid(email))
+                {
+                    MessageBox.Show("Du måste ange en e-post!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbFirstName))
+                {
+                    MessageBox.Show("Du måste ange ett förnamn!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbLastNamne))
+                {
+                    MessageBox.Show("Du måste ange ett efternamn!");
+                }
+                else if (validera.ControllFiledNotEmpty(tbPassword))
+                {
+                    MessageBox.Show("Du måste ange ett lösenord!");
+                }
+                else if (validera.IsSsnValid(SSN))
+                {
+                    MessageBox.Show("Du måste ange ett personnummer!");
+                }
+                else
+                {
+                    addUserHandler.registeruser(firstName, lastName, email, pw, 1, SSN);
+                    MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " är nu tillagd!");
+                    tbPassword.Clear();
+                    tbFirstName.Clear();
+                    tbLastNamne.Clear();
+                    tbEmail.Clear();
+                    tbSsn.Clear();
+                }
             }
             catch (Exception ee)
             {
@@ -421,7 +418,7 @@ namespace Scrumproject
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
-        }
+            }
         }
 
         private void btnUploadReceipt_Click(object sender, RoutedEventArgs e)
@@ -493,9 +490,9 @@ namespace Scrumproject
         {
             try
             {
-            var selectedItem = listBoxReceipts.SelectedItem;
-            listBoxReceipts.Items.Remove(selectedItem);
-        }
+                var selectedItem = listBoxReceipts.SelectedItem;
+                listBoxReceipts.Items.Remove(selectedItem);
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -508,17 +505,17 @@ namespace Scrumproject
         {
             try
             {
-            _reportDraftSaving.Description = tbDoneOnTrip.Text;
-            _reportDraftSaving.NumberOfKilometersDrivenInTotal = Int32.Parse(TbTotalKm.Text);
-            _reportDraftSaving.KilometersDriven = Int32.Parse(TbTotalKm.Text);
-            _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
-            _reportDraftSaving.StartDate = dpStartDate.Text;
-            _reportDraftSaving.EndDate = dpEndDate.Text;
-            _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
-            _reportDraftSaving.DaysOff = TbDaysOff.Text;
-            reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
-            tbDoneOnTrip.Text = "";
-        }
+                _reportDraftSaving.Description = tbDoneOnTrip.Text;
+                _reportDraftSaving.NumberOfKilometersDrivenInTotal = Int32.Parse(TbTotalKm.Text);
+                _reportDraftSaving.KilometersDriven = Int32.Parse(TbTotalKm.Text);
+                _reportDraftSaving.imagePathsList = listBoxReceipts.Items.Cast<String>().ToList();
+                _reportDraftSaving.StartDate = dpStartDate.Text;
+                _reportDraftSaving.EndDate = dpEndDate.Text;
+                _reportDraftSaving.daysSpentInCountry = listBoxDays.Items.Cast<String>().ToList();
+                _reportDraftSaving.DaysOff = TbDaysOff.Text;
+                reportHandler.SaveDraft(_reportDraftSaving, "DraftReport.xml");
+                tbDoneOnTrip.Text = "";
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -552,18 +549,18 @@ namespace Scrumproject
         {
             try
             {
-            listBoxDays.Items.Clear();
-            var dateHandler = new DateHandler();
+                listBoxDays.Items.Clear();
+                var dateHandler = new DateHandler();
 
-            var setDate = dateHandler.GetDays(dpStartDate.SelectedDate.Value, dpEndDate.SelectedDate.Value);
+                var setDate = dateHandler.GetDays(dpStartDate.SelectedDate.Value, dpEndDate.SelectedDate.Value);
 
-            foreach (var item in setDate)
-            {
+                foreach (var item in setDate)
+                {
                     var hej =
                         String.Format(item.Year.ToString() + "/" + item.Month.ToString() + "/" + item.Day.ToString());
-                listBoxDays.Items.Add(hej);
+                    listBoxDays.Items.Add(hej);
+                }
             }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -576,8 +573,8 @@ namespace Scrumproject
         {
             try
             {
-            updateDays();
-        }
+                updateDays();
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -608,7 +605,7 @@ namespace Scrumproject
                     e.Cancel = false;
                 }
 
-        }
+            }
         }
 
  
@@ -623,20 +620,20 @@ namespace Scrumproject
         {
             try
             {
-            var selected = lvCountriesEdit.SelectedValue.ToString();
-            var allCountries = localHandeler.getAllCountriesToList();
-           
+                var selected = lvCountriesEdit.SelectedValue.ToString();
+                var allCountries = localHandeler.getAllCountriesToList();
 
-            foreach (var countries in allCountries)
-            {
-                if (selected == countries.Name)
+
+                foreach (var countries in allCountries)
                 {
-                    tbCountryName.Text = countries.Name;
-                    tbMaxCash.Text = countries.Subsistence.ToString();
-                    tbCurrency.Text = countries.Currency;
+                    if (selected == countries.Name)
+                    {
+                        tbCountryName.Text = countries.Name;
+                        tbMaxCash.Text = countries.Subsistence.ToString();
+                        tbCurrency.Text = countries.Currency;
+                    }
                 }
             }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -647,45 +644,45 @@ namespace Scrumproject
         {
             try
             {
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            if (lvCountriesEdit.Items.Contains(name))
-            {
-                MessageBox.Show("Detta land finns redan!");
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
+                if (lvCountriesEdit.Items.Contains(name))
+                {
+                    MessageBox.Show("Detta land finns redan!");
 
-            }
-            else
-            {
-                logic.AddNewCountry(name, curr, sub);
-            }
+                }
+                else
+                {
+                    logic.AddNewCountry(name, curr, sub);
+                }
             }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
             }
-            
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             try
             {
-            var currname = lvCountriesEdit.SelectedValue.ToString();
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            
-            
-           logic.uppdateCountry(currname, name, curr, sub);
+                var currname = lvCountriesEdit.SelectedValue.ToString();
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
+
+
+                logic.uppdateCountry(currname, name, curr, sub);
             }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
             }
-            
+
 
         }
 
@@ -693,10 +690,10 @@ namespace Scrumproject
         {
             try
             {
-            var source = 2;
-            LoginWindow l = new LoginWindow(source);
-            l.Show();
-    }
+                var source = 2;
+                LoginWindow l = new LoginWindow(source);
+                l.Show();
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -707,10 +704,10 @@ namespace Scrumproject
         {
             try
             {
-            lbLoggedInAsThisUser.Content = "";
-            BtnLogIn.Visibility = Visibility.Visible;
-            btnLogOut.Visibility = Visibility.Hidden;
-}
+                lbLoggedInAsThisUser.Content = "";
+                BtnLogIn.Visibility = Visibility.Visible;
+                btnLogOut.Visibility = Visibility.Hidden;
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -721,10 +718,10 @@ namespace Scrumproject
         {
             try
             {
-            lbLoggedInUser.Content = "";
-            btnLogInChef.Visibility = Visibility.Visible;
-            btnLogOutChef.Visibility = Visibility.Hidden;
-        }
+                lbLoggedInUser.Content = "";
+                btnLogInChef.Visibility = Visibility.Visible;
+                btnLogOutChef.Visibility = Visibility.Hidden;
+            }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -760,9 +757,9 @@ namespace Scrumproject
                 }
                 if (confirmed == false)
                 {
-            double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
+                double subsistenceDouble = Convert.ToDouble(LbTraktamente.Content.ToString());
 
-            var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
+                var subsistence = l.CalculateSubsistenceDeduction(breakfast, lunch, dinner, subsistenceDouble);
 
                 if (CHBVacationday.IsChecked == true)
                 {
@@ -770,7 +767,7 @@ namespace Scrumproject
                     d.country = CbCountries.SelectedItem.ToString();
 
                     d.subsistence = 0;
-
+                    
                     dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
                     "0 kr";
                     listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
@@ -780,25 +777,25 @@ namespace Scrumproject
                     d.date = listBoxDays.SelectedItem.ToString();
                     d.country = CbCountries.SelectedItem.ToString();
                     d.subsistence = subsistence;
-                        var selectedDays = listBoxDays.SelectedItems.Count;
+                    var selectedDays = listBoxDays.SelectedItems.Count;
 
-                        if (selectedDays > 1)
-                        {
+                    if (selectedDays > 1)
+                    {
                             for (int i = 0; selectedDays > i; i++)
-                            {
-                                dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                              subsistence + " kr";
-                                listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
-                            }
-                        }
-                        else
                         {
-                    dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
-                                  subsistence + " kr";
-                    listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
-                }
-
+                            dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                            listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                        }
                     }
+                    else
+                    {
+                        dayinfo = listBoxDays.SelectedItem.ToString() + " - " + CbCountries.SelectedItem.ToString() + " - " +
+                                          subsistence + " kr";
+                        listBoxDays.Items[listBoxDays.SelectedIndex] = dayinfo;
+                    }
+                    
+                }
                 dayhandler.Add(d);
                 //lägger in datum, land, ledighet och traktamente i en lista av typen dayhandler.
             }
@@ -845,31 +842,31 @@ namespace Scrumproject
             {
                 var result = MessageBox.Show("Vill du verkligen radera allt?", "Radera utkast", MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                var today = DateTime.Now.ToString();
-                var tomorrow = DateTime.Now.AddDays(1).ToString();
-                tbDoneOnTrip.Text = "";
-                listBoxReceipts.Items.Clear();
-                listBoxDays.Items.Clear();
-                TbTotalKm.Text = "0";
-                TbCarTripLengthKm.Text = "0";
-                TbDaysOff.Text = "";
-                dpStartDate.Text = today;
-                dpEndDate.Text = tomorrow;
-                tbReceiptFile.Text = "";
-                tbSum.Text = "";
-                LbTraktamente.Content = "";
-                CbCountries.SelectedIndex = -1;
+                if (result == MessageBoxResult.Yes)
+                {
+                    var today = DateTime.Now.ToString();
+                    var tomorrow = DateTime.Now.AddDays(1).ToString();
+                    tbDoneOnTrip.Text = "";
+                    listBoxReceipts.Items.Clear();
+                    listBoxDays.Items.Clear();
+                    TbTotalKm.Text = "0";
+                    TbCarTripLengthKm.Text = "0";
+                    TbDaysOff.Text = "";
+                    dpStartDate.Text = today;
+                    dpEndDate.Text = tomorrow;
+                    tbReceiptFile.Text = "";
+                    tbSum.Text = "";
+                    LbTraktamente.Content = "";
+                    CbCountries.SelectedIndex = -1;
 
-                saveDraft();
-                MessageBox.Show("Utkast raderat");
+                    saveDraft();
+                    MessageBox.Show("Utkast raderat");
+                }
+                else
+                {
+                    MessageBox.Show("Vilken tur att jag frågade");
+                }
             }
-            else
-            {
-                MessageBox.Show("Vilken tur att jag frågade");
-            }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -898,7 +895,7 @@ namespace Scrumproject
                         tbBoss.Text = user.BID.ToString();
                         tbUserID.Text = user.UID.ToString();
                     }
-                    }
+                 }
 
                 foreach (var boss in bosses)
                 {
@@ -929,18 +926,18 @@ namespace Scrumproject
         {
             try
             {
-            var users = localHandeler.getInfoOnSelectedUser();
-            var bosses = localHandeler.getInfoOnSelectedBoss();
+                var users = localHandeler.getInfoOnSelectedUser();
+                var bosses = localHandeler.getInfoOnSelectedBoss();
 
-            foreach (var user in users)
-            {
-                listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
+                foreach (var user in users)
+                {
+                    listBoxUsers.Items.Add("Anst nr: " + user.UID + " " + user.FirstName + " " + user.LastName);
+                }
+                foreach (var boss in bosses)
+                {
+                    listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
+                }
             }
-            foreach (var boss in bosses)
-            {
-                listBoxUsers.Items.Add("Anst nr: " + boss.BID + " " + boss.FirstName + " " + boss.LastName);
-        }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message);
@@ -953,12 +950,12 @@ namespace Scrumproject
         {
             try
             {
-            var allCountries = localHandeler.getAllCountriesToList();
+                var allCountries = localHandeler.getAllCountriesToList();
 
-            foreach (var country in allCountries)
-            {
-                lvCountriesEdit.Items.Add(country.Name);
-            }
+                foreach (var country in allCountries)
+                {
+                    lvCountriesEdit.Items.Add(country.Name);
+                }
             }
             catch (Exception ee)
             {
@@ -979,54 +976,54 @@ namespace Scrumproject
 
             try
             {
-            var id = Int32.Parse(userID);
-            var username = tbUsername.Text;
-            var firstname = tbFirstName.Text;
-            var lastname = tbLastNamne.Text;
-            var password = tbPassword.Text;
-            var boss = Int32.Parse(bossID);
-            var ssn = tbSsn.Text;
-            var mail = tbEmail.Text;
+                var id = Int32.Parse(userID);
+                var username = tbUsername.Text;
+                var firstname = tbFirstName.Text;
+                var lastname = tbLastNamne.Text;
+                var password = tbPassword.Text;
+                var boss = Int32.Parse(bossID);
+                var ssn = tbSsn.Text;
+                var mail = tbEmail.Text;
 
-            if (validate.ControllFiledNotEmpty(tbUsername))
-            {
-                MessageBox.Show("Du måste ange ett användarnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbFirstName))
-            {
-                MessageBox.Show("Du måste ange ett förnamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbLastNamne))
-            {
-                MessageBox.Show("Du måste ange ett efternamn!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbPassword))
-            {
-                MessageBox.Show("Du måste ange ett lösenord!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbSsn))
-            {
-                MessageBox.Show("Du måste ange ett personnummer!");
-            }
-            else if (validate.IsEmailValid(mail))
-            {
-                MessageBox.Show("Du måste ange en email-adress!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbBoss))
-            {
-                MessageBox.Show("Du måste ange vem som är chef för användaren!");
-            }
-            else if (validate.ControllFiledNotEmpty(tbUserID))
-            {
-                MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
-            }
+                if (validate.ControllFiledNotEmpty(tbUsername))
+                {
+                    MessageBox.Show("Du måste ange ett användarnamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbFirstName))
+                {
+                    MessageBox.Show("Du måste ange ett förnamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbLastNamne))
+                {
+                    MessageBox.Show("Du måste ange ett efternamn!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbPassword))
+                {
+                    MessageBox.Show("Du måste ange ett lösenord!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbSsn))
+                {
+                    MessageBox.Show("Du måste ange ett personnummer!");
+                }
+                else if (validate.IsEmailValid(mail))
+                {
+                    MessageBox.Show("Du måste ange en email-adress!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbBoss))
+                {
+                    MessageBox.Show("Du måste ange vem som är chef för användaren!");
+                }
+                else if (validate.ControllFiledNotEmpty(tbUserID))
+                {
+                    MessageBox.Show("Användaren måste ha ett anställnigsnummer!");
+                }
 
-            else
-            {
-                updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
-                MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+                else
+                {
+                    updateUserHandler.uppdateUser(id, username, firstname, lastname, password, ssn, mail, boss);
+                    MessageBox.Show(tbFirstName.Text + " " + tbLastNamne.Text + " har uppdaterats!");
+                }
             }
-        }
             catch (Exception ee)
             {
                 MessageBox.Show("Du måste välja en anställd!");
@@ -1059,25 +1056,25 @@ namespace Scrumproject
         {
             try
             {
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
-            if (lvCountriesEdit.Items.Contains(name))
-            {
-                MessageBox.Show("Detta land finns redan!");
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
+                if (lvCountriesEdit.Items.Contains(name))
+                {
+                    MessageBox.Show("Detta land finns redan!");
 
-            }
-            else
-            {
-                logic.AddNewCountry(name, curr, sub);
-            }
+                }
+                else
+                {
+                    logic.AddNewCountry(name, curr, sub);
+                }
             }
             catch (Exception ee)
             {
                 MessageBox.Show("Du måste fylla i alla uppgifter innan du lägger till ett land!");
             }
-        
+
         }
 
         //Fyller Tbs med text av landet man valt.
@@ -1111,17 +1108,17 @@ namespace Scrumproject
         {
             try
             {
-            var currname = lvCountriesEdit.SelectedValue.ToString();
-            var name = tbCountryName.Text;
-            var curr = tbCurrency.Text;
-            var sub = Int32.Parse(tbMaxCash.Text);
-            var logic = new LogicHandler();
+                var currname = lvCountriesEdit.SelectedValue.ToString();
+                var name = tbCountryName.Text;
+                var curr = tbCurrency.Text;
+                var sub = Int32.Parse(tbMaxCash.Text);
+                var logic = new LogicHandler();
 
 
-            logic.uppdateCountry(currname, name, curr, sub);
-            lvCountriesEdit.Items.Clear();
-            PupulateListViewCountries();
-            MessageBox.Show(tbCountryName.Text + " Har uppdaterats!");
+                logic.uppdateCountry(currname, name, curr, sub);
+                lvCountriesEdit.Items.Clear();
+                PupulateListViewCountries();
+                MessageBox.Show(tbCountryName.Text + " Har uppdaterats!");
             }
             catch (Exception ee)
             {
@@ -1195,15 +1192,15 @@ namespace Scrumproject
         {
             try
             {
-            var selected = lvCountriesEdit.SelectedValue.ToString();
+                var selected = lvCountriesEdit.SelectedValue.ToString();
 
-            localHandeler.DeletSelectedCountry(selected);
-            MessageBox.Show(selected + " Har tagits bort!");
-            lvCountriesEdit.Items.Clear();
-            tbCountryName.Clear();
-            tbMaxCash.Clear();
-            tbCurrency.Clear();
-            PupulateListViewCountries();
+                localHandeler.DeletSelectedCountry(selected);
+                MessageBox.Show(selected + " Har tagits bort!");
+                lvCountriesEdit.Items.Clear();
+                tbCountryName.Clear();
+                tbMaxCash.Clear();
+                tbCurrency.Clear();
+                PupulateListViewCountries();
             }
             catch (Exception ee)
             {
@@ -1258,10 +1255,10 @@ namespace Scrumproject
                 else
                 {
 
-            string fullstringbitch = lbShowReports.SelectedItem.ToString();
-            reportDanger.Acceptpost(fullstringbitch);
-            lbShowReports.ItemsSource = null;
-            lbShowReports.ItemsSource = reportDanger.GetReportList();
+                    string fullstringbitch = lbShowReports.SelectedItem.ToString();
+                    reportDanger.Acceptpost(fullstringbitch);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = reportDanger.GetReportList();
                 }
             }
             catch (Exception ee)
@@ -1288,11 +1285,11 @@ namespace Scrumproject
 
                 else
                 {
-            string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
-            string motivation = tbWhyDenied.Text;
-            reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
-            lbShowReports.ItemsSource = null;
-            lbShowReports.ItemsSource = reportDanger.GetReportList();
+                    string reportwindowfullstring = lbShowReports.SelectedItem.ToString();
+                    string motivation = tbWhyDenied.Text;
+                    reportDanger.SaveStatusUpdateForDenial(reportwindowfullstring, motivation);
+                    lbShowReports.ItemsSource = null;
+                    lbShowReports.ItemsSource = reportDanger.GetReportList();
                 }
             }
             catch (Exception ee)
@@ -1340,6 +1337,9 @@ namespace Scrumproject
 
         private void cbAllCountriesStatistics_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            lbUserStatisic.ItemsSource = null;
+            lbCountriesStatistic.ItemsSource = null;
+            lbReports.ItemsSource = null;
             lbUserStatisic.ItemsSource =
             statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
                 cbAllCountriesStatistics.SelectedItem.ToString());
@@ -1549,28 +1549,30 @@ namespace Scrumproject
         {
             cbAllUsers.ItemsSource = statisticsHandler.SendUsersToGui();
         }
-
+        
         private void cbAllUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             string user = cbAllUsers.SelectedItem.ToString();
             SetSumOfKm(user);
             SetSumOfMoney(user);
+            lbUserStatisic.ItemsSource = null;
             lbCountriesStatistic.ItemsSource = statisticsHandler.GetStatisticsOverTheCountriesAUsersBeenIn(user);
             lbReports.ItemsSource = statisticsHandler.SendReportToGui(user);
         }
-      
+
         public void SetSumOfKm(string user)
         {
        
             string km = statisticsHandler.GetSumOfASelectedUsersTravelDistances(user).ToString();
             tbKmStatistics.Text = km;
         }
-
+       
         public void SetSumOfMoney(string user)
         {
             string totalSumOfMoney = statisticsHandler.GetSumOfReportMoney(user).ToString();
             tbTotalSumMoneyStatistics.Text = totalSumOfMoney;
-
+        
         }
 
         private void btnFilterByDate_Click(object sender, RoutedEventArgs e)
@@ -1587,7 +1589,7 @@ namespace Scrumproject
 
             tbKmStatistics.Text =
             statisticsHandler.GetSumOfASelectedUsersTravelDistancesSortedByDate(user, startDate, endDate).ToString();
-
+       
             tbTotalSumMoneyStatistics.Text =
                 statisticsHandler.GetSumOfReportMoneySortedByDate(user, startDate, endDate).ToString();
 
