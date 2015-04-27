@@ -221,21 +221,22 @@ namespace Scrumproject
                         reportDanger.CreatePdfAndOpen(pdfReport,
                             DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
 
-                    pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
                     MessageBox.Show("Din rapport har sparats.");
-                    string bossemail = emailHandler.GetBossEmailForAUser(lbLoggedInAsThisUser.Content.ToString());
-                    string useremail = emailHandler.GetUserEmail(lbLoggedInAsThisUser.Content.ToString());
-                    emailHandler.SendEmailToBoss(bossemail);
-                    emailHandler.SendEmailToUser(useremail);
 
                     }
 
                      catch (Exception ex)
-                { 
+                     { 
                         MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. " + ex.Message); 
                      }
                 }
-            
+
+                string bossemail = emailHandler.GetBossEmailForAUser(lbLoggedInAsThisUser.Content.ToString());
+                string useremail = emailHandler.GetUserEmail(lbLoggedInAsThisUser.Content.ToString());
+                emailHandler.SendEmailToBoss(bossemail);
+                emailHandler.SendEmailToUser(useremail);
+                
+
             }
 
 
