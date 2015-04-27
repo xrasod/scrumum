@@ -232,7 +232,7 @@
                         <Label Content="Resultat" HorizontalAlignment="Left" Margin="18,166,0,0" VerticalAlignment="Top" Foreground="White"/>
                         <Label Content="&#xA;" HorizontalAlignment="Left" Margin="284,15,0,0" VerticalAlignment="Top" x:Name="lbFromCurrency" Width="91" Height="29" Foreground="White" Grid.ColumnSpan="2"/>
                         <Label Content="&#xA;&#xA;" HorizontalAlignment="Left" Margin="282,51,0,0" VerticalAlignment="Top" x:Name="lbToCurrency" Height="34" Width="72" Foreground="White" Grid.ColumnSpan="2"/>
-                        <DatePicker x:Name="DPdate" HorizontalAlignment="Left" Margin="163,139,0,0" VerticalAlignment="Top"/>
+                        <DatePicker x:Name="DPdate" HorizontalAlignment="Left" Margin="128,139,0,0" VerticalAlignment="Top" Width="153"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Statistik&#xD;&#xA;" HorizontalAlignment="Left" Height="61" VerticalAlignment="Top" Width="183" Margin="145,0,-145,0" FontFamily="Myriad Pro" FontSize="14" FontWeight="Bold" Background="#FF6688D1" BorderBrush="{x:Null}" Padding="6,15,6,2">
