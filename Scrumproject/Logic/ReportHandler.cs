@@ -96,7 +96,7 @@ namespace Scrumproject.Logic
             foreach(var receipt in receiptInfo)
             {
                 var savedReceipts = receiptRep.GetSingleReciept(receipt.RID);
-                listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +" Här ska pris hämtas <3 - " );
+                listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " + receipt.RecieptAmount);
             }
             var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
             var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName +"\n" +
@@ -167,7 +167,17 @@ namespace Scrumproject.Logic
         public List<Reciept> GetReceiptsForSpecificReport(int reportId)
         {
             return receiptRep.GetAllReceipts().Where(x => x.RID == reportId).ToList();
-        } 
+        }
+
+        public void CreatePdfAndOpen(string report, string sokvag)
+        {
+            pdfRep.createPdfandOpen(report, sokvag);
+        }
+
+        public Report GetSingleReport(int id)
+        {
+            return ReportTestClass.GetSingleReport(id);
+        }
 
     }
 }

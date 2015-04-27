@@ -27,6 +27,8 @@ namespace Scrumproject.Logic
       UserRepository userRep = new UserRepository();
       AdvancePaymentsRepository advpayRep = new AdvancePaymentsRepository();
       ReportTestClass reportRep = new ReportTestClass();
+      TravelRepository travelRep = new TravelRepository();
+      ReceiptRepository receiptRep = new ReceiptRepository();
 
 
       //public Countries LoadCountry(string sokvag)
@@ -368,6 +370,34 @@ namespace Scrumproject.Logic
            return countryRep.GetCountryFromId(countryId);
        }
 
+       public List<User> GetAllUsers()
+       {
+           return userRep.GetAllUsers();
+       }
 
+       public List<TravelInfo> GetAllTravels()
+       {
+           return travelRep.GetAllTravels();
+       }
+
+       public List<Country> GetAllCountries()
+       {
+           return countryRep.GetAllCountries();
+       }
+
+       public List<Reciept> GetAllReceipts()
+       {
+           return receiptRep.GetAllReceipts();
+       }
+
+       public Reciept GetSingleReceipt(int id)
+       {
+           return receiptRep.GetSingleReciept(id);
+       }
+
+       public Country GetCountryFromId(int id)
+       {
+           return countryRep.GetCountryFromId(id);
+       }
    }
 }
