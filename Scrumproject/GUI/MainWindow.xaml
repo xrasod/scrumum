@@ -101,7 +101,7 @@
                         <CheckBox x:Name="CHBBreakfast" Content="Frukost" Canvas.Left="236" Canvas.Top="321" Background="White" Foreground="White"/>
                         <CheckBox x:Name="CHBLunch" Content="Lunch" Canvas.Left="236" Canvas.Top="342" Background="White" Foreground="White"/>
                         <CheckBox x:Name="CHBDinner" Content="Middag" Canvas.Left="236" Canvas.Top="363" Background="White" Foreground="White"/>
-                        <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120"/>
+                        <TextBox x:Name="TbDaysOff" Height="23" Canvas.Left="66" TextWrapping="Wrap" Text="TextBox" Canvas.Top="25" Width="120" Visibility="Hidden"/>
                         <TextBox x:Name="tbTotalRecieptAmount" Height="23" Canvas.Left="663" TextWrapping="Wrap" Text="0" Canvas.Top="534" Width="120" IsEnabled="False"/>
 
 
@@ -246,19 +246,24 @@
                                 <GradientStop Color="#FF6CB6E8" Offset="1"/>
                             </LinearGradientBrush>
                         </Grid.Background>
-                        <Label x:Name="lbTotalKilometer" Content="Antal Kilometer: " HorizontalAlignment="Left" Margin="43,521,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <ComboBox x:Name="cbAllCountriesStatistics" HorizontalAlignment="Left" Margin="356.731,136,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1" SelectionChanged="cbAllCountriesStatistics_SelectionChanged_1"/>
-                        <ComboBox x:Name="cbAllUsers" HorizontalAlignment="Left" Margin="10.731,136,0,0" VerticalAlignment="Top" Width="168" Grid.Column="1"/>
-                        <Label x:Name="lbSelectUser" Content="Välj Användare" HorizontalAlignment="Left" Margin="427,136,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <Label x:Name="lbSelectCountry" Content="Välj Land" HorizontalAlignment="Left" Margin="262,133,0,0" VerticalAlignment="Top" Foreground="White" Width="90" Grid.Column="1"/>
-                        <ListBox x:Name="lbReports" HorizontalAlignment="Left" Height="335" Margin="43,168,0,0" VerticalAlignment="Top" Width="291" Background="#FF0C0B0B" Foreground="White" BorderBrush="#FFC5C5C7"/>
-                        <Label x:Name="lbSelectReport" Content="Välj Rapport" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <CheckBox x:Name="chbMonth" Content="Månad" HorizontalAlignment="Left" Margin="44,85,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <CheckBox x:Name="chbQuater" Content="Kvartal" HorizontalAlignment="Left" Margin="138,85,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <Label x:Name="lbChoseCheckBox" Content="Välj månads- eller kvartalsöversikt!" HorizontalAlignment="Left" Margin="44,41,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <Label x:Name="lbCash" Content="Total Summa:" HorizontalAlignment="Left" Margin="43,548,0,0" VerticalAlignment="Top" Foreground="White"/>
-                        <ListBox x:Name="lbUserStatisic" HorizontalAlignment="Left" Height="335" Margin="427,168,0,0" VerticalAlignment="Top" Width="291" Background="#FF0C0B0B" Foreground="White" BorderBrush="#FFC5C5C7" Grid.ColumnSpan="2"/>
-                        <ListBox x:Name="lbCountriesStatistic" HorizontalAlignment="Left" Height="344" Margin="262,165,0,0" VerticalAlignment="Top" Width="291" Background="#FF0F0F0F" Foreground="White" BorderBrush="#FFC5C5C7" Grid.Column="1"/>
+                        <Label x:Name="lbTotalKilometer" Content="Antal Kilometer: " HorizontalAlignment="Left" Margin="31,516,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                        <ComboBox x:Name="cbAllCountriesStatistics" HorizontalAlignment="Left" Margin="343,27,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1" SelectionChanged="cbAllCountriesStatistics_SelectionChanged_1"/>
+                        <ComboBox x:Name="cbAllUsers" HorizontalAlignment="Left" Margin="31,27,0,0" VerticalAlignment="Top" Width="168" Grid.Column="1" SelectionChanged="cbAllUsers_SelectionChanged"/>
+                        <Label x:Name="lbSelectUser" Content="Välj Användare" HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                        <Label x:Name="lbSelectCountry" Content="Välj Land" HorizontalAlignment="Left" Margin="343,55,0,0" VerticalAlignment="Top" Foreground="White" Width="90" Grid.Column="1"/>
+                        <ListBox x:Name="lbReports" HorizontalAlignment="Left" Height="229" Margin="209,82,0,0" VerticalAlignment="Top" Width="291" Background="#FF0C0B0B" Foreground="White" BorderBrush="#FFC5C5C7"/>
+                        <Label x:Name="lbSelectReport" Content="Rapporter" HorizontalAlignment="Left" Margin="283,37,0,0" VerticalAlignment="Top" Foreground="White"/>
+                        <Label x:Name="lbDateChoose" Content="Välj datum du vill se statistik över" HorizontalAlignment="Left" Margin="346,319,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                        <Label x:Name="lbCash" Content="Total Summa:" HorizontalAlignment="Left" Margin="40,543,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                        <ListBox x:Name="lbUserStatisic" HorizontalAlignment="Left" Height="229" Margin="31,82,0,0" VerticalAlignment="Top" Width="291" Background="#FF0C0B0B" Foreground="White" BorderBrush="#FFC5C5C7" Grid.Column="1"/>
+                        <ListBox x:Name="lbCountriesStatistic" HorizontalAlignment="Left" Height="229" Margin="343,82,0,0" VerticalAlignment="Top" Width="291" Background="#FF0F0F0F" Foreground="White" BorderBrush="#FFC5C5C7" Grid.Column="1"/>
+                        <TextBlock x:Name="tbKmStatistics" HorizontalAlignment="Left" Margin="145,521,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <TextBlock x:Name="tbTotalSumMoneyStatistics" HorizontalAlignment="Left" Margin="145,548,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <DatePicker x:Name="dpStatisticsStartDate" HorizontalAlignment="Left" Margin="474,351,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <DatePicker x:Name="dpStatisticsEndDate" HorizontalAlignment="Left" Margin="474,376,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="lbStatisticsStartDate" Content="Startdatum" HorizontalAlignment="Left" Margin="384,349,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF0DFB18" Grid.Column="1"/>
+                        <Label x:Name="lbStatisticsEndDate" Content="Slutdatum" HorizontalAlignment="Left" Margin="390,376,0,0" VerticalAlignment="Top" Width="79" Background="{x:Null}" Foreground="#FF12FB07" Grid.Column="1"/>
+                        <Button x:Name="btnFilterByDate" Content="Sortera efter datum" HorizontalAlignment="Left" Margin="428,403,0,0" VerticalAlignment="Top" Width="149" Grid.Column="1" Click="btnFilterByDate_Click"/>
                     </Grid>
                 </TabItem>
             </TabControl>
