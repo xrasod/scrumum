@@ -89,7 +89,6 @@ namespace Scrumproject.GUI
             reportSumWindow.btnDenyReport.Visibility = Visibility.Hidden;
             reportSumWindow.Show();
 
-            Hide();
         }
     }
 }
