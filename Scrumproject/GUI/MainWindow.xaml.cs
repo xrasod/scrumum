@@ -1,7 +1,8 @@
 ﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+    using System.ServiceModel.Channels;
+    using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -1619,13 +1620,19 @@ namespace Scrumproject
 
         private void btnShowMyReports_Click(object sender, RoutedEventArgs e)
         {
-            ShowAllMyReports showAllMyReports = new ShowAllMyReports();
-            var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
-            var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
-            showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
+            try
+            {
+                ShowAllMyReports showAllMyReports = new ShowAllMyReports();
+                var UserId = localHandeler.GetUserId(MainWindow.main.lbLoggedInAsThisUser.Content.ToString());
+                var loggedInUsersReports = sortHandler.GetReportsForSpecificUser(UserId);
+                showAllMyReports.listBoxMyReports.ItemsSource = loggedInUsersReports;
 
-            showAllMyReports.Show();
-
+                showAllMyReports.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Logga in först");
+            }
 
         }
     }
