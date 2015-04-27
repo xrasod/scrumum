@@ -1339,6 +1339,9 @@ namespace Scrumproject
 
         private void cbAllCountriesStatistics_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            lbUserStatisic.ItemsSource = null;
+            lbCountriesStatistic.ItemsSource = null;
+            lbReports.ItemsSource = null;
             lbUserStatisic.ItemsSource =
             statisticsHandler.GetStatisticsOverCountriesWhereUsersBeen(
                 cbAllCountriesStatistics.SelectedItem.ToString());
@@ -1551,9 +1554,11 @@ namespace Scrumproject
 
         private void cbAllUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             string user = cbAllUsers.SelectedItem.ToString();
             SetSumOfKm(user);
             SetSumOfMoney(user);
+            lbUserStatisic.ItemsSource = null;
             lbCountriesStatistic.ItemsSource = statisticsHandler.GetStatisticsOverTheCountriesAUsersBeenIn(user);
             lbReports.ItemsSource = statisticsHandler.SendReportToGui(user);
         }
