@@ -24,7 +24,7 @@ namespace Scrumproject.Logic
         public string accountName = "scrumprojekt";
         public string accessKey = "J0b3PkuN5FHd5QNjnjS7080NRdWAILm/uSJV32rhEjB8Sxw3tuKyGyyqsi9JxM0LrfvVx7U1qzJN4uNJdn88cw==";
 
-        public void StoreReport(List<DayHandler> list, decimal distance, string description, decimal totalAmount, string user, List<RecieptHandler> listan)
+        public int StoreReport(List<DayHandler> list, decimal distance, string description, decimal totalAmount, string user, List<RecieptHandler> listan)
         {
             Report rp = new Report();
             TravelInfo ti = new TravelInfo();
@@ -41,6 +41,7 @@ namespace Scrumproject.Logic
             int i = ur.SaveReport(rp);
             StoreReciept(i, listan);
             StoreTravelInfo(i, list);
+            return i;
         }
 
         public void StoreReciept(int i, List<RecieptHandler> listan)

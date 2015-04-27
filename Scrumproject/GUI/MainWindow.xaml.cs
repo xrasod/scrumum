@@ -118,15 +118,15 @@ namespace Scrumproject
                 RecieptHandler rh = new RecieptHandler();
                 List<string> list = new List<string>();
                 var j = listBoxDays.Items;
-                
+
                 for (int i = 0; listBoxDays.Items.Count > i; i++)
                 {
                     j.MoveCurrentToNext();
                     list.Add(j.CurrentItem.ToString());
 
                 }
-                
-                
+
+
 
                 foreach (var h in list)
                 {
@@ -149,45 +149,109 @@ namespace Scrumproject
                 double totalkmdec = Convert.ToDouble(totalkm);
                 decimal totalkmdecimal = Convert.ToDecimal(totalkmdec);
                 var totalAmount = day.CalculateTotalAmount(dayhandler, totalkmdec, totalrecieptdec);
-                day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount, lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
+                var rid = day.StoreReport(dayhandler, totalkmdecimal, tbDoneOnTrip.Text.ToString(), totalAmount,
+                    lbLoggedInAsThisUser.Content.ToString(), recieptInfo);
 
                 j.Clear();
-                try
-            {
-                List<string> savedReceipts = new List<string>();
-                List<string> visitedCountries = new List<string>();
-                foreach (var receipt in listBoxReceipts.Items)
-                {
-                    savedReceipts.Add(receipt.ToString());
-                }
-                foreach (var country in listBoxDays.Items)
-                {
-                    visitedCountries.Add("Dag " + country.ToString() + " maxtraktamente.");
-                }
-                var receiptsinfo = string.Join("\n", savedReceipts.ToArray());
-                var countryinfo = string.Join("\n", visitedCountries.ToArray());
-                var chef = pdfHandler.GetUsersBoss(lbLoggedInAsThisUser.Content.ToString());
-                var user = pdfHandler.GetFullNameFromTheUserName(lbLoggedInAsThisUser.Content.ToString());
+
                 var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                
                 if (result == MessageBoxResult.Yes)
                 {
-                    var pdfinfo = "Ansökande: " + user + "\n" + "Chef: " + chef + "\n" +
-                                  "Resperiod: " + dpStartDate.Text + " - " + dpEndDate.Text + "\n" +
-                                  "Antal lediga dagar: " + TbDaysOff.Text + "\n" +
-                                  "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n\n" +
-                                  "Besökta länder " + "\n" + countryinfo + "\n\n" +
-                                  "Sparade kvitton " + "\n" + receiptsinfo + "\n\n" +
-                                  "Resebeskrivning " + "\n" + tbDoneOnTrip.Text + "\n\n";
+                    try
+                    {
 
-                    pdfHandler.CreatePdf(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
-                    MessageBox.Show("Din rapport har sparats.");
+
+                        var report = reportDanger.GetSingleReport(rid);
+                        var user = localHandeler.GetAllUsers().FirstOrDefault(x => x.UID == report.UID);
+                        var travelinfos = localHandeler.GetAllTravels().Where(x => x.RID == report.RID).ToList();
+                        var countries = localHandeler.GetAllCountries();
+                        var listOftravelinfos = new List<String>();
+                        var receiptInfo = localHandeler.GetAllReceipts().Where(x => x.RID == report.RID).ToList();
+                        var listOfReceipts = new List<String>();
+
+                        var statusonreport = "";
+
+                        foreach (var travel in travelinfos)
+                        {
+                            var visitedcountry = localHandeler.GetCountryFromId(travel.CID);
+                            listOftravelinfos.Add("Reste i " + visitedcountry.Name + " mellan " +
+                                                  travel.StartDate.Value.ToShortDateString() + " - " +
+                                                  travel.EndDate.Value.ToShortDateString() + " och var ledig " +
+                                                  travel.VacationDays + " dagar.");
+                        }
+                        var infoOnTravels = string.Join("\n", listOftravelinfos.ToArray());
+
+                        foreach (var receipt in receiptInfo)
+                        {
+                            var savedReceipts = localHandeler.GetSingleReceipt(receipt.RID);
+                            listOfReceipts.Add("Kvitto: " + savedReceipts.TravelReciept + " Kostnad: " +
+                                               receipt.RecieptAmount);
+                        }
+                        var infoOnReceipts = string.Join("\n", listOfReceipts.ToArray());
+                        var pdfReport = "Inskickad av: " + user.FirstName + " " + user.LastName + "\n" +
+                                        "Status: " + report.Status + "\n" +
+                                        "Rapport skapad: " + report.ReportDate.Value.ToShortDateString() + "\n" +
+                                        "Total summa spenderad: " + report.TotalAmount + "\n" +
+                                        "Antal kilometer körda: " + report.Kilometers + "\n\n" +
+                                        "Beskrivning av resa" + "\n" + report.Description + "\n\n" +
+                                        "Info om resor" + "\n" + infoOnTravels + "\n\n" +
+                                        "Info om kvitton \n" + infoOnReceipts;
+
+                        reportDanger.CreatePdfAndOpen(pdfReport,
+                            DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+
 
                     }
+
+                     catch (Exception ex)
+                     { 
+                        MessageBox.Show("Du måste logga in för att kunna skicka din ansökan. " + ex.Message); 
+                     }
                 }
-               catch 
-                { 
-                MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); 
-                }
+
+
+
+
+
+
+
+
+                //    try
+            //{
+            //    List<string> savedReceipts = new List<string>();
+            //    List<string> visitedCountries = new List<string>();
+            //    foreach (var receipt in listBoxReceipts.Items)
+            //    {
+            //        savedReceipts.Add(receipt.ToString());
+            //    }
+            //    foreach (var country in listBoxDays.Items)
+            //    {
+            //        visitedCountries.Add("Dag " + country.ToString() + " maxtraktamente.");
+            //    }
+            //    var receiptsinfo = string.Join("\n", savedReceipts.ToArray());
+            //    var countryinfo = string.Join("\n", visitedCountries.ToArray());
+            //    var chef = pdfHandler.GetUsersBoss(lbLoggedInAsThisUser.Content.ToString());
+            //    var user = pdfHandler.GetFullNameFromTheUserName(lbLoggedInAsThisUser.Content.ToString());
+            //    var result = MessageBox.Show("Vill du även spara rapporten som pdf?", "Spara som pdf", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    if (result == MessageBoxResult.Yes)
+            //    {
+            //        var pdfinfo = "Ansökande: " + user + "\n" + "Chef: " + chef + "\n" +
+            //                      "Resperiod: " + dpStartDate.Text + " - " + dpEndDate.Text + "\n" +
+            //                      "Antal körda kilometer totalt: " + TbCarTripLengthKm.Text + "\n\n" +
+            //                      "Besökta länder " + "\n" + countryinfo + "\n\n" +
+            //                      "Inskickade kvitton " + "\n" + receiptsinfo + "\n\n" +
+            //                      "Resebeskrivning " + "\n" + tbDoneOnTrip.Text + "\n\n";
+
+            //        reportDanger.CreatePdfAndOpen(pdfinfo, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".pdf");
+            //        MessageBox.Show("Din rapport har sparats.");
+
+            //        }
+            //    }
+               //catch 
+               // { 
+               // MessageBox.Show("Du måste logga in för att kunna skicka din ansökan."); 
+               // }
         }       
             
             catch
@@ -1080,7 +1144,7 @@ namespace Scrumproject
                 prepayment.UserID = localHandeler.GetUserId(lbLoggedInAsThisUser.Content.ToString());
                 prepayment.Description = tbDescriptionPrepay.Text;
                 prepayment.Amount = Decimal.Parse(tbTotalAmounth.Text);
-
+                Console.WriteLine(prepayment.UserID.ToString());
                 localHandeler.AddPrepayment(prepayment);
                 MessageBox.Show("Förskottsansökan skickad.");
             }
